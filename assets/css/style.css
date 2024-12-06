@@ -89,13 +89,13 @@ p {
     margin: 0;
     padding: 0;
 }
-@media (min-width: 767px) {
+@media (min-width: 1350px) {
   body {
-    max-width: 600px;
+    max-width: 1350px;
     margin: 0 auto !important; 
 }
 .top-navbar {
-    max-width: 600px;
+    max-width: 1350px;
 }
 }
 .mt-32{
@@ -3783,7 +3783,7 @@ range-slider:before {
     align-items: center;
 }
 .bottom-panel ul {
-    max-width: 600px;
+    max-width: 1080px;
     margin: 0 auto;
 }.bottom-panel ul li {
     text-align: center;
