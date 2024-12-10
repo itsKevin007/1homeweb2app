@@ -19,10 +19,6 @@ switch ($action) {
         delete_data();
         break;
     
-    case 'deleteImage' :
-        deleteImage();
-        break;
-    
 	   
     default :
         // if action is not defined or unknown

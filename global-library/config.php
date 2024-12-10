@@ -65,11 +65,11 @@ $sett_data = $sett->fetch();
 
 // setting up the web root and server root for this website application
 $thisFile = str_replace('\\', '/', __FILE__);
-$docRoot = '/onehomeweb2app/';
+$docRoot = '/1homeweb2app/';
 
 $srvRoot  = str_replace('global-library/config.php', '', $thisFile);
-$webRoot  = '/onehomeweb2app/';
-$adminRoot  = '/onehomeweb2app/adminpanel/';
+$webRoot  = '/1homeweb2app/';
+$adminRoot  = '/1homeweb2app/adminpanel/';
 
 define('WEB_ROOT', $webRoot);
 define('SRV_ROOT', $srvRoot);
