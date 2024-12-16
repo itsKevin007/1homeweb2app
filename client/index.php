@@ -5,17 +5,14 @@ require_once '../include/functions.php';
 $_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
 checkUser();
 
-$pg = $conn->prepare("UPDATE bs_page SET page = '6' WHERE is_deleted != '1'");
+$pg = $conn->prepare("UPDATE bs_page SET page = 'Updates' WHERE is_deleted != '1'");
 $pg->execute();
 
 $userId = $_SESSION['user_id'];
 
-$chk = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId' AND is_deleted != '1'");
-$chk->execute();
-while($chk_data = $chk->fetch()){
-$is_client = $chk_data["is_client"];
 
-if($is_client  == "1"){
+
+if($accesslevel  == "0"){
 
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 	
@@ -30,13 +27,38 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
+	case 'dashboard':
+		$content 	= 'dashboard.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
 	case 'modify' :
 		$content 	= 'modify.php';		
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'transact':
+		$content 	= 'transaction.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'updates':
+		$content 	= 'updates.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'profile':
+		$content 	= 'profile.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 		
 	case 'modify_account' :
 		$content 	= 'modify_account.php';		
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'FAQ':
+		$content 	= 'faq.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
@@ -47,7 +69,7 @@ switch ($view) {
 }else{
 	header("location: ../index.php");
 }
-}
+
 
 $script    = array('category.js');
 

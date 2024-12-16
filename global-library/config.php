@@ -4,7 +4,10 @@ ini_set('display_errors', 'On');
 //ob_start("ob_gzhandler");
 error_reporting(E_ALL ^ E_DEPRECATED);
 // start the session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 date_default_timezone_set("Asia/Manila");
 $today_date1 = date("Y-m-d H:i:s");
@@ -57,6 +60,8 @@ if(isset($_SESSION['user_id'])){ $userId = $_SESSION['user_id']; }else{ $userId 
 $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId'");
 $user->execute();
 $user_data = $user->fetch();
+
+$accesslevel = $user_data['access_level'];
 
 # Get setting details
 $sett = $conn->prepare("SELECT * FROM bs_setting");

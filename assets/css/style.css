@@ -2297,7 +2297,7 @@ video.review-play-video {
     margin-top: 8px;
 }
 .profile-img-sec img {
-    border-radius: 60px;
+    border-radius: 50px;
 }
 .profile-page-sec-full{
     background: #F6F8FA;
@@ -3358,7 +3358,7 @@ textarea#message:focus-visible{
 }
 
 /************************ 26.WalletPage Screen  ***************************/
-.Wallet-first-content {
+/* .Wallet-first-content {
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
@@ -3455,7 +3455,7 @@ input.custom-wallet-input {
 .image-video-sec-full .slick-track,
 .color-sec .slick-track{
     margin-left: 15px;
-}
+} */
 
 /************************ 27.Notification Page Screen  ***************************/
 .noti-title {
@@ -5255,11 +5255,11 @@ ul.input.date-picker-input {
 
 /* for walletcard */
 .wallet {
-    background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(14, 14, 116, 1) 100%);
+    background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgb(8, 8, 151) 100%);
     color: #c9c9d2;
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     margin: 50px auto;
 }
 
@@ -5273,7 +5273,7 @@ ul.input.date-picker-input {
     margin-bottom: 20px;
 }
 .account-number{
-    font-size: 5px;
+    font-size: 2px;
 }
 
 
@@ -5303,7 +5303,7 @@ ul.input.date-picker-input {
     display: flex;
     object-fit: contain;
     
-    height: 100px;
+    height: auto;
     position: relative;
     z-index: 1;
     
@@ -5331,7 +5331,6 @@ ul.input.date-picker-input {
 .account-number-details{
     display: flex;
     margin-top: -20px;
-    font-size: 30px;
 }
 .wallet-btn-sec{
     display: flex;
@@ -5446,6 +5445,23 @@ a {
     height: auto;
 }
 
+/* QR reader */
+   #qr-reader {
+       width: 100%;
+       max-width: 500px;
+       margin: 20px auto;
+       display: none;
+       /* Initially hidden */
+   }
+
+   #start-button {
+       display: block;
+       margin: 20px auto;
+       padding: 10px 20px;
+       font-size: 16px;
+       cursor: pointer;
+   }
+   /* end */
 
 /* expanding menu */
 
@@ -5540,7 +5556,6 @@ footer .demo a {
 
 .sub-circle label:hover {
     cursor: pointer;
-
 }
 
 .subs {

@@ -3,8 +3,13 @@ if (!defined('WEB_ROOT')) {
 	header('Location: ../index.php');
 	exit;
 }
+
+$PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
+$PAGE->execute();
+$PAGEDATA = $PAGE->fetchColumn();
 ?>
 <!-- ======= Footer ======= -->
+
 <!-- Profile Details Section Start -->
 <div id="bottom-navigation">
 	<div class="container">
@@ -13,8 +18,8 @@ if (!defined('WEB_ROOT')) {
 				<div class="col-12">
 					<div class="bottom-panel nagivation-menu">
 						<ul class="sc-bottom-bar furniture-bottom-nav" id="furniture_navbar">
-							<li class="nav-menu-icon active">
-								<a href="home-page1.html" class="home-icon navigation-icons active">
+							<li class="nav-menu-icon <?php echo $active; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=dash" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_798" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -26,12 +31,12 @@ if (!defined('WEB_ROOT')) {
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
-								<a href="favourite.html" class="event-icon navigation-icons">
+								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transaction" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
 							<li class="nav-menu-icon nav-account-icon">
-								<a href="notification.html" class="notification-icon navigation-icons left-icon">
+								<a href="<?php echo WEB_ROOT; ?>client/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_778" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -45,7 +50,7 @@ if (!defined('WEB_ROOT')) {
 								</a>
 							</li>
 							<li class="nav-menu-icon nav-notifi-icon">
-								<a href="profile.html" class="account-icon navigation-icons">
+								<a href="<?php echo WEB_ROOT; ?>client/profile/index.php?view=prof" class="account-icon navigation-icons <?php echo ($PAGEDATA === 'Profile') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_772" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -117,7 +122,7 @@ if (!defined('WEB_ROOT')) {
 										id="sub6"
 										class="hidden-sub-trigger" />
 									<label for="sub6"></label>
-								</button>  
+								</button>
 							</div>
 						</a>
 					</div>

@@ -38,7 +38,7 @@ if (isset($_POST['txtUserName'])) {
                         <div class="text-center">   
                             <a href="#">
                                 <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
-								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title="" height="60%" width="60%"></h1>
+								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="60%"></h1>
                             </a>
                             <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
 
