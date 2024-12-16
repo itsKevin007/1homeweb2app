@@ -1,0 +1,49 @@
+.main-color {
+	background-color: #022c5c;
+}
+
+.delete-color {
+	background-color: #5c0202 !important;
+}
+
+.add-icon-service {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Adjust circle size */
+    height: 45px;
+    background-color: #022c5c; /* Light background for the circle */
+    border-radius: 50%; /* Circular shape */
+    text-decoration: none; /* Removes link underline */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.del-icon-service {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Adjust circle size */
+    height: 45px;
+    background-color: #5c0202; /* Light background for the circle */
+    border-radius: 50%; /* Circular shape */
+    text-decoration: none; /* Removes link underline */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.del-icon-img {
+    width: 30px; /* Adjust icon size */
+}
+
+.add-icon-service img {
+    width: 25px; /* Adjust icon size */
+}
+
+.round-shape-home2 {
+	width: 30px !important;
+}
+
+.btn-save {
+	border-radius: 30px !important;
+}
+
+

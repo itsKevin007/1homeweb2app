@@ -3,18 +3,126 @@ if (!defined('WEB_ROOT')) {
 	header('Location: ../index.php');
 	exit;
 }
+
+$thumbnail = $user_data['thumbnail'];
+
+if ($user_data['thumbnail']) {
+	$image = WEB_ROOT . 'adminpanel/assets/images/user/' . $user_data['thumbnail'];
+} else {
+	$image = WEB_ROOT . 'adminpanel/assets/images/user/noimage.png';
+}
+
+$fname = $user_data['firstname'] . ' ' . $user_data['lastname'];
 ?>
 <!-- ======= Footer ======= -->
 <!-- Profile Details Section Start -->
-<div id="bottom-navigation">
+<div class="menu-sidebar details">
+	<div class="offcanvas offcanvas-start custom-offcanvas-noti" id="offcanvasExample">
+		<div class="offcanvas-header custom-header-offcanva">
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="dropdown mt-3">
+				<div class="profile-top-sec">
+					<div class="profile-top-sec-full">
+							<div class="profile-img-sec">
+								<img src="<?php echo $image; ?>" >
+								
+							</div>
+							<div class="profile-details-sec">
+								<div class="row">
+								
+									<h3 class="app-setting-title"><?php echo $fname; ?></h3>
+									
+								</div>
+							</div>
+					</div>
+				</div>	
+				
+				<h2 class="app-setting-title">Account</h2>
+				<div class="app-setting-page-full mt-24">
+					<div class="app-setting-top">
+						<a href="<?php echo WEB_ROOT; ?>service-provider/index.php?view=service" >
+							<div class="app-setting-menu-start mt-16">
+								<div class="menu-icon">
+									<img src="<?php echo WEB_ROOT; ?>assets/images/icon/tools-solid-white.svg" width="24">
+								</div>
+								<div class="menu-txt-app">
+									<h3 class="app-txt-title">Service Provider</h3>	
+								</div>
+							</div>
+							<div class="border-bottom-app mt-8"></div>
+						</a>								
+						<a href="about-us.html">
+							<div class="app-setting-menu-start mt-16">
+								<div class="menu-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<mask id="mask0_1_385" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+											<rect width="24" height="24" fill="white"/>
+										</mask>
+										<g mask="url(#mask0_1_385)">
+											<path d="M12 16V12M12 8H12.01M2 8.52274V15.4773C2 15.7218 2 15.8441 2.02763 15.9592C2.05213 16.0613 2.09253 16.1588 2.14736 16.2483C2.2092 16.3492 2.29568 16.4357 2.46863 16.6086L7.39137 21.5314C7.56432 21.7043 7.6508 21.7908 7.75172 21.8526C7.84119 21.9075 7.93873 21.9479 8.04077 21.9724C8.15586 22 8.27815 22 8.52274 22H15.4773C15.7218 22 15.8441 22 15.9592 21.9724C16.0613 21.9479 16.1588 21.9075 16.2483 21.8526C16.3492 21.7908 16.4357 21.7043 16.6086 21.5314L21.5314 16.6086C21.7043 16.4357 21.7908 16.3492 21.8526 16.2483C21.9075 16.1588 21.9479 16.0613 21.9724 15.9592C22 15.8441 22 15.7218 22 15.4773V8.52274C22 8.27815 22 8.15586 21.9724 8.04077C21.9479 7.93873 21.9075 7.84119 21.8526 7.75172C21.7908 7.6508 21.7043 7.56432 21.5314 7.39137L16.6086 2.46863C16.4357 2.29568 16.3492 2.2092 16.2483 2.14736C16.1588 2.09253 16.0613 2.05213 15.9592 2.02763C15.8441 2 15.7218 2 15.4773 2H8.52274C8.27815 2 8.15586 2 8.04077 2.02763C7.93873 2.05213 7.84119 2.09253 7.75172 2.14736C7.6508 2.2092 7.56432 2.29568 7.39137 2.46863L2.46863 7.39137C2.29568 7.56432 2.2092 7.6508 2.14736 7.75172C2.09253 7.84119 2.05213 7.93873 2.02763 8.04077C2 8.15586 2 8.27815 2 8.52274Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</g>
+									</svg>
+								</div>
+								<div class="menu-txt-app">
+									<h3 class="app-txt-title">About Us</h3>	
+								</div>
+							</div>
+							<div class="border-bottom-app mt-8"></div>
+						</a>
+						<a href="faq.html" >
+							<div class="app-setting-menu-start mt-16">
+								<div class="menu-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<mask id="mask0_1_376" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+											<rect width="24" height="24" fill="white"/>
+										</mask>
+										<g mask="url(#mask0_1_376)">
+											<path d="M9.08997 8.99999C9.32507 8.33166 9.78912 7.7681 10.3999 7.40912C11.0107 7.05015 11.7289 6.91893 12.4271 7.0387C13.1254 7.15848 13.7588 7.52151 14.215 8.06352C14.6713 8.60552 14.921 9.29151 14.92 9.99999C14.92 12 11.92 13 11.92 13M12 17H12.01M2 8.52274V15.4773C2 15.7218 2 15.8441 2.02763 15.9592C2.05213 16.0613 2.09253 16.1588 2.14736 16.2483C2.2092 16.3492 2.29568 16.4357 2.46863 16.6086L7.39137 21.5314C7.56432 21.7043 7.6508 21.7908 7.75172 21.8526C7.84119 21.9075 7.93873 21.9479 8.04077 21.9724C8.15586 22 8.27815 22 8.52274 22H15.4773C15.7218 22 15.8441 22 15.9592 21.9724C16.0613 21.9479 16.1588 21.9075 16.2483 21.8526C16.3492 21.7908 16.4357 21.7043 16.6086 21.5314L21.5314 16.6086C21.7043 16.4357 21.7908 16.3492 21.8526 16.2483C21.9075 16.1588 21.9479 16.0613 21.9724 15.9592C22 15.8441 22 15.7218 22 15.4773V8.52274C22 8.27815 22 8.15586 21.9724 8.04077C21.9479 7.93873 21.9075 7.84119 21.8526 7.75172C21.7908 7.6508 21.7043 7.56432 21.5314 7.39137L16.6086 2.46863C16.4357 2.29568 16.3492 2.2092 16.2483 2.14736C16.1588 2.09253 16.0613 2.05213 15.9592 2.02763C15.8441 2 15.7218 2 15.4773 2H8.52274C8.27815 2 8.15586 2 8.04077 2.02763C7.93873 2.05213 7.84119 2.09253 7.75172 2.14736C7.6508 2.2092 7.56432 2.29568 7.39137 2.46863L2.46863 7.39137C2.29568 7.56432 2.2092 7.6508 2.14736 7.75172C2.09253 7.84119 2.05213 7.93873 2.02763 8.04077C2 8.15586 2 8.27815 2 8.52274Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</g>
+									</svg>
+								</div>
+								<div class="menu-txt-app">
+									<h3 class="app-txt-title">FAQs</h3>	
+								</div>
+							</div>
+							<div class="border-bottom-app mt-8"></div>
+						</a>
+						<a href="<?php echo $self; ?>?logout">
+							<div class="app-setting-menu-start mt-16">
+								<div class="menu-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<mask id="mask0_1_367" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+											<rect width="24" height="24" fill="white"/>
+										</mask>
+										<g mask="url(#mask0_1_367)">
+											<path d="M16 17L21 12M21 12L16 7M21 12H9M12 17C12 17.93 12 18.395 11.8978 18.7765C11.6204 19.8117 10.8117 20.6204 9.77646 20.8978C9.39496 21 8.92997 21 8 21H7.5C6.10218 21 5.40326 21 4.85195 20.7716C4.11687 20.4672 3.53284 19.8831 3.22836 19.1481C3 18.5967 3 17.8978 3 16.5V7.5C3 6.10217 3 5.40326 3.22836 4.85195C3.53284 4.11687 4.11687 3.53284 4.85195 3.22836C5.40326 3 6.10218 3 7.5 3H8C8.92997 3 9.39496 3 9.77646 3.10222C10.8117 3.37962 11.6204 4.18827 11.8978 5.22354C12 5.60504 12 6.07003 12 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</g>
+									</svg>
+								</div>
+								<div class="menu-txt-app">
+									<h3 class="app-txt-title">Sign Out</h3>	
+								</div>
+							</div>
+							<div class="border-bottom-app mt-8"></div>
+						</a>
+					</div>							
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="dark-overlay"></div>
+</div>
+<div id="bottom-navigation" style="width: 1520px !important;">
 	<div class="container">
-		<div class="home-navigation-menu">
+		<div class="home-navigation-menu" >
 			<div class="row">
 				<div class="col-12">
 					<div class="bottom-panel nagivation-menu-wrap">
 						<ul class="sc-bottom-bar furniture-bottom-nav" id="furniture_navbar">
 							<li class="nav-menu-icon active">
-								<a href="home-page1.html" class="home-icon navigation-icons active">
+								<a href="<?php echo WEB_ROOT; ?>" class="home-icon navigation-icons active">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_798" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white"/>
@@ -52,7 +160,7 @@ if (!defined('WEB_ROOT')) {
 								</a>
 							</li>
 							<li class="nav-menu-icon nav-notifi-icon">
-								<a href="profile.html" class="account-icon navigation-icons">
+								<a href="<?php echo WEB_ROOT; ?>service-provider/index.php?view=prof" class="account-icon navigation-icons">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_772" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white"/>
@@ -65,7 +173,7 @@ if (!defined('WEB_ROOT')) {
 							</li>
 						</ul>
 						<a class="sc-nav-indicator" href="<?php echo WEB_ROOT; ?>client/?view=add">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<svg width="20px" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<mask id="mask0_1_786" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 									<rect width="24" height="24" fill="white"/>
 								</mask>

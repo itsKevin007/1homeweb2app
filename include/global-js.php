@@ -9,4 +9,5 @@ if (!defined('WEB_ROOT')) {
 	<script  src="<?php echo WEB_ROOT; ?>assets/js/bootstrap.bundle.min.js"></script>
 	<script  src="<?php echo WEB_ROOT; ?>assets/js/modal.js"></script>
 	<script  src="<?php echo WEB_ROOT; ?>assets/js/custom.js"></script>
-		
+	
+	<script src="<?php echo WEB_ROOT; ?>ph-address-selector.js"></script>

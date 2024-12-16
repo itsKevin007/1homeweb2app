@@ -22,6 +22,7 @@ if (isset($_POST['txtUserName'])) {
 <meta content="Lending System - www.tridentechnology.com" name="description" />
 <meta content="Coderthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>	
@@ -37,12 +38,9 @@ if (isset($_POST['txtUserName'])) {
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="text-center">   
                             <a href="#">
-                                <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
-								<h1> <img src="<?php echo WEB_ROOT; ?>images/icons/silverlogoh.png" alt="user-img" title="" height="60%" width="60%"></h1>
+								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title="" height="60%" width="60%"></h1>
                             </a>
-                            <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
-
-                        </div>
+                        </div><br><br>
                         <div class="card">
                             <div class="card-body p-4">
                                 
@@ -80,16 +78,7 @@ if (isset($_POST['txtUserName'])) {
                                         <div class="input-group input-group-merge">
                                             <input type="password" id="password" class="form-control" name="txtPassword" id="txtPassword" autocomplete=off placeholder="Enter your password" required>
                                         </div>
-                                    </div>
-									
-									
-                                    <!-- <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signin">
-                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                                        </div>
-                                    </div> -->
-									
+                                    </div>																										
 
                                     <div class="mb-3 d-grid text-center">
                                         <button style="background-color:#16405F;border: 1px #16405F solid;" class="btn btn-primary" type="submit"> Log In </button>
@@ -98,16 +87,7 @@ if (isset($_POST['txtUserName'])) {
 
                             </div> <!-- end card-body -->
                         </div>
-                        <!-- end card -->
-						
-						
-                        <!-- <div class="row mt-3">
-                            <div class="col-12 text-center">
-                                <p> <a href="recoverpass.php" style="color:#16405F;"><i class="fa fa-lock me-1"></i>Forgot your password?</a></p>
-                                <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-dark ms-1"><b>Sign Up</b></a></p>
-                            </div>
-                        </div> -->
-                       
+                        <!-- end card -->						
 
                     </div> <!-- end col -->
                 </div>

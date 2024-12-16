@@ -58,6 +58,8 @@ $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId'");
 $user->execute();
 $user_data = $user->fetch();
 
+$accesslevel = $user_data['access_level'];
+
 # Get setting details
 $sett = $conn->prepare("SELECT * FROM bs_setting");
 $sett->execute();
