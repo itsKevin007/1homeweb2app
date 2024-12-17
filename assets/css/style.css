@@ -973,6 +973,16 @@ label.custom-radio-sel-lang {
 }
 
 /************************ 12.HomePage Screen ***************************/
+.homepage-first-sec{
+    background: #F6F8FA;
+    height: 800px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
 .homepage-cart-sec{
     padding: 0;
     margin: 0;
@@ -1072,7 +1082,7 @@ span.cart-item {
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
-    color: #1E293B;
+    color: #fff;
 }
 .homepage-slide-txt {
     font-family: 'Inter';
@@ -2288,7 +2298,6 @@ video.review-play-video {
 }
 .profile-img-sec img {
     border-radius: 60px;
-    width: 100px;
 }
 .profile-page-sec-full{
     background: #F6F8FA;
@@ -3349,7 +3358,7 @@ textarea#message:focus-visible{
 }
 
 /************************ 26.WalletPage Screen  ***************************/
-.Wallet-first-content {
+/* .Wallet-first-content {
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
@@ -3446,7 +3455,7 @@ input.custom-wallet-input {
 .image-video-sec-full .slick-track,
 .color-sec .slick-track{
     margin-left: 15px;
-}
+} */
 
 /************************ 27.Notification Page Screen  ***************************/
 .noti-title {
@@ -3760,8 +3769,8 @@ range-slider:before {
     bottom: 0px;
     right: 0;
     height: 60px;
-    background-image: -o-radial-gradient(49% -2px,circle,transparent 36px, #022c5c 37px);
-    background-image: radial-gradient(circle at 49% -2px,transparent 36px, #022c5c 37px);
+    background-image: -o-radial-gradient(49% -2px,circle,transparent 36px, #ffffff 37px);
+    background-image: radial-gradient(circle at 49% -2px,transparent 36px, #ffffff 37px);
     -webkit-filter: drop-shadow(0px -1px 6px rgba(0, 0, 0, 0.08)) drop-shadow(0px -2px 12px rgba(0, 0, 0, 0.12));
     filter: drop-shadow(0px -1px 6px rgba(0, 0, 0, 0.08)) drop-shadow(0px -2px 12px rgba(0, 0, 0, 0.12));
     -webkit-transition: cubic-bezier(0.57, 0.23, 0.08, 0.96) .45s;
@@ -3786,6 +3795,8 @@ range-slider:before {
 .bottom-panel ul {
     max-width: 1080px;
     margin: 0 auto;
+    align-items: center;
+    
 }.bottom-panel ul li {
     text-align: center;
     list-style: none;
@@ -3826,9 +3837,9 @@ range-slider:before {
 a.event-icon {
     right: 25px;
     position: relative;
-    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+.history-icon{
+    color: #dfd8d8;
 }
 .left-icon {
     position: relative;
@@ -3843,7 +3854,7 @@ a.event-icon {
     left: 0px;
     right: 0px;
     border-radius: 50%;
-    background: #0EA5E9;
+    background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(23, 92, 143, 1) 100%);
     -webkit-box-shadow: 0px 4px 4px rgba(255, 226, 218, 0.32);
     box-shadow: 0px 4px 4px rgba(255, 226, 218, 0.32);
 }
@@ -3864,7 +3875,7 @@ a.event-icon {
     font-size: 18px;
     line-height: 24px;
     text-align: center;
-    color: #0EA5E9;
+    color: #022c5c;
     margin-left: auto;
     margin-right: auto;
 }
@@ -5006,7 +5017,7 @@ a.addhome-btn{
     z-index: 3;
 }
 #homepage1-sec{
-    margin-bottom: 100px;
+    margin-bottom: 0px;
 }
 nav#top-navbar {
     position: fixed;
@@ -5240,4 +5251,452 @@ ul.input.date-picker-input {
     padding: 0;
     margin: 0;
     list-style-type: none;
+}
+
+/* for walletcard */
+.wallet {
+    background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgb(8, 8, 151) 100%);
+    color: #c9c9d2;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    margin: 50px auto;
+}
+
+.wallet h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.wallet p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.account-number{
+    font-size: 2px;
+}
+
+
+.wallet button {
+    background-color: #c9c9d2;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.wallet button:hover {
+    background-color: #666;
+}
+
+.wallet .scan-to-pay {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+.title-logo{
+    flex-direction: row;
+    display: flex;
+    object-fit: contain;
+    
+    height: auto;
+    position: relative;
+    z-index: 1;
+    
+}
+.wallet-title{
+    margin-left: 10px;
+    color: #c9c9d2;
+    width: 100%;
+}
+.wallet-balance{
+    color: #c9c9d2;
+    font-size: 30px;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    width: inherit;
+}
+.account-number-sec{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+}
+.account-number-details{
+    display: flex;
+    margin-top: -20px;
+}
+.wallet-btn-sec{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* drop down with services */
+.dropdown {
+    position: absolute;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    width: 380px;
+    z-index: 100;
+    box-shadow: 0 0 2px #333;
+    background-color: #4F6877;
+}
+
+a {
+    color: #fff;
+}
+
+.dropdown dd,
+.dropdown dt {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dropdown ul {
+    margin: -1px 0 0 0;
+}
+
+.dropdown dd {
+    position: relative;
+}
+
+.dropdown a,
+.dropdown a:visited {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    font-size: 12px;
+}
+
+.dropdown dt a {
+    background-color: #4F6877;
+    display: block;
+    padding: 8px 20px 5px 10px;
+    min-height: 25px;
+    line-height: 24px;
+    border: 0;
+    width: 380px;
+}
+
+.dropdown dt a spa {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 3px 2px 0;
+}
+
+.multiSel {
+    padding: 0;
+    margin: 0;
+    width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 5%;
+}
+
+.multiSel span {
+    cursor: pointer;
+    display: inline;
+    padding: 0 3px 2px 0;
+}
+
+.dropdown dd ul {
+    background-color: #4F6877;
+    border: 0;
+    color: #fff;
+    display: none;
+    left: 0px;
+    padding: 2px 15px 2px 5px;
+    position: absolute;
+    top: 2px;
+    width: 380px;
+    list-style: none;
+    height: 100px;
+    overflow: auto;
+}
+
+.dropdown span.value {
+    display: none;
+}
+
+.dropdown dd ul li a {
+    padding: 5px;
+    display: block;
+}
+.dropdown dd ul li a:hover {
+    background-color: #fff;
+}
+
+/* history section */
+.history-sec{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(12, 12, 182, 1) 100%);
+    height: auto;
+}
+
+/* QR reader */
+   #qr-reader {
+       width: 100%;
+       max-width: 500px;
+       margin: 20px auto;
+       display: none;
+       /* Initially hidden */
+   }
+
+   #start-button {
+       display: block;
+       margin: 20px auto;
+       padding: 10px 20px;
+       font-size: 16px;
+       cursor: pointer;
+   }
+   /* end */
+
+/* expanding menu */
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+
+}
+
+footer .demo {
+    position: absolute;
+    bottom: 10px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+footer .demo a {
+    text-align: center;
+
+    text-decoration: none;
+    font-weight: 100;
+
+}
+
+.circle {
+    display: block;
+    position: relative;
+    padding: 0;
+    z-index: 98;
+    margin: 0 auto;
+ 
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-color: var(--night-rider);
+    transition: 0.2s;
+    text-align: center;
+}
+
+.circle:active {
+    transform: scale(1);
+ 
+}
+
+.circle:hover {
+    cursor: pointer;
+    background-color: var(--night-rider);
+
+}
+
+.circle .svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -16px;
+    margin-top: -16px;
+    width: 32px;
+    height: 32px;
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+.sub-circle {
+    z-index: 0;
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: 0.3s;
+    transform: scale(0.5);
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 8px 13px 0 rgba(0, 0, 0, 0.51);
+    border: none;
+    user-select: none;
+}
+
+.sub-circle label {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    transition: 0.5s;
+}
+
+.sub-circle label:hover {
+    cursor: pointer;
+}
+
+.subs {
+    left: 0;
+    top: -250px;
+    /* Adjusted to pop above the toggle */
+    width: auto;
+    height: auto;
+    text-align: center;
+    z-index: 0;
+    margin: 0 auto;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    /* Creates enough vertical spacing between buttons */
+    opacity: 0;
+    /* Initially hidden */
+    transform: translateY(20px);
+    /* Start slightly below */
+    pointer-events: none;
+    /* Prevent interaction when hidden */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden-trigger:checked+label+.subs {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
+    /* Enable interaction when visible */
+    transform: translateY(0);
+    /* Moves container to visible position */
+}
+
+/* Individual button animation */
+.subs button {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Start slightly below */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Apply staggered animation to each button */
+.hidden-trigger:checked+label+.subs button:nth-child(1) {
+    opacity: 1;
+    transform: translateX(-90px);
+    /* Move to visible position */
+    transition-delay: 0.2s;
+    /* Delay for first button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0px);
+    /* Move to visible position */
+    transition-delay: 0.4s;
+    /* Delay for second button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(3) {
+    opacity: 1;
+    transform: translateX(90px);
+    /* Move to visible position */
+    transition-delay: 0.5s;
+    /* Delay for third button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(4) {
+    opacity: 1;
+    transform: translateY(100px) translateX(-90px);
+    /* Move to visible position */
+    transition-delay: 0.6s;
+    /* Delay for fourth button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(5) {
+    opacity: 1;
+    transform: translateY(100px) translateX(90px);
+    /* Move to visible position */
+    transition-delay: 0.7s;
+    /* Delay for fifth button */
+}
+.hidden-trigger:checked+label+.subs button:nth-child(6) {
+    opacity: 1;
+    transform: translateY(100px);
+    /* Move to visible position */
+    transition-delay: 0.7s;
+    /* Delay for fifth button */
+}
+
+.hidden-sub-trigger {
+    display: none;
+}
+
+
+
+.hidden-trigger {
+    display: none;
+}
+
+.hidden-trigger:checked~.circle {
+    transform: scale(0.75);
+    cursor: pointer;
+}
+
+.hidden-trigger:checked~.circle .svg {
+    transform: rotate(-315deg);
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(1) {
+    transform: translate(-40px, -69.28px) scale(1);
+    opacity: 1;
+    transition: 0.1s;
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(2) {
+    transform: translate(40px, -69.28px) scale(1);
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(3) {
+    transform: translate(80px, 0px) scale(1);
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(4) {
+    transform: translate(-40px, 69.28px) scale(1);
+    opacity: 1;
+    transition: 0.4s;
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(5) {
+    transform: translate(40px, 69.28px) scale(1);
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.hidden-trigger:checked~.subs button:nth-of-type(6) {
+    transform: translate(-80px, 0px) scale(1);
+    opacity: 1;
+    transition: 0.6s;
 }

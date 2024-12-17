@@ -50,11 +50,18 @@ function add_data()
 
 
 
-		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_lname, email, sub_type,
+		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_mname, c_lname, email,
 													 date_added, added_by)
 											VALUES ('$fname', '$lname', '$email', '$type',
 													'$today_date1', '$userId')");
 		$sql->execute();
+
+		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_mname, c_lname, email,
+													 date_added, added_by)
+											VALUES ('$fname', '$lname', '$email', '$type',
+													'$today_date1', '$userId')");
+		$sql->execute();
+
 
 		$id = $conn->lastInsertId();
 		$uid = md5($id);

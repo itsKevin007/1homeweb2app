@@ -4,7 +4,10 @@ ini_set('display_errors', 'On');
 //ob_start("ob_gzhandler");
 error_reporting(E_ALL ^ E_DEPRECATED);
 // start the session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 date_default_timezone_set("Asia/Manila");
 $today_date1 = date("Y-m-d H:i:s");
@@ -67,11 +70,11 @@ $sett_data = $sett->fetch();
 
 // setting up the web root and server root for this website application
 $thisFile = str_replace('\\', '/', __FILE__);
-$docRoot = '/onehomeweb2app/';
+$docRoot = '/1homeweb2app/';
 
 $srvRoot  = str_replace('global-library/config.php', '', $thisFile);
-$webRoot  = '/onehomeweb2app/';
-$adminRoot  = '/onehomeweb2app/adminpanel/';
+$webRoot  = '/1homeweb2app/';
+$adminRoot  = '/1homeweb2app/adminpanel/';
 
 define('WEB_ROOT', $webRoot);
 define('SRV_ROOT', $srvRoot);

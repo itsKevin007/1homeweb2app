@@ -38,8 +38,11 @@ if (isset($_POST['txtUserName'])) {
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="text-center">   
                             <a href="#">
-								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title="" height="60%" width="60%"></h1>
+                                <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
+								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="60%"></h1>
                             </a>
+                            <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
+
                         </div><br><br>
                         <div class="card">
                             <div class="card-body p-4">
