@@ -5302,7 +5302,7 @@ ul.input.date-picker-input {
     flex-direction: row;
     display: flex;
     object-fit: contain;
-    
+    background-color: red;
     height: auto;
     position: relative;
     z-index: 1;
