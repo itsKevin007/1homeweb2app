@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83 83" width="83" height="83">
+	<title>task-list-add-white</title>
+	<defs>
+		<image  width="67" height="67" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABDAgMAAAC6pFDgAAAAAXNSR0IB2cksfwAAAAlQTFRF////////AAAAjvTD7AAAAAN0Uk5TAP8AaVI5rAAAAXJJREFUeJyV1N1NwzAQB3AbySN4io7QB8IGRkoQIzAGPDACOyAcUGAC96EjhCUsJrCouTv7/JEiJPrQJj/Zrv2/S6SQoygfe/F8kkIPVcIHylRBxDeQdpIQryDKtPJ1d5J68I7vlfm+Bbmc65AJZQpLFX01/ip1GVjo+j+iwlb0ftkI/2EROW5FmV7W3Tr4FVIKSxYdlLCYW5xZ8HorYdHtLFjCOwwOvpMcjbD9KQ5jnHtxNSIWvXMb+SsfcXMmWPcqUF28bgQbwLZC5YZ9VEldY7Oovctd411JPvdIWEryWeJckufms5iPVwaOK6poyMxS8zkY51PyMBskvpsslLDJEtqci1DORSLnTPVioZx7wZx7wQ7rJWVBRVOmESpaJzQGfrjn23XOJD87raTnqzlFSjPdpJOm57SVXJV5rJIiJzlQqvmdYDl5L1/SxedaasHyNHAFWR5LlVkeRu4Elvu0NHRLEdo8RFKFtoptUQUGYTI/PytF2/Ipdo0AAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="12" y="12"/>
+</svg>

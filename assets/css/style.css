@@ -2297,7 +2297,7 @@ video.review-play-video {
     margin-top: 8px;
 }
 .profile-img-sec img {
-    border-radius: 50px;
+    border-radius: 60px;
 }
 .profile-page-sec-full{
     background: #F6F8FA;
@@ -3769,8 +3769,8 @@ range-slider:before {
     bottom: 0px;
     right: 0;
     height: 60px;
-    background-image: -o-radial-gradient(49% -2px,circle,transparent 36px, #0a58b3 37px);
-    background-image: radial-gradient(circle at 49% -2px,transparent 36px, #022c5c 37px);
+    background-image: -o-radial-gradient(49% -2px,circle,transparent 36px, #ffffff 37px);
+    background-image: radial-gradient(circle at 49% -2px,transparent 36px, #ffffff 37px);
     -webkit-filter: drop-shadow(0px -1px 6px rgba(0, 0, 0, 0.08)) drop-shadow(0px -2px 12px rgba(0, 0, 0, 0.12));
     filter: drop-shadow(0px -1px 6px rgba(0, 0, 0, 0.08)) drop-shadow(0px -2px 12px rgba(0, 0, 0, 0.12));
     -webkit-transition: cubic-bezier(0.57, 0.23, 0.08, 0.96) .45s;

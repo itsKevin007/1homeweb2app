@@ -1,0 +1,47 @@
+.product-list {
+	width: 22px;
+	text-align: center;
+}
+
+/* Ensure the profile image container is positioned correctly */
+.profile-img-sec {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 50%; /* Optional for a circular image */
+}
+
+/* Style the image */
+.profile-img-sec img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Style for the hover text */
+.hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Hover effect: Show the text and dim the image */
+.profile-img-sec:hover img {
+    opacity: 0.6;
+}
+
+.profile-img-sec:hover .hover-text {
+    opacity: 1;
+}

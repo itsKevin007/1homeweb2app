@@ -1,10 +1,11 @@
 <?php
-if ($userId != '') 
-{
-	$access_level = $user_data['access_level'];
-		if ($access_level == '0') {
+
+	if($userId != ''){
+		
+		if($accesslevel == 0 ){
 			include 'client/dashboard/dashboard.php';
-		} else {}
-	} else {
-}
-?>
+		}elseif ($accesslevel == 1 ){
+			include 'service-provider/dashboard.php';
+		}else{}
+
+	}else{}

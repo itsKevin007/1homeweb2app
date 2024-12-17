@@ -13,6 +13,7 @@ td
 	vertical-align: super;
 }
 </style>
+
 <h6 class="mb-0 text-uppercase">User</h6><br>
 					<?php
 						if($errorMessage == 'Deleted successfully.')

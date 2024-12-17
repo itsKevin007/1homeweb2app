@@ -3,7 +3,7 @@ require_once 'global-library/config.php';
 require_once 'include/functions.php';
 
 	if(isset($_SESSION['user_id']))
-	{ $userId = $_SESSION['user_id']; }else{ header('Location: login.php'); exit;  }
+	{ $userId = $_SESSION['user_id']; }else{  header('Location: login.php'); exit;  }
 	
 	// checkUser();
 
