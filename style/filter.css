@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;500&display=swap");
+
+
+.imgFilter {
+    max-width: 70%;
+    width: 70%;
+    display: block;
+}
+
+li {
+    list-style: none;
+}
+
+.containerFilter {
+    max-width: 90%;
+    margin: auto;
+    background-color: #f0ebeb;
+}
+
+.category-filters {
+    display: flex;
+    gap: 10px;
+    place-content: center;
+    padding: 10px 0;
+}
+
+.category-filters li {
+    font-size: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px 8px;
+    font-family: "Jost", sans-serif;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.category-filters li:hover {
+    text-shadow: #cecece 6px 6px;
+    transform: translateY(-6px);
+
+}
+
+.category-filters li.selected {
+    pointer-events: none;
+}
+
+.category-filters li.selected:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    view-transition-name: filter-unerline;
+}
+
+[data-filter="green"] {
+    color: lightseagreen;
+}
+
+[data-filter="pink"] {
+    color: hotpink;
+}
+
+[data-filter="purple"] {
+    color: mediumpurple;
+}
+
+.category-items {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px 0;
+}
+
+.category-items li {
+    border-radius: 4px;
+    overflow: hidden;
+}
+/* 
+// did it in js instead
+// $itemsCount: 14;
+// @for $i from 1 through $itemsCount {
+//   [data-category]:nth-child(#{$i}) {
+//     view-transition-name: item-#{$i};
+//   }
+// } */

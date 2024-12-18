@@ -23,15 +23,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'FAQ' :
+			case 'faq' :
 				$content 	= 'faq.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			default:
-				$content = 'faq.php';  // Optionally, add a default view
-				$pageTitle = $sett_data['system_title'];
-				break;
 		}
 	}else{
 		header("location: ../../index.php");

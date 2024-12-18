@@ -2,6 +2,7 @@
 require_once '../global-library/config.php';
 require_once '../include/functions.php';
 
+
 $_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
 checkUser();
 
@@ -57,7 +58,7 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
-	case 'FAQ':
+	case 'faq':
 		$content 	= 'faq.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;

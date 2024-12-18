@@ -1,8 +1,5 @@
-<?php
-
-
-?>
-
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/table.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/faqTbl.css">
 <!-- Faq Details Section Start -->
 <section id="faq-sec">
     <div class="container">

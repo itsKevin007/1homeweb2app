@@ -229,4 +229,7 @@ function _deleteImage($id)
 	return $deleted;
 }
 
+
+// ------------------------------ FOR SERVICES ------------------------------ //
+
 ?>
