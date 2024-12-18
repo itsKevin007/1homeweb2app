@@ -81,7 +81,7 @@
     height: 100%;
     width: 100%;
     line-height: 60px;
-    color: white;
+    color: #022c5c;
     text-align: center;
     font-size: 4em;
     position: absolute;
@@ -101,10 +101,11 @@
     font-size: 16px;
     text-align: left;
     line-height: 25px;
+    padding: 20px;
 }
 
 .card .back {
-    background: linear-gradient(to right, rgb(125, 131, 153), rgb(156, 156, 163));
+    background: linear-gradient(87deg, rgba(11, 32, 170, 1) 1%, rgba(2, 44, 92, 1) 100%);
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);

@@ -1,10 +1,12 @@
 
+
 <?php
 	if (!defined('WEB_ROOT')) {
 		header('Location: ../index.php');
 		exit;
 	}
 ?>
+
 
 <div class="homepage-third-sec">
     <div style="width: 100%;">

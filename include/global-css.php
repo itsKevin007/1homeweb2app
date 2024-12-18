@@ -16,11 +16,13 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/media-query.css">
 <link href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/drawer.css">
+
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/table.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/profile.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/faqTbl.css">
 
 
 
+
 <!-- for modify -->
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/mod.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/mod.css">

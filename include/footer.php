@@ -27,7 +27,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 					<div class="bottom-panel nagivation-menu">
 						<ul class="sc-bottom-bar furniture-bottom-nav" id="furniture_navbar">
 							<li class="nav-menu-icon <?php echo $active; ?>">
-								<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=dash" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=dashboard" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_798" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -59,7 +59,10 @@ $PAGEDATA = $PAGE->fetchColumn();
 							</li>
 							<li class="nav-menu-icon nav-notifi-icon">
 
+
 								<a href="<?php echo $profileDirect; ?>" class="account-icon navigation-icons <?php echo ($PAGEDATA === 'Profile') ? 'active' : ''; ?>">
+
+
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_772" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />

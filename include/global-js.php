@@ -20,6 +20,7 @@ if (!defined('WEB_ROOT')) {
 
 
 
+
 <script>
 	// When page loads, it will trigger the circle menu
 	window.onload = function() {

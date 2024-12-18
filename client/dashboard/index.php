@@ -36,7 +36,7 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'dash' :
+			case 'dashboard' :
 				$content 	= 'dashboard.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;
@@ -47,7 +47,7 @@
 				break;
 
 			default :
-				$content 	= 'list.php';		
+				$content 	= 'dashboard.php';		
 				$pageTitle 	= $sett_data['system_title'];
 		}
 	}else{

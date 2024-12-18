@@ -1,5 +1,8 @@
-<!-- Profile Details Section Start -->
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/style/profile.css">
+
 <?php
+
+
 include('../../phpqrcode/qrlib.php');
 $user_uid = $user_data['uid'];
 $client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
@@ -52,32 +55,14 @@ $fullname = $fname . " " . $mname . " " . $lname;
 
 <!--Profile Card 3-->
 <section id="profile-page-sec">
-	<div class="container" style="margin-top: 20px;">
-		<div class="card profile-card-3">
-			<div class="background-block" style="background-color: #022c5c;">
-
+	<div class="mt-5 d-flex col-12">
+		<div class="card">
+			<div class="image"></div>
+			<div class="card-info">
+				<span>George Johnson</span>
+				<p>Support Specialist</p>
 			</div>
-			<div style="margin-top: -50px;">
-				<img src="<?php echo $image; ?>" class="profile" alt="profile" style="width: 120px; height: 100px;">
-			</div>
-			<div class="card-content" style="z-index: 0;">
-				<div>
-					<h3 class="pro-txt1"><?php echo $fullname; ?></h3>
-					<a href="index.php?view=modify">
-						<button class="btn profile-settings-btn">
-							<p><i class="fas fa-cog" aria-hidden="true"></i>Edit Profile</p>
-						</button>
-					</a>
-				</div>
-
-				<div class="col">
-					<h4 class="pro-txt2"><b>Home</b></h4>
-					<h4 class="pro-txt2"><?php echo $address; ?></h4>
-					<h4 class="pro-txt2"><strong>Office</strong></h4>
-					<h5 class="prile3-txt3"><?php echo $office_add; ?></h5>
-				</div>
-
-			</div>
+			<a href="#" class="button">Folow</a>
 		</div>
 	</div>
 

@@ -1082,7 +1082,7 @@ span.cart-item {
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
-    color: #fff;
+    color: #070707;
 }
 .homepage-slide-txt {
     font-family: 'Inter';
@@ -5259,7 +5259,7 @@ ul.input.date-picker-input {
     color: #c9c9d2;
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
+    width: 350px;
     margin: 50px auto;
 }
 
@@ -5302,10 +5302,9 @@ ul.input.date-picker-input {
     flex-direction: row;
     display: flex;
     object-fit: contain;
-    
     height: auto;
     position: relative;
-    z-index: 1;
+  
     
 }
 .wallet-title{

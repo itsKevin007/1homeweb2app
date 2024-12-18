@@ -147,7 +147,7 @@ if($accesslevel == 0){
 			</div>
 			<div class="border-bottom-app mt-8"></div>
 		</a>
-		<a href="<?php echo WEB_ROOT; ?>client/index.php?view=FAQ">
+		<a href="<?php echo WEB_ROOT; ?>client/faq/index.php?view=faq">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
