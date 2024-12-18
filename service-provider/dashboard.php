@@ -1,3 +1,9 @@
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+?>
 
 <section id="homepage1-sec">
 			<div class="homepage-first-sec">

@@ -1,8 +1,5 @@
 <?php
-if (!defined('WEB_ROOT')) {
-	header('Location: ../index.php');
-	exit;
-}
+include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/restrict.php');
 
 $self = WEB_ROOT . 'index.php';
 

@@ -1,8 +1,14 @@
 <!-- Profile Details Section Start -->
 	<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/profile-modify.css">
-<?php 
+
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+
 	
-	include('../phpqrcode/qrlib.php');
+	include('../../phpqrcode/qrlib.php');
 
 	$uid_user = $user_data['uid'];
 	$client = $conn->prepare("SELECT * FROM tbl_independent WHERE user_id = :userId");
@@ -81,43 +87,44 @@
 
 		$fullname = $fname." ".$mname." ".$lname;
 ?>
-		<section id="profile-page-sec">
-			<div class="profile-top-sec">
-				<div class="profile-top-sec-full">
-					<h1 class="d-none">Profile</h1>
-					<h2 class="d-none">ProfilePage</h2>
 
-							<a href="#" class="add-icon-service main-color" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-								<div class="profile-img-sec position-relative">
-									<img src="<?php echo $image; ?>" alt="Profile Image">
-									<span class="hover-text"><img src="../assets/images/icon/edit.svg" > Edit</span>
-								</div>
-							</a>
 
-							<?php include 'modal/edit-profile.php'; ?>
-
-						<div class="profile-details-sec">
-							<div class="row">
-								<div class="col-6">
-									<h3 class="pro-txt1"><?php echo $fullname; ?></h3>
-								</div>
-								<div class="col-6">
-									<a href="index.php?view=modify"><h3 class="pro-txt1"><img src="../assets/images/icon/edit.svg" ></h3></a>
-								</div>
-							</div>
-							<h4 class="pro-txt2"><?php echo $email; ?></h4>
-							<h5 class="pro-txt3">+<?php echo $connum; ?></h5>
-							<h5 class="pro-txt3">Date Registered: <?php echo $date_added; ?></h5>
-							<h5 class="pro-txt3">Account #: <?php echo $accno; ?></h5>
-						</div>
-				</div>
+<div class="card">
+	<div class="image">
+		
+		<a href="#" class="add-icon-service main-color" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+			<div class="profile-img-sec position-relative">
+				<img src="<?php echo $image; ?>" alt="Profile Image">
+				<span class="hover-text"><img src="../../assets/images/icon/edit.svg" > Edit</span>
 			</div>
+		</a>
+
+		</div>
+		<div class="card-info">
+			<span><h3><b><?php echo $fullname; ?></b></h3></span>
+			<b>
+				<?php echo $email; ?><br>
+				+<?php echo $connum; ?><br>
+				Date Registered: <?php echo $date_added; ?><br>
+				Account #: <?php echo $accno; ?>
+
+				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
+					<p class="tap-me-text">Tap me to edit</p>
+				</div>
+				
+			</b>
+		</div>
+		<a href="index.php?view=modify" class="button" ><img src="../../assets/images/icon/edit-white.svg" width="25px" ></a>
+
+</div>
+		<?php include '../modal/edit-profile.php'; ?>
+		<section id="profile-page-sec">
 			
 			
-			<div id="profile-third-sec">
+			<div class="card-info" id="profile-third-sec">
 				<div class="container">
 					<div class="profile-third-sec-full mt-24">
-						<h3 class="prile3-txt1">Address</h3>
+						<h3 class="prile3-txt1"><img src="../../assets/images/icon/pin-destination-bold.svg" width="20px" > Address</h3>
 						<div class="profile-address-sec mt-16">
 							<h4 class="prile3-txt2">Home</h4>
 							<h5 class="prile3-txt3"><?php echo $address; ?></h5>
@@ -129,7 +136,7 @@
 						<div class="profile-boder mt-24"></div>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<?php 
 				$text = $uid_user;
 				$tempDir = 'temp/'; // Directory to save QR code temporarily

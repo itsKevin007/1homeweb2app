@@ -1,5 +1,7 @@
+
+<link href="<?php echo WEB_ROOT; ?>assets/css/flipped.css" rel="stylesheet">
 <link href="<?php echo WEB_ROOT; ?>style/flipped.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/filter.css">
+
 
 <?php
 // -------------------------------------------------- PHP for services ----------------------------------------------- //

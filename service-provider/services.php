@@ -1,3 +1,10 @@
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+?>
+
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/service-provider-list.css"> 
 <?php
 

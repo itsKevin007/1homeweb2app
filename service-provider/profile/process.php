@@ -46,30 +46,6 @@ switch ($action) {
         header('Location: index.php');
 }
 
-function image_profile()
-{
-	include '../global-library/database.php';
-	$userId = $_SESSION['user_id'];
-
-	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
-
-	$mainImage = $images['image'];
-	$thumbnail = $images['thumbnail'];
-
-		$up = $conn->prepare("UPDATE bs_user SET image = :mainImage, thumbnail = :thumbnail WHERE user_id = :userId");
-		$up->bindParam(':mainImage', $mainImage);
-		$up->bindParam(':thumbnail', $thumbnail);
-		$up->bindParam(':userId', $userId);
-		$up->execute();
-
-		$log = $conn->prepare("INSERT INTO tr_log (module, description, log_action_date, action_by) VALUES ('Service Provider', 'Edit Profile: $thumbnail', '$today_date1', '$userId')");
-		$log->execute();
-		
-		header('Location: index.php?view=prof&error=Success');
-
-	
-}
-
 
 /*
     Add Data
@@ -112,79 +88,6 @@ function add_data()
 		header('Location: index.php?view=list&error=Added successfully.');
 
 	}
-}
-
-function add_service()
-{
-	include '../global-library/database.php';
-	$userId = $_SESSION['user_id'];
-	
-	$mainservice = isset($_POST['mainservice']) ? $_POST['mainservice'] : '';
-	$subcat = isset($_POST['subcat']) ? $_POST['subcat'] : '';
-
-	$subtotal_array = [];
-	foreach ($mainservice as $key => $mainservices) {
-			$subcats = $subcat[$key];
-	
-			// Fetch matching records from the database
-			$chk = $conn->prepare("SELECT * FROM ind_subcat 
-								WHERE main_id = :mainid 
-									AND sub_categor = :subcat 
-									AND user_id = :userid 
-									AND is_deleted != '1'");
-			$chk->bindParam(':mainid', $mainservices, PDO::PARAM_INT);
-			$chk->bindParam(':subcat', $subcats, PDO::PARAM_STR);
-			$chk->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$chk->execute();
-
-			// Check if any record exists
-		if ($chk->rowCount() > 0) {
-			// Fetch all matching records
-			$results = $chk->fetchAll(PDO::FETCH_COLUMN, 0); // Get `sub_categor` values
-			$subtotal_array = array_merge($subtotal_array, $results); // Accumulate results
-		}
-
-
-		// If there are existing records, redirect with query string
-		if (!empty($subtotal_array)) {
-			$resulta = implode(',', $subtotal_array); // Concatenate with commas
-			header('Location: index.php?view=service&exist=' . urlencode($resulta));
-			exit; // Stop further processing
-
-		} else {
-
-			// Handle case where no existing records are found
-			$sql = $conn->prepare("INSERT INTO ind_subcat (main_id, sub_categor, user_id, date_added, added_by)
-								VALUES (:mainid, :subcat, :userid, :todaydate, :userid)");
-			$sql->bindParam(':mainid', $mainservices, PDO::PARAM_INT);
-			$sql->bindParam(':subcat', $subcats, PDO::PARAM_STR);
-			$sql->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$sql->bindParam(':todaydate', $today_date1, PDO::PARAM_STR);
-			$sql->execute();
-
-
-			// activity logs
-			$keyword = 'Sub Category Name: ' . $subcats ;
-			
-			$module = 'Service Category';
-			$action = 'Service Added';
-			
-			$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-								   VALUES (:module, :action, :description, :userid, :todaydate)");
-			$log->bindParam(':module', $module, PDO::PARAM_STR);
-			$log->bindParam(':action', $action, PDO::PARAM_STR);
-			$log->bindParam(':description', $keyword, PDO::PARAM_STR);
-			$log->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$log->bindParam(':todaydate', $today_date1, PDO::PARAM_STR);
-			$log->execute();
-			
-
-
-		}
-	}
-			header('Location: index.php?view=service&error=Success');
-			exit; // Stop further processing
-	
 }
 
 
