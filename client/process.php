@@ -1,4 +1,11 @@
 <?php
+
+if (!defined('WEB_ROOT')) {
+	header('Location: ../index.php');
+	exit;
+}
+
+
 require_once '../../global-library/config.php';
 require_once '../../include/functions.php';
 

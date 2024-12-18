@@ -1,3 +1,10 @@
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+?>
+
 <div class="modal fade" id="exampleLargeModal" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

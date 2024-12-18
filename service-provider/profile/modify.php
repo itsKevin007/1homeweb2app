@@ -1,5 +1,10 @@
 <!-- Modify Profile Section Start -->
-<?php  
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+
 $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error'] : '';
 
 	if($errorMessage == 'Success')
@@ -161,6 +166,47 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 								</div>
 								<div class="faq-bottom-border"></div>
 							</div>
+
+							<div class="accordion-item border-0 mt-24">
+								<hr>
+								<button class="accordion-button custom_icon collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordian1">
+									<h5 class="prile3-txt2">Name</h5>
+								</button>
+								<div id="accordian1" class="accordion-collapse collapse show">
+
+									<div class="row mt-16">
+										<div class="col-6">
+											<input type="text" name="fname" class="form-control" value="<?php echo $fname; ?>" placeholder="First Name" autocomplete="off" required>
+										</div>
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>
+										<div class="col-6">
+											<input type="text" name="mname" class="form-control" value="<?php echo $mname; ?>" placeholder="Middle Name" autocomplete="off" required>
+										</div>	
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>		
+									</div>
+									<div class="row mt-16">
+										<div class="col-6">
+											<input type="text" name="lname" class="form-control" value="<?php echo $lname; ?>" placeholder="Last Name" autocomplete="off" required>
+										</div>
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>
+										<div class="col-6">
+											<input type="text" name="suffix" class="form-control" value="<?php echo $suffix; ?>" autocomplete="off" placeholder="Suffix">
+										</div>	
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>					
+									</div>
+
+								</div>
+								<div class="faq-bottom-border"></div>
+							</div>
+
 							<div class="accordion-item border-0 mt-24">
 								<h2 class="accordion-header">
 									<hr>

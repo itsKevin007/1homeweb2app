@@ -9,6 +9,12 @@ $PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
 $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
+	if($accesslevel == 0){
+		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=prof';
+	}elseif($accesslevel == 1){
+		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
+	}else{}
+
 ?>
 <!-- ======= Footer ======= -->
 
@@ -53,7 +59,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 							</li>
 							<li class="nav-menu-icon nav-notifi-icon">
 
-								<a href="<?php echo WEB_ROOT; ?>client/profile/index.php?view=prof" class="account-icon navigation-icons <?php echo ($PAGEDATA === 'Profile') ? 'active' : ''; ?>">
+								<a href="<?php echo $profileDirect; ?>" class="account-icon navigation-icons <?php echo ($PAGEDATA === 'Profile') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_772" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />

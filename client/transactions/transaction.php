@@ -1,5 +1,11 @@
 <?php
 
+if (!defined('WEB_ROOT')) {
+    header('Location: ../index.php');
+    exit;
+}
+
+
 $trans = $conn->prepare("SELECT * FROM tr_log WHERE action_by = :userId");
 $trans->bindParam(':userId', $userId, PDO::PARAM_INT);
 $trans->execute();

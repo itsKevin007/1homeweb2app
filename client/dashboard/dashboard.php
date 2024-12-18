@@ -1,3 +1,5 @@
+<link href="<?php echo WEB_ROOT; ?>assets/css/flipped.css" rel="stylesheet">
+
 <?php
 
 $client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");

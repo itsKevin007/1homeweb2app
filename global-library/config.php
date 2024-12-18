@@ -61,7 +61,9 @@ $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId'");
 $user->execute();
 $user_data = $user->fetch();
 
-$accesslevel = $user_data['access_level'];
+if($user->rowCount() > 0){
+    $accesslevel = $user_data['access_level'];
+}else{}
 
 # Get setting details
 $sett = $conn->prepare("SELECT * FROM bs_setting");
@@ -70,11 +72,11 @@ $sett_data = $sett->fetch();
 
 // setting up the web root and server root for this website application
 $thisFile = str_replace('\\', '/', __FILE__);
-$docRoot = '/1homeweb2app/';
+$docRoot = '/onehomeweb2app/';
 
 $srvRoot  = str_replace('global-library/config.php', '', $thisFile);
-$webRoot  = '/1homeweb2app/';
-$adminRoot  = '/1homeweb2app/adminpanel/';
+$webRoot  = '/onehomeweb2app/';
+$adminRoot  = '/onehomeweb2app/adminpanel/';
 
 define('WEB_ROOT', $webRoot);
 define('SRV_ROOT', $srvRoot);

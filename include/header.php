@@ -7,41 +7,60 @@ if (!defined('WEB_ROOT')) {
 ?>
 
 <?php
+if($accesslevel == 0){
 
-$client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
-$client->bindParam(':userId', $userId, PDO::PARAM_INT);
-$client->execute();
-$client_data = $client->fetch();
-$uid = $client_data['uid'];
+	$client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
+	$client->bindParam(':userId', $userId, PDO::PARAM_INT);
+	$client->execute();
+	$client_data = $client->fetch();
+	$uid = $client_data['uid'];
 
-$fname = $client_data['c_fname'];
-$mname = $client_data['c_mname'];
-$lname = $client_data['c_lname'];
-$email = $client_data['email'];
-$accnum = $client_data['accnum'];
-$connum = $client_data['connum'];
-$date_added = $client_data['date_added'];
+	$fname = $client_data['c_fname'];
+	$mname = $client_data['c_mname'];
+	$lname = $client_data['c_lname'];
+	$email = $client_data['email'];
+	$accnum = $client_data['accnum'];
+	$connum = $client_data['connum'];
+	$date_added = $client_data['date_added'];
 
-$bal = $conn->prepare("SELECT * FROM tbl_balance WHERE bal_id = :balId");
-$bal->bindParam(':balId', $userId, PDO::PARAM_INT);
-$bal->execute();
-$bal_data = $bal->fetch();
-if ($bal->rowCount() > 0) {
-	$balance = $bal_data['balance'];
-} else {
-	$balance = "0.00";
-}
-
-// for image
-$thumbnail = $user_data['thumbnail'];
-
-if ($user_data['thumbnail']) {
-	$image = WEB_ROOT . 'adminpanel/assets/images/user/' . $user_data['thumbnail'];
-} else {
-	$image = WEB_ROOT . 'adminpanel/assets/images/user/noimage.png';
-}
+	$bal = $conn->prepare("SELECT * FROM tbl_balance WHERE bal_id = :balId");
+	$bal->bindParam(':balId', $userId, PDO::PARAM_INT);
+	$bal->execute();
+	$bal_data = $bal->fetch();
+	if ($bal->rowCount() > 0) {
+		$balance = $bal_data['balance'];
+	} else {
+		$balance = "0.00";
+	}
 
 
+}elseif($accesslevel == 1){
+	$client = $conn->prepare("SELECT * FROM tbl_independent WHERE user_id = :userId");
+	$client->bindParam(':userId', $userId, PDO::PARAM_INT);
+	$client->execute();
+	$client_data = $client->fetch();
+	$uid = $client_data['uid'];
+
+	$inid = $client_data['in_id'];
+
+	$fname = $client_data['fname'];
+	$mname = $client_data['mname'];
+	$lname = $client_data['lname'];
+	$suffix = $client_data['suffix'];
+	$email = $client_data['emailadd'];
+	$connum = $client_data['connum'];
+	$date_added = $client_data['date_added'];
+	$accnum = $client_data['accno'];
+}else{}
+
+	// for image
+	$thumbnail = $user_data['thumbnail'];
+
+	if ($user_data['thumbnail']) {
+		$image = WEB_ROOT . 'adminpanel/assets/images/user/' . $user_data['thumbnail'];
+	} else {
+		$image = WEB_ROOT . 'adminpanel/assets/images/user/noimage.png';
+	}
 ?>
 <header id="top-navbar" class="top-navbar">
 	<div class="container">
@@ -54,10 +73,10 @@ if ($user_data['thumbnail']) {
 						</svg>
 					</a>
 				</button>
-			</div>
-			<div class="justify-content-center align-items-center text-center logo mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0 mb-xxxl-0 mx-auto d-flex">
-				<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="logo" height="40px">
-			</div>
+			</div>			
+				<a href="<?php echo WEB_ROOT; ?>" class="justify-content-center align-items-center text-center logo mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0 mb-xxxl-0 mx-auto d-flex">
+					<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="logo" height="40px">
+				</a>
 		</div>
 	</div>
 	<div class="navbar-boder"></div>
@@ -97,6 +116,19 @@ if ($user_data['thumbnail']) {
 	</nav>
 	<hr>
 	<nav class="drawer-navigation drawer-border">
+
+		<a href="<?php echo WEB_ROOT; ?>service-provider/index.php?view=service">
+			<div class="app-setting-menu-start mt-16">
+				<div class="menu-icon">
+					<img src="<?php echo WEB_ROOT; ?>assets/images/icon/tools-solid-white.svg" alt="logo" height="23px">
+				</div>
+				<div class="menu-txt-app">
+					<h3 class="app-txt-title">Service Offer</h3>
+				</div>
+			</div>
+			<div class="border-bottom-app mt-8"></div>
+		</a>
+
 		<a href="about-us.html">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
