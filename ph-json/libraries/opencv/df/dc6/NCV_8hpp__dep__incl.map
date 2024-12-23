@@ -1,0 +1,19 @@
+<map id="opencv2/cudalegacy/NCV.hpp" name="opencv2/cudalegacy/NCV.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="278,5,433,45"/>
+<area shape="rect" id="Node000002" href="$da/d10/cudalegacy_8hpp.html" title=" " alt="" coords="265,181,446,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,30,165,36,116,43,71,53,36,66,14,84,9,93,9,105,13,117,23,132,38,144,60,154,121,170,194,181,264,187,264,192,193,186,120,176,58,159,35,148,19,135,8,120,3,105,4,92,10,80,33,62,70,48,115,38,165,31,264,24"/>
+<area shape="rect" id="Node000004" href="$d2/d84/NCVBroxOpticalFlow_8hpp.html" title=" " alt="" coords="33,93,221,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="293,53,178,96,176,91,291,48"/>
+<area shape="rect" id="Node000005" href="$d0/d3c/NCVHaarObjectDetection_8hpp.html" title=" " alt="" coords="246,93,465,133"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="358,59,358,93,353,93,353,59"/>
+<area shape="rect" id="Node000006" href="$db/dfa/NCVPyramid_8hpp.html" title=" " alt="" coords="489,93,643,133"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="415,48,521,91,519,96,413,53"/>
+<area shape="rect" id="Node000007" href="$d5/d2c/NPP__staging_8hpp.html" title=" " alt="" coords="667,93,822,133"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="446,44,667,92,666,98,445,49"/>
+<area shape="rect" id="Node000003" href="$de/d3c/contrib_2modules_2cudalegacy_2include_2opencv2_2cudalegacy_2private_8hpp.html" title=" " alt="" coords="278,255,433,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,220,358,255,353,255,353,220"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="195,135,322,179,321,184,194,140"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="358,147,358,181,353,181,353,147"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="504,141,387,184,385,179,502,136"/>
+<area shape="poly" id="edge10_Node000007_Node000002" title=" " alt="" coords="654,136,414,184,413,179,653,131"/>
+</map>

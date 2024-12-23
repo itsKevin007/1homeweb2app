@@ -1,0 +1,29 @@
+<map id="cv::ppf_match_3d::Pose3D" name="cv::ppf_match_3d::Pose3D">
+<area shape="rect" id="Node000001" title="Class, allowing the storage of a pose. The data structure stores both the quaternions and the matrix ..." alt="" coords="212,2020,397,2325"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="195,1239,254,1305"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,1304,253,1407,271,1537,292,1781,303,2004,297,2004,287,1782,266,1538,247,1408,228,1305"/>
+<area shape="rect" id="Node000004" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="5,1537,180,1943"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="218,1306,157,1522,152,1520,213,1304"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="204,1707,256,1773"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,1773,209,1860,195,1967,194,1982,195,1995,207,2028,202,2030,190,1997,188,1982,190,1966,204,1859,220,1772"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="120,1942,140,1995,168,2039,202,2080,198,2083,164,2042,136,1997,115,1944"/>
+<area shape="rect" id="Node000005" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="183,133,341,539"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="239,553,120,1537,114,1536,233,552"/>
+<area shape="rect" id="Node000010" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="287,601,448,1007"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="272,552,277,577,289,622,284,624,271,578,267,553"/>
+<area shape="rect" id="Node000006" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="371,5,409,71"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="373,56,354,74,338,96,325,120,320,117,333,93,350,71,369,53"/>
+<area shape="rect" id="Node000008" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="459,1069,617,1475"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="408,70,430,133,456,253,478,377,509,624,528,856,538,1053,532,1053,523,856,504,624,473,377,451,254,425,134,403,72"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="392,71,376,585,371,585,386,71"/>
+<area shape="rect" id="Node000007" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="566,1537,715,1943"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="568,1926,556,1944,524,1985,488,2025,412,2093,409,2089,484,2021,520,1982,552,1941,564,1923"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="622,1488,625,1498,632,1537,627,1538,619,1499,617,1489"/>
+<area shape="rect" id="Node000011" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="393,1537,542,1943"/>
+<area shape="poly" id="edge15_Node000011_Node000008" title=" " alt="" coords="505,1489,503,1499,498,1537,492,1537,498,1498,500,1488"/>
+<area shape="rect" id="Node000009" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="300,1069,435,1475"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="446,1469,449,1473,460,1482,471,1486,498,1496,528,1514,556,1535,568,1551,564,1555,552,1539,525,1519,496,1501,469,1491,458,1487,445,1477,442,1472"/>
+<area shape="poly" id="edge16_Node000011_Node000009" title=" " alt="" coords="396,1488,401,1513,406,1536,401,1538,395,1514,390,1489"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="370,1020,370,1069,365,1069,365,1020"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="395,1940,370,2005,365,2003,390,1938"/>
+</map>

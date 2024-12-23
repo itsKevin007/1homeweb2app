@@ -1,0 +1,19 @@
+<map id="cv::optflow::GPCPatchDescriptor" name="cv::optflow::GPCPatchDescriptor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,2383,225,2488"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="24,2085,97,2150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,2150,73,2244,91,2358,93,2367,88,2368,86,2359,67,2244,59,2150"/>
+<area shape="rect" id="Node000003" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="122,1915,327,2320"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,2321,171,2360,166,2370,161,2367,166,2358,181,2319"/>
+<area shape="rect" id="Node000004" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="108,563,267,968"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="196,982,222,1914,216,1914,191,982"/>
+<area shape="rect" id="Node000005" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="269,5,306,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="270,54,251,73,235,96,214,150,197,206,175,323,167,438,167,546,162,546,161,438,170,322,192,205,209,148,230,93,247,69,267,51"/>
+<area shape="rect" id="Node000007" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="225,992,387,1397"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="291,71,305,975,300,975,285,71"/>
+<area shape="rect" id="Node000008" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="348,133,507,539"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="305,70,343,151,339,154,300,72"/>
+<area shape="rect" id="Node000006" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="232,1447,367,1852"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="268,1866,260,1915,254,1914,262,1865"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="305,1411,305,1446,300,1446,300,1411"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="399,553,337,992,332,991,394,552"/>
+</map>

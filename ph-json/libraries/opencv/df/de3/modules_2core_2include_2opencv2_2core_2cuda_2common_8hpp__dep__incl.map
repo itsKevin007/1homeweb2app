@@ -1,0 +1,46 @@
+<map id="opencv2/core/cuda/common.hpp" name="opencv2/core/cuda/common.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="656,5,889,31"/>
+<area shape="rect" id="Node000002" href="$df/dcf/datamov__utils_8hpp.html" title=" " alt="" coords="143,79,349,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="682,35,370,81,350,84,349,79,370,76,681,30"/>
+<area shape="rect" id="Node000004" href="$d5/dc3/modules_2core_2include_2opencv2_2core_2cuda_2scan_8hpp.html" title=" " alt="" coords="5,262,212,287"/>
+<area shape="poly" id="edge16_Node000001_Node000004" title=" " alt="" coords="642,25,492,32,333,42,201,59,156,69,132,81,116,101,106,124,100,150,98,176,101,225,108,261,103,262,96,226,93,176,95,149,101,123,112,98,128,77,154,64,200,53,333,37,492,26,642,20"/>
+<area shape="rect" id="Node000005" href="$da/da3/modules_2core_2include_2opencv2_2core_2cuda_2transform_8hpp.html" title=" " alt="" coords="245,262,485,287"/>
+<area shape="poly" id="edge18_Node000001_Node000005" title=" " alt="" coords="642,33,528,52,482,65,450,81,430,101,413,124,389,177,375,226,369,262,363,261,370,225,384,175,408,122,426,97,447,76,480,60,527,47,642,28"/>
+<area shape="rect" id="Node000006" href="$dd/d0e/emulation_8hpp.html" title=" " alt="" coords="882,86,1125,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="820,33,971,83,969,89,818,38"/>
+<area shape="rect" id="Node000007" href="$d7/d42/modules_2core_2include_2opencv2_2core_2cuda_2limits_8hpp.html" title=" " alt="" coords="1149,86,1362,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="857,30,1185,83,1185,89,856,35"/>
+<area shape="rect" id="Node000008" href="$de/d17/modules_2core_2include_2opencv2_2core_2cuda_2saturate__cast_8hpp.html" title=" " alt="" coords="461,79,663,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="730,38,614,81,612,76,728,33"/>
+<area shape="rect" id="Node000014" href="$dc/db9/modules_2core_2include_2opencv2_2core_2cuda_2simd__functions_8hpp.html" title=" " alt="" coords="1387,79,1567,119"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="903,26,1124,46,1374,76,1387,78,1386,83,1374,81,1123,52,903,32"/>
+<area shape="rect" id="Node000015" href="$de/d6f/modules_2core_2include_2opencv2_2core_2cuda_2vec__traits_8hpp.html" title=" " alt="" coords="687,79,858,119"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="775,44,775,79,770,79,770,44"/>
+<area shape="rect" id="Node000016" href="$db/dfa/NCVPyramid_8hpp.html" title=" " alt="" coords="1591,79,1746,119"/>
+<area shape="poly" id="edge24_Node000001_Node000016" title=" " alt="" coords="903,21,1212,39,1395,54,1578,76,1592,78,1591,83,1578,81,1395,60,1212,44,903,26"/>
+<area shape="rect" id="Node000003" href="$df/dc3/cuda_2utility_8hpp.html" title=" " alt="" coords="140,174,352,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="249,133,249,174,243,174,243,133"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,209,129,264,126,259,215,204"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="275,205,350,260,347,264,272,210"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="480,125,289,177,287,171,479,120"/>
+<area shape="rect" id="Node000009" href="$d5/dd1/border__interpolate_8hpp.html" title=" " alt="" coords="720,255,911,295"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="514,128,488,145,469,165,460,185,461,195,466,205,494,214,558,227,720,256,719,261,557,233,493,219,463,209,456,197,455,185,464,162,485,141,511,123"/>
+<area shape="rect" id="Node000010" href="$d3/d10/filters_8hpp.html" title=" " alt="" coords="935,262,1149,287"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="678,117,836,145,927,164,1031,260,1028,264,925,169,835,150,677,122"/>
+<area shape="rect" id="Node000011" href="$d7/dfd/modules_2core_2include_2opencv2_2core_2cuda_2functional_8hpp.html" title=" " alt="" coords="477,174,719,199"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="578,131,595,173,591,175,573,133"/>
+<area shape="rect" id="Node000013" href="$d4/da9/modules_2core_2include_2opencv2_2core_2cuda_2vec__math_8hpp.html" title=" " alt="" coords="743,167,914,207"/>
+<area shape="poly" id="edge13_Node000008_Node000013" title=" " alt="" coords="634,120,771,164,769,169,633,125"/>
+<area shape="rect" id="Node000012" href="$d7/d23/modules_2core_2include_2opencv2_2core_2cuda_2vec__distance_8hpp.html" title=" " alt="" coords="513,255,683,295"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="601,213,601,254,595,254,595,213"/>
+<area shape="poly" id="edge14_Node000013_Node000009" title=" " alt="" coords="826,221,821,255,816,254,821,220"/>
+<area shape="poly" id="edge15_Node000013_Node000010" title=" " alt="" coords="889,209,1015,260,1013,264,887,214"/>
+<area shape="poly" id="edge20_Node000015_Node000009" title=" " alt="" coords="873,121,903,139,928,165,936,186,928,208,903,237,871,257,868,252,899,233,924,205,930,186,924,168,900,143,870,125"/>
+<area shape="poly" id="edge21_Node000015_Node000010" title=" " alt="" coords="859,121,906,139,950,164,978,188,1003,215,1037,260,1033,263,999,218,975,192,947,169,903,144,857,125"/>
+<area shape="poly" id="edge22_Node000015_Node000011" title=" " alt="" coords="723,127,622,176,620,172,721,122"/>
+<area shape="poly" id="edge23_Node000015_Node000013" title=" " alt="" coords="795,129,819,165,814,168,790,132"/>
+<area shape="rect" id="Node000017" href="$da/d10/cudalegacy_8hpp.html" title=" " alt="" coords="1578,174,1759,199"/>
+<area shape="poly" id="edge25_Node000016_Node000017" title=" " alt="" coords="1671,133,1671,174,1666,174,1666,133"/>
+<area shape="rect" id="Node000018" href="$de/d3c/contrib_2modules_2cudalegacy_2include_2opencv2_2cudalegacy_2private_8hpp.html" title=" " alt="" coords="1591,255,1746,295"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="1671,213,1671,254,1666,254,1666,213"/>
+</map>

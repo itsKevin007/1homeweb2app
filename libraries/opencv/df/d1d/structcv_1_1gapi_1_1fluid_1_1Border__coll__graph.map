@@ -1,0 +1,24 @@
+<map id="cv::gapi::fluid::Border" name="cv::gapi::fluid::Border">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,3105,156,3171"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,2857,59,2923"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,2923,76,3089,71,3089,46,2923"/>
+<area shape="rect" id="Node000003" href="$d1/da0/classcv_1_1Scalar__.html" title=" " alt="" coords="83,2737,273,3043"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,3044,122,3082,116,3092,112,3090,117,3080,133,3042"/>
+<area shape="rect" id="Node000004" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="67,1485,201,1891"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="138,1904,146,2265,162,2675,166,2737,161,2737,157,2675,140,2265,133,1905"/>
+<area shape="rect" id="Node000005" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="141,601,303,1007"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="203,1021,157,1485,151,1485,198,1020"/>
+<area shape="rect" id="Node000009" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="203,1915,331,2320"/>
+<area shape="poly" id="edge10_Node000009_Node000005" title=" " alt="" coords="232,1020,263,1914,258,1914,227,1021"/>
+<area shape="rect" id="Node000010" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="260,1056,395,1461"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="275,1020,283,1055,278,1056,269,1021"/>
+<area shape="rect" id="Node000006" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="203,5,241,71"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="221,71,215,133,211,367,215,585,209,585,205,367,210,133,215,71"/>
+<area shape="rect" id="Node000007" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="261,133,420,539"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="237,70,258,121,253,123,232,72"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="289,553,276,602,271,601,283,551"/>
+<area shape="rect" id="Node000008" href="$d1/da0/classcv_1_1Scalar__.html" title="Template class for a 4&#45;element vector derived from Vec." alt="" coords="172,2369,363,2675"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="230,2689,218,2737,213,2736,224,2687"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="270,2334,270,2369,265,2369,265,2334"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="315,1475,284,1915,279,1914,310,1475"/>
+</map>

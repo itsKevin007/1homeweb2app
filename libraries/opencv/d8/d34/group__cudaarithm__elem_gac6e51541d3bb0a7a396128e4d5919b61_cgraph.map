@@ -1,0 +1,6 @@
+<map id="cv::cuda::exp" name="cv::cuda::exp">
+<area shape="rect" id="Node000001" title="Computes an exponent of each matrix element." alt="" coords="5,29,112,55"/>
+<area shape="rect" id="Node000002" href="$d2/de8/group__core__array.html#ga3e10108e2162c338f1b848af619f39e5" title="Calculates the exponent of every array element." alt="" coords="160,29,228,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,39,146,39,146,45,112,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="171,30,166,21,169,11,178,5,194,3,212,6,220,14,217,18,210,11,194,8,180,10,173,14,172,20,176,28"/>
+</map>

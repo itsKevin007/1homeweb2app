@@ -1,0 +1,25 @@
+<map id="cv::detail::tracking::tbm::TrackerParams" name="cv::detail::tracking::tbm::TrackerParams">
+<area shape="rect" id="Node000001" title="The TrackerParams struct stores parameters of TrackerByMatching." alt="" coords="288,2529,439,2609"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="25,2085,77,2150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,2151,23,2222,14,2267,9,2316,9,2366,16,2415,31,2462,57,2504,71,2515,90,2524,144,2540,208,2552,272,2559,271,2564,207,2557,143,2546,88,2529,68,2519,53,2507,27,2464,11,2417,4,2366,4,2316,9,2266,18,2221,37,2149"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="198,2085,241,2150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,2151,203,2220,198,2312,201,2362,209,2412,224,2460,247,2504,260,2519,276,2532,272,2536,256,2523,242,2507,219,2462,204,2413,196,2362,193,2312,198,2219,209,2150"/>
+<area shape="rect" id="Node000004" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="296,1915,431,2320"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="366,2320,366,2513,361,2513,361,2320"/>
+<area shape="rect" id="Node000005" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="247,563,405,968"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="335,982,360,1914,355,1914,329,982"/>
+<area shape="rect" id="Node000006" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="407,5,445,71"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="409,54,390,73,374,96,352,150,336,206,314,323,305,438,306,546,301,546,300,438,309,322,331,205,347,148,369,93,385,69,405,51"/>
+<area shape="rect" id="Node000008" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="364,992,525,1397"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="429,71,444,975,438,975,424,71"/>
+<area shape="rect" id="Node000009" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="487,133,645,539"/>
+<area shape="poly" id="edge10_Node000009_Node000006" title=" " alt="" coords="443,70,482,151,477,154,439,72"/>
+<area shape="rect" id="Node000007" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="371,1447,505,1852"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="406,1866,398,1915,393,1914,401,1865"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="444,1411,444,1446,438,1446,439,1411"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="538,553,476,992,471,991,533,552"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="521,2085,552,2150"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="539,2150,531,2350,523,2450,517,2486,510,2507,485,2531,455,2548,453,2544,482,2527,505,2504,512,2485,518,2450,526,2349,533,2150"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="699,2085,742,2150"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="732,2150,745,2222,750,2268,751,2317,747,2368,736,2418,717,2465,688,2507,672,2519,650,2530,592,2546,523,2558,456,2565,455,2560,522,2552,590,2541,648,2525,669,2515,684,2503,712,2463,731,2417,741,2367,745,2317,744,2268,740,2222,726,2151"/>
+</map>

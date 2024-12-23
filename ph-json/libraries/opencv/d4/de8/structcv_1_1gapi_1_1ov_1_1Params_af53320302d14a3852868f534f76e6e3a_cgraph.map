@@ -1,0 +1,7 @@
+<map id="cv::gapi::ov::Params::cfgOutputTensorPrecision" name="cv::gapi::ov::Params::cfgOutputTensorPrecision">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,200,45"/>
+<area shape="rect" id="Node000002" href="$dd/dcf/namespacecv_1_1gapi_1_1ov_1_1detail.html#ac664c69c5bdea8330e2739b26bdf74f5" title=" " alt="" coords="248,5,453,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,23,234,23,234,28,200,28"/>
+<area shape="rect" id="Node000003" href="$d3/dce/namespacecv_1_1util.html#a40544b3ca23b3917f2a5de6b0273079d" title=" " alt="" coords="501,13,649,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="454,23,488,23,488,28,454,28"/>
+</map>

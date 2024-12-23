@@ -1,0 +1,22 @@
+<map id="cv::cudacodec::FormatInfo" name="cv::cudacodec::FormatInfo">
+<area shape="rect" id="Node000001" title="Struct providing information about video file format. :" alt="" coords="471,732,655,797"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="21,317,76,383"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="39,384,21,451,13,493,9,537,9,583,16,628,32,670,57,706,75,716,109,725,212,739,336,750,454,756,454,762,336,755,211,744,108,730,73,721,53,710,27,672,11,629,4,584,3,537,8,492,16,449,34,382"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,317,210,383"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,384,128,450,120,492,116,537,117,582,124,627,139,669,164,706,182,720,209,732,283,748,370,757,455,761,454,766,369,763,282,754,208,737,179,725,160,710,134,672,119,629,111,583,111,536,115,491,123,449,141,382"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="268,317,298,383"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="284,383,281,567,284,658,288,690,294,706,318,722,357,735,455,752,454,757,356,741,316,727,290,710,283,691,279,659,275,567,279,383"/>
+<area shape="rect" id="Node000005" href="$d2/d44/classcv_1_1Rect__.html" title="Template class for 2D rectangles." alt="" coords="323,177,518,523"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="470,523,475,546,480,593,480,630,483,665,500,707,508,719,504,722,495,709,478,667,475,630,475,593,470,547,464,524"/>
+<area shape="rect" id="Node000006" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="511,5,548,71"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="521,72,489,163,484,161,516,70"/>
+<area shape="rect" id="Node000010" href="$d6/d50/classcv_1_1Size__.html" title="Template class for specifying the size of an image or rectangle." alt="" coords="542,217,736,483"/>
+<area shape="poly" id="edge10_Node000010_Node000006" title=" " alt="" coords="551,59,573,93,595,146,612,200,607,202,590,148,569,96,546,62"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="760,317,803,383"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="783,384,774,450,765,488,751,524,740,536,729,548,721,571,718,592,719,631,719,669,712,689,698,710,671,734,667,730,694,706,707,686,713,668,714,631,712,591,716,569,725,545,736,533,746,521,760,486,769,449,778,383"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="867,317,926,383"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="908,382,920,449,926,537,922,583,913,629,895,672,869,710,856,720,837,729,789,743,731,753,672,760,671,755,730,748,787,738,835,724,853,716,865,706,891,669,908,627,917,583,921,537,915,450,902,383"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="950,317,1075,383"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1022,383,1031,450,1032,539,1025,585,1013,631,993,673,965,710,945,724,916,735,842,752,756,761,672,765,671,760,755,756,841,746,914,730,942,719,961,706,989,670,1008,629,1020,584,1026,538,1025,451,1016,383"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="632,483,618,612,609,668,599,709,595,718,590,716,594,707,604,667,612,611,626,483"/>
+</map>

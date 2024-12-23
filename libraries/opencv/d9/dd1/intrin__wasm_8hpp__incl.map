@@ -1,0 +1,35 @@
+<map id="opencv2/core/hal/intrin_wasm.hpp" name="opencv2/core/hal/intrin_wasm.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="87,5,258,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="11,313,70,339"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,48,57,67,42,79,29,95,17,120,10,147,8,175,9,204,19,257,33,299,28,301,14,259,4,205,3,175,5,146,12,118,25,92,38,76,54,62,90,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="39,93,106,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,48,100,87,97,82,147,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="130,93,215,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="175,46,175,79,170,79,170,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="240,93,398,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="209,43,287,84,284,89,206,48"/>
+<area shape="rect" id="Node000006" href="$db/dbb/core_2include_2opencv2_2core_2saturate_8hpp.html" title=" " alt="" coords="423,93,618,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="256,43,457,88,456,93,255,48"/>
+<area shape="rect" id="Node000007" href="$dc/dcc/cvdef_8h.html" title=" " alt="" coords="359,240,519,265"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="508,121,487,142,467,168,454,198,446,227,441,225,449,196,462,165,483,138,504,117"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="476,167,543,192"/>
+<area shape="poly" id="edge14_Node000006_Node000014" title=" " alt="" coords="521,119,516,154,511,153,516,119"/>
+<area shape="rect" id="Node000015" href="$d0/d2b/fast__math_8hpp.html" title=" " alt="" coords="568,167,774,192"/>
+<area shape="poly" id="edge15_Node000006_Node000015" title=" " alt="" coords="546,116,635,158,633,163,543,121"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="373,268,101,316,84,319,83,314,100,311,372,263"/>
+<area shape="rect" id="Node000008" href="$da/dd7/core_2include_2opencv2_2core_2version_8hpp.html" title=" " alt="" coords="112,313,302,339"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="403,268,258,312,257,307,401,263"/>
+<area shape="rect" id="Node000009" href="$d2/d10/core_2include_2opencv2_2core_2hal_2interface_8h.html" title=" " alt="" coords="326,313,533,339"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="440,266,436,300,430,299,435,265"/>
+<area shape="rect" id="Node000012" href="$d1/dac/cv__cpu__dispatch_8h.html" title=" " alt="" coords="558,313,699,339"/>
+<area shape="poly" id="edge12_Node000007_Node000012" title=" " alt="" coords="470,263,586,306,584,311,469,268"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="723,313,790,339"/>
+<area shape="poly" id="edge13_Node000007_Node000013" title=" " alt="" coords="494,263,710,310,709,316,493,268"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="346,387,417,412"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="424,341,399,377,395,374,420,338"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="441,387,512,412"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="440,338,464,374,459,377,435,340"/>
+<area shape="poly" id="edge16_Node000015_Node000007" title=" " alt="" coords="635,195,490,239,489,233,633,189"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="640,240,702,265"/>
+<area shape="poly" id="edge17_Node000015_Node000016" title=" " alt="" coords="674,192,674,226,668,226,668,192"/>
+</map>

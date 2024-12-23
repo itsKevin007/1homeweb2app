@@ -1,0 +1,63 @@
+<map id="cv::MatExpr" name="cv::MatExpr">
+<area shape="rect" id="Node000001" title="Matrix expression representation This is a list of implemented matrix operations that can be combined..." alt="" coords="1145,3455,1268,3940"/>
+<area shape="rect" id="Node000002" href="$d1/d9d/classcv_1_1MatOp.html" title=" " alt="" coords="627,2967,786,3233"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="740,3232,766,3298,801,3361,837,3408,878,3452,966,3532,1055,3599,1133,3650,1130,3655,1052,3604,963,3536,874,3456,833,3411,796,3364,761,3301,735,3234"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="963,2098,994,2163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="996,2147,1037,2193,1090,2262,1143,2346,1165,2392,1183,2439,1201,2521,1213,2628,1222,2752,1226,2889,1227,3176,1220,3438,1215,3438,1222,3176,1221,2889,1216,2753,1208,2628,1195,2522,1177,2441,1160,2394,1138,2349,1085,2265,1033,2196,992,2150"/>
+<area shape="rect" id="Node000004" href="$d3/d63/classcv_1_1Mat.html" title="n&#45;dimensional dense array class" alt="" coords="811,2837,976,3363"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="982,2163,984,2405,979,2574,965,2746,955,2821,950,2821,960,2745,973,2573,979,2405,977,2163"/>
+<area shape="rect" id="Node000008" href="$db/d58/structcv_1_1UMatData.html" title=" " alt="" coords="286,2440,495,2745"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="965,2151,893,2237,849,2296,809,2359,802,2375,799,2390,795,2404,783,2418,753,2434,725,2436,697,2436,663,2443,585,2477,511,2517,508,2512,583,2472,662,2437,696,2430,725,2431,752,2429,780,2414,790,2401,794,2388,797,2374,804,2356,845,2293,889,2234,961,2147"/>
+<area shape="rect" id="Node000016" href="$df/d63/structcv_1_1MatSize.html" title=" " alt="" coords="835,2500,951,2685"/>
+<area shape="poly" id="edge21_Node000016_Node000003" title=" " alt="" coords="976,2164,929,2416,917,2484,911,2483,924,2416,970,2163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="978,3257,1140,3564,1135,3566,974,3260"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,2098,67,2163"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="32,2164,15,2271,10,2344,9,2425,16,2509,34,2593,64,2672,84,2709,109,2744,131,2767,153,2783,175,2793,198,2798,250,2803,314,2811,405,2814,559,2814,711,2819,767,2825,799,2835,799,2835,796,2840,796,2840,766,2830,711,2824,559,2820,405,2819,313,2816,249,2808,197,2803,173,2798,150,2787,127,2771,105,2747,80,2712,59,2675,28,2594,11,2510,4,2425,4,2344,10,2271,26,2163"/>
+<area shape="poly" id="edge11_Node000008_Node000005" title=" " alt="" coords="41,2163,53,2242,65,2288,81,2332,104,2379,118,2396,140,2414,167,2425,191,2426,216,2427,245,2438,275,2457,272,2461,243,2442,215,2433,191,2432,166,2430,137,2418,114,2400,99,2382,76,2334,60,2289,48,2243,36,2164"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="1069,2560,1169,2625"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="1107,2627,985,2899,980,2897,1102,2624"/>
+<area shape="rect" id="Node000007" href="$df/d4c/classcv_1_1MatAllocator.html" title="Custom array allocator." alt="" coords="91,1998,282,2263"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="173,2264,163,2396,159,2538,162,2604,170,2663,183,2710,202,2743,232,2753,299,2765,498,2790,697,2815,766,2826,799,2835,800,2836,796,2840,796,2840,765,2831,696,2820,497,2795,299,2770,230,2758,198,2747,178,2712,165,2664,157,2605,154,2538,157,2396,168,2263"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="194,2263,207,2340,218,2379,233,2415,250,2440,277,2473,273,2476,245,2443,228,2417,213,2380,202,2341,188,2264"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="497,2652,688,2764,799,2835,803,2840,799,2843,796,2839,685,2769,494,2657"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="497,2558,515,2571,522,2593,519,2607,512,2619,507,2615,514,2605,517,2593,511,2574,494,2562"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="707,2098,759,2163"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="734,2164,726,2217,710,2285,683,2355,664,2388,641,2418,578,2476,511,2525,508,2521,575,2472,637,2414,659,2385,678,2353,705,2283,721,2216,728,2163"/>
+<area shape="rect" id="Node000017" href="$d4/d26/structcv_1_1MatStep.html" title=" " alt="" coords="675,2500,811,2685"/>
+<area shape="poly" id="edge23_Node000017_Node000009" title=" " alt="" coords="737,2164,743,2484,738,2484,731,2164"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="579,2098,675,2163"/>
+<area shape="poly" id="edge13_Node000008_Node000010" title=" " alt="" coords="627,2164,622,2214,610,2279,591,2350,562,2417,538,2455,509,2491,505,2487,534,2452,558,2415,586,2348,605,2278,617,2214,622,2163"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="307,2098,360,2163"/>
+<area shape="poly" id="edge14_Node000008_Node000011" title=" " alt="" coords="334,2164,332,2276,335,2346,343,2416,344,2423,339,2424,337,2416,330,2346,327,2276,329,2164"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="385,2098,554,2163"/>
+<area shape="poly" id="edge16_Node000008_Node000012" title=" " alt="" coords="467,2164,422,2424,417,2423,461,2163"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="501,1239,544,1305"/>
+<area shape="poly" id="edge17_Node000012_Node000013" title=" " alt="" coords="523,1305,487,1904,475,2082,470,2082,481,1904,518,1305"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="328,1239,477,1305"/>
+<area shape="poly" id="edge18_Node000012_Node000014" title=" " alt="" coords="403,1319,400,1423,399,1569,404,1735,419,1904,439,2010,462,2097,457,2098,434,2012,413,1904,399,1735,393,1569,394,1423,398,1319"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="391,771,414,837"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="405,837,405,1223,400,1223,400,837"/>
+<area shape="poly" id="edge20_Node000004_Node000016" title=" " alt="" coords="896,2685,896,2820,891,2820,891,2685"/>
+<area shape="poly" id="edge22_Node000004_Node000017" title=" " alt="" coords="773,2685,813,2820,808,2822,767,2686"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1244,3067,1303,3133"/>
+<area shape="poly" id="edge24_Node000001_Node000018" title=" " alt="" coords="1272,3133,1238,3439,1233,3438,1267,3133"/>
+<area shape="rect" id="Node000019" href="$d1/da0/classcv_1_1Scalar__.html" title=" " alt="" coords="1327,2947,1518,3253"/>
+<area shape="poly" id="edge25_Node000001_Node000019" title=" " alt="" coords="1370,3254,1276,3512,1271,3511,1365,3252"/>
+<area shape="rect" id="Node000020" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="1430,1499,1565,1904"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="1505,1918,1506,2109,1503,2333,1494,2574,1476,2814,1457,2947,1451,2947,1471,2813,1489,2574,1498,2333,1501,2109,1500,1918"/>
+<area shape="rect" id="Node000021" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="1329,601,1490,1007"/>
+<area shape="poly" id="edge27_Node000020_Node000021" title=" " alt="" coords="1433,1020,1480,1498,1475,1499,1428,1020"/>
+<area shape="rect" id="Node000025" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="1300,1928,1428,2333"/>
+<area shape="poly" id="edge33_Node000025_Node000021" title=" " alt="" coords="1415,1021,1412,1431,1406,1668,1393,1904,1392,1928,1386,1928,1388,1904,1400,1668,1407,1431,1409,1021"/>
+<area shape="rect" id="Node000026" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="1237,1069,1371,1475"/>
+<area shape="poly" id="edge35_Node000026_Node000021" title=" " alt="" coords="1363,1020,1352,1070,1347,1069,1358,1019"/>
+<area shape="rect" id="Node000022" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="1365,5,1403,71"/>
+<area shape="poly" id="edge28_Node000021_Node000022" title=" " alt="" coords="1383,71,1379,133,1372,336,1379,539,1382,585,1377,585,1373,539,1366,336,1373,133,1378,71"/>
+<area shape="rect" id="Node000023" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="1423,133,1582,539"/>
+<area shape="poly" id="edge30_Node000023_Node000022" title=" " alt="" coords="1399,70,1420,121,1415,123,1394,72"/>
+<area shape="poly" id="edge29_Node000021_Node000023" title=" " alt="" coords="1462,552,1452,602,1447,601,1457,551"/>
+<area shape="rect" id="Node000024" href="$d1/da0/classcv_1_1Scalar__.html" title="Template class for a 4&#45;element vector derived from Vec." alt="" coords="1269,2440,1459,2745"/>
+<area shape="poly" id="edge31_Node000019_Node000024" title=" " alt="" coords="1386,2759,1408,2947,1402,2947,1381,2759"/>
+<area shape="poly" id="edge32_Node000024_Node000025" title=" " alt="" coords="1367,2347,1367,2440,1361,2440,1361,2347"/>
+<area shape="poly" id="edge34_Node000025_Node000026" title=" " alt="" coords="1301,1488,1305,1690,1310,1798,1320,1904,1323,1927,1318,1928,1315,1904,1305,1798,1299,1691,1296,1489"/>
+</map>

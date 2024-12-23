@@ -1,0 +1,11 @@
+<map id="cv::gapi::streaming::meta" name="cv::gapi::streaming::meta">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,87,152,127"/>
+<area shape="rect" id="Node000002" href="$d3/d75/structcv_1_1detail_1_1GObtainCtor.html#a71a636eaf14fedf2604a591983fb0be6" title=" " alt="" coords="202,5,401,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,85,152,62,199,41,226,32,228,37,201,46,155,67,114,89"/>
+<area shape="rect" id="Node000003" href="$d3/d40/structcv_1_1gapi_1_1streaming_1_1detail_1_1GMeta.html#a714704dbc4ecdbac09391059dde60af3" title=" " alt="" coords="200,55,403,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,94,186,89,187,94,152,99"/>
+<area shape="rect" id="Node000004" href="$d3/d40/structcv_1_1gapi_1_1streaming_1_1detail_1_1GMeta.html#a43b0bb55fd6acbbf4d97bb63aa6cdb9e" title=" " alt="" coords="228,119,375,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,115,215,124,214,130,152,120"/>
+<area shape="rect" id="Node000005" href="$dc/d02/classcv_1_1GCall.html#a518455dd2c14becbac90092bf8e5b173" title=" " alt="" coords="243,184,360,209"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="114,125,155,148,201,169,230,179,229,184,199,174,152,153,111,130"/>
+</map>
