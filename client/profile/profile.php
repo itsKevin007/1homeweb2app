@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/style/profile.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/profile-modify.css">
 
 <?php
 
@@ -55,16 +55,51 @@ $fullname = $fname . " " . $mname . " " . $lname;
 
 <!--Profile Card 3-->
 <section id="profile-page-sec">
-	<div class="mt-5 d-flex col-12">
-		<div class="card">
-			<div class="image"></div>
-			<div class="card-info">
-				<span>George Johnson</span>
-				<p>Support Specialist</p>
-			</div>
-			<a href="#" class="button">Folow</a>
+
+<div class="card">
+		<div class="image">		
+			<a href="#" class="add-icon-service main-color" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+				<div class="profile-img-sec position-relative">
+					<img src="<?php echo $image; ?>" alt="Profile Image">
+				
+				</div>
+			</a>
 		</div>
-	</div>
+		<div class="card-info">
+			<span><h3><b><?php echo $fullname; ?></b></h3></span>
+			<b>
+				<?php echo $email; ?><br>
+				+<?php echo $connum; ?><br>
+				Date Registered: <?php echo $date_added; ?><br>
+				Account #: <?php echo $accnum; ?>
+
+				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
+					<p class="tap-me-text">Tap me to edit</p>
+				</div>
+				
+			</b>
+		</div>
+		<a href="index.php?view=modify" class="button" ><img src="../../assets/images/icon/edit-white.svg" width="25px" ></a>
+
+</div>
+
+		<div class="card-info" id="profile-third-sec">
+			<div class="container">
+				<div class="profile-third-sec-full mt-24">
+					<a href="../address/index.php" class="btn btn-pin" >
+						<img src="../../assets/images/icon/add-location-alt-white.svg" width="30px" >
+					</a>
+				</div>
+				<div class="profile-third-sec-full mt-24">
+					<h3 class="prile3-txt1"><img src="../../assets/images/icon/pin-destination-bold.svg" width="20px" > Address</h3>
+					<div class="profile-address-sec mt-16">
+						<h4 class="prile3-txt2">Home</h4>
+						<h5 class="prile3-txt3"><?php echo $address; ?></h5>
+					</div>
+					<div class="profile-boder mt-24"></div>
+				</div>
+			</div>
+		</div>
 
 	<div class="col-12">
 		<?php
@@ -88,12 +123,6 @@ $fullname = $fname . " " . $mname . " " . $lname;
 			</div>
 		</div>
 	</div>
-	<div>
-		<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=payment">
-			<p style="color: #022c5c;">to payment</p>
-		</a>
-		<a href="<?php echo WEB_ROOT; ?>client/FAQ/index.php?view=FAQ">
-			<p style="color: #022c5c;">To FAQ</p>
-		</a>
-	</div>
+
+
 </section>

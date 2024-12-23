@@ -24,7 +24,7 @@ if (isset($services_data['sercatid'])) {
 }
 // -------------------------------------------------- end of services ----------------------------------------------- //
 
-// include('../../phpqrcode/qrlib.php');
+include ('phpqrcode/qrlib.php');
 $user_uid = $user_data['uid'];
 $client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
 $client->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -113,7 +113,7 @@ if ($bal->rowCount() > 0) {
 						// Generate QR code
 						$fileName = 'qrcode_' . md5($text) . '.png';
 						$filePath = $tempDir . $fileName;
-						// QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
+						QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
 
 
 						?>
@@ -138,89 +138,11 @@ if ($bal->rowCount() > 0) {
 		</div> -->
 
 		<!-- ------------------------------------------ filters ---------------------------------------------- -->
-		<div class="homepage-second-sec mt-24">
-			<div class="container">
-				<div class="Homepage-top-sec">
-					<div class="home-top-first">
-						<h2 class="home-cate-title" style="color: black;">Categories</h2>
-					</div>
-					<div class="home-top-second">
-						<a href="category-page.html">
-							<p class="see-all-txt">See all</p>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="homepage-category-sec mt-16">
-				<h3 class="d-none">Categories Details</h3>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="<?php echo WEB_ROOT; ?>assets/images/homepage/category-1.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Tables</h4>
-						<h5 class="cate-subtitle">120 items</h5>
-					</div>
-				</div>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="assets/images/homepage/category-2.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Chairs</h4>
-						<h5 class="cate-subtitle">178 items</h5>
-					</div>
-				</div>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="assets/images/homepage/category-3.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Sofas</h4>
-						<h5 class="cate-subtitle">89 items</h5>
-					</div>
-				</div>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="assets/images/homepage/category-1.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Tables</h4>
-						<h5 class="cate-subtitle">120 items</h5>
-					</div>
-				</div>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="assets/images/homepage/category-2.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Chairs</h4>
-						<h5 class="cate-subtitle">178 items</h5>
-					</div>
-				</div>
-				<div class="homepage-category-Details">
-					<div class="home-cate-shape">
-						<img src="assets/images/homepage/category-3.png" class="img-fluid" alt="furniture-img">
-					</div>
-					<div class="mt-12">
-						<h4 class="cate-title">Sofas</h4>
-						<h5 class="cate-subtitle">89 items</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-
-	</div>
-
-
 	</div>
 
 </section>
 <!--Homepage1 Section End -->
-
+						
 <!-- QR Scanner Modal -->
 <div class="modal fade" id="paymentModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="staticBackdropLabel">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -235,6 +157,7 @@ if ($bal->rowCount() > 0) {
 		</div>
 	</div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script>

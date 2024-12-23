@@ -109,7 +109,7 @@
 				Account #: <?php echo $accno; ?>
 
 				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
-					<p class="tap-me-text">Tap me to edit</p>
+					<p class="tap-me-text">Tap to edit</p>
 				</div>
 				
 			</b>
@@ -124,14 +124,25 @@
 			<div class="card-info" id="profile-third-sec">
 				<div class="container">
 					<div class="profile-third-sec-full mt-24">
-						<h3 class="prile3-txt1"><img src="../../assets/images/icon/pin-destination-bold.svg" width="20px" > Address</h3>
-						<div class="profile-address-sec mt-16">
-							<h4 class="prile3-txt2">Home</h4>
-							<h5 class="prile3-txt3"><?php echo $address; ?></h5>
+						<a href="../address/index.php" class="btn btn-pin" >
+							<img src="../../assets/images/icon/add-location-alt-white.svg" width="30px" >
+						</a>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="profile-third-sec-full mt-24">
+								<h3 class="prile3-txt1"><img src="../../assets/images/icon/pin-destination-bold.svg" width="20px" > Address</h3>
+								<div class="profile-address-sec mt-16">
+									<h4 class="prile3-txt2">Home</h4>
+									<h5 class="prile3-txt3"><?php echo $address; ?></h5>
+								</div>																
+							</div>
 						</div>
-						<div class="profile-address-sec mt-16">
-							<h4 class="prile3-txt2">Office</h4>
-							<h5 class="prile3-txt3"><?php echo $officeadd; ?></h5>
+						<div class="col-lg-6">
+							<div class="profile-address-sec mt-16">
+								<h4 class="prile3-txt2">Office</h4>
+								<h5 class="prile3-txt3"><?php echo $officeadd; ?></h5>
+							</div>
 						</div>
 						<div class="profile-boder mt-24"></div>
 					</div>

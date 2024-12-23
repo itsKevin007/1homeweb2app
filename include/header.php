@@ -61,6 +61,12 @@ if($accesslevel == 0){
 	} else {
 		$image = WEB_ROOT . 'adminpanel/assets/images/user/noimage.png';
 	}
+
+	if($accesslevel == 0){
+		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
+	}elseif($accesslevel == 1){
+		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
+	}else{}
 ?>
 <header id="top-navbar" class="top-navbar">
 	<div class="container">
@@ -87,17 +93,20 @@ if($accesslevel == 0){
 <div class="layout-drawer is-open">
 	<div class="drawer-header drawer-header-cover" style="position: relative; color: #ffff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);">
 		<!-- Blurred background image -->
-		<div style="background-image: url('<?php echo WEB_ROOT; ?>assets/images/icons/onehomesol.jpg'); background-size: cover; filter: blur(5px); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;"></div>
-
+		
+			<div style="background-image: url('<?php echo WEB_ROOT; ?>assets/images/icons/onehomesol.jpg'); background-size: cover; filter: blur(5px); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;"></div>
+	
+		<a href="<?php echo $profileDirect ?>">
 		<!-- Content on top -->
-		<div class="drawer-user" style="position: relative; z-index: 1;">
-			<div class="drawer-avatar">
-				<img src="<?php echo $image; ?>" alt="avatar">
+			<div class="drawer-user" style="position: relative; z-index: 1;">
+				<div class="drawer-avatar">
+					<img src="<?php echo $image; ?>" alt="avatar">
+				</div>
+				<div class="drawer-meta">
+					<span class="drawer-name"><?php echo $fname ?> <?php echo $mname; ?> <?php echo $lname ?></span>
+				</div>
 			</div>
-			<div class="drawer-meta">
-				<span class="drawer-name"><?php echo $fname ?> <?php echo $mname; ?> <?php echo $lname ?></span>
-			</div>
-		</div>
+		</a>
 	</div>
 
 	<nav class="drawer-navigation">
@@ -117,6 +126,7 @@ if($accesslevel == 0){
 	<hr>
 	<nav class="drawer-navigation drawer-border">
 
+	<?php if($accesslevel != 0){ ?>
 		<a href="<?php echo WEB_ROOT; ?>service-provider/index.php?view=service">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
@@ -128,7 +138,7 @@ if($accesslevel == 0){
 			</div>
 			<div class="border-bottom-app mt-8"></div>
 		</a>
-
+	<?php }else{} ?>
 		<a href="about-us.html">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
@@ -147,7 +157,7 @@ if($accesslevel == 0){
 			</div>
 			<div class="border-bottom-app mt-8"></div>
 		</a>
-		<a href="<?php echo WEB_ROOT; ?>client/faq/index.php?view=faq">
+		<a href="<?php echo WEB_ROOT; ?>FAQ/">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +175,7 @@ if($accesslevel == 0){
 			</div>
 			<div class="border-bottom-app mt-8"></div>
 		</a>
-		<a href="index.html">
+		<a href="<?php echo $self; ?>?logout">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

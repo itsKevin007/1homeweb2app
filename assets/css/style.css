@@ -3851,7 +3851,7 @@ a.event-icon {
     height: 56px;
     bottom: 36px;
     margin: auto;
-    left: 0px;
+    left: -10px;
     right: 0px;
     border-radius: 50%;
     background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(23, 92, 143, 1) 100%);
@@ -3867,6 +3867,14 @@ a.event-icon {
 #favourite-page{
     margin-bottom: 80px;
 }
+
+@media(max-width: 1000px){
+    .sc-nav-indicator {
+        left: 0px;
+        right: 0px;
+    }
+}
+
 /************************ 31.FavouritePage Screen  ***************************/
 .brookwood-txt {
     font-family: 'Poppins';
@@ -5462,6 +5470,7 @@ a {
    }
    /* end */
 
+   
 /* expanding menu */
 
 .wrapper {
@@ -5545,11 +5554,9 @@ footer .demo a {
 }
 
 .sub-circle label {
-    display: block;
-
     width: 100%;
     height: 100%;
-    line-height: 40px;
+    line-height: 60px;
     transition: 0.5s;
 }
 
@@ -5559,7 +5566,7 @@ footer .demo a {
 
 .subs {
     left: 0;
-    top: -250px;
+    top: -400px;
     /* Adjusted to pop above the toggle */
     width: auto;
     height: auto;
@@ -5597,52 +5604,58 @@ footer .demo a {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Apply staggered animation to each button */
 .hidden-trigger:checked+label+.subs button:nth-child(1) {
     opacity: 1;
-    transform: translateX(-90px);
-    /* Move to visible position */
-    transition-delay: 0.2s;
-    /* Delay for first button */
+    transform: translateX(-90px); /* Move to visible position */
+    transition-delay: 0.2s; /* Delay for first button */
 }
 
 .hidden-trigger:checked+label+.subs button:nth-child(2) {
     opacity: 1;
-    transform: translateX(0px);
-    /* Move to visible position */
-    transition-delay: 0.4s;
-    /* Delay for second button */
+    transform: translateX(0px); /* Move to visible position */
+    transition-delay: 0.4s; /* Delay for second button */
 }
 
 .hidden-trigger:checked+label+.subs button:nth-child(3) {
     opacity: 1;
-    transform: translateX(90px);
-    /* Move to visible position */
-    transition-delay: 0.5s;
-    /* Delay for third button */
+    transform: translateX(90px); /* Move to visible position */
+    transition-delay: 0.5s; /* Delay for third button */
 }
-
 .hidden-trigger:checked+label+.subs button:nth-child(4) {
     opacity: 1;
-    transform: translateY(100px) translateX(-90px);
-    /* Move to visible position */
-    transition-delay: 0.6s;
-    /* Delay for fourth button */
+    transform: translateY(80px) translateX(-90px); /* Move higher */
+    transition-delay: 0.6s; /* Delay for fourth button */
 }
 
 .hidden-trigger:checked+label+.subs button:nth-child(5) {
     opacity: 1;
-    transform: translateY(100px) translateX(90px);
-    /* Move to visible position */
-    transition-delay: 0.7s;
-    /* Delay for fifth button */
+    transform: translateY(80px) translateX(0px); /* Move higher */
+    transition-delay: 0.7s; /* Delay for fifth button */
 }
+
 .hidden-trigger:checked+label+.subs button:nth-child(6) {
     opacity: 1;
-    transform: translateY(100px);
-    /* Move to visible position */
-    transition-delay: 0.7s;
-    /* Delay for fifth button */
+    transform: translateY(80px) translateX(90px); /* Move higher */
+    transition-delay: 0.8s; /* Delay for sixth button */
+}
+
+/* Adjusted for buttons 7, 8, and 9 */
+.hidden-trigger:checked+label+.subs button:nth-child(7) {
+    opacity: 1;
+    transform: translateY(160px) translateX(-90px); /* Move higher */
+    transition-delay: 0.9s; /* Delay for seventh button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(8) {
+    opacity: 1;
+    transform: translateY(160px) translateX(0px); /* Move higher */
+    transition-delay: 1s; /* Delay for eighth button */
+}
+
+.hidden-trigger:checked+label+.subs button:nth-child(9) {
+    opacity: 1;
+    transform: translateY(160px) translateX(90px); /* Move higher */
+    transition-delay: 1.1s; /* Delay for ninth button */
 }
 
 .hidden-sub-trigger {
@@ -5662,40 +5675,4 @@ footer .demo a {
 
 .hidden-trigger:checked~.circle .svg {
     transform: rotate(-315deg);
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(1) {
-    transform: translate(-40px, -69.28px) scale(1);
-    opacity: 1;
-    transition: 0.1s;
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(2) {
-    transform: translate(40px, -69.28px) scale(1);
-    opacity: 1;
-    transition: 0.2s;
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(3) {
-    transform: translate(80px, 0px) scale(1);
-    opacity: 1;
-    transition: 0.3s;
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(4) {
-    transform: translate(-40px, 69.28px) scale(1);
-    opacity: 1;
-    transition: 0.4s;
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(5) {
-    transform: translate(40px, 69.28px) scale(1);
-    opacity: 1;
-    transition: 0.5s;
-}
-
-.hidden-trigger:checked~.subs button:nth-of-type(6) {
-    transform: translate(-80px, 0px) scale(1);
-    opacity: 1;
-    transition: 0.6s;
 }

@@ -17,6 +17,24 @@ if (!defined('WEB_ROOT')) {
 		else
 			return false ;
 		}
+
+		function locationSubmit(location) {
+			const form = document.createElement('form');
+			form.method = 'POST';
+			form.action = `<?php echo WEB_ROOT; ?>client/quote/index.php`;
+
+			// Create a hidden input for location_id
+			const input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'location_id';
+			input.value = location;
+			form.appendChild(input);
+
+			// Append the form to the body and submit it
+			document.body.appendChild(form);
+			form.submit();
+		}
+
 		
 		// Nannette Thacker http://www.shiningstar.net
 		function confirmDelete()
