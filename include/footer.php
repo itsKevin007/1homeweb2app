@@ -9,11 +9,12 @@ $PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
 $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
-	if($accesslevel == 0){
-		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=prof';
-	}elseif($accesslevel == 1){
-		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
-	}else{}
+if ($accesslevel == 0) {
+	$profileDirect = WEB_ROOT . 'client/profile/index.php?view=prof';
+} elseif ($accesslevel == 1) {
+	$profileDirect =  WEB_ROOT . 'service-provider/profile/index.php?view=prof';
+} else {
+}
 
 ?>
 <!-- ======= Footer ======= -->
@@ -27,7 +28,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 					<div class="bottom-panel nagivation-menu">
 						<ul class="sc-bottom-bar furniture-bottom-nav" id="furniture_navbar">
 							<li class="nav-menu-icon <?php echo $active; ?>">
-								<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=dashboard" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_798" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -39,7 +40,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transaction" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transact" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
@@ -75,70 +76,12 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 						</ul>
-						<a class="sc-nav-indicator" href="<?php echo WEB_ROOT; ?>client/?view=add">
-							<input type="checkbox" id="toogle" class="hidden-trigger" />
+						<a class="sc-nav-indicator" href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services" <?php echo ($PAGEDATA === 'services') ? 'active' : ''; ?>>
 							<label for="toogle" class="circle">
 								<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">
 							</label>
-
-							<div class="subs">
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub1"
-										class="hidden-sub-trigger" />
-									<label for="sub1">Carpentry</label>
-								</button>
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub2"
-										class="hidden-sub-trigger" />
-									<label for="sub2">Painting</label>
-								</button>
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub3"
-										class="hidden-sub-trigger" />
-									<label for="sub3">Masonry</label>
-								</button>
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub4"
-										class="hidden-sub-trigger" />
-									<label for="sub4">Plumbing</label>
-								</button>
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub5"
-										class="hidden-sub-trigger" />
-									<label for="sub5">Electrical</label>
-								</button>
-								<button class="sub-circle">
-									<input
-										value="1"
-										name="sub-circle"
-										type="checkbox"
-										id="sub6"
-										class="hidden-sub-trigger" />
-									<label for="sub6"></label>
-								</button>
-							</div>
-
 						</a>
+
 					</div>
 				</div>
 			</div>

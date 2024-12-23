@@ -67,13 +67,22 @@ if ($bal_data) {
                                         <path d="M18 11h-12" />
                                     </svg>
                                 </span>
-                                <input type="number" placeholder="Enter Amount" class="form-control search-text" id="amount" onchange="checkBalance()">
-
+                                <input type="number" placeholder="Enter Amount" class="form-control search-text" id="amount" onchange="checkBalanceWithAlert()">
                                 <script>
-                                    function checkBalance() {
+                                    function checkBalanceWithAlert() {
                                         var amount = document.getElementById("amount").value;
-                                        if (amount > <?php echo $balance; ?>) {
-                                            alert("You don't have enough balance");
+                                        if (<?php echo $balance; ?> < amount) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: "You don't have enough balance"
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Success',
+                                                text: "You have enough balance"
+                                            });
                                         }
                                     }
                                 </script>

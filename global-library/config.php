@@ -65,8 +65,7 @@ $user_data = $user->fetch();
 if($user->rowCount() > 0){
     $accesslevel = $user_data['access_level'];
 }else{}
-     
-}
+
 # Get setting details
 $sett = $conn->prepare("SELECT * FROM bs_setting");
 $sett->execute();

@@ -26,8 +26,8 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'modify' :
-				$content 	= 'modify.php';		
+			case 'viewservices' :
+				$content 	= 'viewservices.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 				
@@ -36,8 +36,8 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'prof' :
-				$content 	= 'profile.php';		
+			case 'services' :
+				$content 	= 'services.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 

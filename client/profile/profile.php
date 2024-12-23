@@ -54,46 +54,69 @@ $fullname = $fname . " " . $mname . " " . $lname;
 ?>
 
 <!--Profile Card 3-->
-<section id="profile-page-sec">
-	<div class="mt-5 d-flex col-12">
-		<div class="card">
-			<div class="image"></div>
-			<div class="card-info">
-				<span>George Johnson</span>
-				<p>Support Specialist</p>
-			</div>
-			<a href="#" class="button">Folow</a>
+
+<!-- <div class="container d-flex justify-content-center align-items-center" style="background-color: red;"> -->
+<div class="mt-5 d-flex justify-content-center align-items-center border-none" style="width: 100%;">
+	<div class="card">
+		<div class="image">
+
+			<a href="#" class="add-icon-service main-color" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+				<div class="profile-img-sec position-relative">
+					<img src="<?php echo $image; ?>" class="profile" alt="profile" style="width: 120px; height: 100px;">
+					<span class="hover-text"><img src="../../assets/images/icon/edit.svg">Edit</span>
+				</div>
+			</a>
+
+		</div>
+
+		<div class="card-info">
+			<span>
+				<h3><b><?php echo $fullname; ?></b></h3>
+			</span>
+			<b>
+				<?php echo $email; ?><br>
+				+<?php echo $connum; ?><br>
+				Date Registered: <?php echo $date_added; ?><br>
+				Account #: <?php echo $accnum; ?>
+
+				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
+					<p class="tap-me-text">Tap me to edit</p>
+				</div>
+
+			</b>
+		</div>
+		<a href="index.php?view=modify" class="button"><img src="../../assets/images/icon/edit-white.svg" width="25px"></a>
+	</div>
+</div>
+<!-- </div> -->
+
+<div class="col-12">
+	<?php
+	$text = $user_uid;
+	$tempDir = 'temp/'; // Directory to save QR code temporarily
+
+	// Ensure temp directory exists
+	if (!is_dir($tempDir)) {
+		mkdir($tempDir, 0755, true);
+	}
+
+	// Generate QR code
+	$fileName = 'qrcode_' . md5($text) . '.png';
+	$filePath = $tempDir . $fileName;
+	QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
+
+	?>
+	<div class="container">
+		<div style="text-align: center">
+			<img src="<?php echo $filePath; ?>">
 		</div>
 	</div>
-
-	<div class="col-12">
-		<?php
-		$text = $user_uid;
-		$tempDir = 'temp/'; // Directory to save QR code temporarily
-
-		// Ensure temp directory exists
-		if (!is_dir($tempDir)) {
-			mkdir($tempDir, 0755, true);
-		}
-
-		// Generate QR code
-		$fileName = 'qrcode_' . md5($text) . '.png';
-		$filePath = $tempDir . $fileName;
-		QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
-
-		?>
-		<div class="container">
-			<div style="text-align: center">
-				<img src="<?php echo $filePath; ?>">
-			</div>
-		</div>
-	</div>
-	<div>
-		<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=payment">
-			<p style="color: #022c5c;">to payment</p>
-		</a>
-		<a href="<?php echo WEB_ROOT; ?>client/FAQ/index.php?view=FAQ">
-			<p style="color: #022c5c;">To FAQ</p>
-		</a>
-	</div>
-</section>
+</div>
+<div>
+	<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=payment">
+		<p style="color: #022c5c;">to payment</p>
+	</a>
+	<a href="<?php echo WEB_ROOT; ?>client/FAQ/index.php?view=FAQ">
+		<p style="color: #022c5c;">To FAQ</p>
+	</a>
+</div>

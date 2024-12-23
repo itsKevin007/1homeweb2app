@@ -28,7 +28,7 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'transaction' :
+			case 'transact' :
 				$content 	= 'transaction.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
