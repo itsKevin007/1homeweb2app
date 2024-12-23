@@ -19,7 +19,6 @@ switch ($action) {
         delete_data();
         break;
     
-    
 	   
     default :
         // if action is not defined or unknown
@@ -222,4 +221,16 @@ function _deleteImage($id)
 	return $deleted;
 }
 
+
+// Example usage
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// 	$senderId = $_POST['sender_id']; // Sender's ID from the UI
+// 	$receiverId = $_POST['receiver_id']; // Receiver's ID from the UI
+// 	$amount = $_POST['amount']; // Amount from the UI
+
+// 	$result = transferMoney($senderId, $receiverId, $amount);
+// 	echo $result;
+// }
+
+// $conn->close();
 ?>
