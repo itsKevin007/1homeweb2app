@@ -1,0 +1,13 @@
+<map id="cv::cuda::GpuMat" name="cv::cuda::GpuMat">
+<area shape="rect" id="Node000001" title="Base storage class for GPU memory with reference counting." alt="" coords="111,217,277,523"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,25,36,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="29,90,41,139,62,192,104,260,99,262,57,195,36,141,24,92"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,25,139,91"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="122,90,147,193,149,201,144,202,142,194,117,91"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="163,25,225,91"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="197,91,197,201,191,201,191,91"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="249,25,349,91"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="297,92,287,140,273,194,270,203,265,201,267,193,282,139,292,91"/>
+<area shape="rect" id="Node000006" href="$df/d98/classcv_1_1cuda_1_1GpuMat_1_1Allocator.html" title=" " alt="" coords="374,5,566,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="431,113,361,195,290,273,286,270,357,192,427,109"/>
+</map>

@@ -25,6 +25,7 @@ if (isset($services_data['sercatid'])) {
 // -------------------------------------------------- end of services ----------------------------------------------- //
 
 include('phpqrcode/qrlib.php');
+
 $user_uid = $user_data['uid'];
 $client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
 $client->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -117,6 +118,7 @@ if ($bal->rowCount() > 0) {
 						$fileName = 'qrcode_' . md5($text) . '.png';
 						$filePath = $tempDir . $fileName;
 
+
 						// Set error correction level and size
 						$eccLevel = QR_ECLEVEL_L;
 						$size = 5;
@@ -157,6 +159,7 @@ if ($bal->rowCount() > 0) {
 
 
 
+
 						?>
 						<div class="container">
 							<div style="text-align: center">
@@ -184,11 +187,12 @@ if ($bal->rowCount() > 0) {
 	</div>
 
 
+
 	</div>
 
 </section>
 <!--Homepage1 Section End -->
-
+						
 <!-- QR Scanner Modal -->
 <div class="modal fade" id="paymentModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="staticBackdropLabel">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -203,6 +207,7 @@ if ($bal->rowCount() > 0) {
 		</div>
 	</div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script>

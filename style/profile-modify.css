@@ -155,3 +155,12 @@
         display: block !important;
     }
 }
+.btn-pin{
+	background: linear-gradient(135deg, #022c5c 0%, #044475 100%);
+	color: #fefefe;
+	border-radius: 40%;
+}
+.btn-pin:hover{
+	color: #fefefe;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.35);
+}

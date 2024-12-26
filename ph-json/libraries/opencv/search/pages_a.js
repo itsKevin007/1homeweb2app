@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['eclipse_0',['Using OpenCV Java with Eclipse',['../d1/d0a/tutorial_java_eclipse.html',1,'tutorial_table_of_content_introduction']]],
+  ['eclipse_20plugin_20cdt_1',['Using OpenCV with Eclipse (plugin CDT)',['../d7/d16/tutorial_linux_eclipse.html',1,'tutorial_table_of_content_introduction']]],
+  ['edge_20detection_2',['edge detection',['../d7/de1/tutorial_js_canny.html',1,'Canny Edge Detection'],['../da/d22/tutorial_py_canny.html',1,'Canny Edge Detection'],['../d0/da5/tutorial_ximgproc_prediction.html',1,'Structured forests for fast edge detection']]],
+  ['edge_20detector_3',['Canny Edge Detector',['../da/d5c/tutorial_canny_detector.html',1,'tutorial_table_of_content_imgproc']]],
+  ['effect_4',['Oil painting effect',['../dd/d8c/tutorial_xphoto_oil_painting_effect.html',1,'tutorial_contrib_root']]],
+  ['efficiency_5',['How to enable Halide backend for improve efficiency',['../de/d37/tutorial_dnn_halide.html',1,'tutorial_table_of_content_dnn']]],
+  ['elementary_20features_6',['BRIEF (Binary Robust Independent Elementary Features)',['../dc/d7d/tutorial_py_brief.html',1,'tutorial_py_table_of_contents_feature2d']]],
+  ['ellipses_20for_20contours_7',['Creating Bounding rotated boxes and ellipses for contours',['../de/d62/tutorial_bounding_rotated_ellipses.html',1,'tutorial_table_of_content_imgproc']]],
+  ['enable_20halide_20backend_20for_20improve_20efficiency_8',['How to enable Halide backend for improve efficiency',['../de/d37/tutorial_dnn_halide.html',1,'tutorial_table_of_content_dnn']]],
+  ['environment_20variables_20reference_9',['OpenCV environment variables reference',['../d6/dea/tutorial_env_reference.html',1,'tutorial_table_of_content_introduction']]],
+  ['epipolar_20geometry_10',['Epipolar Geometry',['../da/de9/tutorial_py_epipolar_geometry.html',1,'tutorial_py_table_of_contents_calib3d']]],
+  ['equalization_11',['equalization',['../d4/d1b/tutorial_histogram_equalization.html',1,'Histogram Equalization'],['../d2/d74/tutorial_js_histogram_equalization.html',1,'Histograms - 2: Histogram Equalization'],['../d5/daf/tutorial_py_histogram_equalization.html',1,'Histograms - 2: Histogram Equalization']]],
+  ['eroding_20and_20dilating_12',['Eroding and Dilating',['../db/df6/tutorial_erosion_dilatation.html',1,'tutorial_table_of_content_imgproc']]],
+  ['estimation_13',['estimation',['../d5/dab/tutorial_sfm_trajectory_estimation.html',1,'Camera Motion Estimation'],['../d7/d53/tutorial_py_pose.html',1,'Pose Estimation']]],
+  ['estimation_20example_14',['Pose Estimation Example',['../d1/d0d/tutorial_js_pose_estimation.html',1,'tutorial_js_table_of_contents_dnn']]],
+  ['estimation_20of_20a_20textured_20object_15',['Real Time pose estimation of a textured object',['../dc/d2c/tutorial_real_time_pose.html',1,'tutorial_table_of_content_calib3d']]],
+  ['example_16',['example',['../d3/d6b/tutorial_js_image_classification.html',1,'Image Classification Example'],['../d0/d0f/tutorial_js_object_detection.html',1,'Object Detection Example'],['../d1/d0d/tutorial_js_pose_estimation.html',1,'Pose Estimation Example'],['../dc/d20/tutorial_js_semantic_segmentation.html',1,'Semantic Segmentation Example'],['../d7/d2d/tutorial_js_style_transfer.html',1,'Style Transfer Example']]],
+  ['example_20with_20camera_17',['example with camera',['../db/d08/tutorial_js_image_classification_with_camera.html',1,'Image Classification Example with Camera'],['../d2/d14/tutorial_js_object_detection_with_camera.html',1,'Object Detection Example with Camera']]],
+  ['explained_20with_20code_18',['Basic concepts of the homography explained with code',['../d9/dab/tutorial_homography.html',1,'tutorial_table_of_content_features2d']]],
+  ['exporting_20a_20template_20parameter_20file_19',['Exporting a template parameter file',['../df/dc0/tutorial_qds_export_parameters.html',1,'tutorial_table_of_content_quasi_dense_stereo']]],
+  ['extract_20horizontal_20and_20vertical_20lines_20by_20using_20morphological_20operations_20',['Extract horizontal and vertical lines by using morphological operations',['../dd/dd7/tutorial_morph_lines_detection.html',1,'tutorial_table_of_content_imgproc']]],
+  ['extraction_20using_20grabcut_20algorithm_21',['extraction using grabcut algorithm',['../dd/dfc/tutorial_js_grabcut.html',1,'Foreground Extraction using GrabCut Algorithm'],['../d8/d83/tutorial_py_grabcut.html',1,'Interactive Foreground Extraction using GrabCut Algorithm']]]
+];

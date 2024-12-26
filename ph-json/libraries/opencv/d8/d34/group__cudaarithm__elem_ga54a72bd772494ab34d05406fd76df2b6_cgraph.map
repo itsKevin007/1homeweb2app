@@ -1,0 +1,6 @@
+<map id="cv::cuda::abs" name="cv::cuda::abs">
+<area shape="rect" id="Node000001" title="Computes an absolute value of each matrix element." alt="" coords="5,29,112,55"/>
+<area shape="rect" id="Node000002" href="$d7/dcc/group__core__utils__softfloat.html#ga72dd776aec140cd56401b29af17e36c3" title="Absolute value." alt="" coords="160,29,227,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,39,147,39,147,45,112,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="170,30,166,21,168,11,178,5,193,3,212,6,220,14,216,18,209,11,193,8,180,10,173,14,171,20,175,28"/>
+</map>

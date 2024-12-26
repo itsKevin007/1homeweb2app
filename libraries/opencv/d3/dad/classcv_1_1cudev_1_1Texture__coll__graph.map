@@ -1,0 +1,15 @@
+<map id="cv::cudev::Texture&lt; T, R &gt;" name="cv::cudev::Texture&lt; T, R &gt;">
+<area shape="rect" id="Node000001" title="sharable smart CUDA texture object" alt="" coords="39,837,193,1112"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="65,680,95,745"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,745,97,821,92,821,82,746"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,665,283,760"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,761,168,823,163,821,184,760"/>
+<area shape="rect" id="Node000004" href="$de/de4/classcv_1_1cudev_1_1UniqueTexture.html" title=" " alt="" coords="5,328,181,588"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="151,587,178,649,173,651,146,589"/>
+<area shape="rect" id="Node000005" href="$de/de4/classcv_1_1cudev_1_1UniqueTexture.html" title="non&#45;copyable smart CUDA texture object" alt="" coords="5,5,181,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="96,279,96,328,91,328,91,279"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="205,425,355,491"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="269,505,218,666,213,664,264,503"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="269,103,291,168"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="283,169,283,409,277,409,277,169"/>
+</map>

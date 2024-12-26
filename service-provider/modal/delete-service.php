@@ -1,4 +1,10 @@
 <!-- Modal -->
+<?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
+?>
 <div class="modal fade" id="delServiceModal" tabindex="-1" aria-labelledby="delServiceModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

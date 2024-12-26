@@ -34,7 +34,7 @@
 				break;
 
 			default:
-				$content = 'profile.php';  // Optionally, add a default view
+				$content = 'transaction.php';  // Optionally, add a default view
 				$pageTitle = $sett_data['system_title'];
 				break;
 		}

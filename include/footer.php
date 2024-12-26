@@ -1,3 +1,4 @@
+
 <?php
 if (!defined('WEB_ROOT')) {
 	header('Location: ../index.php');
@@ -9,12 +10,12 @@ $PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
 $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
-if ($accesslevel == 0) {
-	$profileDirect = WEB_ROOT . 'client/profile/index.php?view=prof';
-} elseif ($accesslevel == 1) {
-	$profileDirect =  WEB_ROOT . 'service-provider/profile/index.php?view=prof';
-} else {
-}
+
+	if($accesslevel == 0){
+		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
+	}elseif($accesslevel == 1){
+		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
+	}else{}
 
 ?>
 <!-- ======= Footer ======= -->
@@ -76,12 +77,51 @@ if ($accesslevel == 0) {
 								</a>
 							</li>
 						</ul>
-						<a class="sc-nav-indicator" href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services" <?php echo ($PAGEDATA === 'services') ? 'active' : ''; ?>>
-							<label for="toogle" class="circle">
-								<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">
-							</label>
-						</a>
 
+
+						<div class="sc-nav-indicator">
+							<a href="#" data-bs-toggle="modal" data-bs-target="#transact" >
+								<input type="checkbox" id="toogle" class="hidden-trigger" />
+									<label for="toogle" class="circle">									
+											<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">									
+									</label>
+							</a>
+
+							
+							<!-- <div class="subs">
+
+								<?php
+									
+
+									$maincat = $conn->prepare("SELECT * FROM ind_maincat WHERE is_deleted != '1'");
+									$maincat->execute();
+
+									$counter = 1;
+
+									
+									while($maincatdata = $maincat->fetch()){
+										$label = $maincatdata['main_cat'];
+
+
+										?>
+
+											<button class='sub-circle'>
+												<input value='1' name='sub-circle' type='checkbox' id='sub<?php echo $counter++; ?>' class='hidden-sub-trigger' />
+												<label for='sub<?php echo $counter++; ?>'>
+
+													<span class='label-text'><?php echo $label; ?></span>
+												</label>
+											</button>
+
+										<?php
+									}
+									
+								?>
+								
+								
+							</div> -->
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -90,4 +130,49 @@ if ($accesslevel == 0) {
 
 </div>
 
-<!-- Profile Details Section End -->
+<div class="modal fade" id="transact" tabindex="-1" aria-labelledby="transact" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal">SELECT ADDRESS</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+	
+					<div class="container">
+						<div>
+									
+									<?php
+
+										$location = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_active = '1' AND is_deleted != '1'");
+										$location->execute();
+
+										if($location->rowCount() > 0)
+										{
+											while($locationdata = $location->fetch())
+											{
+												$location_id = $locationdata['l_id'];
+												$name = $locationdata['name'];
+
+												?>
+													<div class="mt-24">
+														<button class="btn btn-primary" onClick="locationSubmit('<?php echo $location_id; ?>')">
+															<?php echo $name; ?>
+														</button>
+													</div>
+
+												<?php
+											}
+										}else{}
+									?>
+
+						
+						</div>
+					</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>

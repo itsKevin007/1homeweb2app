@@ -1,0 +1,17 @@
+<map id="cv::quality::quality_utils::get_column_range" name="cv::quality::quality_utils::get_column_range">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,158,191,198"/>
+<area shape="rect" id="Node000002" href="$d3/d63/classcv_1_1Mat.html#aa11336b9ac538e0475d840657ce164be" title="Returns the number of matrix channels." alt="" coords="239,5,373,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,156,165,99,199,68,237,40,248,34,250,39,240,44,203,72,169,103,117,160"/>
+<area shape="rect" id="Node000003" href="$d3/d63/classcv_1_1Mat.html#a33fd5d125b4c302b0c9aa86980791a77" title="Copies the matrix to another one." alt="" coords="245,55,367,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,156,177,123,237,89,252,83,254,88,240,94,180,127,129,160"/>
+<area shape="rect" id="Node000004" href="$d2/de8/group__core__array.html#gacc40fa15eac0fb83f8ca70b7cc0b588d" title="Calculates per&#45;element maximum of two arrays or an array and a scalar." alt="" coords="269,128,343,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,159,255,147,256,152,192,164"/>
+<area shape="rect" id="Node000005" href="$d2/de8/group__core__array.html#ga9af368f182ee76d0463d0d8d5330b764" title="Calculates per&#45;element minimum of two arrays or an array and a scalar." alt="" coords="271,201,341,227"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="192,191,258,203,257,208,191,197"/>
+<area shape="rect" id="Node000006" href="$d3/d63/classcv_1_1Mat.html#a4b22e1c23af7a7f2eef8fa478cfa7434" title="Creates a matrix header for the specified matrix row." alt="" coords="255,251,357,276"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="146,196,240,236,259,243,257,248,238,240,144,201"/>
+<area shape="rect" id="Node000007" href="$d3/d63/classcv_1_1Mat.html#af2d2652e552d7de635988f18a84b53e5" title="Returns the type of a matrix element." alt="" coords="253,300,359,325"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="123,196,174,240,240,285,254,292,252,297,237,290,171,244,119,200"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="272,130,265,120,268,110,283,104,306,101,335,105,346,114,343,118,333,110,306,107,284,109,272,113,270,119,276,126"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="272,203,265,193,268,183,283,177,306,175,335,178,346,187,343,192,333,183,306,180,284,182,272,187,270,192,276,200"/>
+</map>

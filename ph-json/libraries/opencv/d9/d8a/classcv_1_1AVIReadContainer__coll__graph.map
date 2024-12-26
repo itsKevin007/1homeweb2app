@@ -1,0 +1,19 @@
+<map id="cv::AVIReadContainer" name="cv::AVIReadContainer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="299,477,488,983"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,283,184,349"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,348,126,398,153,452,218,542,289,623,285,626,214,545,148,455,121,400,102,350"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="209,283,282,349"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,348,289,452,296,471,291,473,284,454,252,350"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="307,276,480,356"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="396,356,396,461,391,461,391,356"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="231,133,414,199"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="337,198,360,251,365,261,360,263,355,253,332,200"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="439,133,559,199"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="470,212,423,277,419,274,466,208"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="487,5,510,71"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="501,71,501,117,496,117,496,71"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="504,283,563,349"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="529,350,503,454,496,475,491,473,497,453,524,348"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="595,283,637,349"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="613,350,602,400,582,454,544,527,500,596,495,593,539,525,578,452,597,398,608,349"/>
+</map>

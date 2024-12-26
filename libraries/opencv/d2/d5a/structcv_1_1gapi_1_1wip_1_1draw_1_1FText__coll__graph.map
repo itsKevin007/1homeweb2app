@@ -1,0 +1,31 @@
+<map id="cv::gapi::wip::draw::FText" name="cv::gapi::wip::draw::FText">
+<area shape="rect" id="Node000001" title="This structure represents a text string to draw using FreeType renderer." alt="" coords="150,3445,285,3545"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="36,3197,127,3263"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,3263,83,3297,87,3338,97,3381,116,3420,139,3447,135,3450,111,3423,92,3382,82,3339,77,3298,77,3263"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,2822,136,2902"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,2916,83,3197,78,3197,70,2916"/>
+<area shape="rect" id="Node000004" href="$db/d4e/classcv_1_1Point__.html" title="Template class for 2D points specified by its coordinates x and y." alt="" coords="74,577,273,917"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,918,176,1371,176,3231,178,3283,185,3336,203,3429,198,3430,180,3337,173,3284,171,3231,171,1371,171,918"/>
+<area shape="rect" id="Node000005" href="$d1/dd7/class__Tp.html" title=" " alt="" coords="273,5,311,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="275,60,262,77,252,96,231,153,214,212,190,334,177,453,172,561,166,561,171,453,185,333,209,211,226,151,247,94,258,74,271,57"/>
+<area shape="rect" id="Node000009" href="$de/de1/classcv_1_1Matx.html" title=" " alt="" coords="269,941,430,1347"/>
+<area shape="poly" id="edge9_Node000009_Node000005" title=" " alt="" coords="295,71,298,274,308,553,333,925,328,925,303,553,293,274,290,71"/>
+<area shape="rect" id="Node000010" href="$de/de1/classcv_1_1Matx.html" title="Template class for small matrices whose type and size are known at compilation time." alt="" coords="353,148,511,553"/>
+<area shape="poly" id="edge11_Node000010_Node000005" title=" " alt="" coords="309,70,348,158,344,160,304,72"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="426,3197,457,3263"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="446,3263,441,3322,432,3355,417,3384,393,3412,364,3435,302,3469,299,3464,361,3430,389,3408,412,3381,427,3353,436,3321,441,3262"/>
+<area shape="rect" id="Node000007" href="$d1/da0/classcv_1_1Scalar__.html" title=" " alt="" coords="211,3077,402,3383"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="258,3384,242,3430,237,3428,253,3382"/>
+<area shape="rect" id="Node000008" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="194,1825,329,2231"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="266,2244,274,2605,291,3015,295,3077,290,3077,285,3015,268,2605,261,2245"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="330,1361,284,1825,279,1825,325,1360"/>
+<area shape="rect" id="Node000012" href="$d6/dcf/classcv_1_1Vec.html" title=" " alt="" coords="331,2255,459,2660"/>
+<area shape="poly" id="edge14_Node000012_Node000009" title=" " alt="" coords="359,1360,390,2254,385,2254,354,1361"/>
+<area shape="rect" id="Node000013" href="$d6/dcf/classcv_1_1Vec.html" title="Template class for short numerical vectors, a partial case of Matx." alt="" coords="387,1396,522,1801"/>
+<area shape="poly" id="edge16_Node000013_Node000009" title=" " alt="" coords="402,1360,410,1395,405,1396,397,1361"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="412,567,373,941,368,941,407,567"/>
+<area shape="rect" id="Node000011" href="$d1/da0/classcv_1_1Scalar__.html" title="Template class for a 4&#45;element vector derived from Vec." alt="" coords="299,2709,490,3015"/>
+<area shape="poly" id="edge12_Node000007_Node000011" title=" " alt="" coords="358,3029,346,3077,341,3076,352,3027"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="397,2674,397,2709,392,2709,392,2674"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="442,1815,411,2255,406,2254,437,1815"/>
+</map>
