@@ -36,7 +36,7 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'profile' :
+			case 'prof' :
 				$content 	= 'profile.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;

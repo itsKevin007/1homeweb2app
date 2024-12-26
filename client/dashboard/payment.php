@@ -27,6 +27,81 @@ if ($bal_data) {
 } else {
     $balance = "0.00";
 }
+
+// Function to handle the transfer
+function transferMoney($senderId, $receiverId, $amount)
+{
+    global $conn;
+
+    // Sanitize input
+    $senderId = (int) $senderId;
+    $receiverId = (int) $receiverId;
+    $amount = (float) $amount;
+
+    if ($amount <= 0) {
+        return "Invalid amount.";
+    }
+
+    // Start transaction
+    $conn->beginTransaction();
+
+    try {
+        // Check sender's balance
+        $stmt = $conn->prepare("SELECT balance FROM tbl_balance WHERE bal_id = :balId");
+        $stmt->bindParam(':balId', $senderId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            throw new Exception("Sender not found.");
+        }
+
+        $senderBalance = $result['balance'];
+        if ($senderBalance < $amount) {
+            throw new Exception("Insufficient balance.");
+        }
+
+        // Deduct from sender
+        $stmt = $conn->prepare("UPDATE tbl_balance SET balance = balance - :amount WHERE bal_id = :balId");
+        $stmt->bindParam(':amount', $amount, PDO::PARAM_STR);
+        $stmt->bindParam(':balId', $senderId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Add to receiver
+        $stmt = $conn->prepare("SELECT balance FROM tbl_balance WHERE bal_id = :receiverId");
+        $stmt->bindParam(':receiverId', $receiverId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            throw new Exception("Receiver not found.");
+        }
+
+        $stmt = $conn->prepare("UPDATE tbl_balance SET balance = balance + :amount WHERE bal_id = :receiverId");
+        $stmt->bindParam(':amount', $amount, PDO::PARAM_STR);
+        $stmt->bindParam(':receiverId', $receiverId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Commit transaction
+        $conn->commit();
+        return "Transaction successful.";
+    } catch (Exception $e) {
+        // Rollback transaction
+        $conn->rollback();
+        return "Transaction failed: " . $e->getMessage();
+    }
+}
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $receiverId = $_POST['receiver_id'] ?? null;
+    $amount = $_POST['amount'] ?? null;
+
+    if ($receiverId && $amount) {
+        $message = transferMoney($userId, $receiverId, $amount);
+        echo "<script>alert('$message');</script>";
+    } else {
+        echo "<script>alert('Invalid input.');</script>";
+    }
+}
 ?>
 
 <div class="site_content">
@@ -43,7 +118,7 @@ if ($bal_data) {
     <!-- Wallet Page Details Start -->
     <section id="wallet-page-sec">
         <div class="container">
-            <form>
+            <form action="" method="POST" iaction="transferMoney">
                 <div class="wallet-first mt-24">
                     <div class="Wallet-first-content">
                         <div class="Wallet">
@@ -56,9 +131,10 @@ if ($bal_data) {
                     <p class="wallet-txt2">Enter the exact amount of Payment</p>
                 </div>
                 <div class="wallet-second mt-24">
+                    <input type="number" placeholder="Enter Receiver's ID" name="receiver_id" required />
                     <div class="wallet-amount-sec">
                         <div class="serachbar-homepage2 mt-24">
-                            <div class="input-group ">
+                            <div class="input-group">
                                 <span class="input-group-text">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-peso" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -67,14 +143,17 @@ if ($bal_data) {
                                         <path d="M18 11h-12" />
                                     </svg>
                                 </span>
-                                <input type="number" placeholder="Enter Amount" class="form-control search-text" id="amount" onchange="checkBalance()">
-
+                                <input type="number" placeholder="Enter Amount" class="form-control search-text" name="amount" id="amount" onchange="checkBalanceWithAlert()">
                                 <script>
-                                    function checkBalance() {
+                                    function checkBalanceWithAlert() {
                                         var amount = document.getElementById("amount").value;
-                                        if (amount > <?php echo $balance; ?>) {
-                                            alert("You don't have enough balance");
-                                        }
+                                        if (<?php echo $balance; ?> < amount) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: "You don't have enough balance"
+                                            });
+                                        } else {}
                                     }
                                 </script>
                             </div>

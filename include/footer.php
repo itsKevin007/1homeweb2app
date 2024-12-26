@@ -10,6 +10,7 @@ $PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
 $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
+
 	if($accesslevel == 0){
 		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
 	}elseif($accesslevel == 1){
@@ -40,7 +41,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transaction" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transact" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
@@ -76,6 +77,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 						</ul>
+
 
 						<div class="sc-nav-indicator">
 							<a href="#" data-bs-toggle="modal" data-bs-target="#transact" >

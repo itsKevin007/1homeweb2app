@@ -11,3 +11,5 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/mod.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/profile.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/table.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/services.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/wave.css">

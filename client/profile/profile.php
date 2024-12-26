@@ -54,6 +54,7 @@ $fullname = $fname . " " . $mname . " " . $lname;
 ?>
 
 <!--Profile Card 3-->
+
 <section id="profile-page-sec">
 
 <div class="card">
@@ -101,28 +102,25 @@ $fullname = $fname . " " . $mname . " " . $lname;
 			</div>
 		</div>
 
-	<div class="col-12">
-		<?php
-		$text = $user_uid;
-		$tempDir = 'temp/'; // Directory to save QR code temporarily
+		<div class="card-info">
+			<span>
+				<h3><b><?php echo $fullname; ?></b></h3>
+			</span>
+			<b>
+				<?php echo $email; ?><br>
+				+<?php echo $connum; ?><br>
+				Date Registered: <?php echo $date_added; ?><br>
+				Account #: <?php echo $accnum; ?>
 
-		// Ensure temp directory exists
-		if (!is_dir($tempDir)) {
-			mkdir($tempDir, 0755, true);
-		}
+				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
+					<p class="tap-me-text">Tap me to edit</p>
+				</div>
 
-		// Generate QR code
-		$fileName = 'qrcode_' . md5($text) . '.png';
-		$filePath = $tempDir . $fileName;
-		QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
-
-		?>
-		<div class="container">
-			<div style="text-align: center">
-				<img src="<?php echo $filePath; ?>">
-			</div>
+			</b>
 		</div>
+		<a href="index.php?view=modify" class="button"><img src="../../assets/images/icon/edit-white.svg" width="25px"></a>
 	</div>
+
 
 
 </section>

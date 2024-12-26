@@ -954,14 +954,28 @@ label.custom-radio-sel-lang {
     max-width: 100%;
     border-radius: 8px;
 }
+.cate {
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    /* Ensure it takes up the available space */
+}
+
 .cate-title {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     color: #1E293B;
+    word-wrap: break-word;
+    /* Ensure long words break appropriately */
+    white-space: normal;
+    /* Allow wrapping */
+    padding-left: 10px;
+    /* Optional padding for space */
 }
+
 .cate-subtitle{
     font-family: 'Inter';
     font-style: normal;
@@ -1169,21 +1183,24 @@ span.cart-item {
 .home-cate-shape {
     background: #F6F8FA;
     border-radius: 8px;
-    width:140px;
-    height: 100px;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    width: 200px;
+    /* Make the width flexible */
+    max-width: 200px;
+    /* Set a reasonable max-width */
+    height: auto;
+    /* Allow the height to adjust based on content */
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
+    padding: 10px;
+    /* Add some padding to ensure text has breathing space */
 }
-.home-cate-shape img{
+.home-cate-shape img {
     mix-blend-mode: multiply;
     border-radius: 8px;
+    max-width: 100%;
+    /* Ensure image scales within the div */
+    height: auto;
 }
 .homepage-rating-sec{
     margin: 0;

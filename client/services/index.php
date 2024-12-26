@@ -1,12 +1,11 @@
 <?php
-	session_start();
 	require_once '../../global-library/config.php';
 	require_once '../../include/functions.php';
 
 	$_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
 	checkUser();
 
-	$pg = $conn->prepare("UPDATE bs_page SET page = 'Transactions' WHERE is_deleted != '1'");
+	$pg = $conn->prepare("UPDATE bs_page SET page = 'Profile' WHERE is_deleted != '1'");
 	$pg->execute();
 
 	$userId = $_SESSION['user_id'];
@@ -17,26 +16,34 @@
 			
 
 		switch ($view) {
+			case 'list' :
+				$content 	= 'list.php';		
+				$pageTitle 	= $sett_data['system_title'];
+				break;
 
 			case 'add' :
 				$content 	= 'add.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'dash' :
-				$content 	= 'dashboard.php';		
+			case 'viewservices' :
+				$content 	= 'viewservices.php';		
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+				
+			case 'modify_account' :
+				$content 	= 'modify_account.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'transact' :
-				$content 	= 'transaction.php';
+			case 'services' :
+				$content 	= 'services.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			default:
-				$content = 'transaction.php';  // Optionally, add a default view
-				$pageTitle = $sett_data['system_title'];
-				break;
+			default :
+				$content 	= 'list.php';		
+				$pageTitle 	= $sett_data['system_title'];
 		}
 	}else{
 		header("location: ../../index.php");
