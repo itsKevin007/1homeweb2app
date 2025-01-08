@@ -102,23 +102,6 @@ $fullname = $fname . " " . $mname . " " . $lname;
 			</div>
 		</div>
 
-		<div class="card-info">
-			<span>
-				<h3><b><?php echo $fullname; ?></b></h3>
-			</span>
-			<b>
-				<?php echo $email; ?><br>
-				+<?php echo $connum; ?><br>
-				Date Registered: <?php echo $date_added; ?><br>
-				Account #: <?php echo $accnum; ?>
-
-				<div class="d-none d-sm-block" style="text-align: center; margin-top: 10px;">
-					<p class="tap-me-text">Tap me to edit</p>
-				</div>
-
-			</b>
-		</div>
-		<a href="index.php?view=modify" class="button"><img src="../../assets/images/icon/edit-white.svg" width="25px"></a>
 	</div>
 
 

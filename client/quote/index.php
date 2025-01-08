@@ -33,6 +33,16 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			case 'quote' :
+				$content 	= 'quote.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
+			case 'bookService' :
+				$content 	= 'bookService.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
 			default:
 				$content = 'transaction.php';  // Optionally, add a default view
 				$pageTitle = $sett_data['system_title'];

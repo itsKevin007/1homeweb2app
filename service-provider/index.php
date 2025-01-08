@@ -47,6 +47,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			case 'dash' :
+				$content 	= 'dashboard.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
 			default :
 				$content 	= 'list.php';		
 				$pageTitle 	= $sett_data['system_title'];

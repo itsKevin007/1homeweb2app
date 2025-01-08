@@ -989,7 +989,8 @@ label.custom-radio-sel-lang {
 /************************ 12.HomePage Screen ***************************/
 .homepage-first-sec{
     background: #F6F8FA;
-    height: 800px;
+    /* height: 800px; original */
+    height:100%;
     padding: 10px;
     align-items: center;
     display: flex;

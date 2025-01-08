@@ -48,7 +48,7 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
-	case 'prof':
+	case 'profile':
 		$content 	= 'profile.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;
@@ -65,6 +65,11 @@ switch ($view) {
 
 	case 'services':
 		$content 	= 'services.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'quote':
+		$content 	= 'quote.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 

@@ -51,29 +51,105 @@ if ($services->rowCount() > 0) {
 	<h4 class="text-secondary">All Categories</h4>
 </div>
 <div class="card-container">
-	
-<?php
-// Loop through each service and generate a card
-foreach ($services_data as $service) {
-	$mainCat = htmlspecialchars($service['main_cat']);
-	$description = htmlspecialchars($service['descript']);
-	
-	echo 
-	'<div class="card card-1">
-		<div class="card-img"></div>
-		<a href="" class="card-link">
-			<div class="card-img-hovered"></div>
-		</a>
-		<div class="card-info">
-			<div class="card-about">
-				<a class="card-tag tag-news">' . $mainCat . '</a>
-				<div class="card-time">6/11/2018</div>
+
+	<?php
+	// Loop through each service and generate a card
+	foreach ($services_data as $service) {
+		$mainCat = htmlspecialchars($service['main_cat']);
+		$description = htmlspecialchars($service['descript']);
+
+		echo
+		'<div class="card card-1">
+			<div class="card-img"></div>
+			<a href="" class="card-link" data-bs-toggle="modal" data-bs-target="#transact" data-service-id="<?php echo $service["id"]; ?>
+
+				<div class="card-img-hovered"></div>
+			</a>
+			<div class="card-info">
+				<div class="card-about">
+					<a class="card-tag tag-news">' . $mainCat . '</a>
+					<div class="card-time">6/11/2018</div>
+				</div>
+				<h1 class="card-title">' . $description . '</h1>
+				<div class="card-creator"><a href="">Company Name</a></div>
 			</div>
-			<h1 class="card-title">' . $description . '</h1>
-			<div class="card-creator"><a href="">Company Name</a></div>
+		</div>';
+	}
+	?>
+	<script>
+		document.querySelectorAll('.card-link').forEach(link => {
+			link.addEventListener('click', function() {
+				const serviceId = this.getAttribute('data-service-id');
+				document.getElementById('service-id-input').value = serviceId;
+			});
+		});
+	</script>
+</div>
+
+<!-- -------------------------------- For modal ------------------------------------------ -->
+
+<div class="modal fade" id="transact" tabindex="-1" aria-labelledby="transact" aria-hidden="true">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<h5 class="modal-title" id="modal">SELECT ADDRESS</h5>
+
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+			</div>
+
+			<div class="modal-body">
+
+				<div class="container">
+
+					<div>
+
+						<?php
+
+						$location = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_active = '1' AND is_deleted != '1'");
+
+						$location->execute();
+
+						if ($location->rowCount() > 0) {
+
+							while ($locationdata = $location->fetch()) {
+
+								$location_id = $locationdata['l_id'];
+
+								$name = $locationdata['name'];
+
+						?>
+
+								<div class="mt-24">
+
+									<button class="btn btn-primary" onClick="locationSubmit('<?php echo $location_id; ?>')">
+
+										<?php echo $name; ?>
+
+									</button>
+
+								</div>
+
+						<?php
+
+							}
+						} else {
+						}
+
+						?>
+
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
-	</div>';
-}
-?>
-	
+
+	</div>
+
 </div>

@@ -10,3 +10,4 @@ if (!defined('WEB_ROOT')) {
 <script src="<?php echo WEB_ROOT; ?>script/dateFilter.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/filter.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/wave.js"></script>
+<script src="<?php echo WEB_ROOT; ?>script/location.js"></script>

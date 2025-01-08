@@ -13,3 +13,5 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/table.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/services.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/wave.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/location.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/reqServ.css">
