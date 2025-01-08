@@ -17,9 +17,7 @@ if (!defined('WEB_ROOT')) {
 <script src="<?php echo WEB_ROOT; ?>assets/js/drawer.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <script>
 	// When page loads, it will trigger the circle menu

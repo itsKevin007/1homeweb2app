@@ -51,11 +51,13 @@ function add_data()
     $latitude = mysqli_real_escape_string($link, $_POST['lat']);
     $longitude = mysqli_real_escape_string($link, $_POST['long']);
     $address = mysqli_real_escape_string($link, $_POST['address']);
+	$userType = 1;
 	
-	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, area_long, area_lat, date_added, added_by, is_deleted) 
-								VALUES (:address, :userId, :longitude, :latitude, :today_date1, :userId2, :is_deleted)");
+	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, user_type, area_long, area_lat, date_added, added_by, is_deleted) 
+								VALUES (:address, :userId, :userType, :longitude, :latitude, :today_date1, :userId2, :is_deleted)");
 	$sql->bindParam(':address', $address);
 	$sql->bindParam(':userId', $userId);
+	$sql->bindParam(':userType', $userType);
 	$sql->bindParam(':longitude', $longitude);
 	$sql->bindParam(':latitude', $latitude);
 	$sql->bindParam(':today_date1', $today_date1);

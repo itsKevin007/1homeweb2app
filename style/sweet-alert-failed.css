@@ -1,0 +1,16 @@
+
+.swal2-dark {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Smooth shadow */
+}
+.swal2-error-btn {
+	background-color: #e53935 !important; /* Red confirm button */
+	color: #fff !important; /* White text */
+	border: none !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* Button shadow */
+}
+.swal2-error-btn:hover {
+	background-color: #d32f2f !important; /* Darker red on hover */
+}
+.swal2-timer-progress-bar {
+	background: #e53935 !important; /* Red timer progress bar */
+}

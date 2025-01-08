@@ -54,8 +54,9 @@ if ($rowLocation > 0) {
         $subcatQuery->execute();
         $rowSubcat = $subcatQuery->rowCount();
         if ($rowSubcat > 0) {
-            $subcatData = $subcatQuery->fetch();
-            $sub_categor = $subcatData['sub_categor'];
+            while($subcatData = $subcatQuery->fetch()){           
+                $sub_categor = $subcatData['sub_categor'];
+            }
         } else {
             $sub_categor = '';
         }
