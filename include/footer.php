@@ -10,6 +10,7 @@ $PAGE = $conn->prepare("SELECT page FROM bs_page WHERE p_id = '1'");
 $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
+
 	if($accesslevel == 0){
 		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
 	}elseif ($accesslevel == 1){
@@ -42,12 +43,12 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transaction" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transact" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
 							<li class="nav-menu-icon nav-account-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>client/updates/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_778" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -79,99 +80,17 @@ $PAGEDATA = $PAGE->fetchColumn();
 							</li>
 						</ul>
 
+
+						<a href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services">
 						<div class="sc-nav-indicator">
-							<a href="#" data-bs-toggle="modal" data-bs-target="#transact" >
-								<input type="checkbox" id="toogle" class="hidden-trigger" />
-									<label for="toogle" class="circle">									
+									<label class="circle">									
 											<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">									
 									</label>
+									
+								</div>
 							</a>
-
-							
-							<!-- <div class="subs">
-
-								<?php
-									
-
-									$maincat = $conn->prepare("SELECT * FROM ind_maincat WHERE is_deleted != '1'");
-									$maincat->execute();
-
-									$counter = 1;
-
-									
-									while($maincatdata = $maincat->fetch()){
-										$label = $maincatdata['main_cat'];
-
-
-										?>
-
-											<button class='sub-circle'>
-												<input value='1' name='sub-circle' type='checkbox' id='sub<?php echo $counter++; ?>' class='hidden-sub-trigger' />
-												<label for='sub<?php echo $counter++; ?>'>
-
-													<span class='label-text'><?php echo $label; ?></span>
-												</label>
-											</button>
-
-										<?php
-									}
-									
-								?>
-								
-								
-							</div> -->
-
-						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-<div class="modal fade" id="transact" tabindex="-1" aria-labelledby="transact" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modal">SELECT ADDRESS</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-
-	
-					<div class="container">
-						<div>
-									
-									<?php
-
-										$location = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_active = '1' AND is_deleted != '1'");
-										$location->execute();
-
-										if($location->rowCount() > 0)
-										{
-											while($locationdata = $location->fetch())
-											{
-												$location_id = $locationdata['l_id'];
-												$name = $locationdata['name'];
-
-												?>
-													<div class="mt-24">
-														<button class="btn btn-primary" onClick="locationSubmit('<?php echo $location_id; ?>')">
-															<?php echo $name; ?>
-														</button>
-													</div>
-
-												<?php
-											}
-										}else{}
-									?>
-
-						
-						</div>
-					</div>
-
-
 			</div>
 		</div>
 	</div>

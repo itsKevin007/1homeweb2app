@@ -19,6 +19,7 @@ switch ($action) {
         delete_data();
         break;
     
+    
 	   
     default :
         // if action is not defined or unknown
@@ -40,11 +41,14 @@ function add_data()
 	$email = $_POST['email'];
 	$type = $_POST['type'];
 	
-	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = '$c_fname' AND c_lname = '$c_lname' AND email = '$email' AND is_deleted != '1'");
+	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = :fname AND c_lname = :lname AND email = :email AND is_deleted != '1'");
+	$chk->bindParam(':fname', $fname, PDO::PARAM_STR);
+	$chk->bindParam(':lname', $lname, PDO::PARAM_STR);
+	$chk->bindParam(':email', $email, PDO::PARAM_STR);
 	$chk->execute();
 	if($chk->rowCount() > 0)
 	{
-		header('Location: index.php?view=list&error=Data already exist! Data entry failed.');              
+		header('Location: index.php?view=modify&error=Data already exist! Data entry failed.');              
 	}else{
 
 
@@ -64,15 +68,15 @@ function add_data()
 		$log = $conn->prepare("INSERT INTO tr_log (description, log_action_date, action_by) VALUES ('Client $fname $lname Added.', '$today_date1', '$userId')");
 		$log->execute();
 		
-		header('Location: index.php?view=list&error=Added successfully.');
+		header('Location: index.php?view=modify&error=Added successfully.');
 
 	}
 }
 
 
-/*
-	Upload an image and return the uploaded image name
-*/
+// /*
+// 	Upload an image and return the uploaded image name
+// */
 function uploadimage($inputName, $uploadDir)
 {
 	$image     = $_FILES[$inputName];
@@ -131,12 +135,25 @@ function modify_data()
     $id = $_POST['id'];
     
 	$fname = mysqli_real_escape_string($link, $_POST['fname']);
+	$mname = mysqli_real_escape_string($link, $_POST['mname']);
 	$lname = mysqli_real_escape_string($link, $_POST['lname']);
+	$suffix = mysqli_real_escape_string($link, $_POST['suffix']);
+	$connum = mysqli_real_escape_string($link, $_POST['connum']);
+	$email = mysqli_real_escape_string($link, $_POST['email']);
+	$region = mysqli_real_escape_string($link, $_POST['region']);
+	$province = mysqli_real_escape_string($link, $_POST['province']);
+	$city = mysqli_real_escape_string($link, $_POST['city']);
+	$barangay = mysqli_real_escape_string($link, $_POST['barangay']);
+	$subdivision = mysqli_real_escape_string($link, $_POST['subdivision']);
+	$street = mysqli_real_escape_string($link, $_POST['street']);
+	$unit = mysqli_real_escape_string($link, $_POST['unit']);
+	$building = mysqli_real_escape_string($link, $_POST['building']);
+	$phase = mysqli_real_escape_string($link, $_POST['phase']);
+	$blocklot = mysqli_real_escape_string($link, $_POST['blocklot']);
+	$zip = mysqli_real_escape_string($link, $_POST['zip']);
 	$email = $_POST['email'];
-	$type = $_POST['type'];
-	$uid = $_POST['id'];
 	
-	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/client/');
+	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
 
 	$mainImage = $images['image'];
 	$thumbnail = $images['thumbnail'];
@@ -155,23 +172,31 @@ function modify_data()
 		$mainImage = 'image';
 		$thumbnail = 'thumbnail';
 	}
-	
-	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = '$fname' AND c_lname = '$lname' AND uid != '$uid' AND is_deleted != '1'");
+	$chk = $conn->prepare("SELECT * FROM bs_client WHERE connum = :connum AND email = :email AND uid != :uid AND is_deleted != '1'");
+	$chk->bindParam(':connum', $connum, PDO::PARAM_STR);
+	$chk->bindParam(':email', $email, PDO::PARAM_STR);
+	$chk->bindParam(':uid', $uid, PDO::PARAM_STR);
 	$chk->execute();
-	if($chk->rowCount() > 0)
+	if ($chk->rowCount() > 0)
 	{
-		header("Location: index.php?view=list&error=Data already exist! Data entry failed.");
+		// header("Location: index.php?view=modify&error=Data already exist! Data entry failed.");
 	}else{
     
-		$sql = $conn->prepare("UPDATE bs_client SET c_fname = '$fname', c_lname = '$lname', email = '$email', sub_type = '$type',
+		$sql = $conn->prepare("UPDATE bs_client SET c_fname = '$fname', c_mname = '$mname', c_lname = '$lname', c_suffix = '$suffix', connum = '$connum', email = '$email', region_text = '$region', province_text = '$province', city_text = '$city', barangay_text = '$barangay', subdivision = '$subdivision', street = '$street', unit = '$unit', building = '$building', phase = '$phase', blocklot = '$blocklot', zipcode = '$zip',
 													date_modified = '$today_date1', modified_by = '$userId' WHERE uid = '$id'");
 		$sql->execute();
 
-		$log = $conn->prepare("INSERT INTO tr_log (description, log_action_date, action_by) VALUES ('Client $fname $lname modified.', '$today_date1', '$userId')");
+		$sql1 = $conn->prepare("UPDATE bs_user SET image = $mainImage, thumbnail = $thumbnail,
+													date_modified = '$today_date1', modified_by = '$userId' WHERE user_id = '$userId'");
+		$sql1->execute();
+
+		$keyword = 'First Name: ' . mysqli_real_escape_string($link, $_POST['fname']) . '<br /> Middle Name: ' . mysqli_real_escape_string($link, $_POST['mname']) . '<br /> Last Name: ' . mysqli_real_escape_string($link, $_POST['lname']) . '<br /> Suffix: ' . mysqli_real_escape_string($link, $_POST['suffix']) . '<br /> Contact Number: ' . mysqli_real_escape_string($link, $_POST['connum']) . '<br /> Email: ' . mysqli_real_escape_string($link, $_POST['email']) . '<br /> Address: ' . mysqli_real_escape_string($link, $_POST['region']) . ', ' . mysqli_real_escape_string($link, $_POST['province']) . ', ' . mysqli_real_escape_string($link, $_POST['city']) . ', ' . mysqli_real_escape_string($link, $_POST['barangay']) . ', ' . mysqli_real_escape_string($link, $_POST['subdivision']) . ', ' . mysqli_real_escape_string($link, $_POST['street']) . ', ' . mysqli_real_escape_string($link, $_POST['unit']) . ', ' . mysqli_real_escape_string($link, $_POST['building']) . ', ' . mysqli_real_escape_string($link, $_POST['phase']) . ', ' . mysqli_real_escape_string($link, $_POST['blocklot']) . ', ' . mysqli_real_escape_string($link, $_POST['zip']);
+
+		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
+												VALUES ('Client', 'Profile Edit', '$keyword', '$userId', '$today_date1')");
 		$log->execute();
 		
-		
-		header("Location: index.php?view=list&error=Modified successfully.");
+		header("Location: index.php?view=prof&error=Modified successfully.");
 	
 	}
 }
@@ -213,24 +238,12 @@ function _deleteImage($id)
 
 		if ($sql_data['image'] && $sql_data['thumbnail']) {
 			// remove the image file
-			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/client/$sql_data[image]");
-			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/client/$sql_data[thumbnail]");
+			$deleted = @unlink(SRV_ROOT . "../../adminpanel/assets/images/user/$sql_data[image]");
+			$deleted = @unlink(SRV_ROOT . "../../adminpanel/assets/images/user/$sql_data[thumbnail]");
 		}
 	}
 
 	return $deleted;
 }
 
-
-// Example usage
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-// 	$senderId = $_POST['sender_id']; // Sender's ID from the UI
-// 	$receiverId = $_POST['receiver_id']; // Receiver's ID from the UI
-// 	$amount = $_POST['amount']; // Amount from the UI
-
-// 	$result = transferMoney($senderId, $receiverId, $amount);
-// 	echo $result;
-// }
-
-// $conn->close();
 ?>

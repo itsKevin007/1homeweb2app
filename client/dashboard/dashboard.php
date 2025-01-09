@@ -1,6 +1,6 @@
-
 <link href="<?php echo WEB_ROOT; ?>assets/css/flipped.css" rel="stylesheet">
 <link href="<?php echo WEB_ROOT; ?>style/flipped.css" rel="stylesheet">
+
 
 
 <?php
@@ -24,7 +24,8 @@ if (isset($services_data['sercatid'])) {
 }
 // -------------------------------------------------- end of services ----------------------------------------------- //
 
-include ('phpqrcode/qrlib.php');
+include('phpqrcode/qrlib.php');
+
 $user_uid = $user_data['uid'];
 $client = $conn->prepare("SELECT * FROM bs_client WHERE user_id = :userId");
 $client->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -48,6 +49,7 @@ if ($bal->rowCount() > 0) {
 
 <section id="homepage1-sec">
 	<div class="homepage-first-sec">
+
 		<!-- wallet card -->
 		<div class="wallet card" style="height: auto; width: 350px;">
 			<div class="title-logo">
@@ -92,13 +94,15 @@ if ($bal->rowCount() > 0) {
 				</div>
 				<div class="wallet-btn-sec">
 					<button style="height: 40px;">Cash In</button>
-					<img data-bs-toggle="modal" data-bs-target="#paymentModal" src="<?php echo WEB_ROOT; ?>assets/images/homepage/qr-code.png" alt="qr-code" style="width: 30px; height: 30px; color: #c9c9d2; margin-top:10px;" />
-					<button style="height: 40px;">Pay</button>
+					<img data-bs-toggle="modal" data-bs-target="#paymentModal" src="<?php echo WEB_ROOT; ?>assets/images/homepage/qrScanner.png" alt="qr-code" style="width: 30px; height: 30px; color: #c9c9d2; margin-top:10px;" />
+					<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=payment">
+						<button style="height: 40px;">Pay</button>
+					</a>
 				</div>
 			</div>
 
 
-			<div class="back">
+			<div class="back" style="width: 94%; border-radius: 10px; ">
 				<div>
 					<div class="col-12">
 						<?php
@@ -113,13 +117,53 @@ if ($bal->rowCount() > 0) {
 						// Generate QR code
 						$fileName = 'qrcode_' . md5($text) . '.png';
 						$filePath = $tempDir . $fileName;
-						QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
+
+
+						// Set error correction level and size
+						$eccLevel = QR_ECLEVEL_L;
+						$size = 5;
+
+						// Generate QR code matrix
+						$matrix = QRcode::text($text, false, $eccLevel);
+
+						// Generate QR code image with custom colors
+						$qrWidth = count($matrix);
+						$imageSize = $size * $qrWidth;
+
+						$image = imagecreate($imageSize, $imageSize);
+
+						// Allocate colors
+						$backgroundColor = imagecolorallocate($image, 2, 34, 170); // Linear gradient start color
+						$foregroundColor = imagecolorallocate($image, 255, 255, 255); // White foreground
+
+						// Draw the QR code
+						for ($y = 0; $y < $qrWidth; $y++) {
+							for ($x = 0; $x < $qrWidth; $x++) {
+								$color = $matrix[$y][$x] ? $foregroundColor : $backgroundColor;
+								imagefilledrectangle(
+									$image,
+									$x * $size,
+									$y * $size,
+									($x + 1) * $size - 1,
+									($y + 1) * $size - 1,
+									$color
+								);
+							}
+						}
+
+						// Save the QR code image
+						imagepng($image, $filePath);
+
+						// Clean up resources
+						imagedestroy($image);
+
+
 
 
 						?>
 						<div class="container">
 							<div style="text-align: center">
-								<img src="<?php echo $filePath; ?>">
+								<img src="<?php echo $filePath; ?>" alt="QR Code">
 							</div>
 						</div>
 					</div>
@@ -138,6 +182,12 @@ if ($bal->rowCount() > 0) {
 		</div> -->
 
 		<!-- ------------------------------------------ filters ---------------------------------------------- -->
+
+
+	</div>
+
+
+
 	</div>
 
 </section>

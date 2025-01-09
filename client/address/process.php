@@ -12,6 +12,10 @@ switch ($action) {
         add_data();
         break;
 
+	case 'uploadImg' :
+		upload_img();
+		break;
+
 	case 'addService' :
 		add_service();
 		break;
@@ -90,6 +94,29 @@ function add_data()
 
 }
 
+// --------------------------------- For adding Image --------------------------------- //
+function upload_img()
+{
+	include '../global-library/database.php';
+	$userId = $_SESSION['user_id'];
+
+	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
+
+	$mainImage = $images['image'];
+	$thumbnail = $images['thumbnail'];
+
+	$up = $conn->prepare("UPDATE tbl_location SET image = :mainImage, thumbnail = :thumbnail WHERE user_id = :userId");
+	$up->bindParam(':mainImage', $mainImage);
+	$up->bindParam(':thumbnail', $thumbnail);
+	$up->bindParam(':userId', $userId);
+	$up->execute();
+
+	$log = $conn->prepare("INSERT INTO tr_log (module, description, log_action_date, action_by) VALUES ('Service Provider', 'Edit Profile: $thumbnail', '$today_date1', '$userId')");
+	$log->execute();
+
+	header('Location: index.php?view=prof&error=Success');
+}
+// --------------------------------- End For adding Image --------------------------------- //
 
 /*
 	Upload an image and return the uploaded image name

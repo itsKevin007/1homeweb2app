@@ -54,6 +54,7 @@ $fullname = $fname . " " . $mname . " " . $lname;
 ?>
 
 <!--Profile Card 3-->
+
 <section id="profile-page-sec">
 
 <div class="card">
@@ -101,28 +102,8 @@ $fullname = $fname . " " . $mname . " " . $lname;
 			</div>
 		</div>
 
-	<div class="col-12">
-		<?php
-		$text = $user_uid;
-		$tempDir = 'temp/'; // Directory to save QR code temporarily
-
-		// Ensure temp directory exists
-		if (!is_dir($tempDir)) {
-			mkdir($tempDir, 0755, true);
-		}
-
-		// Generate QR code
-		$fileName = 'qrcode_' . md5($text) . '.png';
-		$filePath = $tempDir . $fileName;
-		QRcode::png($text, $filePath, QR_ECLEVEL_L, 5);
-
-		?>
-		<div class="container">
-			<div style="text-align: center">
-				<img src="<?php echo $filePath; ?>">
-			</div>
-		</div>
 	</div>
+
 
 
 </section>

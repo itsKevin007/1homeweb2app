@@ -91,18 +91,18 @@ if($accesslevel == 0){
 <header id="top-navbar" class="top-navbar">
 	<div class="container">
 		<div class="top-navbar_full">
-			<div class="justify-content-between">
-				<button class="header-drawer-toggle" style="border: none; background: none; margin-top: 5px">
+			<div class="flex-row ">
+				<button class="header-drawer-toggle" style="border: none; background: none;">
 					<a href="#offcanvasExample" data-bs-toggle="offcanvas">
 						<svg fill="none" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
 							<path d="M5 11a1 1 0 1 0 0 2zm14 2a1 1 0 1 0 0-2zM5 6a1 1 0 0 0 0 2zm14 2a1 1 0 1 0 0-2zM5 16a1 1 0 1 0 0 2zm14 2a1 1 0 1 0 0-2zM5 13h14v-2H5zm0-5h14V6H5zm0 10h14v-2H5z" fill="#7D8FAB" />
 						</svg>
 					</a>
 				</button>
-			</div>			
-				<a href="<?php echo WEB_ROOT; ?>" class="justify-content-center align-items-center text-center logo mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0 mb-xxxl-0 mx-auto d-flex">
+				<a href="<?php echo WEB_ROOT; ?>">
 					<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="logo" height="40px">
 				</a>
+			</div>			
 		</div>
 	</div>
 	<div class="navbar-boder"></div>

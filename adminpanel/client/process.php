@@ -19,6 +19,10 @@ switch ($action) {
         delete_data();
         break;
     
+    case 'deleteImage' :
+        deleteImage();
+        break;
+    
 	   
     default :
         // if action is not defined or unknown
@@ -185,14 +189,28 @@ function delete_data()
 	$userId = $_SESSION['user_id'];
 	
     if(isset($_POST['id']))
-	{ $id = $_POST['id']; }else{ $id = $_GET['id']; }
+	{ $id = $_POST['id']; }else{ $id = $_GET['id']; }	
+
+	$chk = $conn->prepare("SELECT * FROM bs_client WHERE uid = '$id'");
+	$chk->execute();
+	$chk_data = $chk->fetch();
+		$c_fname = $chk_data['c_fname'];
+		$email = $chk_data['c_lname'];
+		$c_email = $chk_data['email'];
+		$c_contact = $chk_data['c_contact'];
+		$address = $chk_data['address'];
+
+	
+	$deleted = _deleteImage($id);
 	
     // delete the category. set is_deleted to 1 as deleted;    
-	$sql = $conn->prepare("UPDATE bs_client SET is_deleted = '1', date_deleted = '$today_date1', deleted_by = '$userId' WHERE uid = '$id'");
+	$sql = $conn->prepare("UPDATE bs_client SET is_deleted = '1', date_deleted = '$today_date1', deleted_by = '$userId' WHERE c_id = '$id'");
 	$sql->execute();
+	
+	$keyword = 'c_fname: ' . $c_fname .  '<br /> c_lname: ' . $c_lname . '<br /> email: ' . $email . '<br /> c_contact: ' . $c_contact;
 
 	$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-											VALUES ('User', 'User Deleted', '$id', '$userId', '$today_date1')");
+											VALUES ('User', 'User Deleted', '$keyword', '$userId', '$today_date1')");
 	$log->execute();	
         
 	header("Location: index.php?error=Deleted successfully.");
@@ -221,16 +239,4 @@ function _deleteImage($id)
 	return $deleted;
 }
 
-
-// Example usage
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-// 	$senderId = $_POST['sender_id']; // Sender's ID from the UI
-// 	$receiverId = $_POST['receiver_id']; // Receiver's ID from the UI
-// 	$amount = $_POST['amount']; // Amount from the UI
-
-// 	$result = transferMoney($senderId, $receiverId, $amount);
-// 	echo $result;
-// }
-
-// $conn->close();
 ?>

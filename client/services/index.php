@@ -1,17 +1,16 @@
 <?php
-	require_once '../global-library/config.php';
-	require_once '../include/functions.php';
+	require_once '../../global-library/config.php';
+	require_once '../../include/functions.php';
 
 	$_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
 	checkUser();
 
-	$pg = $conn->prepare("UPDATE bs_page SET page = '6' WHERE is_deleted != '1'");
+	$pg = $conn->prepare("UPDATE bs_page SET page = 'Profile' WHERE is_deleted != '1'");
 	$pg->execute();
 
 	$userId = $_SESSION['user_id'];
 
-
-	if($accesslevel == 1 ){
+	if($accesslevel == 0 ){
 
 		$view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 			
@@ -27,8 +26,8 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'modify' :
-				$content 	= 'modify.php';		
+			case 'viewservices' :
+				$content 	= 'viewservices.php';		
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 				
@@ -37,18 +36,8 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
-			case 'prof' :
-				$content 	= 'profile.php';		
-				$pageTitle 	= $sett_data['system_title'];
-				break;
-
-			case 'service' :
-				$content 	= 'services.php';		
-				$pageTitle 	= $sett_data['system_title'];
-				break;
-
-			case 'dash' :
-				$content 	= 'dashboard.php';
+			case 'services' :
+				$content 	= 'services.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
@@ -57,11 +46,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 		}
 	}else{
-		header("location: ../index.php");
+		header("location: ../../index.php");
 	}
 
 
 $script    = array('category.js');
 
-require_once '../include/template.php';
+require_once '../../include/template.php';
 ?>

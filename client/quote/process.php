@@ -18,7 +18,10 @@ switch ($action) {
     case 'delete' :
         delete_data();
         break;
-    
+
+	case 'bookService':
+		book_service();
+		break;
     
 	   
     default :
@@ -222,4 +225,55 @@ function _deleteImage($id)
 	return $deleted;
 }
 
+// ------------------------------ FOR BOOKING SERVICE ---------------------------------//
+function book_service()
+{
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		global $conn;
+
+		$userId = $_SESSION['user_id'] ?? null;
+		$requestedService = $_POST['requested_service'] ?? null;
+		$address = $_POST['booking_address'] ?? null;
+		$contactNumber = $_POST['contact_num'] ?? null;
+		$serviceId = $_POST['service_id'] ?? null;
+		$location = $_POST['location_id'] ?? null;
+
+		if ($userId && $requestedService && $address && $contactNumber && $serviceId) {
+
+			try {
+				$stmt = $conn->prepare("INSERT INTO tbl_bookings (user_id, service_id, requested_service, booking_address, contact_num)
+                            VALUES (:user_id, :service_id, :requested_service, :booking_address, :contact_num )");
+				$stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+				$stmt->bindParam(':service_id', $serviceId, PDO::PARAM_INT);
+				$stmt->bindParam(':requested_service', $requestedService, PDO::PARAM_STR);
+				$stmt->bindParam(':booking_address', $address, PDO::PARAM_STR);
+				$stmt->bindParam(':contact_num', $contactNumber, PDO::PARAM_STR);
+
+				$stmt->execute();
+
+				// Prepare the form to redirect with success message
+				echo '<form id="redirectForm" action="index.php" method="POST">
+					<input type="hidden" name="location_id" value="' . htmlspecialchars($location) . '">
+					<input type="hidden" name="success" value="Booking successfully added">
+				</form>';
+						echo '<script>document.getElementById("redirectForm").submit();</script>';
+						exit;
+					} catch (Exception $e) {
+						error_log($e->getMessage()); // Log error to the server logs
+						// Prepare the form to redirect with error message
+						echo '<form id="redirectForm" action="index.php" method="POST">
+					<input type="hidden" name="location_id" value="' . htmlspecialchars($location) . '">
+					<input type="hidden" name="error" value="Error processing booking">
+				</form>';
+						echo '<script>document.getElementById("redirectForm").submit();</script>';
+						exit;
+					}
+		} else {
+			header("Location: index.php?error=All fields are required");
+			exit;
+		}
+	}
+}
+
+// ------------------------------ END ---------------------------------//
 ?>

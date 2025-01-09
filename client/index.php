@@ -63,6 +63,16 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
+	case 'services':
+		$content 	= 'services.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'quote':
+		$content 	= 'quote.php';
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
 	default :
 		$content 	= 'list.php';		
 		$pageTitle 	= $sett_data['system_title'];

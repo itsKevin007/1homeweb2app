@@ -9,3 +9,5 @@ if (!defined('WEB_ROOT')) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/dateFilter.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/filter.js"></script>
+<script src="<?php echo WEB_ROOT; ?>script/wave.js"></script>
+<script src="<?php echo WEB_ROOT; ?>script/location.js"></script>
