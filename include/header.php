@@ -33,7 +33,7 @@ if($accesslevel == 0){
 		$balance = "0.00";
 	}
 
-
+	$name = $fname . " " . $mname . " " . $lname;
 }elseif($accesslevel == 1){
 	$client = $conn->prepare("SELECT * FROM tbl_independent WHERE user_id = :userId");
 	$client->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -51,6 +51,26 @@ if($accesslevel == 0){
 	$connum = $client_data['connum'];
 	$date_added = $client_data['date_added'];
 	$accnum = $client_data['accno'];
+
+	$name = $fname . " " . $mname . " " . $lname;
+	
+	$route = 'service-provider';
+}elseif($accesslevel == 2){
+	$client = $conn->prepare("SELECT * FROM tbl_company WHERE user_id = :userId");
+	$client->bindParam(':userId', $userId, PDO::PARAM_INT);
+	$client->execute();
+	$client_data = $client->fetch();
+	$uid = $client_data['uid'];
+
+	$bname = $client_data['bname'];
+	$email = $client_data['emailadd'];
+	$connum = $client_data['connum'];
+	$date_added = $client_data['date_added'];
+	$accnum = $client_data['accno'];
+
+	$name = $bname;
+
+	$route = 'company';
 }else{}
 
 	// for image
@@ -103,7 +123,7 @@ if($accesslevel == 0){
 					<img src="<?php echo $image; ?>" alt="avatar">
 				</div>
 				<div class="drawer-meta">
-					<span class="drawer-name"><?php echo $fname ?> <?php echo $mname; ?> <?php echo $lname ?></span>
+					<span class="drawer-name"><?php echo $name; ?></span>
 				</div>
 			</div>
 		</a>
@@ -127,7 +147,7 @@ if($accesslevel == 0){
 	<nav class="drawer-navigation drawer-border">
 
 	<?php if($accesslevel != 0){ ?>
-		<a href="<?php echo WEB_ROOT; ?>service-provider/index.php?view=service">
+		<a href="<?php echo WEB_ROOT; ?><?php echo $route; ?>/index.php?view=service">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">
 					<img src="<?php echo WEB_ROOT; ?>assets/images/icon/tools-solid-white.svg" alt="logo" height="23px">
