@@ -13,9 +13,11 @@ $PAGEDATA = $PAGE->fetchColumn();
 
 	if($accesslevel == 0){
 		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
-	}elseif($accesslevel == 1){
+	}elseif ($accesslevel == 1){
 		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
-	}else{}
+	}elseif ($accesslevel == 2){
+		$profileDirect =  WEB_ROOT. 'company/profile/index.php?view=prof';
+	}
 
 ?>
 <!-- ======= Footer ======= -->

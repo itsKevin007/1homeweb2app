@@ -82,9 +82,16 @@ if (isset($_POST['txtUserName'])) {
                                             <input type="password" id="password" class="form-control" name="txtPassword" id="txtPassword" autocomplete=off placeholder="Enter your password" required>
                                         </div>
                                     </div>																										
-
+                                    <div class="mb-2 text-end">	<a href="recoverpass.php">Forgot Password ?</a>
+                                    </div>
                                     <div class="mb-3 d-grid text-center">
                                         <button style="background-color:#16405F;border: 1px #16405F solid;" class="btn btn-primary" type="submit"> Log In </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="text-center ">
+                                            <p class="mb-0">Don't have an account yet? <a href="sign-up.php">Sign up here</a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </form>
 

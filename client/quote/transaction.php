@@ -55,6 +55,7 @@ if ($nowLocation->rowCount() > 0) {
         $subcatQuery->bindParam(':userId', $user_id, PDO::PARAM_INT);
         $subcatQuery->execute();
 
+
         if ($subcatQuery->rowCount() > 0) {
             while ($subcatData = $subcatQuery->fetch(PDO::FETCH_ASSOC)) {
                 $sub_categor = $subcatData['sub_categor'];

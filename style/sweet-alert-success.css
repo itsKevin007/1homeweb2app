@@ -1,0 +1,15 @@
+.swal2-dark {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Add smooth shadow */
+  }
+  .swal2-confirm-dark {
+    background-color: #4caf50 !important; /* Green confirm button */
+    color: #fff !important; /* White text */
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* Button shadow */
+  }
+  .swal2-confirm-dark:hover {
+    background-color: #43a047 !important; /* Darker green on hover */
+  }
+  .swal2-timer-progress-bar {
+    background: #4caf50 !important; /* Green timer progress bar */
+  }

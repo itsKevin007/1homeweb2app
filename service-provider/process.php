@@ -513,19 +513,20 @@ function delete_service()
 	
 	$total_subs = [];
 	$logs_action = ''; // Initialize logs_action
+	$is_deleted = 1; // Set is_deleted to 1 for deletion
 	
 	foreach ($subcat as $subid) {
 		
 		if ($subid != '0') { // Only process selected subcategories
-			
+			echo $subid;
 			// Prepare the DELETE query
 			$sql = $conn->prepare("UPDATE ind_subcat 
 								   SET is_deleted = :is_deleted, date_deleted = :date_deleted, deleted_by = :deleted_by 
-								   WHERE uid = :uid");
+								   WHERE subcatid = :id");
 			$sql->bindParam(':is_deleted', $is_deleted, PDO::PARAM_INT);
 			$sql->bindParam(':date_deleted', $today_date1, PDO::PARAM_STR);
 			$sql->bindParam(':deleted_by', $userId, PDO::PARAM_INT);
-			$sql->bindParam(':uid', $id, PDO::PARAM_INT);
+			$sql->bindParam(':id', $subid, PDO::PARAM_INT);
 			$sql->execute();
 	
 			// Add this subcategory ID to the logs action string
