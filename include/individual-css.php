@@ -15,3 +15,5 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/wave.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/location.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/reqServ.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/dropdown.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/transTable.css">

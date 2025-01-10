@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/services.css">
 
+
 <?php
 // Prepare the query to fetch all rows where sercatid is not archived or deleted
 $services = $conn->prepare("SELECT * FROM ind_maincat WHERE is_deleted = 0 AND is_archive = 0");
@@ -106,7 +107,7 @@ if ($services->rowCount() > 0) {
 
 				<div class="container">
 
-					<div>
+					<div style="margin-top: 10px;">
 
 						<?php
 
@@ -124,7 +125,7 @@ if ($services->rowCount() > 0) {
 
 						?>
 
-								<div class="mt-24">
+								<div class="mt-5">
 
 									<button class="btn btn-primary" onClick="locationSubmit('<?php echo $location_id; ?>')">
 
