@@ -3,6 +3,10 @@ if (!defined('WEB_ROOT')) {
     header('Location: ../index.php');
     exit;
 }
+
+// ------------------------------- for notifications ------------------------------- //
+
+
 ?>
 
 
@@ -14,20 +18,8 @@ if (!defined('WEB_ROOT')) {
     </div>
 
     <div style="width: 100%; height:100%; background-color: #d7d7df;">
-
-        <!-- ----------------------------------------------- received updates ----------------------------------------------- -->
-        <?php
-
-     
-
-        $data = json_decode(file_get_contents('php://input'), true);
-        $location_id = $data['location_id'];
-
-        // Include your existing logic here to fetch location data and notify service providers...
-
-        echo json_encode(['success' => true]);
-        ?>
-<!-- end received updates -->
+<!-- ----------------------------------------------- received updates ----------------------------------------------- -->
+      
     </div>
 
 </div>

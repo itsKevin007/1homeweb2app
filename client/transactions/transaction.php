@@ -1,31 +1,38 @@
-<?php
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/transTable.css">
 
+<?php
 if (!defined('WEB_ROOT')) {
     header('Location: ../index.php');
     exit;
 }
 
+// Handle cancelBooking action
+if (isset($_GET['action']) && $_GET['action'] === 'cancelBooking') {
+    // Get the JSON payload
+    $data = json_decode(file_get_contents('php://input'), true);
 
-$trans = $conn->prepare("SELECT * FROM tr_log WHERE action_by = :userId");
-$trans->bindParam(':userId', $userId, PDO::PARAM_INT);
-$trans->execute();
+    if (isset($data['booking_id'])) {
+        $booking_id = $data['booking_id'];
 
+        // Prepare the SQL statement to delete the booking
+        $stmt = $conn->prepare("DELETE FROM tbl_bookings WHERE booking_id = :booking_id");
+        $stmt->bindParam(':booking_id', $booking_id, PDO::PARAM_INT);
 
-if ($trans->rowCount() > 0) {
-    while($trans_data = $trans->fetch()) {
-        $module = $trans_data['module'];
-        $action = $trans_data['action'];
-        $description = $trans_data['description'];
-        $by = $trans_data['action_by'];
-        $date = $trans_data['log_action_date'];
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Database error occurred']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid booking ID']);
     }
-    
-} else {
-    $action = "No history found";
-    $description = "No history found";
-    $by = "No history found";
-    $date = "No history found";
+    exit;
 }
+
+// Prepare the query to fetch bookings for the current user
+$book = $conn->prepare("SELECT * FROM tbl_bookings WHERE user_id = :userId");
+$book->bindParam(':userId', $userId, PDO::PARAM_INT);
+$book->execute();
 ?>
 
 <div class="homepage-second-sec">
@@ -42,43 +49,81 @@ if ($trans->rowCount() > 0) {
         </div>
     </div>
 
-    <div style="background-color: #fff;">
-        <div style="justify-content: center; align-items: center; display: flex;">
+    <div style="background-color: #fff;" >
+        <div style="justify-content: center; align-items: center; display: flex; margin-bottom: 20px;">
             <table style="width: 90%; text-align: left; border-collapse: collapse;">
                 <thead style="background-color: #ccc;">
                     <tr>
-                        <th scope="col">Action</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">By</th>
+                        <th scope="col">Service Request</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Contact Number</th>
                         <th scope="col">Date of Transactions</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="Action"><?php echo $action; ?></td>
-                        <td data-label="Descripti   on"><?php echo $description; ?></td>
-                        <td data-label="By"><?php echo $by; ?></td>
-                        <td data-label="Date of Transactions"><?php echo $date; ?></td>
-                    </tr>
+                    <?php while ($row = $book->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <tr>
+                            <td data-label="Service Request"><?php echo htmlspecialchars($row['requested_service']); ?></td>
+                            <td data-label="Address"><?php echo htmlspecialchars($row['booking_address']); ?></td>
+                            <td data-label="Contact Number"><?php echo htmlspecialchars($row['contact_num']); ?></td>
+                            <td data-label="Date of Transactions"><?php echo htmlspecialchars($row['created_at']); ?></td>
+                            <td data-label="Status">
+                                <?php
+                                switch ($row['booking_status']) {
+                                    case 1:
+                                        echo 'Accepted';
+                                        break;
+                                    case 2:
+                                        echo 'Pending';
+                                        break;
+                                    default:
+                                        echo 'Pending';
+                                        break;
+                                }
+                                ?>
+                            </td>
+                            <td data-label="Cancel">
+                                <?php
+                                if (empty($row['booking_status']) || $row['booking_status'] == 0 || $row['booking_status'] == 2) {
+                                    echo '<button type="button" class="btn btn-danger" onclick="cancelBooking(' . $row['booking_id'] . ')">Cancel</button>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
-    <div style="padding:3%; justify-content: center; align-items: center; display: flex;">
-        <form id="dateRangeForm" style="width: 90%;">
-            <div style="flex-direction: column;">
-                <div class="col">
-                    <label for="startDate" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate">
-                </div>
-                <div class="col">
-                    <label for="endDate" class="form-label">End Date</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate">
-                </div>
-                <div class="flex mt-3">
-                    <button type="button" class="btn btn-primary w-100" id="filterButton">Filter</button>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
+
+<script>
+    function cancelBooking(booking_id) {
+        if (confirm("Are you sure you want to cancel this booking?")) {
+            fetch("?action=cancelBooking", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        booking_id: booking_id
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Booking cancelled successfully!");
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert("Failed to cancel booking: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Deleted Successfully");
+                });
+        }
+    }
+</script>
