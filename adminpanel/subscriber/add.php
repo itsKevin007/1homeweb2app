@@ -33,6 +33,17 @@
 												Please provide a valid contact number.
 											</div>
 										</div>
+										<div class="mb-3">
+											<label for="lname" class="form-label">Subscriber Type: </label>&nbsp;&nbsp;&nbsp;
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" name="type" type="radio" id="1" value="1">
+												<label class="form-check-label" for="1">Subscriber</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" name="type" type="radio" id="2" value="2">
+												<label class="form-check-label" for="2">Service Provider</label>
+											</div>
+										</div>
 										<button type="button" style="float: left;" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 										<button type="submit" style="float: right;" class="btn btn-primary">Save</button>
 									</form>									

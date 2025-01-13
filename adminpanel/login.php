@@ -43,9 +43,9 @@ if (isset($_POST['txtUserNameAdmin'] )) {
 						<div class="card mb-0">
 							<div class="card-body">
 								<div class="p-4">
-                                
+                                <h5 class="text-center">ADMIN LOGIN</h5>
                                     <div class="mb-3 text-center">
-										<img src="<?php echo WEB_ROOT; ?>images/icons/silverlogo.png" width="60%" alt="" />
+										<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogo.png" width="60%" alt="" />
 									</div>
 								<?php
 									if($errorMessage == 'Updated successfully.')
@@ -68,6 +68,7 @@ if (isset($_POST['txtUserNameAdmin'] )) {
 									} else {}	
 								?>
                                 <div class="form-body">
+                                    
                                 <form class="row g-3" id="loginform"  name="frmLogin" method="post">									
 									<div class="input-group input-group-lg"> <span class="input-group-text"><i class='bx bxs-user'></i></span>                                       
                                         <input class="form-control" type="text" name="txtUserNameAdmin" id="txtUserNameAdmin" autocomplete=off required="" placeholder="Enter your username">

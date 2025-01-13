@@ -8,7 +8,7 @@ if (!defined('WEB_ROOT')) {
 	<div class="sidebar-wrapper" data-simplebar="true">
 		<div class="sidebar-header">
 			<div>
-				<img src="<?php echo WEB_ROOT; ?>images/icons/silverlogoh.png" style="width: 90% !important;" class="logo-icon" alt="logo icon">
+				<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" style="width: 90% !important;" class="logo-icon" alt="logo icon">
 			</div>
 			<div>
 				<h4 class="logo-text"></h4>
@@ -25,6 +25,14 @@ if (!defined('WEB_ROOT')) {
 					<div class="parent-icon"><i class='bx bx-home-alt'></i>
 					</div>
 					<div class="menu-title">Dashboard</div>
+				</a>
+			</li>
+
+			<li>
+				<a href="<?php echo ADM_ROOT; ?>subscriber/">
+					<div class="parent-icon"><i class='bx bx-user-plus'></i>
+					</div>
+					<div class="menu-title">Subscriber</div>
 				</a>
 			</li>
 

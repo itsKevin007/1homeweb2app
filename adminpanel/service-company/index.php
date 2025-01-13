@@ -13,9 +13,9 @@ $userId = $_SESSION['user_id'];
 $chk = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId' AND is_deleted != '1'");
 $chk->execute();
 while($chk_data = $chk->fetch()){
-$is_client = $chk_data["is_client"];
+$is_admin = $chk_data["is_admin"];
 
-if($is_client  == "1"){
+if($is_admin  == "1"){
 
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 	
