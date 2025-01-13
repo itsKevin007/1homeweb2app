@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<!-- dropdown -->
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/dropdown.css">
 <?php
 
 require_once '../../global-library/config.php';
@@ -29,7 +31,11 @@ if ($nowLocation->rowCount() > 0) {
     $user_lon = $nowLocationData['area_long'];
     $user_lat = $nowLocationData['area_lat'];
 
-    $standardScope = 10;
+    $standardScope = 10; // Default value 10km
+
+    if (isset($_POST['scope']) && in_array($_POST['scope'], [10, 15, 20, 10000])) {
+        $standardScope = (int)$_POST['scope'];
+    }
 
     $scopeQuery = $conn->prepare("SELECT *, (6371 * ACOS( COS(RADIANS(:userLat)) * COS(RADIANS(area_lat)) * COS(RADIANS(area_long) - RADIANS(:userLon)) + SIN(RADIANS(:userLat)) * SIN(RADIANS(area_lat)))) 
         AS distance
@@ -55,12 +61,12 @@ if ($nowLocation->rowCount() > 0) {
         $subcatQuery->bindParam(':userId', $user_id, PDO::PARAM_INT);
         $subcatQuery->execute();
 
-
         if ($subcatQuery->rowCount() > 0) {
             while ($subcatData = $subcatQuery->fetch(PDO::FETCH_ASSOC)) {
                 $sub_categor = $subcatData['sub_categor'];
 
                 echo '
+
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="card card-1">
                         <div class="card-img"></div>
@@ -87,7 +93,6 @@ if ($nowLocation->rowCount() > 0) {
                             <div class="card-creator">Company Address <a href=""></a></div>
                         </div>
                     </div>
-                   
                 </div>
                 ';
             }
@@ -98,7 +103,24 @@ if ($nowLocation->rowCount() > 0) {
 } else {
     echo "No location data found for the given location ID.";
 }
+
 ?>
+<!-- dropdown -->
+<!-- Dropdown with form -->
+<div style="float: right; margin-top: 10px; margin-right: 10px;">
+    <form id="scopeForm" method="POST" style="background-color: grey; border-radius: 10px; padding: 10px;">
+        <input type="hidden" name="location_id" value="<?php echo htmlspecialchars($location_id); ?>">
+        <label for="scopeSelect">Select Area Range:</label>
+        <select id="scopeSelect" name="scope" onchange="document.getElementById('scopeForm').submit();" style="background-color: grey; border:none;">
+            <option value="10" <?php echo $standardScope == 10 ? 'selected' : ''; ?>>10km</option>
+            <option value="15" <?php echo $standardScope == 15 ? 'selected' : ''; ?>>15km</option>
+            <option value="20" <?php echo $standardScope == 20 ? 'selected' : ''; ?>>20km</option>
+            <option value="10000" <?php echo $standardScope == 10000 ? 'selected' : ''; ?>>10000km</option>
+        </select>
+    </form>
+</div>
+
+<!-- dropdown end -->
 
 <!-- Modal -->
 <div class="modal" id="bookNowModal" tabindex="-1" role="dialog" aria-labelledby="bookNowModalLabel" aria-hidden="true">
@@ -125,7 +147,6 @@ if ($nowLocation->rowCount() > 0) {
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit Booking</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
