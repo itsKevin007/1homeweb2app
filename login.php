@@ -21,6 +21,7 @@ if (isset($_POST['txtUserName'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="Lending System - www.tridentechnology.com" name="description" />
 <meta content="Coderthemes" name="author" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 
@@ -56,21 +57,28 @@ if (isset($_POST['txtUserName'])) {
 								if($errorMessage == 'Updated successfully.')
 								{
 							?>
-								<div class="alert alert-success alert-dismissible fade show" role="alert">
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									<i class="mdi mdi-check-all me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-								</div>
+								<script>
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        Swal.fire({
+                                        title: 'Login Failed',
+                                        text: '<?php echo $errorMessage; ?>',
+                                        icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK',
+                                        timer: 5000, // Auto-dismiss after 5 seconds
+                                        timerProgressBar: true,
+                                        backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+                                        background: '#1e1e1e', // Dark background color
+                                        color: '#ffffff', // White text color
+                                        customClass: {
+                                            popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+                                            confirmButton: 'swal2-confirm-dark' // Custom style for the button
+                                        }
+                                        });
+                                    });
+                                </script>
 							<?php
-								}
-								else if($errorMessage == 'Incorrect username or password.')
-								{
-							?>	
-								<div class="alert alert-danger alert-dismissible fade show" role="alert">
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									<i class="mdi mdi-block-helper me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-								</div>
-							<?php								
-								} else {}
+								}else{}
 							?>
                                 <form id="loginform" name="frmLogin" method="post">
                                     <div class="mb-3">

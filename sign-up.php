@@ -127,6 +127,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 
 		<style>
 			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/sweet-alert-failed.css'); ?>
+			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/card-signup.css'); ?>
 		</style>
 	<?php
 		}else{}
@@ -221,7 +222,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 														<input type="password" name="password" class="form-control border-start-0" id="inputChoosePassword" placeholder="Choose Password" required />
 													</div>
 												</div>
-												<input type="text" name="recaptcha_response"  class="form-control" id="recaptchaResponse">
+												<input type="hidden" name="recaptcha_response"  class="form-control" id="recaptchaResponse">
 												<div class="modal-footer">
 													<button type="submit"  class="btn btn-primary"  onClick="return confirmSubmit()">Save changes</button>
 												</div>
@@ -310,7 +311,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 														<input type="password" name="password" class="form-control border-start-0" id="inputChoosePassword" placeholder="Choose Password" required />
 													</div>
 												</div>
-												<input type="text" name="recaptcha_response"  class="form-control" id="recaptchaResponse2">
+												<input type="hidden" name="recaptcha_response"  class="form-control" id="recaptchaResponse2">
 												<div class="modal-footer">
 													<button type="submit"  class="btn btn-primary" onClick="return confirmSubmit()">Save changes</button>
 												</div>
@@ -378,7 +379,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 														<input type="password" name="password" class="form-control border-start-0" id="inputChoosePassword" placeholder="Choose Password" required />
 													</div>
 												</div>
-												<input type="text" name="recaptcha_response"  class="form-control" id="recaptchaResponse3">
+												<input type="hidden" name="recaptcha_response"  class="form-control" id="recaptchaResponse3">
 												<div class="modal-footer">
 													<button type="submit"  class="btn btn-primary" onClick="return confirmSubmit()">Save changes</button>
 												</div>

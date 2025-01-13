@@ -17,6 +17,7 @@ if (isset($_POST['txtUserNameAdmin'] )) {
 		$errorMessage = $result;
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
