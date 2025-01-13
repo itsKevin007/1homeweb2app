@@ -34,8 +34,10 @@ if (isset($_POST['txtUserName'])) {
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>	
 
     </head>
-
-    <body class="loading authentication-bg authentication-bg-pattern">
+<style>
+    <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
+</style>
+    <body class="loading authentication-bg back-theme authentication-bg-pattern">
 
         <div class="account-pages my-5">
             <div class="container">

@@ -42,6 +42,10 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<style>
+    <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
+</style>
+
     </head>
 <?php 
 
@@ -127,8 +131,8 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 	<?php
 		}else{}
 	?>
-
-    <div class="wrapper">
+<body class="loading back-theme authentication-bg authentication-bg-pattern">
+    <div class="wrapper ">
 		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
 			<div class="container">
 				<div class="text-center">   
@@ -399,7 +403,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 		</div>
 	</div>
 	<!--end wrapper-->
-
+</body>
 	<script>
         // Select all forms
         document.querySelectorAll('form').forEach(function(form) {

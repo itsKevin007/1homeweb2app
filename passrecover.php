@@ -37,7 +37,10 @@ require_once 'include/functions.php';
     }
 ?>
     </head>
-    <body class="loading authentication-bg authentication-bg-pattern">
+<style>
+    <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
+</style>
+    <body class="loading authentication-bg back-theme authentication-bg-pattern">
 
         <div class="account-pages mt-5 mb-5">
             <div class="container">

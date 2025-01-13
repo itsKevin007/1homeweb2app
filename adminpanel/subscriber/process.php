@@ -18,6 +18,11 @@ switch ($action) {
     case 'delete' :
         delete_data();
         break;
+
+	case 'confirm' :
+		confirmData();
+		break;
+		
     
     case 'deleteImage' :
         deleteImage();
@@ -42,6 +47,7 @@ function add_data()
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$email = $_POST['email'];
+	$type = $_POST['type'];
 	
 	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = '$c_fname' AND c_lname = '$c_lname' AND email = '$email' AND is_deleted != '1'");
 	$chk->execute();
@@ -52,9 +58,9 @@ function add_data()
 
 
 
-		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_lname, email,
+		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_lname, email, sub_type,
 													 date_added, added_by)
-											VALUES ('$fname', '$lname', '$email',
+											VALUES ('$fname', '$lname', '$email', '$type',
 													'$today_date1', '$userId')");
 		$sql->execute();
 
@@ -136,6 +142,7 @@ function modify_data()
 	$fname = mysqli_real_escape_string($link, $_POST['fname']);
 	$lname = mysqli_real_escape_string($link, $_POST['lname']);
 	$email = $_POST['email'];
+	$type = $_POST['type'];
 	$uid = $_POST['id'];
 	
 	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/client/');
@@ -165,7 +172,7 @@ function modify_data()
 		header("Location: index.php?view=list&error=Data already exist! Data entry failed.");
 	}else{
     
-		$sql = $conn->prepare("UPDATE bs_client SET c_fname = '$fname', c_lname = '$lname', email = '$email',
+		$sql = $conn->prepare("UPDATE bs_client SET c_fname = '$fname', c_lname = '$lname', email = '$email', sub_type = '$type',
 													date_modified = '$today_date1', modified_by = '$userId' WHERE uid = '$id'");
 		$sql->execute();
 
@@ -212,6 +219,33 @@ function delete_data()
 	$log->execute();	
         
 	header("Location: index.php?error=Deleted successfully.");
+}
+
+function confirmData()
+{
+	include '../../global-library/database.php';
+	$userId = $_SESSION['user_id'];
+	
+    if(isset($_POST['id']))
+	{ $id = $_POST['id']; }else{ $id = $_GET['id']; }	
+
+    if(isset($_POST['id1']))
+	{ $id = $_POST['id1']; }else{ $id = $_GET['id1']; }
+	
+  
+	$sql = $conn->prepare("UPDATE bs_user SET is_sub = '1', subDate = '$today_date1' WHERE uid = '$id'");
+	$sql->execute();
+
+	$sql = $conn->prepare("UPDATE tbl_subscription SET is_done = '1' WHERE uid = '$id'");
+	$sql->execute();
+        
+	echo '<form id="redirectForm" action="'. ADM_ROOT .'subscriber/" method="POST">
+	<input type="hidden" name="subscribe" value="true">
+		</form>
+		<script>
+			document.getElementById("redirectForm").submit();
+		</script>';
+	exit;
 }
 
 function _deleteImage($id)

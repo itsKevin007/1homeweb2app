@@ -31,6 +31,8 @@ if (!defined('WEB_ROOT')) {
 		<!--app JS-->
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/js/app.js"></script>
 
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 		<!-- Feather ICONS JS -->
 		<script src="https://unpkg.com/feather-icons"></script>
 

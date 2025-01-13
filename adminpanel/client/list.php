@@ -89,7 +89,6 @@ td {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Subscriber Type</th>
                                 <th>Email</th>
                                 <th>Image</th>
                                 <th>Action</th>
@@ -98,7 +97,7 @@ td {
 
                         <tbody>
                             <?php
-                            $sql = $conn->prepare("SELECT * FROM bs_client WHERE is_deleted != :is_deleted AND c_id != :c_id AND sub_type = '1' ORDER BY c_fname ASC");
+                            $sql = $conn->prepare("SELECT * FROM bs_client WHERE is_deleted != :is_deleted AND c_id != :c_id ORDER BY c_fname ASC");
                             $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                             $sql->bindValue(':c_id', '1', PDO::PARAM_INT);
                             $sql->execute();
@@ -110,8 +109,7 @@ td {
                                         $fname = $sql_data['c_fname'];
                                         $lname = $sql_data['c_lname'];
                                         $name = $fname . ' ' . $lname;
-                                        $c_id = $sql_data['c_id'];
-                                        $sub = $sql_data['sub_type'];
+                                        $c_id = $sql_data['c_id'];                                       
                                         $email = $sql_data['email'];
                                         $uid = $sql_data['uid'];
                                         if ($sql_data['thumbnail']) {
@@ -120,17 +118,11 @@ td {
                                             $image = WEB_ROOT . 'adminpanel/assets/images/client/noimage.png';
                                         }
 
-                                        if ($sub == '1') {
-                                            $subs = 'Subscriber';
-                                        }else{
-                                            $subs = 'Contractor';
-                                        }
 
                                         ?>
                                         <tr>
                                             <td><?php echo $ctr++; ?></td>
                                             <td><?php echo $name; ?></td>
-                                            <td><?php echo $subs; ?></td>
                                             <td><?php echo $email; ?></td>
                                             <td><img src="<?php echo $image; ?>" alt="image" class=" bg-primary" width="100px" style="object-fit: cover;" /></td>
                                             <td>

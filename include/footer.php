@@ -16,7 +16,7 @@ $PAGEDATA = $PAGE->fetchColumn();
 	}elseif ($accesslevel == 1){
 		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
 	}elseif ($accesslevel == 2){
-		$profileDirect =  WEB_ROOT. 'company/profile/index.php?view=prof';
+		$profileDirect =  WEB_ROOT. 'company/profile/';
 	}
 
 ?>
