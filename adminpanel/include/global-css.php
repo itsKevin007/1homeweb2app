@@ -20,4 +20,13 @@ if (!defined('WEB_ROOT')) {
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 		<link href="<?php echo WEB_ROOT; ?>adminpanel/assets/css/app.css" rel="stylesheet">
 		<link href="<?php echo WEB_ROOT; ?>adminpanel/assets/css/icons.css" rel="stylesheet">
+
+		<!--notification-->
+		<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/notifications/css/lobibox.min.css" />
+
+		<!--datatable-->
+		<link href="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+		
+
 	

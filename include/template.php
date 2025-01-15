@@ -10,6 +10,11 @@ function word_split($str, $words = 15)
 	return join(' ', $arr);
 }
 
+
+if ($user_data['is_admin'] != 0) {
+	header('Location: ' . ADM_ROOT);
+	exit;
+}
 ?>
 
 <!DOCTYPE html>

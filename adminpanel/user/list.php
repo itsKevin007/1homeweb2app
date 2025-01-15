@@ -86,7 +86,10 @@ td
 					
 						<tbody>
 						<?php
-							$sql = $conn->prepare("SELECT * FROM bs_user WHERE is_admin != '1' AND is_deleted != '1' ORDER BY lastname ASC");
+							$sql = $conn->prepare("SELECT * FROM bs_user WHERE is_admin != :is_admin AND is_deleted != :is_deleted AND is_admin != :is_admin ORDER BY lastname ASC");
+							$sql->bindValue(':is_admin', '0', PDO::PARAM_STR);
+							$sql->bindValue(':is_deleted', '1', PDO::PARAM_STR);
+							$sql->bindValue(':is_user', '0', PDO::PARAM_STR);
 							$sql->execute();
 							
 							if($sql->rowCount() > 0)

@@ -37,6 +37,14 @@ if (!defined('WEB_ROOT')) {
 			</li>
 
 			<li>
+				<a href="<?php echo ADM_ROOT; ?>top-up/">
+					<div class="parent-icon"><i class="lni lni-wallet"></i></i>
+					</div>
+					<div class="menu-title">Top Up</div>
+				</a>
+			</li>
+
+			<li>
 				<a href="<?php echo ADM_ROOT; ?>user/">
 					<div class="parent-icon"><i class="lni lni-user"></i>
 					</div>

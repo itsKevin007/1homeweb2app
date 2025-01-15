@@ -4,6 +4,10 @@ if (!defined('WEB_ROOT')) {
 	exit;
 }
 ?>
+
+
+
+
 <!-- Bootstrap JS -->
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/js/bootstrap.bundle.min.js"></script>
 		<!--plugins-->
@@ -23,6 +27,8 @@ if (!defined('WEB_ROOT')) {
 				$(".knob").knob();
 			});
 		</script>
+
+		
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/notifications/js/lobibox.min.js"></script>
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/notifications/js/notifications.min.js"></script>
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/notifications/js/notification-custom-script.js"></script>
@@ -30,6 +36,9 @@ if (!defined('WEB_ROOT')) {
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/js/index.js"></script>
 		<!--app JS-->
 		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/js/app.js"></script>
+
+		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+		<script src="<?php echo WEB_ROOT; ?>adminpanel/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -59,5 +68,28 @@ if (!defined('WEB_ROOT')) {
 				})();
 
 		</script>
+
+<script>
+	  
+	  $(document).ready(function() {
+	  $('#example').DataTable()
+	});
+	  
+</script>
+
+<script>
+		$(document).ready(function() {
+			var table = $('#example2').DataTable( {
+				lengthChange: false,
+				buttons: [ 'copy', 'excel', 'pdf', 'print']
+			} );
+		 
+			table.buttons().container()
+				.appendTo( '#example2_wrapper .col-md-6:eq(0)' );
+		} );
+	</script>
+
+
+	
 
 

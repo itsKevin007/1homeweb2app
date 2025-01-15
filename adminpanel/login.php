@@ -7,7 +7,7 @@ if (!defined('WEB_ROOT')) {
 	exit;
 }
 
-$errorMessage = '&nbsp;';
+$errorMessage = '';
 
 
 if (isset($_POST['txtUserNameAdmin'] )) {
@@ -32,6 +32,26 @@ if (isset($_POST['txtUserNameAdmin'] )) {
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/misc-js.php'); ?>	
 
+<?php
+	if( $errorMessage != '')
+		{
+	?>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// Call the function directly
+				Lobibox.notify('error', {
+					pauseDelayOnHover: true,
+					continueDelayOnInactiveTab: false,
+					position: 'top right',
+					icon: 'bx bx-check-circle',
+					msg: '<?php echo $errorMessage; ?>'
+				});
+			});
+		</script>
+	<?php
+		}else{}
+	?>
+
     </head>
 
     <body class="bg-theme bg-theme9">
@@ -48,26 +68,7 @@ if (isset($_POST['txtUserNameAdmin'] )) {
                                     <div class="mb-3 text-center">
 										<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogo.png" width="60%" alt="" />
 									</div>
-								<?php
-									if($errorMessage == 'Updated successfully.')
-									{
-								?>
-									<div class="alert alert-success alert-dismissible fade show" role="alert">
-										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-										<i class="mdi mdi-check-all me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-									</div>
-								<?php
-									}
-									else if($errorMessage == 'Incorrect username or password.')
-									{
-								?>	
-									<div class="alert alert-danger alert-dismissible fade show" role="alert">
-										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-										<i class="mdi mdi-block-helper me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-									</div>
-								<?php								
-									} else {}	
-								?>
+									
                                 <div class="form-body">
                                     
                                 <form class="row g-3" id="loginform"  name="frmLogin" method="post">									
@@ -87,7 +88,6 @@ if (isset($_POST['txtUserNameAdmin'] )) {
                                     </div>
 
 								</form>
-									
 
 								</div>
 							</div>

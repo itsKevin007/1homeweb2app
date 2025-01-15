@@ -7,7 +7,7 @@ if (!defined('WEB_ROOT')) {
 	<script language="JavaScript" type="text/javascript" src="<?php echo WEB_ROOT;?>global-library/common.js"></script>
 	<!-- Confirm Submission of Form !-->
 	<script LANGUAGE="JavaScript">
-	<!--
+
 		// Nannette Thacker http://www.shiningstar.net
 		function confirmSubmit()
 		{

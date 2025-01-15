@@ -2,7 +2,7 @@
 require_once 'global-library/config.php';
 require_once 'include/functions.php';
 
-$errorMessage = '&nbsp;';
+$errorMessage = '';
 
 
 if (isset($_POST['txtUserName'])) {
@@ -26,10 +26,19 @@ if (isset($_POST['txtUserName'])) {
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
+
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>	
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!--notification-->
+<link rel="stylesheet" href="adminpanel/assets/plugins/notifications/css/lobibox.min.css" />
 <style>
+    
     <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
 </style>
+
     </head>
 
     <body class="loading back-theme authentication-bg authentication-bg-pattern">
@@ -54,26 +63,18 @@ if (isset($_POST['txtUserName'])) {
                                     <h4 class="text-uppercase mt-0">Sign In</h4>
                                 </div>
 							<?php
-								if($errorMessage == 'Updated successfully.')
+								if(isset($errorMessage) && $errorMessage != '')
 								{
 							?>
 								<script>
-                                    document.addEventListener('DOMContentLoaded', () => {
-                                        Swal.fire({
-                                        title: 'Login Failed',
-                                        text: '<?php echo $errorMessage; ?>',
-                                        icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
-                                        showConfirmButton: true,
-                                        confirmButtonText: 'OK',
-                                        timer: 5000, // Auto-dismiss after 5 seconds
-                                        timerProgressBar: true,
-                                        backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
-                                        background: '#1e1e1e', // Dark background color
-                                        color: '#ffffff', // White text color
-                                        customClass: {
-                                            popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
-                                            confirmButton: 'swal2-confirm-dark' // Custom style for the button
-                                        }
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        // Call the function directly
+                                        Lobibox.notify('error', {
+                                            pauseDelayOnHover: true,
+                                            continueDelayOnInactiveTab: false,
+                                            position: 'top right',
+                                            icon: 'bx bx-check-circle',
+                                            msg: '<?php echo $errorMessage; ?>'
                                         });
                                     });
                                 </script>

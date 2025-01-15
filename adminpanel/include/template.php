@@ -13,6 +13,15 @@ $self = WEB_ROOT . 'adminpanel/login.php';
 	}		
 		
 ?>
+
+<?php
+
+	if ($user_data['is_admin'] != 1) {
+		header('Location: ' . WEB_ROOT);
+		exit;
+	}
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +29,7 @@ $self = WEB_ROOT . 'adminpanel/login.php';
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 		<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
 		
 		<title>One Home</title>
@@ -31,7 +41,7 @@ $self = WEB_ROOT . 'adminpanel/login.php';
 			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/left-menu.php'); ?>
 			<!--start header -->
 			<header>
-			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/header.php'); ?>
+				<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/header.php'); ?>
 			</header>
 			<!--end header -->
 			<!--start page wrapper -->
@@ -46,9 +56,9 @@ $self = WEB_ROOT . 'adminpanel/login.php';
 			<!--end overlay-->
 			<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 			<!--End Back To Top Button-->
-			<footer class="page-footer">
+
 			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/footer.php'); ?>
-			</footer>
+	
 		</div>
 		<!--end wrapper-->
 		<!--start switcher-->
