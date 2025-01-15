@@ -49,10 +49,10 @@ $book->execute();
         </div>
     </div>
 
-    <div style="background-color: #fff;" >
+    <div style="background-color: #fff;">
         <div style="justify-content: center; align-items: center; display: flex; margin-bottom: 20px;">
-            <table style="width: 90%; text-align: left; border-collapse: collapse;">
-                <thead style="background-color: #ccc;">
+            <table class="responsive">
+                <thead>
                     <tr>
                         <th scope="col">Service Request</th>
                         <th scope="col">Address</th>
@@ -65,11 +65,11 @@ $book->execute();
                 <tbody>
                     <?php while ($row = $book->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
-                            <td data-label="Service Request"><?php echo htmlspecialchars($row['requested_service']); ?></td>
-                            <td data-label="Address"><?php echo htmlspecialchars($row['booking_address']); ?></td>
-                            <td data-label="Contact Number"><?php echo htmlspecialchars($row['contact_num']); ?></td>
-                            <td data-label="Date of Transactions"><?php echo htmlspecialchars($row['created_at']); ?></td>
-                            <td data-label="Status">
+                            <td data-table-header="Service Request"><?php echo htmlspecialchars($row['requested_service']); ?></td>
+                            <td data-table-header="Address"><?php echo htmlspecialchars($row['booking_address']); ?></td>
+                            <td data-table-header="Contact Number"><?php echo htmlspecialchars($row['contact_num']); ?></td>
+                            <td data-table-header="Date of Transactions"><?php echo htmlspecialchars($row['created_at']); ?></td>
+                            <td data-table-header="Status">
                                 <?php
                                 switch ($row['booking_status']) {
                                     case 1:

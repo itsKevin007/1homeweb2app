@@ -1,7 +1,6 @@
 <?php
-
-require_once '../global-library/config.php';
-require_once '../include/functions.php';
+require_once '../../global-library/config.php';
+require_once '../../include/functions.php';
 
 checkUser();
 
@@ -35,93 +34,11 @@ switch ($action) {
 	case 'delService' :
 		delete_service();
 		break;
-
-	case 'accept' :
-		accept_request();
-		break;
 		
     default :
         // if action is not defined or unknown
         // move to main category page
         header('Location: index.php');
-}
-
-// accept request
-// accept request
-function accept_request()
-{
-
-
-	if (!isset($_SESSION['user_id'])) {
-		header('Location: index.php?view=dash&status=error&message=Unauthorized');
-		exit;
-	}
-
-	include '../global-library/database.php';
-
-	$serviceId = filter_input(INPUT_POST, 'serviceId', FILTER_VALIDATE_INT); // Updated variable
-	$serProvId = $_SESSION['user_id'];
-	$aAddress = filter_input(INPUT_POST, 'aAddress', FILTER_SANITIZE_STRING);
-	$aContactNo = filter_input(INPUT_POST, 'aContactNo', FILTER_SANITIZE_STRING);
-	$aReqServ = filter_input(INPUT_POST, 'aReqServ', FILTER_SANITIZE_STRING);
-
-	if (!$serviceId || !$aAddress || !$aContactNo || !$aReqServ) {
-		header('Location: index.php?view=dash&status=error&message=Invalid input');
-		exit;
-	}
-
-	try {
-		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, serProvId, accepted_at, aAddress, aContactNo, aReqServ) 
-                                VALUES (:serviceId, :serProvId, NOW(), :aAddress, :aContactNo, :aReqServ)");
-
-		$sql->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-		$sql->bindParam(':serProvId', $serProvId, PDO::PARAM_INT);
-		$sql->bindParam(':aAddress', $aAddress, PDO::PARAM_STR);
-		$sql->bindParam(':aContactNo', $aContactNo, PDO::PARAM_STR);
-		$sql->bindParam(':aReqServ', $aReqServ, PDO::PARAM_STR);
-
-		if ($sql->execute()) {
-			$up = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = :serviceId");
-			$up->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-			$up->execute();
-
-			header('Location: ' . $_SERVER['HTTP_REFERER']);
-		} else {
-			header('Location: index.php?view=dash&status=error&message=Failed to execute query');
-		}
-	} catch (PDOException $e) {
-		error_log('Database Error: ' . $e->getMessage());
-		header('Location: index.php?view=dash&status=error&message=Database error');
-	}
-
-	exit;
-}
-
-
-// end of accept request
-
-function image_profile()
-{
-	include '../global-library/database.php';
-	$userId = $_SESSION['user_id'];
-
-	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
-
-	$mainImage = $images['image'];
-	$thumbnail = $images['thumbnail'];
-
-		$up = $conn->prepare("UPDATE bs_user SET image = :mainImage, thumbnail = :thumbnail WHERE user_id = :userId");
-		$up->bindParam(':mainImage', $mainImage);
-		$up->bindParam(':thumbnail', $thumbnail);
-		$up->bindParam(':userId', $userId);
-		$up->execute();
-
-		$log = $conn->prepare("INSERT INTO tr_log (module, description, log_action_date, action_by) VALUES ('Service Provider', 'Edit Profile: $thumbnail', '$today_date1', '$userId')");
-		$log->execute();
-		
-		header('Location: index.php?view=prof&error=Success');
-
-	
 }
 
 
@@ -168,76 +85,29 @@ function add_data()
 	}
 }
 
-function add_service()
+
+function image_profile()
 {
-	include '../global-library/database.php';
+	include '../../global-library/database.php';
 	$userId = $_SESSION['user_id'];
-	
-	$mainservice = isset($_POST['mainservice']) ? $_POST['mainservice'] : '';
-	$subcat = isset($_POST['subcat']) ? $_POST['subcat'] : '';
 
-	$subtotal_array = [];
-	foreach ($mainservice as $key => $mainservices) {
-			$subcats = $subcat[$key];
-	
-			// Fetch matching records from the database
-			$chk = $conn->prepare("SELECT * FROM ind_subcat 
-								WHERE main_id = :mainid 
-									AND sub_categor = :subcat 
-									AND user_id = :userid 
-									AND is_deleted != '1'");
-			$chk->bindParam(':mainid', $mainservices, PDO::PARAM_INT);
-			$chk->bindParam(':subcat', $subcats, PDO::PARAM_STR);
-			$chk->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$chk->execute();
+	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
 
-			// Check if any record exists
-		if ($chk->rowCount() > 0) {
-			// Fetch all matching records
-			$results = $chk->fetchAll(PDO::FETCH_COLUMN, 0); // Get `sub_categor` values
-			$subtotal_array = array_merge($subtotal_array, $results); // Accumulate results
-		}
+	$mainImage = $images['image'];
+	$thumbnail = $images['thumbnail'];
 
+		$up = $conn->prepare("UPDATE bs_user SET image = :mainImage, thumbnail = :thumbnail WHERE user_id = :userId");
+		$up->bindParam(':mainImage', $mainImage);
+		$up->bindParam(':thumbnail', $thumbnail);
+		$up->bindParam(':userId', $userId);
+		$up->execute();
 
-		// If there are existing records, redirect with query string
-		if (!empty($subtotal_array)) {
-			$resulta = implode(',', $subtotal_array); // Concatenate with commas
-			header('Location: index.php?view=service&exist=' . urlencode($resulta));
-			exit; // Stop further processing
+		$log = $conn->prepare("INSERT INTO tr_log (module, description, log_action_date, action_by) VALUES ('Service Provider', 'Edit Profile: $thumbnail', '$today_date1', '$userId')");
+		$log->execute();
+		
+		
+		header('Location: index.php?view=modify&error=Success');
 
-		} else {
-
-			// Handle case where no existing records are found
-			$sql = $conn->prepare("INSERT INTO ind_subcat (main_id, sub_categor, user_id, date_added, added_by)
-								VALUES (:mainid, :subcat, :userid, :todaydate, :userid)");
-			$sql->bindParam(':mainid', $mainservices, PDO::PARAM_INT);
-			$sql->bindParam(':subcat', $subcats, PDO::PARAM_STR);
-			$sql->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$sql->bindParam(':todaydate', $today_date1, PDO::PARAM_STR);
-			$sql->execute();
-
-
-			// activity logs
-			$keyword = 'Sub Category Name: ' . $subcats ;
-			
-			$module = 'Service Category';
-			$action = 'Service Added';
-			
-			$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-								   VALUES (:module, :action, :description, :userid, :todaydate)");
-			$log->bindParam(':module', $module, PDO::PARAM_STR);
-			$log->bindParam(':action', $action, PDO::PARAM_STR);
-			$log->bindParam(':description', $keyword, PDO::PARAM_STR);
-			$log->bindParam(':userid', $userId, PDO::PARAM_INT);
-			$log->bindParam(':todaydate', $today_date1, PDO::PARAM_STR);
-			$log->execute();
-			
-
-
-		}
-	}
-			header('Location: index.php?view=service&error=Success');
-			exit; // Stop further processing
 	
 }
 
@@ -350,36 +220,25 @@ function modify_data()
 */
 function profile_mod()
 {
-	include '../global-library/database.php';
+	include '../../global-library/database.php';
 	$userId = $_SESSION['user_id'];
 
 	$id = $_POST['id'];
 
 	// Full Name
-	$fname = isset($_POST['fname']) ? $_POST['fname'] : '';
-	$mname = isset($_POST['mname']) ? $_POST['mname'] : '';
-	$lname = isset($_POST['lname']) ? $_POST['lname'] : '';
-	$suffix = isset($_POST['suffix']) ? $_POST['suffix'] : null;
+	$bname = isset($_POST['bname']) ? $_POST['bname'] : '';
 	
 	// Prepare SQL with placeholders
-	$sql1 = $conn->prepare("UPDATE tbl_independent 
-							SET fname = :fname, 
-								mname = :mname, 
-								lname = :lname, 
-								suffix = :suffix 
+	$sql1 = $conn->prepare("UPDATE tbl_company 
+							SET bname = :bname
 							WHERE uid = :uid");
 	
 	// Bind parameters securely
-	$sql1->bindParam(':fname', $fname);
-	$sql1->bindParam(':mname', $mname);
-	$sql1->bindParam(':lname', $lname);
-	$sql1->bindParam(':suffix', $suffix);
+	$sql1->bindParam(':bname', $bname);
 	$sql1->bindParam(':uid', $id);
-	
 	// Execute the query
 	$sql1->execute();
 	
-		
 	
 
 	// Main Address
@@ -390,7 +249,7 @@ function profile_mod()
 	$zip = isset($_POST['zip']) ? $_POST['zip'] : '';
 
 		// Prepare SQL with placeholders
-		$sql2 = $conn->prepare("UPDATE tbl_independent SET in_region = :region, in_prov = :prov, in_city = :city, in_barangay = :barangay , 
+		$sql2 = $conn->prepare("UPDATE tbl_company SET in_region = :region, in_prov = :prov, in_city = :city, in_barangay = :barangay , 
 								zipc = :zip WHERE uid = :uid");
 
 		// Bind parameters securely
@@ -419,7 +278,7 @@ function profile_mod()
 		$blocklot = isset($_POST['blocklot']) ? $_POST['blocklot'] : '';
 
 		// Prepare SQL with placeholders
-		$sql3 = $conn->prepare("UPDATE tbl_independent SET in_subdi = :subdivision, str = :street, in_unit = :unit, in_build = :building, phase = :phase,
+		$sql3 = $conn->prepare("UPDATE tbl_company SET in_subdi = :subdivision, str = :street, in_unit = :unit, in_build = :building, phase = :phase,
 		 blocklot = :blocklot WHERE uid = :uid");
 
 		// Bind parameters securely
@@ -433,59 +292,6 @@ function profile_mod()
 		$sql3->execute();
 
 	// Business Main Address	
-	// ID of the tbl_comadd
-	$baddress = isset($_POST['baddress']) ? $_POST['baddress'] : '';
-
-	$cregion = isset($_POST['cregion']) ? $_POST['cregion'] : '';
-	$cprov = isset($_POST['cprov']) ? $_POST['cprov'] : '';
-	$ccity = isset($_POST['ccity']) ? $_POST['ccity'] : '';
-	$cbarangay = isset($_POST['cbarangay']) ? $_POST['cbarangay'] : '';
-
-	// Sub business Address
-	$csubdivision = isset($_POST['csubdivision']) ? $_POST['csubdivision'] : '';
-	$cstreet = isset($_POST['cstreet']) ? $_POST['cstreet'] : '';
-	$cunit = isset($_POST['cunit']) ? $_POST['cunit'] : '';
-	$cbuilding = isset($_POST['cbuilding']) ? $_POST['cbuilding'] : '';
-	$cphase = isset($_POST['cphase']) ? $_POST['cphase'] : '';
-	$cblocklot = isset($_POST['cblocklot']) ? $_POST['cblocklot'] : '';
-
-		// ID of the tbl_comadd
-		$baddress = isset($_POST['baddress']) ? $_POST['baddress'] : '';
-
-		// Business Main Address
-		$cregion = isset($_POST['cregion']) ? $_POST['cregion'] : '';
-		$cprov = isset($_POST['cprov']) ? $_POST['cprov'] : '';
-		$ccity = isset($_POST['ccity']) ? $_POST['ccity'] : '';
-		$cbarangay = isset($_POST['cbarangay']) ? $_POST['cbarangay'] : '';
-		$czip = isset($_POST['czip']) ? $_POST['czip'] : '';
-
-		// Sub business Address
-		$csubdivision = isset($_POST['csubdivision']) ? $_POST['csubdivision'] : '';
-		$cstreet = isset($_POST['cstreet']) ? $_POST['cstreet'] : '';
-		$cunit = isset($_POST['cunit']) ? $_POST['cunit'] : '';
-		$cbuilding = isset($_POST['cbuilding']) ? $_POST['cbuilding'] : '';
-		$cphase = isset($_POST['cphase']) ? $_POST['cphase'] : '';
-		$cblocklot = isset($_POST['cblocklot']) ? $_POST['cblocklot'] : '';
-
-		// Prepare SQL with placeholders
-		$sql4 = $conn->prepare("UPDATE tbl_comadd SET cregion = :region, cprovince = :prov, ccity = :city, cbarangay = :barangay , czip = :czip,
-			csubvil = :csubdivision, cstreet = :cstreet, cunit = :cunit, cbname = :cbuilding, cphase = :cphase, cbandl = :cblocklot, date_added = :tdate WHERE ca_id = :uid");
-
-		// Bind parameters securely
-		$sql4->bindParam(':region', $cregion);
-		$sql4->bindParam(':prov', $cprov);
-		$sql4->bindParam(':city', $ccity);
-		$sql4->bindParam(':barangay', $cbarangay);
-		$sql4->bindParam(':czip', $czip);
-		$sql4->bindParam(':csubdivision', $csubdivision);
-		$sql4->bindParam(':cstreet', $cstreet);
-		$sql4->bindParam(':cunit', $cunit);
-		$sql4->bindParam(':cbuilding', $cbuilding);
-		$sql4->bindParam(':cphase', $cphase);
-		$sql4->bindParam(':cblocklot', $cblocklot);
-		$sql4->bindParam(':tdate', $today_date1);
-		$sql4->bindParam(':uid', $baddress);
-		$sql4->execute();
 	
 	$tin = isset($_POST['tin']) ? $_POST['tin'] : '';
 
@@ -495,8 +301,7 @@ function profile_mod()
 	$cor2303 = isset($_POST['cor2303']) ? $_POST['cor2303'] : '';
 
 		// Prepare SQL with placeholders
-		$sql5 = $conn->prepare("UPDATE tbl_independent SET tin = :tin, dti = :dtinum, mayorper = :mayornum, cor = :cor WHERE uid = :uid");
-
+		$sql5 = $conn->prepare("UPDATE tbl_company SET tin = :tin, dti = :dtinum, mayorper = :mayornum, cor = :cor WHERE uid = :uid");
 		// Bind parameters securely
 		$sql5->bindParam(':tin', $tin);
 		$sql5->bindParam(':dtinum', $dtinum);
@@ -508,8 +313,14 @@ function profile_mod()
 	// Contact Number
 	$connum = isset($_POST['connum']) ? $_POST['connum'] : '';
 	$email = isset($_POST['email']) ? $_POST['email'] : '';
+	$conperna = isset($_POST['conperna']) ? $_POST['conperna'] : '';
+	$conperpos = isset($_POST['conperpos']) ? $_POST['conperpos'] : '';
 
-	$chk = $conn->prepare("SELECT emailadd, connum, uid, is_deleted FROM tbl_independent WHERE emailadd = :email OR connum = :connum AND uid != :uid AND is_deleted != '1'");
+	echo $connum . '<br>';
+	echo $email. '<br>';
+	echo $id;
+
+	$chk = $conn->prepare("SELECT emailadd, connum, uid, is_deleted FROM tbl_company WHERE emailadd = :email AND connum = :connum AND uid != :uid AND is_deleted != '1'");
 	$chk->bindParam(':email', $email);
 	$chk->bindParam(':connum', $connum);
 	$chk->bindParam(':uid', $id);
@@ -522,15 +333,29 @@ function profile_mod()
 	}else{
 
 		// Prepare SQL with placeholders
-		$sql = $conn->prepare("UPDATE tbl_independent SET emailadd = :email,  connum = :connum
+		$sql = $conn->prepare("UPDATE tbl_company SET emailadd = :email,  connum = :connum, conperna = :conperna,  conperpos = :conperpos
 								WHERE uid = :uid");
 		// Bind parameters securely
 		$sql->bindParam(':email', $email);
 		$sql->bindParam(':connum', $connum);
+		$sql->bindParam(':conperna', $conperna);
+		$sql->bindParam(':conperpos', $conperpos);
 		$sql->bindParam(':uid', $id);
 		$sql->execute();
 
 	}
+
+	// $module = 'Service Provider';
+	// $action = 'Edit Profile';
+
+	// $log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
+	// 						VALUES (:module, :action, :description, :action_by, :log_action_date)");
+	// $log->bindParam(':module', $module);
+	// $log->bindParam(':action', $action);
+	// $log->bindParam(':description', $description);
+	// $log->bindParam(':action_by', $userId);
+	// $log->bindParam(':log_action_date', $today_date1);
+	// $log->execute();	
 		
 		header("Location: index.php?view=modify&error=Success");
 		
@@ -567,20 +392,19 @@ function delete_service()
 	
 	$total_subs = [];
 	$logs_action = ''; // Initialize logs_action
-	$is_deleted = 1; // Set is_deleted to 1 for deletion
 	
 	foreach ($subcat as $subid) {
 		
 		if ($subid != '0') { // Only process selected subcategories
-			echo $subid;
+			
 			// Prepare the DELETE query
 			$sql = $conn->prepare("UPDATE ind_subcat 
 								   SET is_deleted = :is_deleted, date_deleted = :date_deleted, deleted_by = :deleted_by 
-								   WHERE subcatid = :id");
+								   WHERE uid = :uid");
 			$sql->bindParam(':is_deleted', $is_deleted, PDO::PARAM_INT);
 			$sql->bindParam(':date_deleted', $today_date1, PDO::PARAM_STR);
 			$sql->bindParam(':deleted_by', $userId, PDO::PARAM_INT);
-			$sql->bindParam(':id', $subid, PDO::PARAM_INT);
+			$sql->bindParam(':uid', $id, PDO::PARAM_INT);
 			$sql->execute();
 	
 			// Add this subcategory ID to the logs action string
@@ -608,7 +432,7 @@ function delete_service()
 	}
 	
 	// Redirect after processing
-	header("Location: index.php?view=service&error=Deleted");
+	header("Location: index.php?error=Deleted");
 	exit;
 	
 

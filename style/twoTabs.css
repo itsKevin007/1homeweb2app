@@ -57,7 +57,7 @@ select:focus {
 
 .tabs [class^="tab"] label,
 .tabs [class*=" tab"] label {
-    color: #18219d;
+    color: #082e5f;
     cursor: pointer;
     display: block;
     font-size: 1.1em;
@@ -86,12 +86,24 @@ select:focus {
 .tabs [class^="tab"] [type="radio"]:focus,
 .tabs [class*=" tab"] [type="radio"]:hover,
 .tabs [class*=" tab"] [type="radio"]:focus {
-    border-bottom: 1px solid #3826fd;
+    border-bottom: 0px solid #022c5c;
+    background-color: #022c5c;
+}
+
+label:hover {
+    color: #022c5c;
+    width: 100%;
+}
+
+label:focus {
+    color: #022c5c;
+    width: 100%;
 }
 
 .tabs [class^="tab"] [type="radio"]:checked,
 .tabs [class*=" tab"] [type="radio"]:checked {
-    border-bottom: 2px solid #5526fd;
+    border-bottom: 0px solid #022c5c;
+    background-color: #022c5c;
 }
 
 .tabs [class^="tab"] [type="radio"]:checked+div,
@@ -130,4 +142,16 @@ select:focus {
 
 .tabs .tab-2:last-child [type="radio"]:checked+div {
     margin-left: -100%;
+}
+
+/* Added styles for h5 */
+.tabs [class^="tab"] label:hover h5,
+.tabs [class^="tab"] label:focus h5,
+.tabs [class^="tab"] [type="radio"]:checked+label h5 {
+    background-color: #022c5c;
+    color: white;
+    height: 50px;
+    width: auto;
+    padding: 10px;
+    border-radius: 10px;
 }

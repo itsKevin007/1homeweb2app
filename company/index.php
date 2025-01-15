@@ -28,6 +28,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 				
+			case'dash' :
+				$content 	= 'dashboard.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
 			case 'modify_account' :
 				$content 	= 'modify_account.php';		
 				$pageTitle 	= $sett_data['system_title'];
@@ -40,6 +45,11 @@
 
 			case 'service' :
 				$content 	= 'services.php';		
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
+			case 'transact':
+				$content 	= 'transaction.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
