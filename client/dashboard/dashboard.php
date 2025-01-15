@@ -95,7 +95,7 @@ if ($bal->rowCount() > 0) {
 				<div class="wallet-btn-sec">
 					<button style="height: 40px;">Cash In</button>
 					<img data-bs-toggle="modal" data-bs-target="#paymentModal" src="<?php echo WEB_ROOT; ?>assets/images/homepage/qrScanner.png" alt="qr-code" style="width: 30px; height: 30px; color: #c9c9d2; margin-top:10px;" />
-					<a href="<?php echo WEB_ROOT; ?>client/dashboard/index.php?view=payment">
+					<a href="<?php echo WEB_ROOT; ?>client/dashboard/fill-up/index.php?view=register">
 						<button style="height: 40px;">Pay</button>
 					</a>
 				</div>

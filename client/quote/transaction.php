@@ -62,40 +62,43 @@ if ($nowLocation->rowCount() > 0) {
         $subcatQuery->execute();
 
         if ($subcatQuery->rowCount() > 0) {
+            echo '<div class="row">';
             while ($subcatData = $subcatQuery->fetch(PDO::FETCH_ASSOC)) {
                 $sub_categor = $subcatData['sub_categor'];
 
                 echo '
-
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="card card-1">
-                        <div class="card-img"></div>
-                        <a href="<?php echo WEB_ROOT; ?>client/quote/index.php?view=quote&user_id=<?php echo $user_id; ?>&sub_categor=<?php echo urlencode($sub_categor); ?>" class="card-link">
-                            <div class="card-img-hovered"></div>
-                        </a>
-                        <div class="card-info">
-                            <div class="card-about">
-                                <a class="card-tag tag-news">' . htmlspecialchars($sub_categor) . '</a>
-                                <div class="card-time">6/11/2018</div>
+                <div class="col-lg-4">                
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="card card-1">
+                            <div class="card-img"></div>
+                            <a href="<?php echo WEB_ROOT; ?>client/quote/index.php?view=quote&user_id=<?php echo $user_id; ?>&sub_categor=<?php echo urlencode($sub_categor); ?>" class="card-link">
+                                <div class="card-img-hovered"></div>
+                            </a>
+                            <div class="card-info">
+                                <div class="card-about">
+                                    <a class="card-tag tag-news">' . htmlspecialchars($sub_categor) . '</a>
+                                    <div class="card-time">6/11/2018</div>
+                                </div>
+                                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                    <h1 class="card-title">Company Name</h1>
+                                <button 
+                                        type="button" 
+                                        class="btn btn-primary bookNowBtn" 
+                                        data-sub-categor=" ' . htmlspecialchars($sub_categor) . ' " 
+                                        data-address=" ' . htmlspecialchars($address) . ' "
+                                        data-location-id="' . $location_id . '"
+                                        >
+                                        Book Now
+                                    </button>
+                                </div>
+                                <div class="card-creator">Company Address <a href=""></a></div>
                             </div>
-                            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                                <h1 class="card-title">Company Name</h1>
-                               <button 
-                                    type="button" 
-                                    class="btn btn-primary bookNowBtn" 
-                                    data-sub-categor=" ' . htmlspecialchars($sub_categor) . ' " 
-                                    data-address=" ' . htmlspecialchars($address) . ' "
-                                    data-location-id="' . $location_id . '"
-                                    >
-                                    Book Now
-                                </button>
-                            </div>
-                            <div class="card-creator">Company Address <a href=""></a></div>
                         </div>
                     </div>
                 </div>
                 ';
             }
+            echo '</div>';
         } else {
             echo '<div>No subcategories found for this user.</div>';
         }
@@ -123,6 +126,7 @@ if ($nowLocation->rowCount() > 0) {
 <!-- dropdown end -->
 
 <!-- Modal -->
+
 <div class="modal" id="bookNowModal" tabindex="-1" role="dialog" aria-labelledby="bookNowModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -158,10 +162,11 @@ if ($nowLocation->rowCount() > 0) {
             const subCategor = this.getAttribute("data-sub-categor");
             const address = this.getAttribute("data-address");
             const locationId = this.getAttribute("data-location-id");
+            const contactNum = this.getAttribute("data-contact-num");
 
             document.getElementById("requested-service-input").value = subCategor;
             document.getElementById("address-input").value = address;
-            document.getElementById("contact-num-input").value = "";
+            document.getElementById("contact-num-input").value = contactNum;
             document.getElementById("service-id-hidden").value = subCategor;
             document.getElementById("location-id-hidden").value = locationId;
 

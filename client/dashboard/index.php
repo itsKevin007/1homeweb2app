@@ -46,6 +46,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			// case 'register' :
+			// 	$content 	= 'register.php';
+			// 	$pageTitle 	= $sett_data['system_title'];
+			// 	break;
+
 			default :
 				$content 	= 'dashboard.php';		
 				$pageTitle 	= $sett_data['system_title'];

@@ -209,7 +209,7 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 			<!-- Service Requests Tab -->
 			<div class="tab-2">
 				<label for="tab2-1">
-					<h3>Service Requests</h3>
+					<h6>Requests</h6>
 				</label>
 				<input id="tab2-1" name="tabs-two" type="radio" checked="checked">
 				<div>
@@ -220,20 +220,24 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 						$contactNumber = htmlspecialchars($booking['contact_num']);
 						$bookingId = htmlspecialchars($booking['booking_id']);
 						echo "
-                <div class='blog-card'>
-                    <div class='meta'>
-                        <div class='photo' style='background-image: url(\"" . htmlspecialchars(WEB_ROOT) . "assets/images/icons/hotel1.jpg\")'></div>
-                    </div>
-                    <div class='description'>
-                        <h1>$requestedService</h1>
-                        <h2><span style='color:black;'>Contact Number:</span> $contactNumber</h2>
-                        <p>$bookingAddress</p>
-                        <p class='read-more'>
-                            <button class='btn btn-primary' data-booking-id='$bookingId'>Accept</button>
-                            <button class='btn btn-danger' data-booking-id='$bookingId'>Decline</button>
-                        </p>
-                    </div>
-                </div>";
+                <div class='rqCard flex-row p-2 justify-content-between' style='background: linear-gradient(90deg, rgba(10,0,176,1) 0%, rgba(59,68,223,1) 100%); width: 60%; margin: 10px 0; '>
+
+					<div style='margin-left: 10px;'>
+						<h4 style='color:white;'>$requestedService</h4>
+						<h5 style='color: #fff;'><span style='color:white;'>Contact Number:</span> $contactNumber</h5>
+						<p style='color: #fff;'>$bookingAddress</p>
+					</div>
+					<div style='margin-right: 10px; margin-left: 10px;'>
+					📍
+					</div>
+					<div style='text-align: center;'>
+						<p class='read-more'>
+							<button style='margin-bottom: 10px;' class='btn btn-primary'>Accept</button>
+							<br>
+							<button class='btn btn-danger'>Decline</button>
+						</p>
+					</div>
+				</div>";
 					}
 					?>
 				</div>
@@ -242,7 +246,7 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 			<!-- Approved Requests Tab -->
 			<div class="tab-2">
 				<label for="tab2-2">
-					<h3>Approved Request</h3>
+					<h6>Approved</h6>
 				</label>
 				<input id="tab2-2" name="tabs-two" type="radio">
 				<div id="pending-tasks">
@@ -257,7 +261,7 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
                         <div class='photo' style='background-image: url(\"" . htmlspecialchars(WEB_ROOT) . "assets/images/icons/hotel1.jpg\")'></div>
                     </div>
                     <div class='description'>
-                        <h1>$requestedService</h1>
+                        <h5>$requestedService</h5>
                         <h2><span style='color:black;'>Contact Number:</span> $contactNumber</h2>
                         <p>$bookingAddress</p>
                     </div>

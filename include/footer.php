@@ -1,4 +1,3 @@
-
 <?php
 if (!defined('WEB_ROOT')) {
 	header('Location: ../index.php');
@@ -11,13 +10,16 @@ $PAGE->execute();
 $PAGEDATA = $PAGE->fetchColumn();
 
 
-	if($accesslevel == 0){
-		$profileDirect = WEB_ROOT. 'client/profile/index.php?view=profile';
-	}elseif ($accesslevel == 1){
-		$profileDirect =  WEB_ROOT. 'service-provider/profile/index.php?view=prof';
-	}elseif ($accesslevel == 2){
-		$profileDirect =  WEB_ROOT. 'company/profile/';
-	}
+if ($accesslevel == 0) {
+	$profileDirect = WEB_ROOT . 'client/profile/index.php?view=profile';
+	$transactDirect = WEB_ROOT . 'client/transactions';
+} elseif ($accesslevel == 1) {
+	$profileDirect =  WEB_ROOT . 'service-provider/profile/index.php?view=prof';
+	$transactDirect =  WEB_ROOT . 'service-provider/transactions';
+} elseif ($accesslevel == 2) {
+	$profileDirect =  WEB_ROOT . 'company/profile/index.php?view=prof';
+	$transactDirect =  WEB_ROOT . 'company/transactions/index.php?view=transact';
+}
 
 ?>
 <!-- ======= Footer ======= -->
@@ -43,12 +45,12 @@ $PAGEDATA = $PAGE->fetchColumn();
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/transactions/index.php?view=transact" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
+								<a href="<?php echo $transactDirect; ?>" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
 							<li class="nav-menu-icon nav-account-icon">
-								<a href="<?php echo WEB_ROOT; ?>client/updates/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
+								<a href="<?php echo WEB_ROOT; ?>updates/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_778" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -82,13 +84,13 @@ $PAGEDATA = $PAGE->fetchColumn();
 
 
 						<a href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services">
-						<div class="sc-nav-indicator">
-									<label class="circle">									
-											<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">									
-									</label>
-									
-								</div>
-							</a>
+							<div class="sc-nav-indicator">
+								<label class="circle">
+									<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">
+								</label>
+
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
