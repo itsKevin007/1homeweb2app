@@ -80,7 +80,7 @@ function submitProjectCost()
 
 	try {
 		// Prepare the SQL query to update the projectCost
-		$query = "UPDATE accepted_services SET projectCost = :projectCost, status = 'ongoing'  WHERE service_id = :serviceId";
+		$query = "UPDATE accepted_services SET projectCost = :projectCost, status = 'ongoing' WHERE service_id = :serviceId";
 		$stmt = $conn->prepare($query);
 
 		// Bind parameters to the query
@@ -90,8 +90,6 @@ function submitProjectCost()
 		// Execute the query
 		if ($stmt->execute()) {
 			header('Location: index.php?view=transact&error=Project cost successfully updated.');
-
-	
 		} else {
 			header('Location: index.php?view=transact&error=Failed to update project cost.');
 		}
@@ -99,7 +97,6 @@ function submitProjectCost()
 		header('Location: index.php?view=transact&error=Error: ' . $e->getMessage());
 	}
 }
-
 
 /*
     Mark as Done
@@ -135,6 +132,3 @@ function markAsDone()
 		header('Location: index.php?view=transact&error=Error: ' . $e->getMessage());
 	}
 }
-
-
-?>

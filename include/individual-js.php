@@ -11,3 +11,4 @@ if (!defined('WEB_ROOT')) {
 <script src="<?php echo WEB_ROOT; ?>script/filter.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/wave.js"></script>
 <script src="<?php echo WEB_ROOT; ?>script/location.js"></script>
+<script src="<?php echo WEB_ROOT; ?>script/tabs.js"></script>

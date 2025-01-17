@@ -15,7 +15,7 @@ if ($accesslevel == 0) {
 	$transactDirect = WEB_ROOT . 'client/transactions';
 } elseif ($accesslevel == 1) {
 	$profileDirect =  WEB_ROOT . 'service-provider/profile/index.php?view=prof';
-	$transactDirect =  WEB_ROOT . 'service-provider/transactions';
+	$transactDirect =  WEB_ROOT .'service-provider/index.php?view=transact';
 } elseif ($accesslevel == 2) {
 	$profileDirect =  WEB_ROOT . 'company/profile/index.php?view=prof';
 	$transactDirect =  WEB_ROOT . 'company/transactions/index.php?view=transact';

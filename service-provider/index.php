@@ -47,13 +47,20 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			case'transact' :
+				$content = 'transactions/transactions.php';
+				$pageTitle = $sett_data['system_title'];
+				break;
+
 			case 'dash' :
 				$content 	= 'dashboard.php';
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			
+
 			default :
-				$content 	= 'list.php';		
+				$content 	= 'dashboard.php';		
 				$pageTitle 	= $sett_data['system_title'];
 		}
 	}else{

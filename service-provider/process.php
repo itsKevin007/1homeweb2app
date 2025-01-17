@@ -39,12 +39,68 @@ switch ($action) {
 	case 'delService' :
 		delete_service();
 		break;
+
+	case 'accept' :
+		accept_request();
+		break;
 		
     default :
         // if action is not defined or unknown
         // move to main category page
         header('Location: index.php');
 }
+
+
+// accept request
+function accept_request()
+{
+
+
+	if (!isset($_SESSION['user_id'])) {
+		header('Location: index.php?view=dash&status=error&message=Unauthorized');
+		exit;
+	}
+
+	include '../global-library/database.php';
+
+	$serviceId = filter_input(INPUT_POST, 'serviceId', FILTER_VALIDATE_INT); // Updated variable
+	$user_id = $_SESSION['user_id'];
+	$aAddress = filter_input(INPUT_POST, 'aAddress', FILTER_SANITIZE_STRING);
+	$aContactNo = filter_input(INPUT_POST, 'aContactNo', FILTER_SANITIZE_STRING);
+	$aReqServ = filter_input(INPUT_POST, 'aReqServ', FILTER_SANITIZE_STRING);
+
+	if (!$serviceId || !$aAddress || !$aContactNo || !$aReqServ) {
+		header('Location: index.php?view=dash&status=error&message=Invalid input');
+		exit;
+	}
+
+	try {
+		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, user_id, accepted_at, aAddress, aContactNo, aReqServ) 
+                                VALUES (:serviceId, :user_id, NOW(), :aAddress, :aContactNo, :aReqServ)");
+
+		$sql->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+		$sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+		$sql->bindParam(':aAddress', $aAddress, PDO::PARAM_STR);
+		$sql->bindParam(':aContactNo', $aContactNo, PDO::PARAM_STR);
+		$sql->bindParam(':aReqServ', $aReqServ, PDO::PARAM_STR);
+
+		if ($sql->execute()) {
+			$up = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = :serviceId");
+			$up->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+			$up->execute();
+
+			header('Location: ' . $_SERVER['HTTP_REFERER']);
+		} else {
+			header('Location: index.php?view=dash&status=error&message=Failed to execute query');
+		}
+	} catch (PDOException $e) {
+		error_log('Database Error: ' . $e->getMessage());
+		header('Location: index.php?view=dash&status=error&message=Database error');
+	}
+
+	exit;
+}
+
 
 function image_profile()
 {

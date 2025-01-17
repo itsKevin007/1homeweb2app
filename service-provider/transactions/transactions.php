@@ -8,15 +8,6 @@ if (!defined('WEB_ROOT')) {
     exit;
 }
 
-// for QR
-include('../../phpqrcode/qrlib.php');
-
-// Temporary directory for QR codes
-$tempDir = 'temp/';
-if (!is_dir($tempDir)) {
-    mkdir($tempDir, 0755, true);
-}
-
 // Query to fetch accepted services only for the logged-in user
 $query = "SELECT * FROM accepted_services WHERE user_id = :user_id";
 $stmt = $conn->prepare($query);
@@ -35,19 +26,19 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/tabStyle.css">
 
 <section class="signup-step-container">
-    <div class="col-md-12 col-lg-12 col-sm-12 mb-12">
+    <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
         <div class="d-flex justify-content-center align-items-center"
             style="background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(4,69,117,1) 100%); height: 60px;">
             <h3 style="color: #d7d7df; font-weight: 600;">Transactions</h3>
         </div>
-        <div style="width: 100%; margin-bottom: 20px;">
+        <div style="width: 100%; margin-bottom: 15px;">
             <div class="mt-16">
-                <!-- <h5 style="margin-left: 5%;">As of <?php echo date('F j, Y'); ?></h5> -->
+                <h5 style="margin-left: 5%;">As of <?php echo date('F j, Y'); ?></h5>
             </div>
         </div>
     </div>
 
-    <br>
+
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12">
@@ -77,11 +68,11 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <br>
                                 <?php
                                 // Include database connection
-                                include '../../global-library/database.php';
+                                include '../global-library/database.php';
 
                                 try {
                                     // Fetch accepted services from the database
-                                    $stmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id AND status IS NULL");
+                                    $stmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id");
                                     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
                                     $stmt->execute();
 
@@ -211,43 +202,6 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                 <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                                                 <button type="submit" class="btn btn-primary">Done</button>
                                                             </form>
-                                                            <button type="button" class="btn btn-secondary mt-10" data-bs-toggle="modal" data-bs-target="#modalQr-<?= $service['service_id'] ?>">
-                                                                Show QR
-                                                            </button>
-
-                                                            <!-- Modal for displaying QR code -->
-                                                            <div class="modal fade" id="modalQr-<?= $service['service_id'] ?>" tabindex="-1" aria-labelledby="modalQrLabel-<?= $service['service_id'] ?>" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="modalQrLabel-<?= $service['service_id'] ?>">QR Code for Service</h5>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center">
-                                                                            <?php
-                                                                            // Generate the QR code for the current service's UID
-                                                                            $uid = htmlspecialchars($service['uid']); // Fetch UID from the database
-                                                                            $qrFileName = 'qrcode_' . md5($uid) . '.png'; // Unique file name
-                                                                            $qrFilePath = $tempDir . $qrFileName;
-
-                                                                            // Generate QR code only if it doesn't already exist
-                                                                            if (!file_exists($qrFilePath)) {
-                                                                                QRcode::png($uid, $qrFilePath, QR_ECLEVEL_L, 5);
-                                                                            }
-
-                                                                            // Display the QR code
-                                                                            echo '<img src="' . $qrFilePath . '" alt="QR Code for UID: ' . $uid . '" class="img-fluid">';
-                                                                            ?>
-
-                                                                            <p>₱ <?php echo ($service['projectCost']); ?></p>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

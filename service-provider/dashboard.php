@@ -203,107 +203,79 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 		<!-- end of card -->
 
 		<!-- --------------------------------------------------------------------- for notif ------------------------------------------------ -->
-
-
-		<div class="tabs">
-			<!-- Service Requests Tab -->
-			<div class="tab-2">
-				<label for="tab2-1">
-					<h6>Requests</h6>
-				</label>
-				<input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-				<div>
-					<?php
-					foreach ($bookings_data as $booking) {
-						$requestedService = htmlspecialchars($booking['requested_service']);
-						$bookingAddress = htmlspecialchars($booking['booking_address']);
-						$contactNumber = htmlspecialchars($booking['contact_num']);
-						$bookingId = htmlspecialchars($booking['booking_id']);
-						echo "
-                <div class='rqCard flex-row p-2 justify-content-between' style='background: linear-gradient(90deg, rgba(10,0,176,1) 0%, rgba(59,68,223,1) 100%); width: 60%; margin: 10px 0; '>
-
-					<div style='margin-left: 10px;'>
-						<h4 style='color:white;'>$requestedService</h4>
-						<h5 style='color: #fff;'><span style='color:white;'>Contact Number:</span> $contactNumber</h5>
-						<p style='color: #fff;'>$bookingAddress</p>
+		<!-- display of request -->
+		<?php foreach ($bookings_data as $booking): ?>
+			<?php
+			if ($booking['booking_status'] !== 'accepted') {
+				$requestedService = htmlspecialchars($booking['requested_service']);
+				$bookingAddress = htmlspecialchars($booking['booking_address']);
+				$contactNumber = htmlspecialchars($booking['contact_num']);
+				$bookingId = htmlspecialchars($booking['booking_id']);
+			?>
+				<div class="row p-2 rounded mb-2" style="background: linear-gradient(90deg, rgba(10,0,176,1) 0%, rgba(59,68,223,1) 100%); width: 80%;">
+					<div class="col-sm-8 row" style="margin-left: 2px;">
+						<h5 style="color:white;"><?= $requestedService; ?></h5>
+						<h6 style="color: #fff;">Contact Number: <?= $contactNumber; ?></h6>
+						<p style="color: #fff;"><?= $bookingAddress; ?></p>
 					</div>
-					<div style='margin-right: 10px; margin-left: 10px;'>
-					📍
+					<div class="col-sm-4">
+						<button
+							style="float: right;"
+							class="btn btn-primary acceptBtn"
+							data-booking-id="<?= $bookingId; ?>"
+							data-requested-service="<?= $requestedService; ?>"
+							data-booking-address="<?= $bookingAddress; ?>"
+							data-contact-num="<?= $contactNumber; ?>">
+							Accept
+						</button>
 					</div>
-					<div style='text-align: center;'>
-						<p class='read-more'>
-							<button style='margin-bottom: 10px;' class='btn btn-primary'>Accept</button>
-							<br>
-							<button class='btn btn-danger'>Decline</button>
-						</p>
-					</div>
-				</div>";
-					}
-					?>
 				</div>
-			</div>
+			<?php } ?>
+		<?php endforeach; ?>
 
-			<!-- Approved Requests Tab -->
-			<div class="tab-2">
-				<label for="tab2-2">
-					<h6>Approved</h6>
-				</label>
-				<input id="tab2-2" name="tabs-two" type="radio">
-				<div id="pending-tasks">
-					<?php
-					foreach ($approvedBookingsData as $approved) {
-						$requestedService = htmlspecialchars($approved['requested_service']);
-						$bookingAddress = htmlspecialchars($approved['booking_address']);
-						$contactNumber = htmlspecialchars($approved['contact_num']);
-						echo "
-                <div class='blog-card'>
-                    <div class='meta'>
-                        <div class='photo' style='background-image: url(\"" . htmlspecialchars(WEB_ROOT) . "assets/images/icons/hotel1.jpg\")'></div>
-                    </div>
-                    <div class='description'>
-                        <h5>$requestedService</h5>
-                        <h2><span style='color:black;'>Contact Number:</span> $contactNumber</h2>
-                        <p>$bookingAddress</p>
-                    </div>
-                </div>";
-					}
-					?>
+		<!-- Accept Modal -->
+		<div class="modal" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="acceptModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="acceptModalLabel">Confirm Service Acceptance</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#acceptModal').modal('hide');">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="company/process.php?action=accept" id="acceptForm">
+							<input type="hidden" name="serviceId" id="booking-id-hidden">
+							<input type="hidden" name="aReqServ" id="requested-service-hidden">
+							<input type="hidden" name="aAddress" id="booking-address-hidden">
+							<input type="hidden" name="aContactNo" id="contact-num-hidden">
+							<p>Are you sure you want to accept this service?</p>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary">Confirm</button>
+							</div>
+						</form>
+
+					</div>
 				</div>
 			</div>
 		</div>
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				document.querySelectorAll('.btn-primary, .btn-danger').forEach(button => {
-					button.addEventListener('click', function() {
-						const bookingId = this.getAttribute('data-booking-id');
-						const status = this.classList.contains('btn-primary') ? 1 : 2;
 
-						fetch('<?php echo WEB_ROOT; ?>service-provider/update_booking_status.php', {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/x-www-form-urlencoded'
-								},
-								body: `booking_id=${bookingId}&status=${status}`,
-							})
-							.then(response => response.json())
-							.then(data => {
-								if (data.success) {
-									const card = this.closest('.blog-card');
-									if (status === 1) {
-										document.getElementById('pending-tasks').appendChild(card);
-									} else if (status === 2) {
-										card.remove();
-									}
-									alert(data.message);
-								} else {
-									alert('Error: ' + data.message);
-								}
-							})
-							.catch(error => {
-								console.error('Error:', error);
-								alert('An error occurred. Please try again.');
-							});
-					});
+		<script>
+			document.querySelectorAll('.acceptBtn').forEach(button => {
+				button.addEventListener('click', function() {
+					const bookingId = this.getAttribute('data-booking-id');
+					const requestedService = this.getAttribute('data-requested-service');
+					const bookingAddress = this.getAttribute('data-booking-address');
+					const contactNum = this.getAttribute('data-contact-num');
+
+					// Populate modal fields
+					document.getElementById('booking-id-hidden').value = bookingId;
+					document.getElementById('requested-service-hidden').value = requestedService;
+					document.getElementById('booking-address-hidden').value = bookingAddress;
+					document.getElementById('contact-num-hidden').value = contactNum;
+
+					// Show the modal
+					$('#acceptModal').modal('show');
 				});
 			});
 		</script>

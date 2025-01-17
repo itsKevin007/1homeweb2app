@@ -47,11 +47,8 @@ switch ($action) {
 }
 
 // accept request
-// accept request
 function accept_request()
 {
-
-
 	if (!isset($_SESSION['user_id'])) {
 		header('Location: index.php?view=dash&status=error&message=Unauthorized');
 		exit;
@@ -59,8 +56,8 @@ function accept_request()
 
 	include '../global-library/database.php';
 
-	$serviceId = filter_input(INPUT_POST, 'serviceId', FILTER_VALIDATE_INT); // Updated variable
-	$serProvId = $_SESSION['user_id'];
+	$serviceId = filter_input(INPUT_POST, 'serviceId', FILTER_VALIDATE_INT);
+	$user_id = $_SESSION['user_id'];
 	$aAddress = filter_input(INPUT_POST, 'aAddress', FILTER_SANITIZE_STRING);
 	$aContactNo = filter_input(INPUT_POST, 'aContactNo', FILTER_SANITIZE_STRING);
 	$aReqServ = filter_input(INPUT_POST, 'aReqServ', FILTER_SANITIZE_STRING);
@@ -71,19 +68,33 @@ function accept_request()
 	}
 
 	try {
-		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, serProvId, accepted_at, aAddress, aContactNo, aReqServ) 
-                                VALUES (:serviceId, :serProvId, NOW(), :aAddress, :aContactNo, :aReqServ)");
+		// Insert into accepted_services table
+		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, user_id, accepted_at, aAddress, aContactNo, aReqServ) 
+                                VALUES (:serviceId, :user_id, NOW(), :aAddress, :aContactNo, :aReqServ)");
 
 		$sql->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-		$sql->bindParam(':serProvId', $serProvId, PDO::PARAM_INT);
+		$sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 		$sql->bindParam(':aAddress', $aAddress, PDO::PARAM_STR);
 		$sql->bindParam(':aContactNo', $aContactNo, PDO::PARAM_STR);
 		$sql->bindParam(':aReqServ', $aReqServ, PDO::PARAM_STR);
 
 		if ($sql->execute()) {
-			$up = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = :serviceId");
-			$up->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-			$up->execute();
+			// Get the last inserted ID from accepted_services table
+			$id = $conn->lastInsertId();
+
+			// Generate the MD5 hash for the uid
+			$uid = md5($id);
+
+			// Update the uid column in the accepted_services table
+			$updateUid = $conn->prepare("UPDATE accepted_services SET uid = :uid WHERE id = :id");
+			$updateUid->bindParam(':uid', $uid, PDO::PARAM_STR);
+			$updateUid->bindParam(':id', $id, PDO::PARAM_INT);
+			$updateUid->execute();
+
+			// Update booking status in tbl_bookings
+			$updateBooking = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = :serviceId");
+			$updateBooking->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+			$updateBooking->execute();
 
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		} else {
@@ -96,6 +107,7 @@ function accept_request()
 
 	exit;
 }
+
 
 
 // end of accept request
