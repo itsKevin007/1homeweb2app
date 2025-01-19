@@ -54,7 +54,7 @@ td {
                             <thead>
                                 <tr>
                                     <th>Name</th>    
-                                    <th>Account Number</th>                                                  
+                                    <th>Amount</th>                                                  
                                     <th>Reference No.</th>
                                     <th>Image</th>
                                     <th>Action</th>
@@ -63,9 +63,8 @@ td {
 
                             <tbody>
                                 <?php
-                                $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_deleted != :is_deleted AND is_done != :is_done");
+                                $sql = $conn->prepare("SELECT * FROM tbl_topup WHERE is_done != :is_done");
                                 $sql->bindValue(':is_done', '1', PDO::PARAM_INT);
-                                $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                                 $sql->execute();
 
                                 if ($sql->rowCount() > 0) {
@@ -77,38 +76,19 @@ td {
                                             $refNo = $sql_data['refNo'];
                                             $uid = $sql_data['uid'];
                                             $accessLevelNum = '0';
-                                            $subType = $sql_data['subType'];
+                                            $pay_amount = $sql_data['pay_amount'];
 
-                                            if ($subType == '0') {
-                                                $subTypeName = 'Basic';
-                                            }else{
-                                                $subTypeName = 'Premium';
-                                            }
-
-                                            $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = :userId AND access_level = :access_level");
+                                            $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = :userId");
                                             $user->bindParam(':userId', $userIds, PDO::PARAM_INT);
-                                            $user->bindParam(':access_level', $accessLevelNum, PDO::PARAM_INT);
                                             $user->execute();
                                             if($user->rowCount() > 0){
                                             $user_data = $user->fetch();
-                                            $accessLevel1 = $user_data['access_level'];
                                             $uidUser = $user_data['uid'];
-
-                                            if($accessLevel1 == '0'){
-                                                $accessLevel = 'Client';
-                                            }elseif($accessLevel1 == '1'){
-                                                $accessLevel = 'Independent';
-                                            }elseif($accessLevel1 == '2'){
-                                                $accessLevel = 'Company';
-                                            }else{
-                                                $accessLevel = '';
-                                            }
-
                                             $name = $user_data['firstname'] . ' ' . $user_data['lastname'];
-                                            $email = $user_data['email'];
+
 
                                             if ($sql_data['thumbnail']) {
-                                                $image = WEB_ROOT . 'assets/images/subscription/' . $sql_data['thumbnail'];
+                                                $image = WEB_ROOT . 'assets/images/top-up/' . $sql_data['thumbnail'];
                                             } else {
                                                 $image = WEB_ROOT . 'adminpanel/assets/images/client/noimage.png';
                                             }
@@ -117,20 +97,18 @@ td {
                                             
                                             <tr>
                                 
-                                                <td><?php echo $accessLevel; ?></td>
-                                                <td><?php echo $subTypeName; ?></td>
-                                                <td><?php echo $name; ?></td>                                        
-                                                <td><?php echo $refNo; ?></td>
+                                                <td><?php echo $name; ?></td>
+                                                <td><?php echo $pay_amount; ?></td>
+                                                <td><?php echo $refNo; ?></td>                                        
                                                 <td>
-
-                                                        <div class="btn-group">                                                                                                      
-                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $uid; ?>" class="btn btn-light px-3 radius-30" aria-expanded="false"><i class="lni lni-eye"></i>
-                                                                </button>                                            
-                                                        </div>&nbsp;
+                                                   <div class="btn-group">                                                                                                      
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $uid; ?>" class="btn btn-light px-3 radius-30" aria-expanded="false"><i class="lni lni-eye"></i>
+                                                            </button>                                            
+                                                    </div>&nbsp;
 
                                                 </td>
                                                 <td>
-                                                    <a href="process.php?action=confirm&id=<?php echo $uidUser; ?>&id1=<?php echo $uid; ?>&subType=<?php echo $subType; ?>"  onClick="return confirmSubmit()">
+                                                    <a href="process.php?action=topUp&id=<?php echo $uid; ?>&ids=<?php echo $userIds; ?>"  onClick="return confirmSubmit()">
                                                         <div class="btn-group">                                                                                                      
                                                                 <button type="button" class="btn btn-success px-3 radius-30" aria-expanded="false"><span><i class="lni lni-checkmark"></i></span>                                           
                                                         </div>

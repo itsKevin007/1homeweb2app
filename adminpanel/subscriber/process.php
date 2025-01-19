@@ -239,7 +239,12 @@ function confirmData()
 
 	if(isset($_POST['subType']))
 	{ $sub = $_POST['subType']; }else{ $sub = $_GET['subType']; }
-	
+
+	$userSel = $conn->prepare("SELECT * FROM bs_user WHERE uid = :uid");
+	$userSel->bindParam(':uid', $id, PDO::PARAM_STR);
+	$userSel->execute();
+	$userSelData = $userSel->fetch();
+	$user_id = $userSelData['user_id'];
   
 	$sql = $conn->prepare("UPDATE bs_user SET is_sub = :is_sub, subDate = :sub_date, sub_type = :sub_type WHERE uid = :uid");
 	$sql->bindValue(':is_sub', '1', PDO::PARAM_INT);
@@ -247,6 +252,7 @@ function confirmData()
 	$sql->bindValue(':sub_type', $sub, PDO::PARAM_STR);
 	$sql->bindValue(':uid', $id, PDO::PARAM_STR);
 	$sql->execute();
+	
 
 	$sql1 = $conn->prepare("UPDATE tbl_subscription SET is_done = :is_done, sub_date = :sub_date, sub_by = :sub_by WHERE uid = :uid");
 	$sql1->bindValue(':is_done', '1', PDO::PARAM_INT);
@@ -254,6 +260,22 @@ function confirmData()
 	$sql1->bindValue(':sub_by', $userId, PDO::PARAM_STR);
 	$sql1->bindValue(':uid', $id1, PDO::PARAM_STR);
 	$sql1->execute();
+
+	// Insert a new notification into tbl_notifications
+	$notificationMessage = "Your Subscription has been approved.";
+	$notificationType = 'success'; // info, success, error , primary
+	$notifIcon = 'success'; // icon
+
+
+	$notificationSQL = $conn->prepare("INSERT INTO tbl_notifications (user_id, notification_message, notification_type, notification_icon, date_created, misc_id)
+									VALUES (:userId, :message, :type, :notifIcon, :date_created, :misc_id)");
+	$notificationSQL->bindParam(':userId', $user_id);
+	$notificationSQL->bindParam(':message', $notificationMessage);
+	$notificationSQL->bindParam(':type', $notificationType);
+	$notificationSQL->bindParam(':notifIcon', $notifIcon);
+	$notificationSQL->bindParam(':date_created', $today_date1);
+	$notificationSQL->bindParam(':misc_id', $id1);
+	$notificationSQL->execute();
         
 	echo '<form id="redirectForm" action="'. ADM_ROOT .'subscriber/" method="POST">
 	<input type="hidden" name="subscribe" value="Success">

@@ -23,6 +23,7 @@ if ($accesslevel == 0) {
 
 ?>
 <!-- ======= Footer ======= -->
+<link href="<?php echo WEB_ROOT; ?>style/notif-dot.css" rel="stylesheet">
 
 <!-- Profile Details Section Start -->
 <div id="bottom-navigation">
@@ -49,8 +50,8 @@ if ($accesslevel == 0) {
 									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
 								</a>
 							</li>
-							<li class="nav-menu-icon nav-account-icon">
-								<a href="<?php echo WEB_ROOT; ?>updates/index.php?view=updates" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'Updates') ? 'active' : ''; ?>">
+							<li class="nav-menu-icon nav-account-icon" style="position: relative;">
+								<a href="<?php echo WEB_ROOT; ?>notification/" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'notification') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<mask id="mask0_1_778" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
 											<rect width="24" height="24" fill="white" />
@@ -61,8 +62,22 @@ if ($accesslevel == 0) {
 											<path d="M15.3299 18.8201C15.3299 20.6501 13.8299 22.1501 11.9999 22.1501C11.0899 22.1501 10.2499 21.7701 9.64992 21.1701C9.04992 20.5701 8.66992 19.7301 8.66992 18.8201" stroke="#666666" stroke-width="2" stroke-miterlimit="10" />
 										</g>
 									</svg>
+									<?php
+									// Add PHP logic to display the dot based on rowCount
+									$notificationsSQL = $conn->prepare("SELECT * FROM tbl_notifications WHERE user_id = :userId AND is_read = '0'");
+									$notificationsSQL->bindParam(':userId', $userId, PDO::PARAM_INT);
+									$notificationsSQL->execute();
+
+									$unreadCount = $notificationsSQL->rowCount();
+
+									if ($unreadCount > 0) {
+										echo '<span class="notification-dot"></span>';
+									}
+									
+									?>
 								</a>
 							</li>
+
 							<li class="nav-menu-icon nav-notifi-icon">
 
 

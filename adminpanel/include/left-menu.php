@@ -19,7 +19,7 @@ if (!defined('WEB_ROOT')) {
 		<!--navigation-->
 		<ul class="metismenu" id="menu">
 
-			
+		<li class="menu-label">Main</li>
 			<li>
 				<a href="<?php echo ADM_ROOT; ?>">
 					<div class="parent-icon"><i class='bx bx-home-alt'></i>
@@ -27,23 +27,6 @@ if (!defined('WEB_ROOT')) {
 					<div class="menu-title">Dashboard</div>
 				</a>
 			</li>
-
-			<li>
-				<a href="<?php echo ADM_ROOT; ?>subscriber/">
-					<div class="parent-icon"><i class='bx bx-user-plus'></i>
-					</div>
-					<div class="menu-title">Subscriber</div>
-				</a>
-			</li>
-
-			<li>
-				<a href="<?php echo ADM_ROOT; ?>top-up/">
-					<div class="parent-icon"><i class="lni lni-wallet"></i></i>
-					</div>
-					<div class="menu-title">Top Up</div>
-				</a>
-			</li>
-
 			<li>
 				<a href="<?php echo ADM_ROOT; ?>user/">
 					<div class="parent-icon"><i class="lni lni-user"></i>
@@ -51,7 +34,23 @@ if (!defined('WEB_ROOT')) {
 					<div class="menu-title">User</div>
 				</a>
 			</li>
-
+			<li class="menu-label">Payments</li>
+			<li>
+				<a href="<?php echo ADM_ROOT; ?>subscriber/">
+					<div class="parent-icon"><i class='bx bx-user-plus'></i>
+					</div>
+					<div class="menu-title">Subscriber</div>
+				</a>
+			</li>
+			
+			<li>
+				<a href="<?php echo ADM_ROOT; ?>top-up/">
+					<div class="parent-icon"><i class="lni lni-wallet"></i></i>
+					</div>
+					<div class="menu-title">Top Up</div>
+				</a>
+			</li>
+			<li class="menu-label">Subscibers</li>
 			<li>
 				<a href="<?php echo ADM_ROOT; ?>client/">
 					<div class="parent-icon"><i class="lni lni-users"></i>

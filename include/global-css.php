@@ -17,9 +17,9 @@ if (!defined('WEB_ROOT')) {
 <link href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/drawer.css">
 
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/table.css">
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/profile.css">
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/faqTbl.css">
+
+
+<link href="<?php echo WEB_ROOT; ?>adminpanel/assets/css/icons.css" rel="stylesheet">
 
 
 

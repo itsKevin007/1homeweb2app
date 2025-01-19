@@ -17,14 +17,14 @@
                                         <th>Email</th>                                
                                         <th>Reference No</th>
                                         <th>Image</th>
+                                        <th>Approved By</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <?php
-                                    $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_deleted != :is_deleted AND is_done = :is_done $datefilter");
+                                    $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_done = :is_done $datefilter");
                                     $sql->bindValue(':is_done', '1', PDO::PARAM_INT);
-                                    $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                                     $sql->execute();
                                    
                                     if ($sql->rowCount() > 0) {
@@ -40,7 +40,12 @@
                                                 $uid = $sql_data['uid'];
                                                 $accessLevelNum = '0';
 
-                                                
+                                                $subBy = $sql_data['sub_by'];
+                                                $userBy = $conn->prepare("SELECT * FROM bs_user WHERE user_id = :sub_by");
+                                                $userBy->bindParam(':sub_by', $subBy, PDO::PARAM_INT);
+                                                $userBy->execute();
+                                                $userByData = $userBy->fetch();
+                                                $nameBy = $userByData['firstname'] . ' ' . $userByData['lastname'];
 
 
                                                 $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = :userId AND access_level = :access_level");
@@ -57,7 +62,7 @@
                                                 }elseif($accessLevel1 == '1'){
                                                     $accessLevel = 'Independent';
                                                 }elseif($accessLevel1 == '2'){
-                                                    $accessLevel = 'Company';3
+                                                    $accessLevel = 'Company';
                                                 }else{
                                                     $accessLevel = '';
                                                 }
@@ -88,6 +93,7 @@
                                                             </div>&nbsp;
 
                                                     </td>
+                                                    <td><?php echo $nameBy; ?></td>
 
                                                         <?php include '../modify.php'; ?>
                                                         &nbsp;                                                                                             
