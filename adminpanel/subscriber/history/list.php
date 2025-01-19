@@ -31,7 +31,7 @@ if(isset($_POST['submit']))
         <div class="row">   
             <div class="col-lg-6">                
                 <div class="card-body">
-                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form method="post" action="<?php echo ADM_ROOT; ?>subscriber/history/">
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="input-group input-group-sm mb-3"> <span class="input-group-text" id="inputGroup-sizing-sm">From:</span>

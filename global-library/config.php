@@ -100,20 +100,20 @@ define('LIMIT_EMPLOYEE_WIDTH',     true);
 define('LIMIT_PRODUCT_WIDTH',     true);
 
 // all file image width must not exceed 300 pixels
-define('MAX_IMAGE_WIDTH', 1300);
+define('MAX_IMAGE_WIDTH', 2000);
 
 // all file image width must not exceed 300 pixels
-define('MAX_PRODUCT_WIDTH', 1300);
+define('MAX_PRODUCT_WIDTH', 2000);
 
 // all employee image width must not exceed 300 pixels
-define('MAX_EMPLOYEE_WIDTH', 300);
+define('MAX_EMPLOYEE_WIDTH', 600);
 
 // all category image width must not 
 // exceed 75 pixels
-define('MAX_CATEGORY_IMAGE_WIDTH', 75);
+define('MAX_CATEGORY_IMAGE_WIDTH', 150);
 
 // the width for writer thumbnail
-define('THUMBNAIL_WIDTH',         175);
+define('THUMBNAIL_WIDTH',         300);
 
 /*if (!get_magic_quotes_gpc()) {
 	if (isset($_POST)) {

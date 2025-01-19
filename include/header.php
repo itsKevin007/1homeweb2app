@@ -91,7 +91,7 @@ if($accesslevel == 0){
 <header id="top-navbar" class="top-navbar">
 	<div class="container">
 		<div class="top-navbar_full">
-			<div class="flex-row ">
+			<div class="menu-btn d-flex align-items-center">
 				<button class="header-drawer-toggle" style="border: none; background: none;">
 					<a href="#offcanvasExample" data-bs-toggle="offcanvas">
 						<svg fill="none" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
@@ -99,10 +99,12 @@ if($accesslevel == 0){
 						</svg>
 					</a>
 				</button>
+			</div>	
+			<div class="brookwood-txt d-flex align-items-center">
 				<a href="<?php echo WEB_ROOT; ?>">
 					<img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="logo" height="40px">
-				</a>
-			</div>			
+				</a>	
+			</div>	
 		</div>
 	</div>
 	<div class="navbar-boder"></div>
@@ -111,7 +113,7 @@ if($accesslevel == 0){
 <!-- Setting Menu Section Start -->
 <!-- Navigation Drawer -->
 <div class="layout-drawer is-open">
-	<div class="drawer-header drawer-header-cover" style="position: relative; color: #ffff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);">
+	<div class="drawer-header drawer-header-cover" >
 		<!-- Blurred background image -->
 		
 			

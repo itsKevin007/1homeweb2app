@@ -1,15 +1,19 @@
 <?php
+	if (!defined('WEB_ROOT')) {
+		header('Location: ../index.php');
+		exit;
+	}
 
-require_once '../../global-library/config.php';
-require_once '../../include/functions.php';
+require_once '../global-library/config.php';
+require_once '../include/functions.php';
 
 checkUser();
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 switch ($action) {
 	
-    case 'reg' :
-        reg_data();
+    case 'add' :
+        add_data();
         break;
 		
 	case 'modify' :
@@ -34,85 +38,44 @@ switch ($action) {
 /*
     Add Data
 */
-function reg_data()
+function add_data()
 {
-	include '../../global-library/database.php';
+	include '../global-library/database.php';
 	$userId = $_SESSION['user_id'];
-
-	$refNo = isset($_POST['refNo']) ? $_POST['refNo'] : '';
-	$plan = isset($_POST['plan']) ? $_POST['plan'] : '0';
 	
-	$images = uploadimage('fileImage', SRV_ROOT . 'assets/images/subscription/');
+	$fname = $_POST['fname'];
+	$lname = $_POST['lname'];
+	$email = $_POST['email'];
+	$type = $_POST['type'];
 	
-	$mainImage = $images['image'];
-	$thumbnail = $images['thumbnail'];
+	
+	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = '$c_fname' AND c_lname = '$c_lname' AND email = '$email' AND is_deleted != '1'");
+	$chk->execute();
+	if($chk->rowCount() > 0)
+	{
+		header('Location: index.php?view=list&error=Data already exist! Data entry failed.');              
+	}else{
 
 
 
-		$sql = $conn->prepare("INSERT INTO tbl_subscription (userId, subType, refNo, thumbnail, image,
+		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_lname, email, sub_type,
 													 date_added, added_by)
-											VALUES (:userId, :plan, :refNo, :thumbnail, :mainImage,
-													:today_date1, :userId)");
-		$sql->bindParam(':userId', $userId);
-		$sql->bindParam(':plan', $plan);
-		$sql->bindParam(':refNo', $refNo);
-		$sql->bindParam(':thumbnail', $thumbnail);
-		$sql->bindParam(':mainImage', $mainImage);
-		$sql->bindParam(':today_date1', $today_date1);
+											VALUES ('$fname', '$lname', '$email', '$type',
+													'$today_date1', '$userId')");
 		$sql->execute();
 
 		$id = $conn->lastInsertId();
 		$uid = md5($id);
 
-		$up = $conn->prepare("UPDATE tbl_subscription SET uid = :uid WHERE subid = :id");
-		$up->bindParam(':uid', $uid);
-		$up->bindParam(':id', $id);
+		$up = $conn->prepare("UPDATE bs_client SET uid = '$uid' WHERE c_id = '$id'");
 		$up->execute();
 
-		if($plan == '0') {
-			$planType = 'Basic'; 
-		}else{
-			$planType = 'Premium';
-		}
-
-		$module = 'Subscription';
-		$action = 'Subscribed' . ' - ' . $refNo . ' Plan Type ' . $planType;
-
+		$log = $conn->prepare("INSERT INTO tr_log (description, log_action_date, action_by) VALUES ('Client $fname $lname Added.', '$today_date1', '$userId')");
+		$log->execute();
 		
-		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-										VALUES (:module, :action, :description, :action_by, :log_action_date)");
-        $log->bindParam(':module', $module);
-        $log->bindParam(':action', $action);
-        $log->bindParam(':description', $refNo);
-        $log->bindParam(':action_by', $userId);
-        $log->bindParam(':log_action_date', $today_date1);
-        $log->execute();
+		header('Location: index.php?view=list&error=Added successfully.');
 
-		// Insert a new notification into tbl_notifications
-		$notificationMessage = "User has subscribed";
-		$notificationType = 'info'; // Assuming 'success' is a valid type
-		$notifIcon = 'info'; // icon
-
-		$user_id = '0';
-
-		$notificationSQL = $conn->prepare("INSERT INTO tbl_notifications (user_id, notification_message, notification_type, notification_icon, date_created, misc_id)
-										VALUES (:userId, :message, :type, :notifIcon, :date_created, :misc_id)");
-		$notificationSQL->bindParam(':userId', $user_id);
-		$notificationSQL->bindParam(':message', $notificationMessage);
-		$notificationSQL->bindParam(':type', $notificationType);
-		$notificationSQL->bindParam(':notifIcon', $notifIcon);
-		$notificationSQL->bindParam(':date_created', $today_date1);
-		$notificationSQL->bindParam(':misc_id', $id);
-		$notificationSQL->execute();
-		
-		echo '<form id="redirectForm" action="../../" method="POST">
-					<input type="hidden" name="subscribe" value="true">
-				</form>
-				<script>
-					document.getElementById("redirectForm").submit();
-				</script>';
-		exit;
-	
+	}
 }
 
 

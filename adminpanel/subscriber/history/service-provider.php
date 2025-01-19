@@ -21,9 +21,8 @@
 
                                 <tbody>
                                     <?php
-                                    $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_deleted != :is_deleted AND is_done = :is_done $datefilter");
+                                    $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_done = :is_done $datefilter");
                                     $sql->bindValue(':is_done', '1', PDO::PARAM_INT);
-                                    $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                                     $sql->execute();
 
                                     if ($sql->rowCount() > 0) {

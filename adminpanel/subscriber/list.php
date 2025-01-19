@@ -66,9 +66,8 @@ td {
 
                             <tbody>
                                 <?php
-                                $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_deleted != :is_deleted AND is_done != :is_done");
+                                $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_done != :is_done");
                                 $sql->bindValue(':is_done', '1', PDO::PARAM_INT);
-                                $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                                 $sql->execute();
 
                                 if ($sql->rowCount() > 0) {
@@ -182,9 +181,8 @@ td {
 
                             <tbody>
                                 <?php
-                                $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_deleted != :is_deleted AND is_done != :is_done");
+                                $sql = $conn->prepare("SELECT * FROM tbl_subscription WHERE is_done != :is_done");
                                 $sql->bindValue(':is_done', '1', PDO::PARAM_INT);
-                                $sql->bindValue(':is_deleted', '1', PDO::PARAM_INT);
                                 $sql->execute();
 
                                 if ($sql->rowCount() > 0) {
@@ -194,9 +192,9 @@ td {
 
                                             $userIds = $sql_data['userId'];
                                             $refNo = $sql_data['refNo'];
-                                            $uid = $sql_data['uid'];
+                                            $uid1 = $sql_data['uid'];
                                             $accessLevelNum = '0';
-
+                                            
                                             $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = :userId AND access_level != :access_level");
                                             $user->bindParam(':userId', $userIds, PDO::PARAM_INT);
                                             $user->bindParam(':access_level', $accessLevelNum, PDO::PARAM_INT);
@@ -238,13 +236,13 @@ td {
                                                 <td>
 
                                                     <div class="btn-group">                                                                                                      
-                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $uid; ?>" class="btn btn-light px-3 radius-30" aria-expanded="false"><i class="lni lni-eye"></i>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $uid1; ?>" class="btn btn-light px-3 radius-30" aria-expanded="false"><i class="lni lni-eye"></i>
                                                             </button>                                            
                                                     </div>&nbsp;
 
                                                 </td>
                                                 <td>
-                                                    <a href="process.php?action=confirm&id=<?php echo $uidUser; ?>&id1=<?php echo $uid; ?>"  onClick="return confirmSubmit()">
+                                                    <a href="process.php?action=confirm&id=<?php echo $uidUser; ?>&id1=<?php echo $uid1; ?>"  onClick="return confirmSubmit()">
                                                         <div class="btn-group">                                                                                                      
                                                                 <button type="button" class="btn btn-success px-3 radius-30" aria-expanded="false"><span><i class="lni lni-checkmark"></i></span>                                          
                                                         </div>

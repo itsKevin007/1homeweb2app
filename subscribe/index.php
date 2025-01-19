@@ -11,23 +11,30 @@
 	$userId = $_SESSION['user_id'];
 
 	$view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
+
+	if($user_data['is_sub'] != 1){
+
+
+		switch ($view) {
+			case 'register' :
+				$content 	= 'register.php';		
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
+			case 'modify' :
+				$content 	= 'modify.php';		
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
+			default :
+				$content 	= 'register.php';		
+				$pageTitle 	= $sett_data['system_title'];
+		}
 		
-
-	switch ($view) {
-		case 'register' :
-			$content 	= 'register.php';		
-			$pageTitle 	= $sett_data['system_title'];
-			break;
-
-		case 'modify' :
-			$content 	= 'modify.php';		
-			$pageTitle 	= $sett_data['system_title'];
-			break;
-
-		default :
-			$content 	= 'register.php';		
-			$pageTitle 	= $sett_data['system_title'];
+	}else{
+		header("location: ../index.php");
 	}
+
 
 $script    = array('category.js');
 

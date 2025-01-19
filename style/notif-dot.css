@@ -1,0 +1,11 @@
+.notification-dot {
+    position: absolute;
+    top: -6px; /* Adjust the vertical position */
+    right: 2px; /* Adjust the horizontal position */
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white; /* Optional: to create a white border around the dot */
+    z-index: 1;
+}
