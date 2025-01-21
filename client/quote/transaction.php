@@ -143,7 +143,7 @@ if ($nowLocation->rowCount() > 0) {
                         style="background-color: #e4e8eb; border-radius: 10px; padding: 10px;" value="" required>
                     <textarea name="booking_address" id="address-input"
                         style="background-color: #e4e8eb; border-radius: 10px; padding: 10px; margin-top: 10px; width:100%;" required></textarea>
-                    <label style="margin-top: 10px;">Contact Number</label>
+                    <label style="margin-top: 10px;">Contact Person</label>
                     <input type="text" placeholder="Contact Number" name="contact_num" id="contact-num-input"
                         style="background-color: #e4e8eb; border-radius: 10px; padding: 10px;" required>
                     <input type="hidden" name="service_id" id="service-id-hidden">
