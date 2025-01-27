@@ -8,6 +8,15 @@ if (!defined('WEB_ROOT')) {
     exit;
 }
 
+// for QR
+include('../phpqrcode/qrlib.php');
+
+// Temporary directory for QR codes
+$tempDir = 'temp/';
+if (!is_dir($tempDir)) {
+    mkdir($tempDir, 0755, true);
+}
+
 // Query to fetch accepted services only for the logged-in user
 $query = "SELECT * FROM accepted_services WHERE user_id = :user_id";
 $stmt = $conn->prepare($query);
@@ -26,19 +35,19 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/tabStyle.css">
 
 <section class="signup-step-container">
-    <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
+    <div class="col-md-12 col-lg-12 col-sm-12 mb-12">
         <div class="d-flex justify-content-center align-items-center"
             style="background: linear-gradient(87deg, rgba(2, 44, 92, 1) 1%, rgba(4,69,117,1) 100%); height: 60px;">
             <h3 style="color: #d7d7df; font-weight: 600;">Transactions</h3>
         </div>
-        <div style="width: 100%; margin-bottom: 15px;">
+        <div style="width: 100%; margin-bottom: 20px;">
             <div class="mt-16">
-                <h5 style="margin-left: 5%;">As of <?php echo date('F j, Y'); ?></h5>
+                <!-- <h5 style="margin-left: 5%;">As of <?php echo date('F j, Y'); ?></h5> -->
             </div>
         </div>
     </div>
 
-
+    <br>
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12">
@@ -70,9 +79,13 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 // Include database connection
                                 include '../global-library/database.php';
 
+                                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST['projectCost'])) {
+                                    submitProjectCost();
+                                }
+
                                 try {
                                     // Fetch accepted services from the database
-                                    $stmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id");
+                                    $stmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id AND status IS NULL");
                                     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
                                     $stmt->execute();
 
@@ -83,6 +96,36 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     echo "Error fetching services: " . $e->getMessage();
                                     $services = []; // Default to an empty array to avoid foreach errors
                                 }
+
+                                // Submit function
+                                function submitProjectCost()
+                                {
+                                    include '../global-library/database.php';
+
+                                    $serviceId = isset($_POST['service_id']) ? intval($_POST['service_id']) : null;
+                                    $projectCost = isset($_POST['projectCost']) ? floatval($_POST['projectCost']) : null;
+
+                                    if (!$serviceId || !$projectCost) {
+                                        echo '<script>Swal.fire("Error!", "Please fill in all fields.", "error")</script>';
+                                        exit();
+                                    }
+
+                                    try {
+                                        $query = "UPDATE accepted_services SET projectCost = :projectCost , status = 'ongoing' WHERE service_id = :serviceId";
+                                        $stmt = $conn->prepare($query);
+                                        $stmt->bindParam(':projectCost', $projectCost, PDO::PARAM_STR);
+                                        $stmt->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+
+                                        if ($stmt->execute()) {
+                                            echo '<script>Swal.fire("Success!", "Project cost successfully updated.", "success")</script>';
+                                        } else {
+                                            echo '<script>Swal.fire("Error!", "Failed to update project cost.", "error")</script>';
+                                        }
+                                    } catch (PDOException $e) {
+                                        echo ("Error: " . $e->getMessage());
+                                    }
+                                }
+
                                 ?>
 
                                 <table class="table">
@@ -117,7 +160,7 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                         <h5 class="modal-title" id="modalLabel-<?= $service['service_id'] ?>">Submit Project Cost</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <form action="process.php?action=submitAmount" method="POST" onsubmit="return confirm('Are you sure you want to submit the project cost?');">
+                                                                    <form action="" method="POST">
                                                                         <div class="modal-body">
                                                                             <input type="hidden" name="service_id" value="<?= $service['service_id'] ?>">
                                                                             <label for="projectCost-<?= $service['service_id'] ?>" class="form-label">Project Cost</label>
@@ -176,6 +219,8 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         echo "Error fetching ongoing services: " . $e->getMessage();
                                         $ongoingServices = []; // Default to an empty array to avoid foreach errors
                                     }
+
+
                                     ?>
 
                                     <table class="table">
@@ -198,10 +243,47 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                         <td><?= htmlspecialchars($service['status']) ?></td>
                                                         <td>
                                                             <!-- Form to mark as Done -->
-                                                            <form action="process.php?action=markDone" method="POST" style="display: inline;">
+                                                            <form action="transactions/process.php?action=markDone" method="POST" style="display: inline;">
                                                                 <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                                                 <button type="submit" class="btn btn-primary">Done</button>
                                                             </form>
+                                                            <button type="button" class="btn btn-secondary mt-10" data-bs-toggle="modal" data-bs-target="#modalQr-<?= $service['service_id'] ?>">
+                                                                Show QR
+                                                            </button>
+
+                                                            <!-- Modal for displaying QR code -->
+                                                            <div class="modal fade" id="modalQr-<?= $service['service_id'] ?>" tabindex="-1" aria-labelledby="modalQrLabel-<?= $service['service_id'] ?>" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="modalQrLabel-<?= $service['service_id'] ?>">QR Code for Service</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body text-center">
+                                                                            <?php
+                                                                            // Generate the QR code for the current service's UID
+                                                                            $uid = htmlspecialchars($service['uid']); // Fetch UID from the database
+                                                                            $qrFileName = 'qrcode_' . md5($uid) . '.png'; // Unique file name
+                                                                            $qrFilePath = $tempDir . $qrFileName;
+
+                                                                            // Generate QR code only if it doesn't already exist
+                                                                            if (!file_exists($qrFilePath)) {
+                                                                                QRcode::png($uid, $qrFilePath, QR_ECLEVEL_L, 5);
+                                                                            }
+
+                                                                            // Display the QR code
+                                                                            echo '<img src="' . $qrFilePath . '" alt="QR Code for UID: ' . $uid . '" class="img-fluid">';
+                                                                            ?>
+
+                                                                            <p>₱ <?php echo ($service['projectCost']); ?></p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- modal end -->
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
