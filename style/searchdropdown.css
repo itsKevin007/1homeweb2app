@@ -1,0 +1,33 @@
+/* Hide the dropdown by default */
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 100;
+}
+
+/* Show the dropdown when the input group is hovered */
+.input-group:hover + .dropdown {
+    display: block;
+}
+
+/* Dropdown styling */
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown ul li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown ul li:hover {
+    background-color: #f0f0f0;
+}

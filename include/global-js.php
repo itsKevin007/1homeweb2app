@@ -5,7 +5,7 @@ if (!defined('WEB_ROOT')) {
 }
 ?>
 
-	<script src="<?php echo WEB_ROOT; ?>philippine-address/philippine-address-selector-main/ph-address-selector.js"></script>
+<script src="<?php echo WEB_ROOT; ?>philippine-address/philippine-address-selector-main/ph-address-selector.js"></script>
 
 <script src="<?php echo WEB_ROOT; ?>assets/js/jquery-min-3.6.0.js"></script>
 <script src="<?php echo WEB_ROOT; ?>assets/js/slick.min.js"></script>
@@ -30,4 +30,16 @@ if (!defined('WEB_ROOT')) {
 	$('.card').click(function() {
 		$(this).toggleClass('flipped');
 	});
+</script>
+
+<script>
+	if ("serviceWorker" in navigator) {
+		navigator.serviceWorker.register("<?php echo WEB_ROOT; ?>service-worker.js")
+			.then((registration) => {
+				console.log("Service Worker registered with scope:", registration.scope);
+			})
+			.catch((error) => {
+				console.log("Service Worker registration failed:", error);
+			});
+	}
 </script>

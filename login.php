@@ -6,67 +6,94 @@ $errorMessage = '';
 
 
 if (isset($_POST['txtUserName'])) {
-	$result = doLogin();
+    $result = doLogin();
 
-	if ($result != '') {
-		$errorMessage = $result;
-	}
+    if ($result != '') {
+        $errorMessage = $result;
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-<title><?php echo $sett_data['system_title']; ?> - Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="Lending System - www.tridentechnology.com" name="description" />
-<meta content="Coderthemes" name="author" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
+<head>
+    <!-- pwa -->
 
-<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
+    <link rel="manifest" href="/manifest.json">
+   
 
-<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>	
+    <meta charset="utf-8" />
+    <title><?php echo $sett_data['system_title']; ?> - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Lending System - www.tridentechnology.com" name="description" />
+    <meta content="Coderthemes" name="author" />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 
-<!--notification-->
-<link rel="stylesheet" href="adminpanel/assets/plugins/notifications/css/lobibox.min.css" />
-<style>
-    
-    <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
-</style>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
 
-    </head>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>
 
-    <body class="loading back-theme authentication-bg authentication-bg-pattern">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <div class="account-pages my-5">
-            <div class="container">
+    <!--notification-->
+    <link rel="stylesheet" href="adminpanel/assets/plugins/notifications/css/lobibox.min.css" />
+    <style>
+        <?php include($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
+    </style>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="text-center">   
-                            <a href="#">
-                                <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
-								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="60%"></h1>
-                            </a>
-                            <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
+</head>
 
-                        </div><br><br>
-                        <div class="card">
-                            <div class="card-body p-4">
-                                
-                                <div class="text-center mb-4">
-                                    <h4 class="text-uppercase mt-0">Sign In</h4>
-                                </div>
-							<?php
-								if(isset($errorMessage) && $errorMessage != '')
-								{
-							?>
-								<script>
+<body class="loading back-theme authentication-bg authentication-bg-pattern">
+
+    <div class="account-pages my-5">
+        <div class="container">
+            <script>
+                let deferredPrompt;
+
+                window.addEventListener("beforeinstallprompt", (event) => {
+                    event.preventDefault();
+                    deferredPrompt = event;
+                    // Show your custom install button
+                });
+
+                document.getElementById("install-button").addEventListener("click", () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then((choiceResult) => {
+                            if (choiceResult.outcome === "accepted") {
+                                console.log("User accepted the install prompt");
+                            } else {
+                                console.log("User dismissed the install prompt");
+                            }
+                            deferredPrompt = null;
+                        });
+                    }
+                });
+            </script>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="text-center">
+                        <a href="#">
+                            <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
+                            <h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title="" width="60%"></h1>
+                        </a>
+                        <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
+
+                    </div><br><br>
+                    <div class="card">
+                        <div class="card-body p-4">
+
+                            <div class="text-center mb-4">
+                                <h4 class="text-uppercase mt-0">Sign In</h4>
+                            </div>
+                            <?php
+                            if (isset($errorMessage) && $errorMessage != '') {
+                            ?>
+                                <script>
                                     document.addEventListener("DOMContentLoaded", () => {
                                         // Call the function directly
                                         Lobibox.notify('error', {
@@ -78,47 +105,49 @@ if (isset($_POST['txtUserName'])) {
                                         });
                                     });
                                 </script>
-							<?php
-								}else{}
-							?>
-                                <form id="loginform" name="frmLogin" method="post">
-                                    <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Username</label>
-                                        <input class="form-control" type="rext" name="txtUserName" id="txtUserName" autocomplete=off required="" placeholder="Enter your username">
-                                    </div>
+                            <?php
+                            } else {
+                            }
+                            ?>
+                            <form id="loginform" name="frmLogin" method="post">
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Username</label>
+                                    <input class="form-control" type="rext" name="txtUserName" id="txtUserName" autocomplete=off required="" placeholder="Enter your username">
+                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <div class="input-group input-group-merge">
-                                            <input type="password" id="password" class="form-control" name="txtPassword" id="txtPassword" autocomplete=off placeholder="Enter your password" required>
-                                        </div>
-                                    </div>																										
-                                    <div class="mb-2 text-end">	<a href="recoverpass.php">Forgot Password ?</a>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="password" id="password" class="form-control" name="txtPassword" id="txtPassword" autocomplete=off placeholder="Enter your password" required>
                                     </div>
-                                    <div class="mb-3 d-grid text-center">
-                                        <button style="background-color:#16405F;border: 1px #16405F solid;" class="btn btn-primary" type="submit"> Log In </button>
+                                </div>
+                                <div class="mb-2 text-end"> <a href="recoverpass.php">Forgot Password ?</a>
+                                </div>
+                                <div class="mb-3 d-grid text-center">
+                                    <button style="background-color:#16405F;border: 1px #16405F solid;" class="btn btn-primary" type="submit"> Log In </button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-center ">
+                                        <p class="mb-0">Don't have an account yet? <a href="sign-up.php">Sign up here</a>
+                                        </p>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="text-center ">
-                                            <p class="mb-0">Don't have an account yet? <a href="sign-up.php">Sign up here</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
+                            </form>
 
-                            </div> <!-- end card-body -->
-                        </div>
-                        <!-- end card -->						
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
 
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
+                </div> <!-- end col -->
             </div>
-            <!-- end container -->
+            <!-- end row -->
         </div>
-        <!-- end page -->
+        <!-- end container -->
+    </div>
+    <!-- end page -->
 
-        <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-js.php'); ?>
-        
-    </body>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-js.php'); ?>
+
+</body>
+
 </html>

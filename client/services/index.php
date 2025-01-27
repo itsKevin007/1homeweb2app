@@ -41,6 +41,11 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			case 'all_services' :
+				$content 	= 'seeAll.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
 			default :
 				$content 	= 'list.php';		
 				$pageTitle 	= $sett_data['system_title'];
