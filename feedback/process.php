@@ -1,28 +1,17 @@
 <?php
 
-require_once '../../global-library/config.php';
-require_once '../../include/functions.php';
+require_once '../global-library/config.php';
+require_once '../include/functions.php';
 
 checkUser();
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 switch ($action) {
 	
-    case 'reg' :
-        reg_data();
+    case 'feed' :
+        feed_data();
         break;
-		
-	case 'modify' :
-        modify_data();
-        break;
-        
-    case 'delete' :
-        delete_data();
-        break;
-
-	case 'delService' :
-		delete_service();
-		break;
+	
 		
     default :
         // if action is not defined or unknown
@@ -34,82 +23,30 @@ switch ($action) {
 /*
     Add Data
 */
-function reg_data()
+function feed_data()
 {
-	include '../../global-library/database.php';
+	include '../global-library/database.php';
 	$userId = $_SESSION['user_id'];
-
-	$plan = isset($_POST['plan']) ? $_POST['plan'] : '0';
 	
-	$images = uploadimage('fileImage', SRV_ROOT . 'assets/images/subscription/');
+	$feedback = isset($_POST['feedBack']) ? $_POST['feedBack'] : '';
 	
-	$mainImage = $images['image'];
-	$thumbnail = $images['thumbnail'];
-
-
-
-		$sql = $conn->prepare("INSERT INTO tbl_subscription (userId, subType, thumbnail, image,
-													 date_added, added_by)
-											VALUES (:userId, :plan, :thumbnail, :mainImage,
-													:today_date1, :userId)");
+		$sql = $conn->prepare("INSERT INTO tbl_feedback (userId, feedback_com, date_added)
+											VALUES (:userId, :feedback, :today_date1)");
 		$sql->bindParam(':userId', $userId);
-		$sql->bindParam(':plan', $plan);
-		$sql->bindParam(':thumbnail', $thumbnail);
-		$sql->bindParam(':mainImage', $mainImage);
+		$sql->bindParam(':feedback', $feedback);
 		$sql->bindParam(':today_date1', $today_date1);
 		$sql->execute();
 
-		$id = $conn->lastInsertId();
-		$uid = md5($id);
-
-		$up = $conn->prepare("UPDATE tbl_subscription SET uid = :uid WHERE subid = :id");
-		$up->bindParam(':uid', $uid);
-		$up->bindParam(':id', $id);
-		$up->execute();
-
-		if($plan == '0') {
-			$planType = 'Basic'; 
-		}else{
-			$planType = 'Premium';
-		}
-
-		$module = 'Subscription';
-		$action = 'Plan Type ' . $planType;
-
+		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, log_action_date, action_by) VALUES ('Feedback', 'Add feedback', '$feedback', '$today_date1', '$userId')");
+		$log->execute();
 		
-		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-										VALUES (:module, :action, :description, :action_by, :log_action_date)");
-        $log->bindParam(':module', $module);
-        $log->bindParam(':action', $action);
-        $log->bindParam(':description', $planType);
-        $log->bindParam(':action_by', $userId);
-        $log->bindParam(':log_action_date', $today_date1);
-        $log->execute();
-
-		// Insert a new notification into tbl_notifications
-		$notificationMessage = "User has subscribed";
-		$notificationType = 'info'; // Assuming 'success' is a valid type
-		$notifIcon = 'info'; // icon
-
-		$user_id = '0';
-
-		$notificationSQL = $conn->prepare("INSERT INTO tbl_notifications (user_id, notification_message, notification_type, notification_icon, date_created, misc_id)
-										VALUES (:userId, :message, :type, :notifIcon, :date_created, :misc_id)");
-		$notificationSQL->bindParam(':userId', $user_id);
-		$notificationSQL->bindParam(':message', $notificationMessage);
-		$notificationSQL->bindParam(':type', $notificationType);
-		$notificationSQL->bindParam(':notifIcon', $notifIcon);
-		$notificationSQL->bindParam(':date_created', $today_date1);
-		$notificationSQL->bindParam(':misc_id', $id);
-		$notificationSQL->execute();
-		
-		echo '<form id="redirectForm" action="../../" method="POST">
-					<input type="hidden" name="subscribe" value="true">
+		echo '<form id="redirectForm" action="../feedback/" method="POST">
+					<input type="hidden" name="feed" value="true">
 				</form>
 				<script>
 					document.getElementById("redirectForm").submit();
 				</script>';
-		exit;
+			exit;
 	
 }
 

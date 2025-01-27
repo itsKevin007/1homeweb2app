@@ -197,6 +197,18 @@ if($accesslevel == 0){
 			</div>
 			<div class="border-bottom-app mt-8"></div>
 		</a>
+		<a href="<?php echo WEB_ROOT; ?>feedback/">
+			<div class="app-setting-menu-start mt-16">
+				<div class="menu-icon">
+				<img src="<?php echo WEB_ROOT; ?>assets/images/icon/feedback.svg" iewBox="0 0 24 24" alt="logo" width="26" height="26">
+
+				</div>
+				<div class="menu-txt-app">
+					<h3 class="app-txt-title">Feedback</h3>
+				</div>
+			</div>
+			<div class="border-bottom-app mt-8"></div>
+		</a>
 		<a href="<?php echo $self; ?>?logout">
 			<div class="app-setting-menu-start mt-16">
 				<div class="menu-icon">

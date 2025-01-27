@@ -74,6 +74,14 @@ if (!defined('WEB_ROOT')) {
 					<div class="menu-title">Company Service</div>
 				</a>
 			</li>
+			<li class="menu-label">Content Management</li>
+			<li>
+				<a href="<?php echo ADM_ROOT; ?>settings/">
+					<div class="parent-icon"><i class="lni lni-cogs"></i>
+					</div>
+					<div class="menu-title">Settings</div>
+				</a>
+			</li>
 
 		</ul>
 		<!--end navigation-->

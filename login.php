@@ -84,7 +84,7 @@ if (isset($_POST['txtUserName'])) {
                                 <form id="loginform" name="frmLogin" method="post">
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Username</label>
-                                        <input class="form-control" type="rext" name="txtUserName" id="txtUserName" autocomplete=off required="" placeholder="Enter your username">
+                                        <input class="form-control" type="rext" name="txtUserName" id="txtUserName" autocomplete=off required="" placeholder="Enter your username/email">
                                     </div>
 
                                     <div class="mb-3">

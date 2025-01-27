@@ -61,6 +61,9 @@ $user = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$userId'");
 $user->execute();
 $user_data = $user->fetch();
 
+$data_management = $conn->prepare("SELECT * FROM tbl_management");
+$data_management->execute();
+$dataManage = $data_management->fetch();
 
 if($user->rowCount() > 0){
     $accesslevel = $user_data['access_level'];

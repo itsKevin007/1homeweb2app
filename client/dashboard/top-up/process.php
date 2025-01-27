@@ -31,7 +31,6 @@ function top_up()
 	include '../../../global-library/database.php';
 	$userId = $_SESSION['user_id'];
 	
-	$refNo = isset($_POST['referenceNo']) ? $_POST['referenceNo'] : '';
 	$amountDue = isset($_POST['amountDue']) ? $_POST['amountDue'] : '';
 	
 	$images = uploadimage('fileImage', SRV_ROOT . 'assets/images/top-up/');
@@ -39,13 +38,12 @@ function top_up()
 	$mainImage = $images['image'];
 	$thumbnail = $images['thumbnail'];
 	
-		$sql = $conn->prepare("INSERT INTO tbl_topup (userId, pay_amount, refNo, image, thumbnail,
+		$sql = $conn->prepare("INSERT INTO tbl_topup (userId, pay_amount, image, thumbnail,
 													 date_added, added_by)
-											VALUES (:userId, :pay_amount, :refNo, :image, :thumbnail,
+											VALUES (:userId, :pay_amount, :image, :thumbnail,
 													:today_date1, :userId)");
 		$sql->bindParam(':userId', $userId, PDO::PARAM_INT);
 		$sql->bindParam(':pay_amount', $amountDue, PDO::PARAM_STR);
-		$sql->bindParam(':refNo', $refNo, PDO::PARAM_STR);
 		$sql->bindParam(':image', $mainImage, PDO::PARAM_STR);
 		$sql->bindParam(':thumbnail', $thumbnail, PDO::PARAM_STR);
 		$sql->bindParam(':today_date1', $today_date1, PDO::PARAM_STR);
@@ -60,7 +58,7 @@ function top_up()
 		$up->execute();
 
 		// Insert a new notification into tbl_notifications
-		$notificationMessage = "User has topped up " . $amountDue . " for reference number " . $refNo;
+		$notificationMessage = "User has topped up " . $amountDue;
 		$notificationType = 'info'; // Assuming 'success' is a valid type
 		$notifIcon = 'info'; // icon
 
@@ -77,7 +75,7 @@ function top_up()
 		$notificationSQL->bindParam(':misc_id', $id);
 		$notificationSQL->execute();
 
-		$description = 'Top up ' . $amountDue . ' for ' . $refNo . ' by ' . $uid;
+		$description = 'Top up ' . $amountDue . ' by ' . $uid;
 
 		$log = $conn->prepare("INSERT INTO tr_log (description, log_action_date, action_by) VALUES (:description, :log_action_date, :action_by)");
 		$log->bindParam(':description', $description, PDO::PARAM_STR);

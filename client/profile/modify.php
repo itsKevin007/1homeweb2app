@@ -7,6 +7,12 @@ $client->execute();
 $client_data = $client->fetch();
 $uid = $client_data['uid'];
 
+// bank details
+$bank = $client_data['bank'];
+$branch = $client_data['branch'];
+$accname = $client_data['accname'];
+$accnum = $client_data['accnum'];
+
 $fname = $client_data['c_fname'];
 $mname = $client_data['c_mname'];
 $lname = $client_data['c_lname'];
@@ -14,7 +20,6 @@ $suffix = $client_data['c_suffix'];
 $email = $client_data['email'];
 $connum = $client_data['connum'];
 $date_added = $client_data['date_added'];
-$accnum = $client_data['accnum'];
 
 $region = $client_data['region_text'];
 $province = $client_data['province_text'];
@@ -103,6 +108,47 @@ $image = $thumbnail ? WEB_ROOT . 'adminpanel/assets/images/user/' . $thumbnail :
 							</div>
 							<div class="faq-bottom-border"></div>
 						</div>
+
+						<div class="accordion-item border-0 mt-24">
+								<hr>
+								<button class="accordion-button custom_icon collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordian5">
+									<h5 class="prile3-txt2">Bank Details</h5>
+								</button>
+								<div id="accordian5" class="accordion-collapse collapse show">
+
+									<div class="row mt-16">
+										<div class="col-6">
+											<input type="text" name="accname" class="form-control" value="<?php echo $accname; ?>" placeholder="Account Name" autocomplete="off" required>
+										</div>
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>
+										<div class="col-6">
+											<input type="text" name="accnum" class="form-control" value="<?php echo $accnum; ?>" placeholder="Account Number" autocomplete="off" required>
+										</div>	
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>		
+									</div>
+									<div class="row mt-16">
+										<div class="col-6">
+											<input type="text" name="bank" class="form-control" value="<?php echo $bank; ?>" placeholder="Bank" autocomplete="off" required>
+										</div>
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>
+										<div class="col-6">
+											<input type="text" name="branch" class="form-control" value="<?php echo $branch; ?>" placeholder="Branch" autocomplete="off" required>
+										</div>	
+										<div class="invalid-feedback">
+											Please provide a valid Data.
+										</div>					
+									</div>
+
+								</div>
+								<div class="faq-bottom-border"></div>
+							</div>
+
 						<div class="accordion-item border-0 mt-24">
 							<h2 class="accordion-header">
 								<hr>
