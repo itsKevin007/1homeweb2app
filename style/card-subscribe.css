@@ -44,6 +44,17 @@
 	border: 1px solid #333;
 	color: black;
   }
+
+  .card__form textarea {
+	margin-top: 10px;
+	outline: 0;
+	background: rgb(255, 255, 255);
+	box-shadow: transparent 0px 0px 0px 1px inset;
+	padding: 0.6em;
+	border-radius: 14px;
+	border: 1px solid #333;
+	color: black;
+  }
   
   .card__form button {
 	border: 0;

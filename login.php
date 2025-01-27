@@ -105,6 +105,7 @@ if (isset($_POST['txtUserName'])) {
                                         });
                                     });
                                 </script>
+
                             <?php
                             } else {
                             }
@@ -114,6 +115,7 @@ if (isset($_POST['txtUserName'])) {
                                     <label for="emailaddress" class="form-label">Username</label>
                                     <input class="form-control" type="rext" name="txtUserName" id="txtUserName" autocomplete=off required="" placeholder="Enter your username">
                                 </div>
+
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>

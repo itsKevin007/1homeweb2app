@@ -23,73 +23,98 @@ switch ($action) {
  *
  * @return void
  */
-function confirmData()
-{
-	include '../../global-library/database.php';
-	$userId = $_SESSION['user_id'];
-	
-    if(isset($_POST['id']))
-	{ $id = $_POST['id']; }else{ $id = $_GET['id']; }	// top up ID
+function confirmData() {
+    include '../../global-library/database.php';
+    $userId = $_SESSION['user_id'];
+    
+    // Get POST parameters
+    $id = $_POST['id'] ?? $_GET['id'];  // top up ID
+    $id1 = $_POST['ids'] ?? $_GET['ids'];  // user ID
+    
+    try {
+        // Start transaction
+        $conn->beginTransaction();
 
-	if(isset($_POST['ids']))
-	{ $id1 = $_POST['ids']; }else{ $id1 = $_GET['ids']; }	// user ID
+        // Update top-up status
+        $topUP = $conn->prepare("UPDATE tbl_topup SET is_done = :is_done, date_approve = :date_approve, approved_by = :approved_by WHERE uid = :uid");
+        $topUP->bindValue(':is_done', '1', PDO::PARAM_INT);
+        $topUP->bindValue(':date_approve', $today_date2, PDO::PARAM_STR);
+        $topUP->bindValue(':approved_by', $userId, PDO::PARAM_INT);
+        $topUP->bindValue(':uid', $id, PDO::PARAM_STR);
+        $topUP->execute();
 
+        // Get top-up amount
+        $selTopup = $conn->prepare("SELECT * FROM tbl_topup WHERE uid = :uid");
+        $selTopup->bindParam(':uid', $id, PDO::PARAM_STR);
+        $selTopup->execute();
+        $data = $selTopup->fetch();
+        $amountTopUp = $data['pay_amount'];
 
-	
+        // Update or insert balance
+        $sql = $conn->prepare("SELECT * FROM tbl_balance WHERE userId = :userId");
+        $sql->bindParam(':userId', $id1, PDO::PARAM_INT);
+        $sql->execute();
+        
+        if($sql->rowCount() > 0) {
+            $balanceSQL = $conn->prepare("UPDATE tbl_balance SET balance = balance + :topUp WHERE userId = :userId");
+            $balanceSQL->bindValue(':topUp', $amountTopUp, PDO::PARAM_INT);
+            $balanceSQL->bindValue(':userId', $id1, PDO::PARAM_STR);
+        } else {
+            $balanceSQL = $conn->prepare("INSERT INTO tbl_balance (userId, balance) VALUES (:userId, :balance)");
+            $balanceSQL->bindParam(':userId', $id1, PDO::PARAM_INT);
+            $balanceSQL->bindParam(':balance', $amountTopUp, PDO::PARAM_INT);
+        }
+        $balanceSQL->execute();
 
-	$topUP = $conn->prepare("UPDATE tbl_topup SET is_done = :is_done, date_approve = :date_approve, approved_by = :approved_by WHERE uid = :uid");
-	$topUP->bindValue(':is_done', '1', PDO::PARAM_INT);
-	$topUP->bindValue(':date_approve', $today_date2, PDO::PARAM_STR);
-	$topUP->bindValue(':approved_by', $userId, PDO::PARAM_INT);
-	$topUP->bindValue(':uid', $id, PDO::PARAM_STR);
-	$topUP->execute();
+        // Insert notification
+        $notificationMessage = "Your Cash In has been confirmed. Thank you.";
+        $notificationType = 'success';
+        $notifIcon = 'success';
 
-	$selTopup = $conn->prepare("SELECT * FROM tbl_topup WHERE uid = :uid");
-	$selTopup->bindParam(':uid', $id, PDO::PARAM_STR);
-	$selTopup->execute();
-	$data = $selTopup->fetch();
-	$amountTopUp = $data['pay_amount'];
+        $notificationSQL = $conn->prepare("INSERT INTO tbl_notifications 
+            (user_id, notification_message, notification_type, notification_icon, date_created, misc_id)
+            VALUES (:userId, :message, :type, :notifIcon, :date_created, :misc_id)");
+        $notificationSQL->bindParam(':userId', $id1);
+        $notificationSQL->bindParam(':message', $notificationMessage);
+        $notificationSQL->bindParam(':type', $notificationType);
+        $notificationSQL->bindParam(':notifIcon', $notifIcon);
+        $notificationSQL->bindParam(':date_created', $today_date1);
+        $notificationSQL->bindParam(':misc_id', $id);
+        $notificationSQL->execute();
 
-	$sql = $conn->prepare("SELECT * FROM tbl_balance WHERE userId = :userId");
-	$sql->bindParam(':userId', $id1, PDO::PARAM_INT);
-	$sql->execute();
-	if($sql->rowCount() > 0){
-		$balanceSQL = $conn->prepare("UPDATE tbl_balance SET balance = balance + :topUp WHERE userId = :userId");
-		$balanceSQL->bindValue(':topUp', $amountTopUp, PDO::PARAM_INT);
-		$balanceSQL->bindValue(':userId', $id1, PDO::PARAM_STR);
-		$balanceSQL->execute();
-	}else{
-		$balanceSQL = $conn->prepare("INSERT INTO tbl_balance (userId, balance) VALUES (:userId, :balance)");
-		$balanceSQL->bindParam(':userId', $id1, PDO::PARAM_INT);
-		$balanceSQL->bindParam(':balance', $amountTopUp, PDO::PARAM_INT);
-		$balanceSQL->execute();
-	}
+        // Commit transaction
+        $conn->commit();
 
-	// Insert a new notification into tbl_notifications
-	$notificationMessage = "Your Cash In has been confirmed. Thank you.";
-	$notificationType = 'success'; // info, success, error , primary
-	$notifIcon = 'success'; // icon
+        // Return JSON response for AJAX requests
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        }
 
+        // Fallback for non-AJAX requests
+        header('Location: ' . ADM_ROOT . 'top-up/?subscribe=Success');
+        exit;
 
-	$notificationSQL = $conn->prepare("INSERT INTO tbl_notifications (user_id, notification_message, notification_type, notification_icon, date_created, misc_id)
-									VALUES (:userId, :message, :type, :notifIcon, :date_created, :misc_id)");
-	$notificationSQL->bindParam(':userId', $id1);
-	$notificationSQL->bindParam(':message', $notificationMessage);
-	$notificationSQL->bindParam(':type', $notificationType);
-	$notificationSQL->bindParam(':notifIcon', $notifIcon);
-	$notificationSQL->bindParam(':date_created', $today_date1);
-	$notificationSQL->bindParam(':misc_id', $id);
-	$notificationSQL->execute();
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollBack();
+        
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'success' => false,
+                'message' => 'An error occurred while processing the top-up'
+            ]);
+            exit;
+        }
 
-
-
-	echo '<form id="redirectForm" action="'. ADM_ROOT .'top-up/" method="POST">
-			<input type="hidden" name="subscribe" value="Success">
-		</form>
-		<script>
-			document.getElementById("redirectForm").submit();
-		</script>';
-	exit;
+        // Fallback for non-AJAX requests
+        header('Location: ' . ADM_ROOT . 'top-up/?error=1');
+        exit;
+    }
 }
 
 

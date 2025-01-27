@@ -36,8 +36,8 @@ $uid = $client_data['uid'];
 $fname = $client_data['c_fname'];
 $accnum = $client_data['accnum'];
 
-$bal = $conn->prepare("SELECT * FROM tbl_balance WHERE bal_id = :balId");
-$bal->bindParam(':balId', $userId, PDO::PARAM_INT);
+$bal = $conn->prepare("SELECT * FROM tbl_balance WHERE userId = :userId");
+$bal->bindParam(':userId', $userId, PDO::PARAM_INT);
 $bal->execute();
 $bal_data = $bal->fetch();
 if ($bal->rowCount() > 0) {

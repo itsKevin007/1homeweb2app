@@ -1,11 +1,8 @@
 <?php
-	if (!defined('WEB_ROOT')) {
-		header('Location: ../index.php');
-		exit;
-	}
 
-require_once '../global-library/config.php';
-require_once '../include/functions.php';
+
+require_once '../../global-library/config.php';
+require_once '../../include/functions.php';
 
 checkUser();
 
@@ -199,7 +196,7 @@ function modify_data()
 */
 function profile_mod()
 {
-	include '../global-library/database.php';
+	include '../../global-library/database.php';
 	$userId = $_SESSION['user_id'];
 
 	$id = $_POST['id'];
@@ -229,6 +226,31 @@ function profile_mod()
 	$sql1->execute();
 	
 		
+	
+	$accname = isset($_POST['accname']) ? $_POST['accname'] : '';
+	$accno = isset($_POST['accno']) ? $_POST['accno'] : '';
+	$bank = isset($_POST['bank']) ? $_POST['bank'] : '';
+	$branch = isset($_POST['branch']) ? $_POST['branch'] : '';
+
+
+	// Prepare SQL with placeholders
+	$ind = $conn->prepare("UPDATE tbl_independent 
+							SET accname = :accname, 
+								accno = :accno, 
+								bank = :bank, 
+								branch = :branch 
+							WHERE uid = :uid");
+	
+	// Bind parameters securely
+	$ind->bindParam(':accname', $accname);
+	$ind->bindParam(':accno', $accno);
+	$ind->bindParam(':bank', $bank);
+	$ind->bindParam(':branch', $branch);
+	$ind->bindParam(':uid', $id);
+	
+	// Execute the query
+	$ind->execute();
+
 	
 
 	// Main Address

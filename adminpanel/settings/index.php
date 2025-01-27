@@ -25,6 +25,21 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
+	case 'add' :
+		$content 	= 'add.php';		
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
+	case 'modify' :
+		$content 	= 'modify.php';		
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+		
+	case 'modify_account' :
+		$content 	= 'modify_account.php';		
+		$pageTitle 	= $sett_data['system_title'];
+		break;
+
 	default :
 		$content 	= 'list.php';		
 		$pageTitle 	= $sett_data['system_title'];

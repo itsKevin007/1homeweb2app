@@ -56,6 +56,12 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 
 	$inid = $client_data['in_id'];
 
+	// bank details
+	$accname = $client_data['accname'];
+	$accno = $client_data['accno'];
+	$bank = $client_data['bank'];
+	$branch = $client_data['branch'];
+
 	$fname = $client_data['fname'];
 	$mname = $client_data['mname'];
 	$lname = $client_data['lname'];
@@ -169,20 +175,20 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 
 							<div class="accordion-item border-0 mt-24">
 								<hr>
-								<button class="accordion-button custom_icon collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordian1">
-									<h5 class="prile3-txt2">Name</h5>
+								<button class="accordion-button custom_icon collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordian5">
+									<h5 class="prile3-txt2">Bank Details</h5>
 								</button>
-								<div id="accordian1" class="accordion-collapse collapse show">
+								<div id="accordian5" class="accordion-collapse collapse show">
 
 									<div class="row mt-16">
 										<div class="col-6">
-											<input type="text" name="fname" class="form-control" value="<?php echo $fname; ?>" placeholder="First Name" autocomplete="off" required>
+											<input type="text" name="accname" class="form-control" value="<?php echo $accname; ?>" placeholder="Account Name" autocomplete="off" required>
 										</div>
 										<div class="invalid-feedback">
 											Please provide a valid Data.
 										</div>
 										<div class="col-6">
-											<input type="text" name="mname" class="form-control" value="<?php echo $mname; ?>" placeholder="Middle Name" autocomplete="off" required>
+											<input type="text" name="accno" class="form-control" value="<?php echo $accno; ?>" placeholder="Account Number" autocomplete="off" required>
 										</div>	
 										<div class="invalid-feedback">
 											Please provide a valid Data.
@@ -190,13 +196,13 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 									</div>
 									<div class="row mt-16">
 										<div class="col-6">
-											<input type="text" name="lname" class="form-control" value="<?php echo $lname; ?>" placeholder="Last Name" autocomplete="off" required>
+											<input type="text" name="bank" class="form-control" value="<?php echo $bank; ?>" placeholder="Bank" autocomplete="off" required>
 										</div>
 										<div class="invalid-feedback">
 											Please provide a valid Data.
 										</div>
 										<div class="col-6">
-											<input type="text" name="suffix" class="form-control" value="<?php echo $suffix; ?>" autocomplete="off" placeholder="Suffix">
+											<input type="text" name="branch" class="form-control" value="<?php echo $branch; ?>" placeholder="Branch" autocomplete="off" required>
 										</div>	
 										<div class="invalid-feedback">
 											Please provide a valid Data.

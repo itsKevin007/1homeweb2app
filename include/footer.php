@@ -35,22 +35,27 @@ if ($accesslevel == 0) {
 						<ul class="sc-bottom-bar furniture-bottom-nav" id="furniture_navbar">
 							<li class="nav-menu-icon <?php echo $active; ?>">
 								<a href="<?php echo WEB_ROOT; ?>" class="home-icon navigation-icons <?php echo ($PAGEDATA === 'Dashboard') ? 'active' : ''; ?>">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<mask id="mask0_1_798" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-											<rect width="24" height="24" fill="white" />
-										</mask>
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">																				
 										<g mask="url(#mask0_1_798)">
 											<path d="M8.12602 14C8.57006 15.7252 10.1362 17 12 17C13.8638 17 15.4299 15.7252 15.874 14M11.0177 2.764L4.23539 8.03912C3.78202 8.39175 3.55534 8.56806 3.39203 8.78886C3.24737 8.98444 3.1396 9.20478 3.07403 9.43905C3 9.70352 3 9.9907 3 10.5651V17.8C3 18.9201 3 19.4801 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4801 21 18.9201 21 17.8V10.5651C21 9.9907 21 9.70352 20.926 9.43905C20.8604 9.20478 20.7526 8.98444 20.608 8.78886C20.4447 8.56806 20.218 8.39175 19.7646 8.03913L12.9823 2.764C12.631 2.49075 12.4553 2.35412 12.2613 2.3016C12.0902 2.25526 11.9098 2.25526 11.7387 2.3016C11.5447 2.35412 11.369 2.49075 11.0177 2.764Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 										</g>
 									</svg>
-									<p style="color: black">Home</p>
+
+									<p class="navigation-name">HOME</p>
+
 								</a>
 							</li>
 							<li class="history-icon nav-menu-icon">
 								<a href="<?php echo $transactDirect; ?>" class="event-icon navigation-icons <?php echo ($PAGEDATA === 'Transactions') ? 'active' : ''; ?>">
-									<img class="history-icon" src="<?php echo WEB_ROOT; ?>/assets/images/icons/history.png" alt="favourite-icon" height="24px" width="24px">
-									<p style="color: black">Transactions</p>
-								</a>
+
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										
+										<path d="M12 7V12L15 14" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C14.761 22 17.2 20.983 19 19.600 21.1 17.6 22 15.2 22 12C22 6.477 17.523 2 12 2Z" 
+												stroke="#666666" stroke-width="2" stroke-linecap="round" />									
+									</svg>
+									<p class="navigation-name">TRANSACTIONS</p>
+								</a>							
 							</li>
 							<li class="nav-menu-icon nav-account-icon" style="position: relative;">
 								<a href="<?php echo WEB_ROOT; ?>notification/" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'notification') ? 'active' : ''; ?>">
@@ -77,7 +82,9 @@ if ($accesslevel == 0) {
 									}
 
 									?>
-									<p style="color: black">Notofications</p>
+
+									<p class="navigation-name">NOTIFICATION</p>
+
 								</a>
 							</li>
 
@@ -96,7 +103,9 @@ if ($accesslevel == 0) {
 
 										</g>
 									</svg>
-									<p style="color: black">Profile</p>
+
+									<p class="navigation-name">PROFILE</p>
+
 								</a>
 							</li>
 						</ul>

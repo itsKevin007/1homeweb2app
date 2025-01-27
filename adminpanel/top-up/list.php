@@ -54,8 +54,7 @@ td {
                             <thead>
                                 <tr>
                                     <th>Name</th>    
-                                    <th>Amount</th>                                                  
-                                    <th>Reference No.</th>
+                                    <th>Amount</th>                                                                                     
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -98,8 +97,7 @@ td {
                                             <tr>
                                 
                                                 <td><?php echo $name; ?></td>
-                                                <td><?php echo $pay_amount; ?></td>
-                                                <td><?php echo $refNo; ?></td>                                        
+                                                <td><?php echo $pay_amount; ?></td>                                     
                                                 <td>
                                                    <div class="btn-group">                                                                                                      
                                                             <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $uid; ?>" class="btn btn-light px-3 radius-30" aria-expanded="false"><i class="lni lni-eye"></i>
@@ -108,11 +106,12 @@ td {
 
                                                 </td>
                                                 <td>
-                                                    <a href="process.php?action=topUp&id=<?php echo $uid; ?>&ids=<?php echo $userIds; ?>"  onClick="return confirmSubmit()">
-                                                        <div class="btn-group">                                                                                                      
-                                                                <button type="button" class="btn btn-success px-3 radius-30" aria-expanded="false"><span><i class="lni lni-checkmark"></i></span>                                           
-                                                        </div>
-                                                    </a>
+                                                    <button type="button" 
+                                                            class="btn btn-success px-3 radius-30 confirm-topup" 
+                                                            data-uid="<?php echo $uid; ?>" 
+                                                            data-user-id="<?php echo $userIds; ?>">
+                                                        <span><i class="lni lni-checkmark"></i></span>
+                                                    </button>
                                                     <?php include 'modify.php'; ?>
                                                     &nbsp;                                              
                                                 </td>
@@ -131,8 +130,75 @@ td {
                 </div>
             </div>
         </div>
-        
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle top-up confirmation clicks
+    document.querySelectorAll('.confirm-topup').forEach(button => {
+        button.addEventListener('click', function() {
+            if (!confirm('Are you sure you want to confirm this top-up?')) {
+                return;
+            }
+
+            const uid = this.dataset.uid;
+            const userId = this.dataset.userId;
+            const button = this;
+
+            // Disable the button while processing
+            button.disabled = true;
+
+            // Create FormData object
+            const formData = new FormData();
+            formData.append('action', 'topUp');
+            formData.append('id', uid);
+            formData.append('ids', userId);
+
+            // Send AJAX request
+            fetch('process.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success notification
+                    Lobibox.notify('success', {
+                        pauseDelayOnHover: true,
+                        continueDelayOnInactiveTab: false,
+                        position: 'top right',
+                        icon: 'bx bx-check-circle',
+                        msg: 'Top-up confirmed successfully'
+                    });
+
+                    // Remove the row from the table
+                    button.closest('tr').remove();
+
+                    // Optionally refresh the table if using DataTables
+                    if (typeof $('#example').DataTable === 'function') {
+                        $('#example').DataTable().ajax.reload();
+                    }
+                } else {
+                    throw new Error(data.message || 'Failed to process top-up');
+                }
+            })
+            .catch(error => {
+                // Show error notification
+                Lobibox.notify('error', {
+                    pauseDelayOnHover: true,
+                    continueDelayOnInactiveTab: false,
+                    position: 'top right',
+                    icon: 'bx bx-x-circle',
+                    msg: error.message
+                });
+                
+                // Re-enable the button
+                button.disabled = false;
+            });
+        });
+    });
+});
+</script>
 
 <script>
 	  

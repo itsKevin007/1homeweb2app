@@ -3837,6 +3837,12 @@ range-slider:before {
     text-align: center;
     list-style: none;
 }
+
+.navigation-name {
+    color: #000000;
+     font-weight: 500;
+      font-size: 10px;
+}
 .nav-menu-icon .navigation-icons.active svg {
     transform: translateY(-7px);
     -webkit-transform: translateY(-7px);
@@ -3859,7 +3865,7 @@ range-slider:before {
     height: 8px;
     width: 8px;
     border-radius: 100%;
-    background: #0EA5E9;
+
     transform: translateY(8%);
     -moz-transform: scale(0, 0);
     -ms-transform: scale(0, 0);

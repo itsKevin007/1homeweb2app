@@ -51,23 +51,26 @@ if ($bal_data) {
 				<div class="sign-in-screen_full">
 					<span class="card__title">TOP UP / CASH IN</span>
 					<p class="card__content">Please fill up your payment details.</p>
-					<form action="process.php?action=topUp" method="post" enctype="multipart/form-data">
-						<div class="card__form"><br>
-							<div>
-								<label style="float: left;">
-									<h6>Referrence No.:</h6>
-								</label>
-								<input placeholder="Reference Number" name="referenceNo" type="text" autocomplete="off" required>
-								<label style="float: left; margin-top: 5px;">
-									<h6>Amount:</h6>
-								</label>
-								<input placeholder="Amount" name="amountDue" type="number" step="0.01" required id="amountDue">
-								<input type="file" class="form-control" name="fileImage" id="formFile" required>
+						<form action="process.php?action=topUp" method="post" enctype="multipart/form-data">
+							<div class="card__form"><br>
+								<div>
+									<label style="float: left; margin-top: 5px;">
+										<h6>Amount:</h6>
+									</label>
+									<input placeholder="Amount" name="amountDue" type="number" step="0.01" required id="amountDue">
+									<input type="file" class="form-control" name="fileImage" id="formFile" required>
+									<p>Need Assistance? 
+										<a href="tel:<?php echo $dataManage['contactNum']; ?>" 
+										style="color: #000000; font-weight: bold;" 
+										target="_blank">
+										<?php echo $dataManage['contactNum']; ?>
+										</a>
+									</p>
+								</div>
+								<br>
+								<button type="submit" class="sign-up" onClick="return confirmSubmit()">Submit</button>
 							</div>
-							<br>
-							<button type="submit" class="sign-up" onClick="return confirmSubmit()">Submit</button>
-						</div>
-					</form>
+						</form>
 				</div>
 			</div>
 		</div>

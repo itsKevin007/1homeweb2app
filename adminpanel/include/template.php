@@ -31,7 +31,7 @@ $self = WEB_ROOT . 'adminpanel/login.php';
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="<?php echo WEB_ROOT; ?>assets/images/icons/onehome.png">
 		<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
-		
+		<?php include($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>
 		<title>One Home</title>
     </head>
 	<body class="bg-theme bg-theme9">

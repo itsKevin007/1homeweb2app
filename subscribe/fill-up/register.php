@@ -35,8 +35,7 @@
 									<div class="card__form"><br>
 										
 											<div>
-												<label style="float: left;"><h6>Referrence No.:</h6></label>
-												<input placeholder="Reference Number:" name="refNo" type="text" required>
+												<label style="float: left;"><h6>Proof of Payment:</h6></label><br>
 												<input type="file" class="form-control" name="fileImage" id="formFile" required>
 												<input type="hidden" name="plan" value="<?php echo $plan; ?>">
 											</div>
