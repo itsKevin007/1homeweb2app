@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/services.css">
 
-
 <?php
 // Prepare the query to fetch all rows where sercatid is not archived or deleted
 $services = $conn->prepare("SELECT * FROM ind_maincat WHERE is_deleted = 0 AND is_archive = 0");
@@ -27,7 +26,7 @@ if ($subcategories->rowCount() > 0) {
 
 
 <!-- all categories carousel -->
-<div class="homepage2-fifth-sec">
+<div class="homepage-first-sec" style="background-color: #fff; width: 100%; height: 100%;">
 	<!-- search input -->
 	<div class="container mb-24">
 		<div class="serachbar-homepage2 mt-24">
@@ -49,7 +48,6 @@ if ($subcategories->rowCount() > 0) {
 					</g>
 				</svg>
 			</button>
-
 		</div>
 	</div>
 	<!-- end of search input -->
@@ -57,13 +55,13 @@ if ($subcategories->rowCount() > 0) {
 	<div class="container mt-24">
 		<div class="tranding-item-sec">
 			<div class="home-tranding-first">
-				<h2 class="home-cate-title">All Categories</h2>
+				<h6 class="home-cate-title" style="font-size: 14px;">All Categories</h6>
 			</div>
 			<div class="home-tranding-second">
 				<a href="index.php?view=all_services">
-					<p class="see-all-txt">See all<span><svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-							</svg></span></p>
+					<p class="see-all-txt"></p><span><svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+						</svg></span></p>
 				</a>
 			</div>
 		</div>
@@ -73,161 +71,304 @@ if ($subcategories->rowCount() > 0) {
 			foreach ($services_data as $service) {
 				// Escape special characters for the main category
 				$mainCat = htmlspecialchars($service['main_cat']);
+				$serviceId = htmlspecialchars($service['sercatid']);
 
 				echo '
-				
-				<div class="offcial-partner-home2" data-name="' . $mainCat . '" style="height: auto;">
-					<a href="" class="card-link" data-bs-toggle="modal" data-bs-target="#transact" data-service-id="<?php echo $service["id"]; ?>
-						<div>
-							<img src="' . WEB_ROOT . 'assets/images/serviceImg/carpentry.jpg" style="width: 100%; height:auto;border-top-left-radius:8px;border-top-right-radius:8px;" alt="furniture-img">
-							<h5 class="offcial-title-home2 text-center">' . $mainCat . '</h5>
+				<div class="offcial-partner-home2 mt-8" data-name="' . $mainCat . '" style="height: auto; margin-bottom: 8px; padding-bottom: 8px; box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 16px 0 rgba(0,0,0,0.19);">
+					<a href="' . WEB_ROOT . 'client/services/index.php?view=viewsub&main_id=' . $serviceId . '" class="card-link">
+						<div style=" height: 110px; padding-bottom: 8px; text-overflow: ellipsis; overflow: hidden;">
+							<img src="' . WEB_ROOT . 'assets/images/serviceImg/carpentry.jpg" style="width: 100%; height:auto; border-top-left-radius: 8px; border-top-right-radius: 8px;" alt="furniture-img">
+							<p class="offcial-title-home2" style="font-size: 12px; margin-left: 8px; text-overflow: ellipsis; overflow: hidden;">' . $mainCat . '</p>
 						</div>
 					</a>
 				</div>
+
 			';
 			}
 			?>
+
+		</div>
+		<!-- script for modal -->
+
+		<!-- Modal for Subcategories -->
+		<!-- Modal for Subcategories -->
+		<div class="modal fade" id="subcategoryModal" tabindex="-1" aria-labelledby="subcategoryModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-fullscreen">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="subcategoryModalLabel">Subcategories</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- Subcategory cards container -->
+						<div id="subcategoryList" class="d-flex flex-wrap justify-content-start">
+							<!-- Subcategory cards will be dynamically added here -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				// Add event listener for main category clicks
+				document.querySelectorAll('.card-link').forEach(card => {
+					card.addEventListener('click', function() {
+						const serviceId = this.getAttribute('data-service-id'); // Get the main category ID
+
+						// Fetch subcategories via AJAX
+						fetch(`<?php echo WEB_ROOT; ?>client/services/getSubcategories.php?main_id=${serviceId}`)
+							.then(response => response.json())
+							.then(data => {
+								const subcategoryList = document.getElementById('subcategoryList');
+								subcategoryList.innerHTML = ''; // Clear previous entries
+
+								// Populate the subcategories as cards
+								if (data.length > 0) {
+									data.forEach(subcat => {
+										// Create a card for each subcategory
+										const card = document.createElement('div');
+										card.className = 'offcial-partner-home2';
+										card.style = 'height: auto; padding-bottom: 8px; width: calc(33% - 10px); margin: 5px;';
+
+										card.innerHTML = `
+										
+											<a href="javascript:void(0)" class="card-link" data-subcatid="${subcat.subcatid}">
+												<div class="offcial-partner-home2">
+													<div>
+														<img src="<?php echo WEB_ROOT; ?>assets/images/serviceImg/carpentry.jpg" style="width: 100%; height:auto; alt="subcategory-img">
+														<p class="offcial-title-home2 text-center" style="font-size: 12px; font-style: bold ">${subcat.sub_category}</p>
+													</div>
+												</div>
+											</a>
+
+                                `;
+
+										subcategoryList.appendChild(card);
+									});
+								} else {
+									// If no subcategories are available, show a message
+									const noSubcategoryMessage = document.createElement('p');
+									noSubcategoryMessage.className = 'text-center text-muted';
+									noSubcategoryMessage.textContent = 'No subcategories available.';
+									subcategoryList.appendChild(noSubcategoryMessage);
+								}
+							})
+							.catch(error => {
+								console.error('Error fetching subcategories:', error);
+							});
+					});
+				});
+			});
+		</script>
+
+		<!-- script for modal -->
+
 		<hr>
+		<h6 class="home-cate-title" style="font-size: 14px;">All Services</h6>
+		<div class="homepage2-second-sec mt-24" style="margin-bottom: 100px;">
+			<div class="container" style="overflow: hidden;">
+				<div class="product-details" style="margin-bottom: 10px;">
 
-		<div class="homepage2-second-sec mt-24">
-			<div class="container">
-				<div class="product-details">
 					<?php
-					// Loop through each subcategory and generate a card
-					foreach ($subcategories_data as $index => $subcategory) {
-						// Escape special characters for the subcategory
+					foreach ($subcategories_data as $subcategory) {
 						$subCategory = htmlspecialchars($subcategory['sub_categor']);
-						$dateAdded = htmlspecialchars($subcategory['date_added']);
-						$modalId = 'modal-' . $index; // Unique ID for each modal
 						$description = htmlspecialchars($subcategory['description']);
-
+						$subcatId = htmlspecialchars($subcategory['subcatid']);
 
 						echo '
-							<div class="official-partner-home2" data-name="' . $subCategory . '" style="height: auto; background-color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-								<a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#' . $modalId . '">
+							<div class="official-partner-home2" data-name="' . $subCategory . '" style="height: auto; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 16px 0 rgba(0,0,0,0.19); border-radius: 8px;">
+								<a href="#" class="card-link"
+									data-bs-toggle="modal" 
+									data-bs-target="#dynamicModal"
+									data-subcatid="' . $subcatId . '"
+									data-title="' . $subCategory . '"
+									data-description="' . $description . '">
 									<div>
-										<img src="' . WEB_ROOT . 'assets/images/serviceImg/carpentry.jpg" style="width: 100%; height:auto; border-top-left-radius:8px; border-top-right-radius:8px;" alt="furniture-img">
-										<h6 class="official-title-home2 text-left">' . $subCategory . '</h6>
+										<img src="' . WEB_ROOT . 'assets/images/serviceImg/carpentry.jpg" style="width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px;" alt="service-img">
+										<p class="official-title-home2 mt-2 mb-2" style="margin-left: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+											' . (strlen($subCategory) > 10 ? substr($subCategory, 0, 10) . '...' : $subCategory) . '
+										</p>
 									</div>
 								</a>
-							</div>
-
-							<!-- Modal -->
-							<div class="modal fade" id="' . $modalId . '" tabindex="-1" aria-labelledby="modalLabel-' . $index . '" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="modalLabel-' . $index . '">' . $subCategory . ' Details</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>' . $description . '</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
 							</div>
 						';
 					}
 					?>
 
-					<script>
-						document.querySelectorAll('.card-link').forEach(link => {
-							link.addEventListener('click', function() {
-								const serviceId = this.getAttribute('data-subcat-id');
-								document.getElementById('service-id-input').value = serviceId;
-							});
-						});
-					</script>
 				</div>
 			</div>
 
-			<!-- -------------------------------- For modal ------------------------------------------ -->
-
-			<div class="modal fade" id="transact" tabindex="-1" aria-labelledby="transact" aria-hidden="true">
-
-				<div class="modal-dialog">
-
+			<!-- Single Dynamic Modal (Outside PHP Loop) -->
+			<!-- Fullscreen Modal Structure -->
+			<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/wizard.css">
+			<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+			<!-- Single Dynamic Modal (Outside PHP Loop) -->
+			<div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-fullscreen">
 					<div class="modal-content">
-
 						<div class="modal-header">
-
-							<h5 class="modal-title" id="modal">SELECT ADDRESS</h5>
-
+							<h5 class="modal-title" id="dynamicModalLabel">Service Details</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
 						</div>
-
 						<div class="modal-body">
+							<form method="POST" action="">
+								<div class="container">
+									<div id="app">
+										<step-navigation :steps="steps" :currentstep="currentstep">
+										</step-navigation>
 
-							<div class="container">
-
-								<div>
-
-
-									<?php
-
-									$location = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_active = '1' AND is_deleted != '1'");
-
-									$location->execute();
-
-									if ($location->rowCount() > 0) {
-
-										while ($locationdata = $location->fetch()) {
-
-											$location_id = $locationdata['l_id'];
-
-											$name = $locationdata['name'];
-
-									?>
-											<?php
-											$services = $conn->prepare("SELECT * FROM ind_maincat WHERE sercatid = :sercatId");
-											$services->bindParam(':sercatId', $sercatId, PDO::PARAM_INT);
-											$services->execute();
-
-											$services_data = [];
-											if ($services->rowCount() > 0) {
-												$services_data = $services->fetchAll(PDO::FETCH_ASSOC); // Fetch all results
-											}
-											?>
-
+										<div v-show="currentstep == 1">
+											<select class="form-select" name="bookingAddress" aria-label="Default select example" required>
+												<option value="" selected disabled style="width: 90%;" id="address">Select Location</option>
+												<?php
+												$sql = "SELECT * FROM tbl_location WHERE user_id = :user_id";
+												$stmt = $conn->prepare($sql);
+												$stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+												$stmt->execute();
+												$locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												foreach ($locations as $location) {
+													echo "<option value=\"{$location['name']}\">{$location['name']}</option>";
+												}
+												?>
+											</select>
+											<br>
 											<div class="mb-3">
+												<label for="contact" class="form-label">Contact Number</label>
+												<input type="number" class="form-control" name="contactNum" id="contact" required>
+											</div>
+											<div class="mb-3">
+												<label for="roomNo" class="form-label">Room Number</label>
+												<input type="number" class="form-control" name="roomNo" id="roomNo">
+											</div>
+										</div>
 
-												<button class="btn btn-primary" onClick="locationSubmit('<?php echo $location_id; ?>'),('<?php echo $sercatId; ?>')">
-
-													<?php echo $name; ?>
-
-												</button>
-
+										<div v-show="currentstep == 2">
+											<div class="mb-3">
+												<label for="date" class="form-label">Booking Date</label>
+												<input type="date" class="form-control" name="created_at" id="date" required>
+											</div>
+											<div class="mb-3">
+												<label for="photoUpload" class="form-label">Reference Photo</label>
+												<input type="file" class="form-control" id="photoUpload" name="photo" accept="image/*" onchange="previewImage(event)">
 											</div>
 
-									<?php
+											<div class="mb-3">
+												<label for="photoPreview" class="form-label"></label>
+												<img id="photoPreview" class="img-fluid border" alt="Uploaded photo will appear here" style="display: none; max-height: 300px;">
+											</div>
 
-										}
-									} else {
-									}
+											<script>
+												function previewImage(event) {
+													const [file] = event.target.files;
+													if (file) {
+														const preview = document.getElementById('photoPreview');
+														preview.src = URL.createObjectURL(file);
+														preview.style.display = 'block';
+													}
+												}
+											</script>
+										</div>
 
-									?>
+										<div v-show="currentstep == 3">
 
+											<form action="process.php?action=addBooking" method="POST">
+												<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+												<div class="mb-3">
+													<h6 class="service-title"></h6>
+													<p class="service-description"></p>
+
+												</div>
+												<div class="mb-3">
+													<label for="modalAddress" class="form-label">Location</label>
+													<input type="text" name="booking_address" class="form-control" id="modalAddress" readonly>
+												</div>
+												<div>
+													<label for="modalContact" class="form-label">Contact Number</label>
+													<input type="text" name="contact_num" class="form-control" id="modalContact" readonly>
+												</div>
+												<div>
+													<label for="modalRoomNo" class="form-label">Room Number</label>
+													<input type="text" name="roomNo" class="form-control" id="modalRoomNo" readonly>
+												</div>
+												<div>
+													<label for="modalDate" class="form-label">Booking Date</label>
+													<input type="text" name="created_at" class="form-control" id="modalDate" readonly>
+												</div>
+												<div class="mb-3">
+													<label for="photoPreview" class="form-label"></label>
+													<img id="photoPreview" class="img-fluid border" alt="Uploaded photo will appear here" style="display: none; max-height: 300px;">
+												</div>
+												<button type="submit" class="btn btn-primary">Submit</button>
+											</form>
+
+										</div>
+
+										<step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
+										</step>
+
+										<script type="x-template" id="step-navigation-template">
+											<ol class="step-indicator">
+													<li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+													</li>
+												</ol>
+											</script>
+
+										<script type="x-template" id="step-navigation-step-template">
+											<li :class="indicatorclass">
+													<div class="step"><i :class="step.icon_class"></i></div>
+													<div class="caption hidden-xs hidden-sm">Step <span v-text="step.id"></span>: <span v-text="step.title"></span></div>
+												</li>
+											</script>
+
+										<script type="x-template" id="step-template">
+											<div class="step-wrapper" :class="stepWrapperClass">
+													<button type="button" class="btn btn-primary" @click="lastStep" :disabled="firststep">
+														Back
+													</button>
+													<button type="button" class="btn btn-primary" @click="nextStep" :disabled="laststep">
+														Next
+													</button>
+													<button type="submit" class="btn btn-primary" v-if="laststep">
+														Submit
+													</button>
+												</div>
+											</script>
+									</div>
 								</div>
-
-							</div>
-
+							</form>
+							<h6 class="service-title"></h6>
+							<p class="service-description"></p>
 						</div>
-
 					</div>
-
 				</div>
-
 			</div>
-			<!-- end of modal -->
-		</div>
-	</div>
+			<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js'></script>
+			<script src="<?php echo WEB_ROOT; ?>script/wizard.js"></script>
+			<script>
+				const dynamicModal = document.getElementById('dynamicModal');
+				dynamicModal.addEventListener('shown.bs.modal', function(event) {
+					// Get the service ID from the button that triggered the modal
+					const button = event.relatedTarget;
+					const subcatid = button.getAttribute('data-subcatid');
+					const title = button.getAttribute('data-title');
+					const description = button.getAttribute('data-description');
 
+					// Update the modal content with the service details
+					document.querySelector('.service-title').innerText = title;
+					document.querySelector('.service-description').innerText = description;
+				});
+			</script>
+			<!-- END OF MODAL -->
+
+		</div>
+
+
+
+	</div>
 </div>
 
 <!-- end of carousel -->
@@ -251,3 +392,5 @@ if ($subcategories->rowCount() > 0) {
 		});
 	});
 </script>
+
+</div>
