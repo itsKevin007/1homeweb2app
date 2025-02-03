@@ -1487,7 +1487,7 @@ span.cart-item {
    display: -ms-grid;
    display: grid;
    -ms-grid-columns: 1fr 16px 1fr 16px 1fr 16px 1fr;
-   grid-template-columns: repeat(4,1fr);
+   grid-template-columns: repeat(3,1fr);
    grid-gap: 16px;
 }
 .prodcut-sec-slide-full{
@@ -1648,8 +1648,8 @@ span.cart-item {
     border: 1px solid rgb(30 41 59 / 10%);
     border-radius: 8px;
     background: #FFFFFF;
-    padding: 16px;
-    width: 220px;
+    /* padding: 16px; */
+    width: 150px;
     height: 96px;
     margin: 0 16px 0 0;
 }

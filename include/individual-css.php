@@ -19,3 +19,4 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/transTable.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/tabStyle.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/searchdropdown.css">
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/wizard.css">

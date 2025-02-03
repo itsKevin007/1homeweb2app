@@ -46,6 +46,16 @@
 				$pageTitle 	= $sett_data['system_title'];
 				break;
 
+			case 'viewsub' :
+				$content 	= 'view_subcategories.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+
+			case 'book' :
+				$content 	= 'booking.php';
+				$pageTitle 	= $sett_data['system_title'];
+				break;
+				
 			default :
 				$content 	= 'list.php';		
 				$pageTitle 	= $sett_data['system_title'];

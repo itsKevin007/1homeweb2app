@@ -6,11 +6,7 @@ checkUser();
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 switch ($action) {
-	
-    case 'add' :
-        add_data();
-        break;
-		
+
 	case 'modify' :
         modify_data();
         break;
@@ -19,60 +15,58 @@ switch ($action) {
         delete_data();
         break;
     
-    
-	   
-    default :
-        // if action is not defined or unknown
-        // move to main category page
-        header('Location: index.php');
+    case 'addBooking' :
+        add_booking();
+        break;
+	
+	default :
+		// if action is not defined or unknown
+		// move to main category page
+		header('Location: index.php');
 }
 
-
-/*
-    Add Data
-*/
-function add_data()
+function add_booking()
 {
-	include '../../global-library/database.php';
+    global $conn;
+
 	$userId = $_SESSION['user_id'];
-	
-	$fname = $_POST['fname'];
-	$lname = $_POST['lname'];
-	$email = $_POST['email'];
-	$type = $_POST['type'];
-	
-	$chk = $conn->prepare("SELECT * FROM bs_client WHERE c_fname = :fname AND c_lname = :lname AND email = :email AND is_deleted != '1'");
-	$chk->bindParam(':fname', $fname, PDO::PARAM_STR);
-	$chk->bindParam(':lname', $lname, PDO::PARAM_STR);
-	$chk->bindParam(':email', $email, PDO::PARAM_STR);
-	$chk->execute();
-	if($chk->rowCount() > 0)
-	{
-		header('Location: index.php?view=modify&error=Data already exist! Data entry failed.');              
-	}else{
+    $requestedService = $_POST['requestedService'] ?? '';
+    $booking_address = $_POST['booking_address'] ?? '';
+    $contact_num = $_POST['contact_num'] ?? '';
+    $roomNo = $_POST['roomNo'] ?? '';
+    $createdAt = $_POST['created_at'] ?? '';
 
+// echo "Requested Service: " . htmlspecialchars($requestedService) . "<br>";
+// echo "Booking Address: " . htmlspecialchars($booking_address) . "<br>";
+// echo "Contact Number: " . htmlspecialchars($contact_num) . "<br>";
+// echo "Room Number: " . htmlspecialchars($roomNo) . "<br>";
+// echo "Created At: " . htmlspecialchars($createdAt) . "<br>";
 
+    try {
+        $stmt = $conn->prepare("INSERT INTO tbl_bookings (user_id,requested_service, booking_address, contact_num, roomNo, created_at)
+                            VALUES (:user_id, :requested_service, :booking_address, :contact_num, :roomNo, :created_at )");
+		$stmt->bindParam(':user_id', $userId, PDO::PARAM_STR);
+        $stmt->bindParam(':requested_service', $requestedService, PDO::PARAM_STR);
+        $stmt->bindParam(':booking_address', $booking_address, PDO::PARAM_STR);
+        $stmt->bindParam(':contact_num', $contact_num, PDO::PARAM_STR);
+        $stmt->bindParam(':roomNo', $roomNo, PDO::PARAM_STR);
+        $stmt->bindParam(':created_at', $createdAt, PDO::PARAM_STR);
 
-		$sql = $conn->prepare("INSERT INTO bs_client (c_fname, c_lname, email, sub_type,
-													 date_added, added_by)
-											VALUES ('$fname', '$lname', '$email', '$type',
-													'$today_date1', '$userId')");
-		$sql->execute();
+        $stmt->execute();
 
-		$id = $conn->lastInsertId();
-		$uid = md5($id);
-
-		$up = $conn->prepare("UPDATE bs_client SET uid = '$uid' WHERE c_id = '$id'");
-		$up->execute();
-
-		$log = $conn->prepare("INSERT INTO tr_log (description, log_action_date, action_by) VALUES ('Client $fname $lname Added.', '$today_date1', '$userId')");
-		$log->execute();
-		
-		header('Location: index.php?view=modify&error=Added successfully.');
-
-	}
+        // Redirect to previous page with success message
+        header('Location: ' . $_SERVER['HTTP_REFERER'] . '?success=Booking+successfully+added');
+        exit;
+    } catch (Exception $e) {
+        error_log($e->getMessage()); // Log error to the server logs
+        // Prepare the form to redirect with error message
+        echo '<form id="redirectForm" action="index.php?view=viewsub" method="POST">
+            <input type="hidden" name="error" value="Error processing booking">
+        </form>';
+        echo '<script>document.getElementById("redirectForm").submit();</script>';
+        exit;
+    }
 }
-
 
 // /*
 // 	Upload an image and return the uploaded image name
