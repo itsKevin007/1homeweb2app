@@ -87,7 +87,7 @@ $fullname = $fname . " " . $mname . " " . $lname;
 		<div class="card-info" id="profile-third-sec">
 			<div class="container">
 				<div class="profile-third-sec-full mt-24">
-					<a href="../address/index.php" class="btn btn-pin" >
+					<a href="../address/" class="btn btn-pin" >
 						<img src="../../assets/images/icon/add-location-alt-white.svg" width="30px" >
 					</a>
 				</div>

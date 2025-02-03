@@ -51,15 +51,17 @@ function add_data()
     $latitude = mysqli_real_escape_string($link, $_POST['lat']);
     $longitude = mysqli_real_escape_string($link, $_POST['long']);
     $address = mysqli_real_escape_string($link, $_POST['address']);
-	$userType = 1;
-	
-	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, user_type, area_long, area_lat, date_added, added_by, is_deleted) 
-								VALUES (:address, :userId, :userType, :longitude, :latitude, :today_date1, :userId2, :is_deleted)");
+	$landMark = mysqli_real_escape_string($link, $_POST['landMark']);
+	$userType = 0;
+
+	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, user_type, area_long, area_lat, landMark, date_added, added_by, is_deleted) 
+								VALUES (:address, :userId, :userType, :longitude, :latitude, :landMark, :today_date1, :userId2, :is_deleted)");
 	$sql->bindParam(':address', $address);
 	$sql->bindParam(':userId', $userId);
 	$sql->bindParam(':userType', $userType);
 	$sql->bindParam(':longitude', $longitude);
 	$sql->bindParam(':latitude', $latitude);
+	$sql->bindParam(':landMark', $landMark);
 	$sql->bindParam(':today_date1', $today_date1);
 	$sql->bindParam(':userId2', $userId); // Alias for clarity, though userId is reused here
 	$sql->bindValue(':is_deleted', 0); // Assuming 'is_deleted' is always 0
@@ -170,19 +172,20 @@ function modify_data()
     $latitude = mysqli_real_escape_string($link, $_POST['lat']);
     $longitude = mysqli_real_escape_string($link, $_POST['long']);
     $name = mysqli_real_escape_string($link, $_POST['address']);
-	
+	$landmark = mysqli_real_escape_string($link, $_POST['landMark']);
 
-	$sql = $conn->prepare("UPDATE tbl_location SET name = :name, area_long = :longitude, area_lat = :latitude,
+	$sql = $conn->prepare("UPDATE tbl_location SET name = :name, area_long = :longitude, area_lat = :latitude, landMark = :landmark,
 									date_modified = :today_date1, modified_by = :userId WHERE l_id = :areaId");
 	$sql->bindParam(':name', $name);
 	$sql->bindParam(':longitude', $longitude);
 	$sql->bindParam(':latitude', $latitude);
+	$sql->bindParam(':landmark', $landmark);
 	$sql->bindParam(':today_date1', $today_date1);
 	$sql->bindParam(':userId', $userId);
 	$sql->bindParam(':areaId', $areaId);
 	$sql->execute();
 
-	$keyword = 'Address: ' . $name .' Longitude: ' . $longitude . ' Latitude: ' . $latitude;
+	$keyword = 'Address: ' . $name .' Longitude: ' . $longitude . ' Latitude: ' . $latitude . ' Landmark: ' . $landmark;
 
 
 	$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
@@ -190,8 +193,8 @@ function modify_data()
 	$log->execute();
 	
 		
-		header("Location: index.php?view=service&error=Success");
-		
+		header("Location: ../address/?error=success");
+			
 }
 
 /*
