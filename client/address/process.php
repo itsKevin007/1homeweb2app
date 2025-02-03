@@ -55,15 +55,17 @@ function add_data()
     $latitude = mysqli_real_escape_string($link, $_POST['lat']);
     $longitude = mysqli_real_escape_string($link, $_POST['long']);
     $address = mysqli_real_escape_string($link, $_POST['address']);
+	$landMark = mysqli_real_escape_string($link, $_POST['landMark']);
 	$userType = 0;
-	
-	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, user_type, area_long, area_lat, date_added, added_by, is_deleted) 
-								VALUES (:address, :userId, :userType, :longitude, :latitude, :today_date1, :userId2, :is_deleted)");
+
+	$sql = $conn->prepare("INSERT INTO tbl_location (name, user_id, user_type, area_long, area_lat, landMark, date_added, added_by, is_deleted) 
+								VALUES (:address, :userId, :userType, :longitude, :latitude, :landMark, :today_date1, :userId2, :is_deleted)");
 	$sql->bindParam(':address', $address);
 	$sql->bindParam(':userId', $userId);
 	$sql->bindParam(':userType', $userType);
 	$sql->bindParam(':longitude', $longitude);
 	$sql->bindParam(':latitude', $latitude);
+	$sql->bindParam(':landMark', $landMark);
 	$sql->bindParam(':today_date1', $today_date1);
 	$sql->bindParam(':userId2', $userId); // Alias for clarity, though userId is reused here
 	$sql->bindValue(':is_deleted', 0); // Assuming 'is_deleted' is always 0
@@ -197,19 +199,20 @@ function modify_data()
     $latitude = mysqli_real_escape_string($link, $_POST['lat']);
     $longitude = mysqli_real_escape_string($link, $_POST['long']);
     $name = mysqli_real_escape_string($link, $_POST['address']);
-	
+	$landmark = mysqli_real_escape_string($link, $_POST['landMark']);
 
-	$sql = $conn->prepare("UPDATE tbl_location SET name = :name, area_long = :longitude, area_lat = :latitude,
+	$sql = $conn->prepare("UPDATE tbl_location SET name = :name, area_long = :longitude, area_lat = :latitude, landMark = :landmark,
 									date_modified = :today_date1, modified_by = :userId WHERE l_id = :areaId");
 	$sql->bindParam(':name', $name);
 	$sql->bindParam(':longitude', $longitude);
 	$sql->bindParam(':latitude', $latitude);
+	$sql->bindParam(':landmark', $landmark);
 	$sql->bindParam(':today_date1', $today_date1);
 	$sql->bindParam(':userId', $userId);
 	$sql->bindParam(':areaId', $areaId);
 	$sql->execute();
 
-	$keyword = 'Address: ' . $name .' Longitude: ' . $longitude . ' Latitude: ' . $latitude;
+	$keyword = 'Address: ' . $name .' Longitude: ' . $longitude . ' Latitude: ' . $latitude . ' Landmark: ' . $landmark;
 
 
 	$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
@@ -217,7 +220,7 @@ function modify_data()
 	$log->execute();
 	
 		
-		header("Location: index.php?view=service&error=Success");
+		header("Location: ../address/?error=success");
 		
 }
 
@@ -231,21 +234,39 @@ function modify_data()
 */
 function active_data()
 {
+	
+	session_start();
 	include '../../global-library/database.php';
-	$userId = $_SESSION['user_id'];
-	
-    if(isset($_POST['id']))
-	{ $id = $_POST['id']; }else{ $id = $_GET['id']; }
-	
-    // delete the category. set is_deleted to 1 as deleted;    
-	$sql = $conn->prepare("UPDATE tbl_location SET is_active = '1', date_deleted = '$today_date1', deleted_by = '$userId' WHERE uid = '$id'");
-	$sql->execute();
 
-	$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-											VALUES ('Location', 'Location Deleted', '$id', '$userId', '$today_date1')");
-	$log->execute();	
-        
-	header("Location: index.php?error=Success");
+	if (isset($_POST['action']) && $_POST['action'] == 'act') {
+		$userId = $_SESSION['user_id'];
+		$id = $_POST['id'];
+		$isActive = $_POST['is_active'];
+		$today_date1 = date('Y-m-d H:i:s');
+
+		// Update the active status
+		$sql = $conn->prepare("UPDATE tbl_location SET is_active = :is_active, date_deleted = :date_deleted, deleted_by = :deleted_by WHERE uid = :id");
+		$sql->execute([
+			':is_active' => $isActive,
+			':date_deleted' => $today_date1,
+			':deleted_by' => $userId,
+			':id' => $id
+		]);
+
+		// Log the action
+		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
+							VALUES ('Location', 'Location Status Updated', :id, :userId, :today_date1)");
+		$log->execute([
+			':id' => $id,
+			':userId' => $userId,
+			':today_date1' => $today_date1
+		]);
+
+		echo json_encode(['status' => 'success', 'is_active' => $isActive]);
+	} else {
+		echo json_encode(['status' => 'error', 'message' => 'Invalid action']);
+	}
+	
 }
 
 /*

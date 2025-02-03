@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="<?php echo WEB_ROOT;?>style/add-location.css" />
 <link rel="stylesheet" href="<?php echo WEB_ROOT;?>libraries/leaflet/leaflet.css" />
+<link rel="stylesheet" href="<?php echo WEB_ROOT;?>style/toggle-button.css" />
+<link rel="stylesheet" href="<?php echo WEB_ROOT;?>style/section-location.css" />
 <script src="<?php echo WEB_ROOT;?>libraries/leaflet/leaflet.js"></script>
 
 <style>
@@ -77,103 +79,139 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 	}else{}
 
 ?>
-<section id="profile-page-sec">
 
-	<div class="container  mt-24">
-		<h4>LOCATION</h4>
-	</div><br>
-	<div class="card" id="profile-third-sec">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="container">				
-					<div class="profile-third-sec-full mt-24">
-						<div class="header">
-							<div class="row">
-								<div class="col-8">	
-									<button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#addArea">
-										<img src="../../assets/images/icon/add-location-alt-white.svg" alt="Add" width="20px">
-									</button>																																		
-								</div>
-							</div>
-						</div>
-					<?php
+<section id="profile-page-sec" class="section-location">
 
-						$sql = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_deleted != '1'");
-						$sql->execute();
-						$count = $sql->rowCount();
+<div class="container  mt-24">
+    <h4>PROPERTIES LOCATION</h4>
+</div><br>
+<div class="card" id="profile-third-sec">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container">				
+                <div class="profile-third-sec-full mt-24 ">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-2 add-button-loc">	
+                                <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#addArea">
+                                    <img src="../../assets/images/icon/add-location-alt-white.svg" alt="Add" width="20px">
+                                </button>																																		
+                            </div>
+                        </div>
+                    </div>
+                <?php
 
-					?>
-					
-					<hr>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Active</th>
-								<th scope="col">Address</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							if ($count > 0) {
-								$n = 1;
-								foreach ($sql as $row) 
-								{
-										$id = $row['uid'];
-										$areaId = $row['l_id'];
-										$Address = $row['name'];
-										$is_active = $row['is_active'];
-										$Long = $row['area_long'];
-										$Lat = $row['area_lat'];
+                    $sql = $conn->prepare("SELECT * FROM tbl_location WHERE user_id = '$userId' AND is_deleted != '1'");
+                    $sql->execute();
+                    $count = $sql->rowCount();
 
-										
-										if($is_active == 1)
-										{
-											$active = 'success';
-											$active_name = WEB_ROOT .'assets/images/icon/check-circle-white.svg';
-										}else{
-											$active = 'danger';
-											$active_name = WEB_ROOT .'assets/images/icon/circle-x-white.svg';
-										}
-									?>
+                ?>
+                
+                <hr>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Active</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($count > 0) {
+                            $n = 1;
+                            foreach ($sql as $row) 
+                            {
+                                    $id = $row['uid'];
+                                    $areaId = $row['l_id'];
+                                    $Address = $row['name'];
+                                    $is_active = $row['is_active'];
+                                    $Long = $row['area_long'];
+                                    $Lat = $row['area_lat'];
+                                    $landMark = $row['landMark'];
 
-									<tr>
 
-									
-										<td>
+                                    if ($is_active == 1) {
+                                        $active = 'checked'; // Set the checkbox to checked if active
+                                    } else {
+                                        $active = ''; // Leave it unchecked if not active
+                                    }
+                                ?>
 
-											<a href="process.php?action=act&id=<?php echo $id; ?>" class="btn btn-<?php echo $active; ?> btn-icon">
-												<img src="<?php echo $active_name; ?>" class="icon" style="width: 25px !important;" />
-											</a>		
-										</td>							
-										<td><?php echo $Address; ?></td>
-										<td>			
-											<button type="button" data-name="<?php echo $Name?>" data-long="<?php echo $Long?>" data-lat="<?php echo $Lat?>" data-address="<?php echo $Address?>" data-areaId="<?php echo $areaId?>" data-bs-toggle="offcanvas" data-bs-target="#editArea" class="btn btn-primary "><img src="../../assets/images/icon/edit-white.svg" width="15px" ></button>						
-											<a href="process.php?action=delete&id=<?php echo $id; ?>" class="btn btn-danger btn-icon">
-												<img src="<?php echo WEB_ROOT; ?>assets/images/icon/delete-white.svg" class="icon" />
-											</a>					
-										</td>
-									</tr>
+                                <tr>                          
+                                    <td>
 
-									<?php
-									$n++;
-								}
-							} else {
-								?>
-								<tr>
-									<td colspan="5" style="text-align: center;">No records found</td>
-								</tr>
-								<?php
-							}
-							?>
-						</tbody>
-					</table>
-					</div>
-				</div>
-			</div>
-			
+                                    <div class="switch-container" data-id="<?php echo $id; ?>">
+                                        <label class="switch">
+                                            <input type="checkbox" class="switch-button" <?php echo $active; ?>>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>  
+
+                                    </td>							
+                                    <td>
+                                        <b><?php echo $Address; ?></b><br>
+                                        Landmark: <?php echo $landMark; ?>
+                                    </td>
+                                    <td>			
+                                        <button type="button" data-long="<?php echo $Long?>" data-land="<?php echo $landMark; ?>" data-lat="<?php echo $Lat?>" data-address="<?php echo $Address?>" data-areaId="<?php echo $areaId?>" data-bs-toggle="offcanvas" data-bs-target="#editArea" class="btn btn-primary "><img src="../../assets/images/icon/edit-white.svg" width="15px" ></button>
+                                    </td>
+                                    <td>
+
+                                        <a href="process.php?action=delete&id=<?php echo $id; ?>" class="btn btn-danger btn-icon">
+                                            <img src="<?php echo WEB_ROOT; ?>assets/images/icon/delete-white.svg" class="icon" />
+                                        </a>					
+                                    </td>
+                                </tr>
+
+                                <?php
+                                $n++;
+                            }
+                        } else {
+                            ?>
+                            <tr>
+                                <td colspan="5" style="text-align: center;">No records found</td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>			
 	</div>
 </div>
+<!-- script for switch and ajax -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    $(document).ready(function() {
+        $('.switch-button').on('change', function() {
+            console.log('clicked');
+            var checkbox = $(this);
+            var id = checkbox.closest('.switch-container').data('id');
+            var isActive = checkbox.is(':checked') ? 1 : 0;
+
+            $.ajax({
+                url: 'address-active.php', 
+                type: 'POST',
+                data: {
+                    id: id,
+                    is_active: isActive
+                },
+                success: function(response) {
+                    console.log(response); // Log the server response
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+});
+</script>
+
+
 
 </section>
 
@@ -199,10 +237,12 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 				<input type="hidden" class="form-control form-control-sm" id="long" name="long" placeholder="Long" autocomplete="off" required />
 				<input type="hidden" class="form-control form-control-sm" id="lat" name="lat" placeholder="Lat" autocomplete="off" required />
 			</div>
+            
 
 			<div class="mt-16">
 				<center><label class="mt-16"><b>Address</b></label></center>
-				<textarea type="text" rows="2" class="form-control" id="address" name="address" placeholder="Area Address" autocomplete="off" readonly required></textarea>
+				<textarea type="text" rows="2" class="form-control" id="address" name="address" placeholder="Area Address" autocomplete="off" readonly required></textarea><br>
+                <textarea type="text" rows="2" class="form-control" id="landMark" name="landMark" placeholder="Add Landmark (optional)" autocomplete="off"></textarea>
 			</div>
 
             <hr>
@@ -386,7 +426,8 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
             </div>
             <div class="mb-1">
                 <center><b>Address</b></center>
-                <textarea type="text" rows="2" class="form-control form-control-sm" id="aaddress" name="address" placeholder="Area Address" autocomplete="off" required></textarea>
+                <textarea type="text" rows="2" class="form-control form-control-sm" id="aaddress" name="address" placeholder="Area Address" autocomplete="off" required></textarea><br>
+                <textarea type="text" rows="2" class="form-control" id="mod-landMark" name="landMark" placeholder="Add Landmark (optional)" autocomplete="off"></textarea>
             </div>
             <hr>
             <div class="col-12 col-sm-12 mb-2">
@@ -445,92 +486,105 @@ $errorMessage = (isset($_GET['error']) && $_GET['error'] != '') ? $_GET['error']
 </script>
 
 <script>
-    var map2;
-    var marker2;
+var map2;
+var marker2;
 
-        function initEditMap(lat, lng) {
-        var map2 = L.map('map2').setView([lat, lng], 16);
-
-
-        // Initialize map with OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map2);
-
-        var marker2 = L.marker([lat, lng]).addTo(map2).bindPopup('<center>Current <br> Location</center>').openPopup();
-
-        // Add click event handler to the map
-        map2.on('click', function(e) {
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
-
-            // Update marker position and popup content
-            marker2.setLatLng([lat, lng]).bindPopup('<center>Selected <br> Location</center>').openPopup();
-
-            // Update the latitude and longitude input fields
-            document.getElementById('lati').value = lat;
-            document.getElementById('longi').value = lng;
-
-            // Fetch address for the selected location
-            fetchAddress1(lat, lng);
-        });
+function initEditMap(lat, lng) {
+    // Check if map already exists and remove it
+    if (map2) {
+        map2.remove(); // Remove existing map instance
     }
 
-    function fetchAddress1(lat, lng) {
-        // Use the Nominatim API to get the address from latitude and longitude
-        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.address) {
-                    // Update the address field
-                    document.getElementById('aaddress').value = data.display_name;
-                } else {
-                    document.getElementById('aaddress').value = 'Address not found';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching address:', error);
-                document.getElementById('address').value = 'Error fetching address';
-            });
-    }
+    map2 = L.map('map2').setView([lat, lng], 16);
 
-    function showLocation1(empName, lat, lng) {
-        $('#editArea').on('shown.bs.offcanvas', function () {
-            map2.invalidateSize(); // Force map to recalculate size
-            // Update marker position and popup content
-            marker2.setLatLng([lat, lng]).bindPopup(empName).openPopup();
-            map2.setView([lat, lng], 17); // Set view to marker position with zoom level 17
-        });
+    // Initialize map with OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map2);
 
-        // Remove the event listener after the modal is  hidden to prevent multiple bindings
-        $('#editArea').on('hidden.bs.offcanvas', function () {
-            $('#editArea').off('shown.bs.offcanvas');
-        });
-    }
+    marker2 = L.marker([lat, lng]).addTo(map2)
+        .bindPopup('<center>Current <br> Location</center>')
+        .openPopup();
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var offcanvasElement = document.getElementById('editArea');
-        offcanvasElement.addEventListener('show.bs.offcanvas', function (event) {
-            console.log('Edit area canvas activated');
-            
-            var button = event.relatedTarget; 
-            var long = button.getAttribute('data-long');
-            var lat = button.getAttribute('data-lat');
-            var areaId = button.getAttribute('data-areaId');
-            var address = button.getAttribute('data-address');
+    // Add click event handler to the map
+    map2.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
 
-            var offcanvaslong = offcanvasElement.querySelector('#longi'); 
-            var offcanvasclat = offcanvasElement.querySelector('#lati'); 
-            var offcanvasareaId = offcanvasElement.querySelector('#areaId'); 
-            var offcanvasaddress = offcanvasElement.querySelector('#aaddress'); 
+        // Update marker position and popup content
+        marker2.setLatLng([lat, lng])
+            .bindPopup('<center>Selected <br> Location</center>')
+            .openPopup();
 
-            offcanvaslong.value = long;
-            offcanvasclat.value = lat;
-            offcanvasareaId.value = areaId;
-            offcanvasaddress.value = address;
+        // Update the latitude and longitude input fields
+        document.getElementById('lati').value = lat;
+        document.getElementById('longi').value = lng;
 
-            // Initialize the map with the given lat and long
-            initEditMap(lat, long);
-        });
+        // Fetch address for the selected location
+        fetchAddress1(lat, lng);
     });
+}
+
+function fetchAddress1(lat, lng) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.address) {
+                document.getElementById('aaddress').value = data.display_name;
+            } else {
+                document.getElementById('aaddress').value = 'Address not found';
+            }
+        })
+        .catch(error => {
+
+            document.getElementById('aaddress').value = 'Error fetching address';
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var offcanvasElement = document.getElementById('editArea');
+
+    // When opening the offcanvas
+    offcanvasElement.addEventListener('show.bs.offcanvas', function(event) {
+        
+        var button = event.relatedTarget;
+        var long = button.getAttribute('data-long');
+        var lat = button.getAttribute('data-lat');
+        var areaId = button.getAttribute('data-areaId');
+        var address = button.getAttribute('data-address');
+        var landmark = button.getAttribute('data-land');
+
+        var offcanvaslong = offcanvasElement.querySelector('#longi');
+        var offcanvasclat = offcanvasElement.querySelector('#lati');
+        var offcanvasareaId = offcanvasElement.querySelector('#areaId');
+        var offcanvasaddress = offcanvasElement.querySelector('#aaddress');
+        var offcanvaslandmark = offcanvasElement.querySelector('#mod-landMark');
+
+        offcanvaslong.value = long;
+        offcanvasclat.value = lat;
+        offcanvasareaId.value = areaId;
+        offcanvasaddress.value = address;
+        offcanvaslandmark.value = landmark;
+
+        // Initialize the map with the given lat and long
+        initEditMap(parseFloat(lat), parseFloat(long));
+    });
+
+    // When closing the offcanvas, clear input fields and remove the map
+    offcanvasElement.addEventListener('hidden.bs.offcanvas', function() {
+
+        // Clear input fields
+        offcanvasElement.querySelector('#longi').value = '';
+        offcanvasElement.querySelector('#lati').value = '';
+        offcanvasElement.querySelector('#areaId').value = '';
+        offcanvasElement.querySelector('#aaddress').value = '';
+        offcanvasElement.querySelector('#mod-landMark').value = '';
+
+        // Remove the map instance
+        if (map2) {
+            map2.remove();
+            map2 = null; // Reset the map instance
+        }
+    });
+});
 </script>

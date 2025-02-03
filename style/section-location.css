@@ -1,0 +1,14 @@
+
+    /* section-location */
+    .section-location 
+    {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+	.add-button-loc {
+		float: left !important;
+
+	}

@@ -265,8 +265,8 @@ function _deleteImage($id)
 
 		if ($sql_data['image'] && $sql_data['thumbnail']) {
 			// remove the image file
-			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/client/$sql_data[image]");
-			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/client/$sql_data[thumbnail]");
+			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/user/$sql_data[image]");
+			$deleted = @unlink(SRV_ROOT . "adminpanel/assets/images/user/$sql_data[thumbnail]");
 		}
 	}
 
