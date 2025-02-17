@@ -19,14 +19,36 @@ switch ($action) {
         delete_data();
         break;
     
+	    case 'delBooking' :
+        delBooking();
+        break;
     
-	   
     default :
         // if action is not defined or unknown
         // move to main category page
         header('Location: index.php');
 }
 
+// delete booking
+function delBooking()
+{
+    include '../../global-library/database.php';
+    $bookingId = $_POST['booking_id'];
+
+    try {
+        $stmt = $conn->prepare("DELETE FROM tbl_bookings WHERE booking_id = :bookingId");
+        $stmt->bindParam(':bookingId', $bookingId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            echo 'Error: Unable to delete booking.';
+        }
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
 
 /*
     Add Data

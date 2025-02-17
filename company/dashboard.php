@@ -170,6 +170,7 @@ $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
 				$bookingAddress = htmlspecialchars($booking['booking_address']);
 				$contactNumber = htmlspecialchars($booking['contact_num']);
 				$bookingId = htmlspecialchars($booking['booking_id']);
+				$userId = htmlspecialchars($booking['user_id']);
 			?>
 			<div class="row p-2 rounded mb-2" style="background: linear-gradient(90deg, rgba(10,0,176,1) 0%, rgba(59,68,223,1) 100%); width: 80%;">
 				<div class="col-sm-8 row" style="margin-left: 2px;">
@@ -184,14 +185,15 @@ $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
 						data-booking-id="<?= $bookingId; ?>"
 						data-requested-service="<?= $requestedService; ?>"
 						data-booking-address="<?= $bookingAddress; ?>"
-						data-contact-num="<?= $contactNumber; ?>">
+						data-contact-num="<?= $contactNumber; ?>"
+						data-user-id="<?= $userId; ?>"
+						>
 						Accept
 					</button>
 				</div>
 			</div>
 			<?php } ?>
 		<?php endforeach; ?>
-
 		<!-- Accept Modal -->
 		<div class="modal" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="acceptModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -204,7 +206,9 @@ $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
 					</div>
 					<div class="modal-body">
 						<form method="POST" action="company/process.php?action=accept" id="acceptForm">
-							<input type="hidden" name="serviceId" id="booking-id-hidden">
+							<input type="hidden" name="service_id" id="booking-id-hidden">
+							<input type="hidden" name="client_id" id="client-id-hidden">
+							<input type="hidden" name="accepted_by" id="accepted-by-hidden">
 							<input type="hidden" name="aReqServ" id="requested-service-hidden">
 							<input type="hidden" name="aAddress" id="booking-address-hidden">
 							<input type="hidden" name="aContactNo" id="contact-num-hidden">
@@ -226,12 +230,14 @@ $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
 					const requestedService = this.getAttribute('data-requested-service');
 					const bookingAddress = this.getAttribute('data-booking-address');
 					const contactNum = this.getAttribute('data-contact-num');
+					const userId = this.getAttribute('data-user-id');
 
 					// Populate modal fields
 					document.getElementById('booking-id-hidden').value = bookingId;
 					document.getElementById('requested-service-hidden').value = requestedService;
 					document.getElementById('booking-address-hidden').value = bookingAddress;
 					document.getElementById('contact-num-hidden').value = contactNum;
+					document.getElementById('client-id-hidden').value = userId;
 
 					// Show the modal
 					$('#acceptModal').modal('show');

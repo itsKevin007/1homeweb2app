@@ -49,64 +49,46 @@ switch ($action) {
 // accept request
 function accept_request()
 {
-	if (!isset($_SESSION['user_id'])) {
-		header('Location: index.php?view=dash&status=error&message=Unauthorized');
-		exit;
-	}
-
 	include '../global-library/database.php';
+	$acceptedBy = $_SESSION['user_id'];
+	$userId = $_SESSION['user_id'];
 
-	$serviceId = filter_input(INPUT_POST, 'serviceId', FILTER_VALIDATE_INT);
-	$user_id = $_SESSION['user_id'];
-	$aAddress = filter_input(INPUT_POST, 'aAddress', FILTER_SANITIZE_STRING);
-	$aContactNo = filter_input(INPUT_POST, 'aContactNo', FILTER_SANITIZE_STRING);
-	$aReqServ = filter_input(INPUT_POST, 'aReqServ', FILTER_SANITIZE_STRING);
+	$serviceId = mysqli_real_escape_string($link, $_POST['service_id']);
+	$clientId = mysqli_real_escape_string($link, $_POST['client_id']);
+	$aReqServ = mysqli_real_escape_string($link, $_POST['aReqServ']);
+	$aAddress = mysqli_real_escape_string($link, $_POST['aAddress']);
+	$aContactNo = mysqli_real_escape_string($link, $_POST['aContactNo']);
+	$today_date = date('Y-m-d H:i:s');
 
-	if (!$serviceId || !$aAddress || !$aContactNo || !$aReqServ) {
-		header('Location: index.php?view=dash&status=error&message=Invalid input');
-		exit;
+	$chk = $conn->prepare("SELECT * FROM accepted_services WHERE service_id = ?");
+	$chk->execute([$serviceId]);
+	if ($chk->rowCount() > 0) {
+		header('Location: index.php?view=accept&error=Service already accepted!');
+	} else {
+		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, user_id, client_id, accepted_by, aReqServ, aAddress, aContactNo, accepted_at) VALUES (:service_id, :user_id, :client_id, :accepted_by, :aReqServ, :aAddress, :aContactNo, :accepted_at)");
+		$sql->execute([
+			'service_id' => $serviceId,
+			'user_id' => $userId,
+			'client_id' => $clientId,
+			'accepted_by' => $acceptedBy,
+			'aReqServ' => $aReqServ,
+			'aAddress' => $aAddress,
+			'aContactNo' => $aContactNo,
+			'accepted_at' => $today_date
+		]);
+
+		$up = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = ?");
+		$up->execute([$serviceId]);
+
+		$logDesc = 'Service ID: ' . $serviceId . ' accepted by User ID: ' . $acceptedBy;
+
+		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date) VALUES ('Service', 'Service Accepted', ?, ?, ?)");
+		$log->execute([$logDesc, $acceptedBy, $today_date]);
+
+		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
-
-	try {
-		// Insert into accepted_services table
-		$sql = $conn->prepare("INSERT INTO accepted_services (service_id, user_id, accepted_at, aAddress, aContactNo, aReqServ) 
-                                VALUES (:serviceId, :user_id, NOW(), :aAddress, :aContactNo, :aReqServ)");
-
-		$sql->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-		$sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-		$sql->bindParam(':aAddress', $aAddress, PDO::PARAM_STR);
-		$sql->bindParam(':aContactNo', $aContactNo, PDO::PARAM_STR);
-		$sql->bindParam(':aReqServ', $aReqServ, PDO::PARAM_STR);
-
-		if ($sql->execute()) {
-			// Get the last inserted ID from accepted_services table
-			$id = $conn->lastInsertId();
-
-			// Generate the MD5 hash for the uid
-			$uid = md5($id);
-
-			// Update the uid column in the accepted_services table
-			$updateUid = $conn->prepare("UPDATE accepted_services SET uid = :uid WHERE id = :id");
-			$updateUid->bindParam(':uid', $uid, PDO::PARAM_STR);
-			$updateUid->bindParam(':id', $id, PDO::PARAM_INT);
-			$updateUid->execute();
-
-			// Update booking status in tbl_bookings
-			$updateBooking = $conn->prepare("UPDATE tbl_bookings SET booking_status = 'accepted' WHERE booking_id = :serviceId");
-			$updateBooking->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-			$updateBooking->execute();
-
-			header('Location: ' . $_SERVER['HTTP_REFERER']);
-		} else {
-			header('Location: index.php?view=dash&status=error&message=Failed to execute query');
-		}
-	} catch (PDOException $e) {
-		error_log('Database Error: ' . $e->getMessage());
-		header('Location: index.php?view=dash&status=error&message=Database error');
-	}
-
-	exit;
 }
+
 
 
 

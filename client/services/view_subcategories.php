@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include database connection
 include_once '../../global-library/database.php'; // Replace with your actual database connection file
 
@@ -148,7 +151,7 @@ $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                                         <div class="mb-3">
                                             <label for="modalSubcategoryTitle" class="form-label">Service</label>
-                                            <input type="text" name="requestedService" class="form-control" id="modalSubcategoryTitle">
+                                            <input type="text" name="requested_service" class="form-control" id="modalSubcategoryTitle">
                                         </div>
                                         <div class="mb-3">
                                             <label for="modalAddress" class="form-label">Location</label>
@@ -172,7 +175,6 @@ $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
-
 
                                     <script>
                                         function previewImage(event) {
