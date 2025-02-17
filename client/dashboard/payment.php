@@ -105,14 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="site_content">
-    <!-- Preloader Start -->
-    <div class="loader-mask">
-        <div class="loader">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- Preloader End -->
     <!-- Header Section Start -->
     <!-- Header Section End -->
     <!-- Wallet Page Details Start -->

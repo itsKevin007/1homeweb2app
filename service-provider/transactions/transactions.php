@@ -9,7 +9,7 @@ if (!defined('WEB_ROOT')) {
 }
 
 // for QR
-include('../phpqrcode/qrlib.php');
+include('../../phpqrcode/qrlib.php');
 
 // Temporary directory for QR codes
 $tempDir = 'temp/';
@@ -77,11 +77,7 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <br>
                                 <?php
                                 // Include database connection
-                                include '../global-library/database.php';
-
-                                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST['projectCost'])) {
-                                    submitProjectCost();
-                                }
+                                include '../../global-library/database.php';
 
                                 try {
                                     // Fetch accepted services from the database
@@ -96,36 +92,6 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     echo "Error fetching services: " . $e->getMessage();
                                     $services = []; // Default to an empty array to avoid foreach errors
                                 }
-
-                                // Submit function
-                                function submitProjectCost()
-                                {
-                                    include '../global-library/database.php';
-
-                                    $serviceId = isset($_POST['service_id']) ? intval($_POST['service_id']) : null;
-                                    $projectCost = isset($_POST['projectCost']) ? floatval($_POST['projectCost']) : null;
-
-                                    if (!$serviceId || !$projectCost) {
-                                        echo '<script>Swal.fire("Error!", "Please fill in all fields.", "error")</script>';
-                                        exit();
-                                    }
-
-                                    try {
-                                        $query = "UPDATE accepted_services SET projectCost = :projectCost , status = 'ongoing' WHERE service_id = :serviceId";
-                                        $stmt = $conn->prepare($query);
-                                        $stmt->bindParam(':projectCost', $projectCost, PDO::PARAM_STR);
-                                        $stmt->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
-
-                                        if ($stmt->execute()) {
-                                            echo '<script>Swal.fire("Success!", "Project cost successfully updated.", "success")</script>';
-                                        } else {
-                                            echo '<script>Swal.fire("Error!", "Failed to update project cost.", "error")</script>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo ("Error: " . $e->getMessage());
-                                    }
-                                }
-
                                 ?>
 
                                 <table class="table">
@@ -160,7 +126,7 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                         <h5 class="modal-title" id="modalLabel-<?= $service['service_id'] ?>">Submit Project Cost</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <form action="" method="POST">
+                                                                    <form action="process.php?action=submitAmount" method="POST" onsubmit="return confirm('Are you sure you want to submit the project cost?');">
                                                                         <div class="modal-body">
                                                                             <input type="hidden" name="service_id" value="<?= $service['service_id'] ?>">
                                                                             <label for="projectCost-<?= $service['service_id'] ?>" class="form-label">Project Cost</label>
@@ -219,8 +185,6 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         echo "Error fetching ongoing services: " . $e->getMessage();
                                         $ongoingServices = []; // Default to an empty array to avoid foreach errors
                                     }
-
-
                                     ?>
 
                                     <table class="table">
@@ -243,7 +207,7 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                         <td><?= htmlspecialchars($service['status']) ?></td>
                                                         <td>
                                                             <!-- Form to mark as Done -->
-                                                            <form action="transactions/process.php?action=markDone" method="POST" style="display: inline;">
+                                                            <form action="process.php?action=markDone" method="POST" style="display: inline;">
                                                                 <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                                                 <button type="submit" class="btn btn-primary">Done</button>
                                                             </form>
@@ -310,19 +274,19 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <!--  -->
 
                                     <?php
-                                    try {
-                                        // Fetch ongoing services from the database
-                                        $ongoingStmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id AND status = 'done'");
-                                        $ongoingStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                                        $ongoingStmt->execute();
+                                        try {
+                                            // Fetch ongoing services from the database
+                                            $ongoingStmt = $conn->prepare("SELECT * FROM accepted_services WHERE user_id = :user_id AND status = 'done'");
+                                            $ongoingStmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                                            $ongoingStmt->execute();
 
-                                        // Fetch all results as an associative array
-                                        $ongoingServices = $ongoingStmt->fetchAll(PDO::FETCH_ASSOC);
-                                    } catch (Exception $e) {
-                                        // Handle exceptions
-                                        echo "Error fetching ongoing services: " . $e->getMessage();
-                                        $ongoingServices = []; // Default to an empty array to avoid foreach errors
-                                    }
+                                            // Fetch all results as an associative array
+                                            $ongoingServices = $ongoingStmt->fetchAll(PDO::FETCH_ASSOC);
+                                        } catch (Exception $e) {
+                                            // Handle exceptions
+                                            echo "Error fetching ongoing services: " . $e->getMessage();
+                                            $ongoingServices = []; // Default to an empty array to avoid foreach errors
+                                        }
                                     ?>
 
                                     <table class="table">

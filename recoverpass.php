@@ -37,18 +37,12 @@ if (isset($_POST['txtUserName'])) {
 <style>
     <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/log-in.css'); ?>
 </style>
-    <body class="loading authentication-bg back-theme authentication-bg-pattern">
+<body class="bg-theme bg-theme9">
 
-        <div class="account-pages my-5">
-            <div class="container">
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="text-center">   
-                            <a href="#">
-                                <!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
-								<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="60%"></h1>
-                            </a>
+                
+                          
+                           
                             <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
 
                             <?php
@@ -84,56 +78,40 @@ if (isset($_POST['txtUserName'])) {
                                 }
                             ?>
 
-                        </div><br><br>
-                        <div class="card">
-                            <div class="card-body p-4">
-                                
-							<?php
-								if($errorMessage == 'Updated successfully.')
-								{
-							?>
-								<div class="alert alert-success alert-dismissible fade show" role="alert">
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									<i class="mdi mdi-check-all me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-								</div>
-							<?php
-								}
-								else if($errorMessage == 'Incorrect username or password.')
-								{
-							?>	
-								<div class="alert alert-danger alert-dismissible fade show" role="alert">
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									<i class="mdi mdi-block-helper me-2"></i> <strong><?php echo $errorMessage; ?></strong>
-								</div>
-							<?php								
-								} else {}
-							?>
-                                <div class="text-center mb-3">
-                                    <h4 class="text-uppercase mt-0 mb-3">Reset Password</h4>
-                                    <p class=" mb-0 font-13">Enter your email address and we'll send you an email with instructions to reset your password.  </p>
-                                </div>
-
-                                <form class="needs-validation" novalidate method="post" action="process-recoverpass.php?action=check" enctype="multipart/form-data" name="form" id="form">
-
-                                    <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Email address</label>
-                                        <input class="form-control" name="email" type="email" id="emailaddress" placeholder="Enter your email" required>
+                        <div class="wrapper">
+                            <div class="authentication-forgot d-flex align-items-center justify-content-center">
+                                <div class="card forgot-box">                                 
+                                    <div class="card-body">
+                                        <div class="p-3">
+                                            <div class="text-center">
+                                                <a href="#">
+                                                    <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="200px">
+                                                </a> 
+                                            </div><br>
+                                            <div class="text-center">
+                                                <img src="adminpanel/assets/images/icons/forgot-2.png" width="80" alt="" />
+                                            </div>
+                                            <h4 class="mt-5 font-weight-bold">Forgot Password?</h4>
+                                            <p class="mb-0">Enter your registered email ID to reset the password</p>
+                                            <form class="needs-validation" novalidate method="post" action="process-recoverpass.php?action=check" enctype="multipart/form-data" name="form" id="form">
+                                                <div class="my-4">
+                                                    <label class="form-label">Email</label>
+                                                    <input class="form-control" name="email" type="email" id="emailaddress" placeholder="Enter your email" required>
+                                                </div>
+                                                <div class="d-grid gap-2">
+                                                    <input type="hidden" name="recaptcha_response"  class="form-control" id="recaptchaResponse">
+                                                    <button type="submit" class="btn btn-white text-center">Save changes</button>
+                                                    <a href="index.php" class="btn btn-light"><i class='bx bx-arrow-back me-1'></i>Back to Login</a>
+                                                </div>
+                                            </form> 
+                                        </div>
                                     </div>
-                                    <input type="hidden" name="recaptcha_response"  class="form-control" id="recaptchaResponse">
-                                    <button type="submit" class="btn btn-primary text-center" onClick="return confirmSubmit()">Save changes</button>
-                                    
-                                </form>      
-                            </div> <!-- end card-body -->
+                                </div>
+                            </div>
                         </div>
-                        <!-- end card -->						
+						
 
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
-        <!-- end page -->
+                    
         <script>
             // Select all forms
             document.querySelectorAll('form').forEach(function(form) {

@@ -140,7 +140,7 @@ function modify_data()
 	$bank = isset($_POST['bank']) ? mysqli_real_escape_string($link, $_POST['bank']) : '';
 	$branch = isset($_POST['branch']) ? mysqli_real_escape_string($link, $_POST['branch']) : '';
 
-    
+
 	$fname = mysqli_real_escape_string($link, $_POST['fname']);
 	$mname = mysqli_real_escape_string($link, $_POST['mname']);
 	$lname = mysqli_real_escape_string($link, $_POST['lname']);
@@ -186,7 +186,7 @@ function modify_data()
 	$chk->execute();
 	if ($chk->rowCount() > 0)
 	{
-		// header("Location: index.php?view=modify&error=Data already exist! Data entry failed.");
+		header("Location: index.php?view=modify&error=Data already exist! Data entry failed.");
 	}else{
     
 		$sql = $conn->prepare("UPDATE bs_client SET  c_fname = '$fname', c_mname = '$mname', c_lname = '$lname', c_suffix = '$suffix', connum = '$connum', email = '$email', region_text = '$region', province_text = '$province', city_text = '$city', barangay_text = '$barangay', subdivision = '$subdivision', street = '$street', unit = '$unit', building = '$building', phase = '$phase', blocklot = '$blocklot', zipcode = '$zip', bank = '$bank', branch = '$branch', accname = '$accname', accnum = '$accnum',

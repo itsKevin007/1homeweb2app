@@ -5,12 +5,12 @@
 	$_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
 	checkUser();
 
-	$pg = $conn->prepare("UPDATE bs_page SET page = 'Profile' WHERE is_deleted != '1'");
+	$pg = $conn->prepare("UPDATE bs_page SET page = 'Transactions' WHERE is_deleted != '1'");
 	$pg->execute();
 
 	$userId = $_SESSION['user_id'];
 
-if($accesslevel == 2 ){
+if($accesslevel == 1 ){
 
 	$view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 		

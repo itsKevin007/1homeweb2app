@@ -84,7 +84,7 @@ function check_data()
         $chk1->execute();
         $chk_result = $chk1->fetch(PDO::FETCH_ASSOC);
 
-        $name = $chk_result['fname'] . ' ' . $chk_result['mname']. ' ' . $chk_result['lname'];
+        $name = $chk_result['firstname'] . ' ' . $chk_result['middlename']. ' ' . $chk_result['lastname'];
         $eId = $chk_result['user_id'];
         $uId = $chk_result['uid'];
 
@@ -109,18 +109,18 @@ function check_data()
             $mail->isSMTP(); // Send using SMTP
             $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
             $mail->SMTPAuth = true; // Enable SMTP authentication
-            $mail->Username = 'subscribe@onehomeph.com'; // SMTP username
-            $mail->Password = 'lnab mmun qvzw vpge'; // SMTP password
+            $mail->Username = 'cortez.kevin0914@gmail.com'; // SMTP username
+            $mail->Password = 'vswm nukh maix pfvv'; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
             $mail->Port = 587; // TCP port to connect to
 
             // Recipients
-            $mail->setFrom('subscribe@onehomeph.com', 'One Home PH');
+            $mail->setFrom('cortez.kevin0914@gmail.com', 'One Home PH');
             $mail->addAddress($email); // Add a recipient
 
 
-            $sql = $conn->prepare("INSERT INTO tr_recover_account (e_id, email, verification, request_by, date_request)
-                                                VALUES ('$eId', '$email', '$verification_code', '$userId', '$today_date1')");
+            $sql = $conn->prepare("INSERT INTO tr_recover_account (e_id, email, verification, date_request)
+                                                VALUES ('$eId', '$email', '$verification_code', '$today_date1')");
             $sql->execute();
 
             $id = $conn->lastInsertId();
@@ -128,7 +128,7 @@ function check_data()
             $keyword = 'Email: ' . $email;
             
             $log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
-                                                VALUES ('Recover Account', 'Change Password', '$keyword', '$userId', '$today_date1')");
+                                                VALUES ('Recover Account', 'Change Password', '$keyword', '$eId', '$today_date1')");
             $log->execute();
             
             // Content
@@ -136,7 +136,7 @@ function check_data()
             $mail->Subject = 'Recover Password';
             $mail->Body = '<p>Dear ' . $name . '</p>
             <p>You recently requested to reset your password. Please click the button below to reset it:</p>
-            <form action="https://onehomeph.com/passrecover.php" method="post" target="_blank">
+            <form action="https://mock-up.onehomeph.com/passrecover.php" method="post" target="_blank">
                 <input type="hidden" name="id" value="' . $uId . '">
                 <input type="hidden" name="ra" value="' . $id . '">
                 <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none; font-size: 16px;">Reset Password</button>
@@ -180,33 +180,32 @@ function reset_data()
     $password = $_POST['password'];
     $id = $_POST['id'];
     $ra = $_POST['ra'];
-    
 	
 	$chk = $conn->prepare("SELECT * FROM tr_recover_account WHERE verification = '$verification' AND ra_id = '$ra' ORDER BY ra_id DESC LIMIT 1");
 	$chk->execute();
 	if($chk->rowCount() > 0)
 	{
 
-        $chk1 = $conn->prepare("SELECT * FROM bs_employee WHERE uid = '$id'");
+        $chk1 = $conn->prepare("SELECT * FROM bs_user WHERE uid = '$id'");
         $chk1->execute();
         $chk_result1 = $chk1->fetch(PDO::FETCH_ASSOC);
 
-        $eId = $chk_result1['e_id'];
-        $name = $chk_result1['e_fname'] . '' . $chk_result1['e_mname'] . '' . $chk_result1['e_lname'] . '' . $chk_result1['suffix'];
+        $eId = $chk_result1['user_id'];
+        $name = $chk_result1['firstname'] . '' . $chk_result1['middlename'] . '' . $chk_result1['lastname'];
 
-        $sql = $conn->prepare("UPDATE bs_user SET password = md5('$password'), pass_text = '$password' WHERE e_id = '$eId'");
+        $sql = $conn->prepare("UPDATE bs_user SET password = md5('$password'), pass_text = '$password' WHERE user_id = '$eId'");
         $sql->execute();
 
         $sql = $conn->prepare("UPDATE tr_recover_account SET verification = '' WHERE e_id = '$eId'");
         $sql->execute();
 
-        $chk2 = $conn->prepare("SELECT * FROM bs_user WHERE e_id = '$eId'");
+        $chk2 = $conn->prepare("SELECT * FROM bs_user WHERE user_id = '$eId'");
         $chk2->execute();
         $chk_result2 = $chk2->fetch(PDO::FETCH_ASSOC);
 
         $userId = $chk_result2['user_id'];
 
-        $keyword = 'Employee Named: ' . $name . '<br /> successfully changed password!';
+        $keyword = 'Named: ' . $name . '<br /> successfully changed password!';
 		
 		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)
 												VALUES ('Request Change Password', 'Change Password', '$keyword', '$userId', '$today_date1')");
@@ -214,7 +213,13 @@ function reset_data()
 
 		header("Location: login.php?error=Sucessfully changed the password, please login your portal.");
 	}else{
-    
+
+        $chk1 = $conn->prepare("SELECT * FROM bs_user WHERE uid = '$id'");
+        $chk1->execute();
+        $chk_result1 = $chk1->fetch(PDO::FETCH_ASSOC);
+        $name = $chk_result1['firstname'] . '' . $chk_result1['middlename'] . '' . $chk_result1['lastname'];
+
+        $userId = $chk_result1['user_id'];
 		$keyword = 'Employee Named: ' . $name . '<br /> attempt to change password but failed, verification code did not matched!';
 		
 		$log = $conn->prepare("INSERT INTO tr_log (module, action, description, action_by, log_action_date)

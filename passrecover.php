@@ -28,12 +28,12 @@ require_once 'include/functions.php';
 
     $user_Id = $sql_data['user_id'];
 
-    if ($IMAGEEMP_DATA && !empty($sql_data['thumbnail'])) {
-        $imageProfile = WEB_ROOT .'adminpanel/assets/images/' . $sql_data['thumbnail'];
-    } elseif ($IMAGEEMP_DATA && !empty($sql_data['thumbnail'])) {
-        $imageProfile = WEB_ROOT .'adminpanel/assets/images/' . $sql_data['thumbnail'];
+    if (!empty($sql_data['thumbnail'])) {
+        $imageProfile = WEB_ROOT .'adminpanel/assets/images/user/' . $sql_data['thumbnail'];
+    } elseif (!empty($sql_data['thumbnail'])) {
+        $imageProfile = WEB_ROOT .'adminpanel/assets/images/user/' . $sql_data['thumbnail'];
     } else {
-        $imageProfile = WEB_ROOT .'201file/attachment/no-icon-id.png';
+        $imageProfile = WEB_ROOT .'adminpanel/assets/images/user/noimage.png';
     }
 ?>
     </head>
@@ -50,7 +50,9 @@ require_once 'include/functions.php';
                             <a href="index.html">
                                 <img src="<?php echo WEB_ROOT;?>assets/images/human-cap-colored.png" alt="" height="22" class="mx-auto">
                             </a>
-                            <p class="text-muted mt-2 mb-4">HUMAN CAPITAL</p>
+                            <a href="#">
+                                <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="200px">
+                            </a> 
                         </div>
                         <?php
                             if (isset($_GET['error']) && !empty($_GET['error'])) {

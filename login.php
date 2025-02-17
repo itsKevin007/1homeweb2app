@@ -139,10 +139,49 @@ if (isset($_POST['txtUserName'])) {
                         </div> <!-- end card-body -->
                     </div>
                     <!-- end card -->
+                    <style>
+                        .download-btn {
+                            transition: transform 0.3s ease, opacity 0.3s ease;
+                        }
+
+                        .download-btn:hover {
+                            transform: scale(1.1); /* Slight zoom-in effect */
+                            opacity: 0.8; /* Slight transparency */
+                        }
+
+                    </style>
+                    
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-6 text-center d-flex justify-content-center">
+                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/googleDown.png" class="download-btn" alt="Download Android" onclick="downloadAndroid()"/>
+                        </div>
+                        <div class="col-6 text-center d-flex justify-content-center">
+                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/appleDown.png" class="download-btn" alt="Download iOS" />
+                        </div>
+                    </div>
+
 
                 </div> <!-- end col -->
             </div>
             <!-- end row -->
+
+            <script>
+                function downloadAndroid() {
+                    // Replace with your actual APK file URL
+                    const apkUrl = '<?php echo WEB_ROOT; ?>assets/oneapk/onehome.apk';
+                    window.location.href = apkUrl;
+                }
+
+                function downloadiOS() {
+                    // Replace with your iOS TestFlight or App Store link
+                    const iOSUrl = 'https://testflight.apple.com/join/ABC123';
+                    
+                    // Show confirmation dialog
+                    if(confirm('iOS installation requires TestFlight. Continue to TestFlight?')) {
+                        window.location.href = iOSUrl;
+                    }
+                }
+            </script>
         </div>
         <!-- end container -->
     </div>

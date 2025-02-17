@@ -87,6 +87,40 @@ function add_data()
 	}
 }
 
+/**
+ * Updates the profile image and thumbnail for the current user.
+ *
+ * This function uploads a new profile image and thumbnail for the user using
+ * the `uploadimage` function. It updates the `bs_user` database table with the
+ * new image paths corresponding to the user's ID. A log entry is also created
+ * in the `tr_log` table to record the profile edit action. After updating the
+ * database, the user is redirected to the profile view page with a success message.
+ */
+
+function image_profile()
+{
+	include '../../global-library/database.php';
+	$userId = $_SESSION['user_id'];
+
+	$images = uploadimage('fileImage', SRV_ROOT . 'adminpanel/assets/images/user/');
+
+	$mainImage = $images['image'];
+	$thumbnail = $images['thumbnail'];
+
+		$up = $conn->prepare("UPDATE bs_user SET image = :mainImage, thumbnail = :thumbnail WHERE user_id = :userId");
+		$up->bindParam(':mainImage', $mainImage);
+		$up->bindParam(':thumbnail', $thumbnail);
+		$up->bindParam(':userId', $userId);
+		$up->execute();
+
+		$log = $conn->prepare("INSERT INTO tr_log (module, description, log_action_date, action_by) VALUES ('Service Provider', 'Edit Profile: $thumbnail', '$today_date1', '$userId')");
+		$log->execute();
+		
+		header('Location: index.php?view=prof&error=Success');
+
+	
+}
+
 
 /*
 	Upload an image and return the uploaded image name
