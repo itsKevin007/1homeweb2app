@@ -16,7 +16,11 @@ if($accesslevel == 1 ){
 		
 
 	switch ($view) {
-	
+		case 'add' :
+			$content 	= 'add.php';		
+			$pageTitle 	= $sett_data['system_title'];
+			break;
+
 		case 'modify' :
 			$content 	= 'modify.php';		
 			$pageTitle 	= $sett_data['system_title'];
@@ -27,7 +31,7 @@ if($accesslevel == 1 ){
 			$pageTitle 	= $sett_data['system_title'];
 			break;
 
-		case 'transact': 
+		case 'transactions': 
 			$content 	= 'transactions.php';		
 			$pageTitle 	= $sett_data['system_title'];
 			break;

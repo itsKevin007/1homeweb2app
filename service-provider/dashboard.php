@@ -1,34 +1,7 @@
-<!-- <link href="<?php echo WEB_ROOT; ?>assets/css/flipped.css" rel="stylesheet"> -->
 <link href="<?php echo WEB_ROOT; ?>style/flipped.css" rel="stylesheet">
-<!-- ----------------------------------------------------- for service request css---------------------------------------------------------------- -->
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/reqServ.css">
-
-<!-- for tabs request and approved -->
-<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/twoTabs.css">
-
-
 
 <?php
-// -------------------------------------------------- PHP for services ----------------------------------------------- //
-$services = $conn->prepare("SELECT * FROM ind_maincat WHERE sercatid = :sercatId");
-$services->bindParam(':sercatId', $sercatId, PDO::PARAM_INT);
-$services->execute();
-$services_data = $services->fetch();
-if (isset($services_data['sercatid'])) {
-	$sercatId = $services_data['sercatid'];
-	$mainCategory = $services_data['main_cat'];
-	$description = $services_data['descript'];
-	$thumbnail = $services_data['thumbnail'];
-	$image = $services_data['image'];
-} else {
-	$sercatId = null;
-	$mainCategory = null;
-	$description = null;
-	$thumbnail = null;
-	$image = null;
-}
-// -------------------------------------------------- end of services ----------------------------------------------- //
-
+// for QR code
 include('phpqrcode/qrlib.php');
 
 $user_uid = $user_data['uid'];
@@ -41,6 +14,7 @@ $uid = $client_data['uid'];
 $fname = $client_data['firstname'];
 $id = $client_data['user_id'];
 
+// for balance
 $bal = $conn->prepare("SELECT * FROM tbl_balance WHERE bal_id = :balId");
 $bal->bindParam(':balId', $userId, PDO::PARAM_INT);
 $bal->execute();
@@ -51,34 +25,25 @@ if ($bal->rowCount() > 0) {
 	$balance = "0.00";
 }
 
-//---------------------------------------------------------------- for notifications ----------------------------------------------------//
-// $bookings = $conn->prepare("SELECT * FROM tbl_bookings WHERE booking_status = 0");
+// $bookings = $conn->prepare("SELECT * FROM tbl_bookings");
 // $bookings->execute();
 // $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
 
-// // Fetch only accepted bookings (for the Approved tab)
-// $approvedBookings = $conn->prepare("SELECT * FROM tbl_bookings WHERE booking_status = 1");
-// $approvedBookings->execute();
-// $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
+// Assuming $conn is your PDO connection
 
-// Fetch all pending bookings (for the Service Requests tab)
-
-// Fetch all pending bookings (for the Service Requests tab)
-$bookings = $conn->prepare("SELECT * FROM tbl_bookings WHERE booking_status = 0 OR booking_status IS NULL");
+$bookings = $conn->prepare("SELECT b.* 
+FROM tbl_bookings b
+INNER JOIN bs_user u ON b.user_id = u.user_id
+WHERE NOT (b.booking_status = 'accepted' AND u.access_level IN (1, 2))
+");
 $bookings->execute();
 $bookings_data = $bookings->fetchAll(PDO::FETCH_ASSOC);
-
-// Fetch only accepted bookings (for the Approved tab)
-$approvedBookings = $conn->prepare("SELECT * FROM tbl_bookings WHERE booking_status = 1");
-$approvedBookings->execute();
-$approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
-// ------------------------------------ end -----------------------------------------------------//
-
+// Debugging output (optional)
+// print_r($bookings_data);
 ?>
 
 <section id="homepage1-sec" style="height: auto; background-color: #fff;">
 	<div class="homepage-first-sec" style="height:auto; background-color: #fff;">
-
 		<!-- wallet card -->
 		<div class="wallet card " style="height: auto; width: 350px;">
 			<div class="title-logo">
@@ -129,8 +94,7 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 					</a>
 				</div>
 			</div>
-
-
+			<!-- back -->
 			<div class="back" style="width: 94%; border-radius: 10px; ">
 				<div>
 					<div class="col-12">
@@ -185,10 +149,6 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 
 						// Clean up resources
 						imagedestroy($image);
-
-
-
-
 						?>
 						<div class="container">
 							<div style="text-align: center">
@@ -202,7 +162,6 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 		<!-- end of card -->
 
-		<!-- --------------------------------------------------------------------- for notif ------------------------------------------------ -->
 		<!-- display of request -->
 		<?php foreach ($bookings_data as $booking): ?>
 			<?php
@@ -211,6 +170,7 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 				$bookingAddress = htmlspecialchars($booking['booking_address']);
 				$contactNumber = htmlspecialchars($booking['contact_num']);
 				$bookingId = htmlspecialchars($booking['booking_id']);
+				$userId = htmlspecialchars($booking['user_id']);
 			?>
 				<div class="row p-2 rounded mb-2" style="background: linear-gradient(90deg, rgba(10,0,176,1) 0%, rgba(59,68,223,1) 100%); width: 80%;">
 					<div class="col-sm-8 row" style="margin-left: 2px;">
@@ -225,14 +185,14 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 							data-booking-id="<?= $bookingId; ?>"
 							data-requested-service="<?= $requestedService; ?>"
 							data-booking-address="<?= $bookingAddress; ?>"
-							data-contact-num="<?= $contactNumber; ?>">
+							data-contact-num="<?= $contactNumber; ?>"
+							data-user-id="<?= $userId; ?>">
 							Accept
 						</button>
 					</div>
 				</div>
 			<?php } ?>
 		<?php endforeach; ?>
-
 		<!-- Accept Modal -->
 		<div class="modal" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="acceptModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -245,7 +205,9 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 					</div>
 					<div class="modal-body">
 						<form method="POST" action="company/process.php?action=accept" id="acceptForm">
-							<input type="hidden" name="serviceId" id="booking-id-hidden">
+							<input type="hidden" name="service_id" id="booking-id-hidden">
+							<input type="hidden" name="client_id" id="client-id-hidden">
+							<input type="hidden" name="accepted_by" id="accepted-by-hidden">
 							<input type="hidden" name="aReqServ" id="requested-service-hidden">
 							<input type="hidden" name="aAddress" id="booking-address-hidden">
 							<input type="hidden" name="aContactNo" id="contact-num-hidden">
@@ -267,30 +229,20 @@ $approvedBookingsData = $approvedBookings->fetchAll(PDO::FETCH_ASSOC);
 					const requestedService = this.getAttribute('data-requested-service');
 					const bookingAddress = this.getAttribute('data-booking-address');
 					const contactNum = this.getAttribute('data-contact-num');
+					const userId = this.getAttribute('data-user-id');
 
 					// Populate modal fields
 					document.getElementById('booking-id-hidden').value = bookingId;
 					document.getElementById('requested-service-hidden').value = requestedService;
 					document.getElementById('booking-address-hidden').value = bookingAddress;
 					document.getElementById('contact-num-hidden').value = contactNum;
+					document.getElementById('client-id-hidden').value = userId;
 
 					// Show the modal
 					$('#acceptModal').modal('show');
 				});
 			});
 		</script>
-		<!-- end here -->
-
-
-
 
 	</div>
-
-
-
-	</div>
-
-
 </section>
-<!--Homepage1 Section End -->
-<!-- insert here -->

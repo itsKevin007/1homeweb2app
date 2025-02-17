@@ -43,6 +43,7 @@
 	}
 
 
+
 $script    = array('category.js');
 
 require_once '../../include/template.php';
