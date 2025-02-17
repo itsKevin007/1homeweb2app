@@ -16,11 +16,6 @@ if($accesslevel == 2 ){
 		
 
 	switch ($view) {
-		case 'list' :
-			$content 	= 'list.php';		
-			$pageTitle 	= $sett_data['system_title'];
-			break;
-
 		case 'add' :
 			$content 	= 'add.php';		
 			$pageTitle 	= $sett_data['system_title'];
