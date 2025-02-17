@@ -15,7 +15,7 @@ if ($accesslevel == 0) {
 	$transactDirect = WEB_ROOT . 'client/transactions';
 } elseif ($accesslevel == 1) {
 	$profileDirect =  WEB_ROOT . 'service-provider/profile/index.php?view=prof';
-	$transactDirect =  WEB_ROOT . 'service-provider/index.php?view=transact';
+	$transactDirect =  WEB_ROOT . 'service-provider/transactions/';
 } elseif ($accesslevel == 2) {
 	$profileDirect =  WEB_ROOT . 'company/profile/index.php?view=prof';
 	$transactDirect =  WEB_ROOT . 'company/transactions/';
@@ -58,13 +58,13 @@ if ($accesslevel == 0) {
 								</a>							
 							</li>
 							<a href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services">
-							<div class="sc-nav-indicator">
-								<label class="circle">
-									<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">
-								</label>
+								<div class="sc-nav-indicator">
+									<label class="circle">
+										<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">
+									</label>
 
-							</div>
-						</a>
+								</div>
+							</a>
 							<li class="nav-menu-icon nav-account-icon" style="position: relative;">
 								<a href="<?php echo WEB_ROOT; ?>notification/" class="notification-icon navigation-icons left-icon <?php echo ($PAGEDATA === 'notification') ? 'active' : ''; ?>">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

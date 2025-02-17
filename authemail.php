@@ -13,46 +13,74 @@ require_once 'include/functions.php';
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <?php $email = isset($_GET['email']) ? $_GET['email'] : ''; ?>
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
-<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/include/misc-js.php'); ?>	
+<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/misc-js.php'); ?>	
     </head>
 
-    <body class="loading authentication-bg authentication-bg-pattern">
+    <body class="bg-theme bg-theme9">
 
-        <div class="account-pages mt-5 mb-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <div class="text-center">
-                            <a href="index.html">
-                                <img src="<?php echo WEB_ROOT;?>assets/images/human-cap-colored.png" alt="" height="22" class="mx-auto">
-                            </a>
-                            <p class="text-muted mt-2 mb-4">Human Capital</p>
-                        </div>
-                        <div class="card text-center">
 
-                            <div class="card-body p-4">
-                                
-                                <div class="mb-4">
-                                    <h4 class="text-uppercase mt-0">Confirm Email</h4>
+                
+                          
+                           
+                            <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
+
+                            <?php
+                                if (isset($_GET['error']) && !empty($_GET['error'])) {
+                                    ?>
+                                        <script>
+                                                document.addEventListener('DOMContentLoaded', () => {
+                                                Swal.fire({
+                                                title: 'Error!',
+                                                text: '<?php echo $_GET['error']; ?>',
+                                                icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+                                                showConfirmButton: true,
+                                                confirmButtonText: 'OK',
+                                                timer: 5000, // Auto-dismiss after 5 seconds
+                                                timerProgressBar: true,
+                                                backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+                                                background: '#1e1e1e', // Dark background color
+                                                color: '#ffffff', // White text color
+                                                customClass: {
+                                                    popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+                                                    confirmButton: 'swal2-confirm-dark' // Custom style for the button
+                                                }
+                                                });
+                                            });
+                                        </script>
+                                <style>
+                                    <?php 
+                                        include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/sweet-alert-failed.css'); 
+                                    ?>
+                                </style>
+
+                            <?php
+                                }
+                            ?>
+
+                        <div class="wrapper">
+                            <div class="authentication-forgot d-flex align-items-center justify-content-center">
+                                <div class="card forgot-box">                                 
+                                    <div class="card-body">
+                                        <div class="p-3">
+                                            <div class="text-center">
+                                                <a href="#">
+                                                    <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="200px">
+                                                </a> 
+                                            </div><br>
+                                            <div class="text-center">
+                                                <p class="mb-0">A email has been send to <b><?php echo $email; ?></b>.<br> Please check for an email from Onehome.<br> Click on the included link to reset your password.</p>                                                   
+                                            </div><br>
+                                            <div class="d-grid gap-2">
+                                                <a href="index.php" class="btn btn-light"><i class='bx bx-arrow-back me-1'></i>Back to Login</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-muted font-14 mt-2"> A email has been send to <b><?php echo $email;?></b>.
-                                    Please check for an email from company and click on the included link to
-                                    reset your password. </p>
-
-                                <a href="login.php" class="btn d-block btn-primary waves-effect waves-light mt-3">Back to Login</a>
-
-                            </div> <!-- end card-body -->
+                            </div>
                         </div>
-                        <!-- end card -->
+						
 
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
-        <!-- end page -->
-
-    <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-js.php'); ?>
+        <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-js.php'); ?>
+        
     </body>
 </html>

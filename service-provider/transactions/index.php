@@ -10,7 +10,7 @@
 
 	$userId = $_SESSION['user_id'];
 
-if($accesslevel == 2 ){
+if($accesslevel == 1 ){
 
 	$view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 		

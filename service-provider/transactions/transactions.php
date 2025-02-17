@@ -11,6 +11,17 @@ if (!defined('WEB_ROOT')) {
     exit;
 }
 
+
+// for QR
+include('../../phpqrcode/qrlib.php');
+
+// Temporary directory for QR codes
+$tempDir = 'temp/';
+if (!is_dir($tempDir)) {
+    mkdir($tempDir, 0755, true);
+}
+
+
 // Query to fetch accepted services only for the logged-in user
 $query = "SELECT * FROM accepted_services WHERE user_id = :user_id";
 $stmt = $conn->prepare($query);
@@ -80,6 +91,7 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="step-label">Done</div>
                 </div>
             </div>
+
 
             <div class="step-content">
                 <div class="navigation-buttons">
@@ -219,10 +231,12 @@ $acceptedServices = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     <input type='hidden' name='date_finish' value='<?php echo date('Y-m-d'); ?>'>
                                                     <button type='submit' class='btn btn-success' id='markDoneBtn_<?php echo $modalId; ?>' style="font-size: 10px;">Done</button>
                                                 </form>
+
                                             <?php endif; ?>
                                         </span>
                                     </div>
                                 </div>
+
 
                                 <!-- Modal for Percentage -->
                                 <div class='modal fade' id='<?php echo $modalId; ?>' tabindex='-1' role='dialog' aria-labelledby='modalTitle_<?php echo $modalId; ?>' aria-hidden='true'>
