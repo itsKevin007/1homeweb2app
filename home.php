@@ -40,7 +40,6 @@
 		}else{}
 	}
 
-
 	if($user_data['is_sub'] == 0){
 		include 'pop-up/subscription/subscribe-offcanvas.php';
 	}else{}

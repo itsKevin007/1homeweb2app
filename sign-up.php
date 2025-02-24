@@ -130,14 +130,70 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 			<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/card-signup.css'); ?>
 		</style>
 	<?php
-		}else{}
+		}elseif ($sweetAlert == 'error') {
+			?>
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						Swal.fire({
+						title: 'Registered Failed',
+						text: 'Please try again and check all the details.',
+						icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+						showConfirmButton: true,
+						confirmButtonText: 'OK',
+						timer: 5000, // Auto-dismiss after 5 seconds
+						timerProgressBar: true,
+						backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+						background: '#1e1e1e', // Dark background color
+						color: '#ffffff', // White text color
+						customClass: {
+							popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+							confirmButton: 'swal2-confirm-dark' // Custom style for the button
+						}
+						});
+					});
+				</script>
+		
+				<style>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/sweet-alert-failed.css'); ?>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/card-signup.css'); ?>
+				</style>
+			<?php
+		}elseif ($sweetAlert == 'exceeded') {
+			?>
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						Swal.fire({
+						title: 'Registered Failed',
+						text: 'You have exceeded your daily registration limit. Please Try again tomorrow',
+						icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+						showConfirmButton: true,
+						confirmButtonText: 'OK',
+						timer: 5000, // Auto-dismiss after 5 seconds
+						timerProgressBar: true,
+						backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+						background: '#1e1e1e', // Dark background color
+						color: '#ffffff', // White text color
+						customClass: {
+							popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+							confirmButton: 'swal2-confirm-dark' // Custom style for the button
+						}
+						});
+					});
+				</script>
+		
+				<style>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/sweet-alert-failed.css'); ?>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/card-signup.css'); ?>
+				</style>
+			<?php
+				}else{}
 	?>
 <body class="loading back-theme authentication-bg authentication-bg-pattern">
     <div class="wrapper ">
 		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
 			<div class="container">
 				<div class="text-center">   
-						<a href="#">
+						<a href="<?php echo WEB_ROOT; ?>">
 						<!-- <img src="../assets/images/logo-dark.png" alt="" height="22" class="mx-auto"> -->
 						<h1> <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="300px"></h1>
 					</a>
@@ -147,9 +203,8 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
 					<div class="col mx-auto">
 						<div class="card mb-0">							                                                    
-							<a href="#" class="card-body text-center " class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Client">Client</button>
-								<!-- Modal -->										
-							</a>
+						<button type="button" class="card-body text-center btn btn-light" data-bs-toggle="modal" data-bs-target="#Client">Client</button>
+
 							<div class="modal fade" id="Client" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -159,7 +214,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 										</div>
 										
 										<div class="modal-body">
-											<form method="post" action="sign-folder/client.php" enctype="multipart/form-data" name="form" id="form" class="row g-3">
+											<form method="post" action="sign-folder/aut-client.php?action=check" enctype="multipart/form-data" name="form" id="form" class="row g-3">
 												<div class="col-md-6">
 													<label for="inputFirstName" class="form-label">First Name</label>
 													<div class="input-group"> <span class="input-group-text"><i class='bx bxs-user'></i></span>
@@ -237,9 +292,9 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 						</div><br>
 
 						<div class="card mb-0">							                              
-							<a href="#" class="card-body text-center " class="btn btn-light" data-bs-toggle="modal" data-bs-target="#serviceProvider">Independent Service Provider</button>
+							<button class="card-body text-center btn btn-light" data-bs-toggle="modal" data-bs-target="#serviceProvider">Independent Service Provider</button>
 								<!-- Modal -->										
-							</a>
+							</button>
 							<div class="modal fade" id="serviceProvider" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -248,7 +303,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-											<form method="post" action="sign-folder/independent.php" enctype="multipart/form-data" name="form" id="form2" class="row g-3">
+											<form method="post" action="sign-folder/aut-ind.php?action=check" enctype="multipart/form-data" name="form" id="form2" class="row g-3">
 												<div class="col-md-6">
 													<label for="inputFirstName" class="form-label">First Name</label>
 													<div class="input-group"> <span class="input-group-text"><i class='bx bxs-user'></i></span>
@@ -323,9 +378,9 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 						</div><br>
 
 						<div class="card mb-0">							                              
-							<a href="#" class="card-body text-center " class="btn btn-light" data-bs-toggle="modal" data-bs-target="#serviceCompany">Company Service Provider</button>
+							<button class="card-body text-center btn btn-light" data-bs-toggle="modal" data-bs-target="#serviceCompany">Company Service Provider</button>
 								<!-- Modal -->										
-							</a>
+							</button>
 							<div class="modal fade" id="serviceCompany" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -334,11 +389,11 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-											<form method="post" action="sign-folder/company.php" enctype="multipart/form-data" name="form" id="form3" class="row g-3">
+											<form method="post" action="sign-folder/aut-company.php?action=check" enctype="multipart/form-data" name="form" id="form3" class="row g-3">
 												<div class="col-md-12">
 													<label for="inputFirstName" class="form-label">Company Name</label>
 													<div class="input-group"> <span class="input-group-text"><i class='bx bxs-user'></i></span>
-														<input type="text" name="firstName" class="form-control border-start-0" id="inputFirstName" placeholder="First Name" required/>
+														<input type="text" name="firstName" class="form-control border-start-0" id="inputFirstName" placeholder="Company Name" required/>
 													</div>
 												</div>
 												<div class="col-md-12">
@@ -406,6 +461,12 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 	<!--end wrapper-->
 </body>
 	<script>
+		$(document).ready(function() {
+			$('a[data-bs-toggle="modal"]').on('click', function(e) {
+			e.preventDefault();
+			});
+		});
+
         // Select all forms
         document.querySelectorAll('form').forEach(function(form) {
             form.addEventListener('submit', function(event) {

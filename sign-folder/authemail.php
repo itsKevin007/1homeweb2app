@@ -1,6 +1,6 @@
 <?php
-require_once 'global-library/config.php';
-require_once 'include/functions.php';
+require_once '../global-library/config.php';
+require_once '../include/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,15 +12,12 @@ require_once 'include/functions.php';
 <meta content="Coderthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <?php $email = isset($_GET['email']) ? $_GET['email'] : ''; ?>
+
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/global-css.php'); ?>
 <?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['admin_dir'] . '/include/misc-js.php'); ?>	
     </head>
 
     <body class="bg-theme bg-theme9">
-
-
-                
-                          
                            
                             <!-- <p class="text-muted mt-2 mb-4">Lending</p> -->
 
@@ -30,9 +27,9 @@ require_once 'include/functions.php';
                                         <script>
                                                 document.addEventListener('DOMContentLoaded', () => {
                                                 Swal.fire({
-                                                title: 'Error!',
+                                                title: 'Success!',
                                                 text: '<?php echo $_GET['error']; ?>',
-                                                icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+                                                icon: 'success', // Options: 'success', 'error', 'warning', 'info', 'question'
                                                 showConfirmButton: true,
                                                 confirmButtonText: 'OK',
                                                 timer: 5000, // Auto-dismiss after 5 seconds
@@ -63,15 +60,15 @@ require_once 'include/functions.php';
                                     <div class="card-body">
                                         <div class="p-3">
                                             <div class="text-center">
-                                                <a href="#">
+                                                <a href="<?php echo WEB_ROOT; ?>">
                                                     <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="200px">
-                                                </a> 
+                                                </a>
                                             </div><br>
                                             <div class="text-center">
-                                                <p class="mb-0">A email has been send to <b><?php echo $email; ?></b>.<br> Please check for an email from Onehome.<br> Click on the included link to reset your password.</p>                                                   
+                                                <p class="mb-0">A email has been send to <b><?php echo $email; ?></b>.<br> Please check for an email from Onehome.<br>Click the link to verify your account.</p>                                                   
                                             </div><br>
                                             <div class="d-grid gap-2">
-                                                <a href="index.php" class="btn btn-light"><i class='bx bx-arrow-back me-1'></i>Back to Login</a>
+                                                <a href="<?php echo WEB_ROOT; ?>" class="btn btn-light"><i class='bx bx-arrow-back me-1'></i>Back to Login</a>
                                             </div>
                                         </div>
                                     </div>
