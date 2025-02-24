@@ -28,10 +28,10 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
-	case 'dashboard':
-		$content 	= 'dashboard.php';
-		$pageTitle 	= $sett_data['system_title'];
-		break;
+	// case 'dashboard':
+	// 	$content 	= 'dashboard.php';
+	// 	$pageTitle 	= $sett_data['system_title'];
+	// 	break;
 
 	case 'modify' :
 		$content 	= 'modify.php';		
@@ -63,8 +63,8 @@ switch ($view) {
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 
-	case 'services':
-		$content 	= 'services.php';
+	case 'categories' :
+		$content 	= 'categories.php';
 		$pageTitle 	= $sett_data['system_title'];
 		break;
 

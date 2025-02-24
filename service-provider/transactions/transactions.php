@@ -1,8 +1,9 @@
 <!-- Profile Details Section Start -->
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/transactionsWizard.css">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>style/transactionBox.css">
+
 <?php
-include('../phpqrcode/qrlib.php');
+// include('../phpqrcode/qrlib.php');
 
 $user_id = $_SESSION['user_id'];
 

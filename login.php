@@ -20,7 +20,7 @@ if (isset($_POST['txtUserName'])) {
     <!-- pwa -->
 
     <link rel="manifest" href="/manifest.json">
-   
+
 
     <meta charset="utf-8" />
     <title><?php echo $sett_data['system_title']; ?> - Login</title>
@@ -145,15 +145,16 @@ if (isset($_POST['txtUserName'])) {
                         }
 
                         .download-btn:hover {
-                            transform: scale(1.1); /* Slight zoom-in effect */
-                            opacity: 0.8; /* Slight transparency */
+                            transform: scale(1.1);
+                            /* Slight zoom-in effect */
+                            opacity: 0.8;
+                            /* Slight transparency */
                         }
-
                     </style>
-                    
+
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-6 text-center d-flex justify-content-center">
-                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/googleDown.png" class="download-btn" alt="Download Android" onclick="downloadAndroid()"/>
+                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/googleDown.png" class="download-btn" alt="Download Android" onclick="downloadAndroid()" />
                         </div>
                         <div class="col-6 text-center d-flex justify-content-center">
                             <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/appleDown.png" class="download-btn" alt="Download iOS" />
@@ -174,10 +175,10 @@ if (isset($_POST['txtUserName'])) {
 
                 function downloadiOS() {
                     // Replace with your iOS TestFlight or App Store link
-                    const iOSUrl = 'https://testflight.apple.com/join/ABC123';
-                    
+                    const iOSUrl = 'https://testflight.apple.com/join/DGBkG2zd';
+
                     // Show confirmation dialog
-                    if(confirm('iOS installation requires TestFlight. Continue to TestFlight?')) {
+                    if (confirm('iOS installation requires TestFlight. Continue to TestFlight?')) {
                         window.location.href = iOSUrl;
                     }
                 }

@@ -14,7 +14,11 @@ switch ($action) {
 	case 'modify' :
         modify_data();
         break;
-        
+
+	case 'addBooking':
+		add_booking();
+		break;
+	
     case 'delete' :
         delete_data();
         break;
@@ -24,6 +28,48 @@ switch ($action) {
         // if action is not defined or unknown
         // move to main category page
         header('Location: index.php');
+}
+
+function add_booking()
+{
+	global $conn;
+
+	$userId = $_SESSION['user_id'];
+	$requested_service = $_POST['requested_service'] ?? '';
+	$booking_address   = $_POST['booking_address'] ?? '';
+	$contact_num       = $_POST['contact_num'] ?? '';
+	$roomNo            = $_POST['roomNo'] ?? '';
+	$created_at        = $_POST['created_at'] ?? '';
+
+	// echo "userId: $userId, requested_service: $requested_service, booking_address: $booking_address, contact_num: $contact_num, roomNo: $roomNo, created_at: $created_at <br>";
+
+	try {
+		$stmt = $conn->prepare("INSERT INTO tbl_bookings (user_id, requested_service, booking_address, contact_num, roomNo, created_at)
+        VALUES (:user_id, :requested_service, :booking_address, :contact_num, :roomNo, :created_at)");
+
+		$stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+		$stmt->bindParam(':requested_service', $requested_service, PDO::PARAM_STR);
+		$stmt->bindParam(':booking_address', $booking_address, PDO::PARAM_STR);
+		$stmt->bindParam(':contact_num', $contact_num, PDO::PARAM_STR);
+		$stmt->bindParam(':roomNo', $roomNo, PDO::PARAM_STR);
+		$stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
+
+		$stmt->execute();
+		$_SESSION['success_message'] = 'Booking added successfully.';
+		echo "<script>
+			window.location.href = '" . WEB_ROOT . "client/transactions/index.php?view=transact';
+			Swal.fire({
+				icon: 'success',
+				title: 'Success',
+				text: 'Booking added successfully.',
+				showConfirmButton: false,
+				timer: 1500
+			});
+		</script>";
+		exit;
+	} catch (PDOException $e) {
+		echo 'Error: ' . $e->getMessage();
+	}
 }
 
 
