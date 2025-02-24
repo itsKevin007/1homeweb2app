@@ -57,7 +57,7 @@ if ($accesslevel == 0) {
 									<p class="navigation-name">TRANSACTIONS</p>
 								</a>							
 							</li>
-							<a href="<?php echo WEB_ROOT; ?>client/services/index.php?view=services">
+							<a href="<?php echo WEB_ROOT; ?>client/categories/index.php?view=categories" class="nav-menu-icon nav-indicator">
 								<div class="sc-nav-indicator">
 									<label class="circle">
 										<img style="object-fit: contain; margin:10px 0 0 -5px;" src="<?php echo WEB_ROOT; ?>assets/images/icons/ohlogo1.png" alt="user-img" title="" height="60%" width="60%">

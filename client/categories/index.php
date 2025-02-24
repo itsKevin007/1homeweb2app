@@ -1,0 +1,52 @@
+<?php
+	require_once '../../global-library/config.php';
+	require_once '../../include/functions.php';
+
+	$_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
+	checkUser();
+
+	$pg = $conn->prepare("UPDATE bs_page SET page = 'Profile' WHERE is_deleted != '1'");
+	$pg->execute();
+
+	$userId = $_SESSION['user_id'];
+
+if($accesslevel == 0 ){
+
+	$view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
+		
+
+	switch ($view) {
+
+		case 'categories' :
+			$content 	= 'categories.php';		
+			$pageTitle 	= $sett_data['system_title'];
+			break;
+
+		case 'company_details' :
+			$content 	= 'company_details.php';
+			$pageTitle 	= $sett_data['system_title'];
+			break;
+
+		case 'subcategories' :
+			$content 	= 'subcategories.php';
+			$pageTitle 	= $sett_data['system_title'];
+			break;
+
+		case 'subBooking':
+			$content 	= 'subcatBooking.php';
+			$pageTitle 	= $sett_data['system_title'];
+			break;
+
+		default :
+			$content 	= 'categories.php';		
+			$pageTitle 	= $sett_data['system_title'];
+	}
+}else{
+	header("location: ../../index.php");
+}
+
+
+$script    = array('category.js');
+
+require_once '../../include/template.php';
+?>

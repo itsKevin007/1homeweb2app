@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 3-Step Wizard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <style>
+        .wizard-container {
+            margin-top: 50px;
+        }
+
+        .wizard-step {
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .wizard-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #e0e0e0;
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            width: 33.333%;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            color: #fff;
+            transition: background-color 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Line between steps */
+        .step-line {
+            position: absolute;
+            height: 3px;
+            top: 24px;
+            width: 100%;
+            left: -50%;
+            z-index: 1;
+        }
+
+        .step:first-child .step-line {
+            display: none;
+        }
+
+        .step.active .step-line,
+        .step.completed .step-line {
+            background-color: #0d6efd;
+        }
+
+        .step.completed .step-line {
+            background-color: #198754;
+        }
+
+        .step.completed .step-circle,
+        .step.active .step-circle {
+            background-color: #0d6efd;
+        }
+
+        .step.completed .step-circle {
+            background-color: #198754;
+        }
+
+        .navigation-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container wizard-container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Registration Wizard</h2>
+
+                        <!-- Step Indicators with Lines -->
+                        <div class="step-indicator">
+                            <div class="step active" id="step-indicator-1">
+                                <div class="step-line"></div>
+                                <div class="step-circle">1</div>
+                                <div class="step-label">Personal Info</div>
+                            </div>
+                            <div class="step" id="step-indicator-2">
+                                <div class="step-line"></div>
+                                <div class="step-circle">2</div>
+                                <div class="step-label">Account Details</div>
+                            </div>
+                            <div class="step" id="step-indicator-3">
+                                <div class="step-line"></div>
+                                <div class="step-circle">3</div>
+                                <div class="step-label">Confirmation</div>
+                            </div>
+                        </div>
+
+                        <!-- Step Content -->
+                        <div id="step1" class="wizard-step active">
+                            <h4>Step 1: Personal Information</h4>
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName"
+                                    placeholder="Enter your first name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName"
+                                    placeholder="Enter your last name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                        </div>
+
+                        <div id="step2" class="wizard-step">
+                            <h4>Step 2: Account Details</h4>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Choose a username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                    placeholder="Create a password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                    placeholder="Confirm your password">
+                            </div>
+                        </div>
+
+                        <div id="step3" class="wizard-step">
+                            <h4>Step 3: Confirmation</h4>
+                            <div class="alert alert-success">
+                                <p>Please review your information before submitting:</p>
+                                <div id="summaryInfo" class="mt-3">
+                                    <p><strong>Name:</strong> <span id="summaryName">-</span></p>
+                                    <p><strong>Email:</strong> <span id="summaryEmail">-</span></p>
+                                    <p><strong>Username:</strong> <span id="summaryUsername">-</span></p>
+                                </div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="termsCheck">
+                                <label class="form-check-label" for="termsCheck">
+                                    I agree to the Terms and Conditions
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="navigation-buttons">
+                            <button id="prevBtn" class="btn btn-secondary" disabled>Previous</button>
+                            <button id="nextBtn" class="btn btn-primary">Next</button>
+                            <button id="submitBtn" class="btn btn-success" style="display: none;">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const steps = document.querySelectorAll('.wizard-step');
+            const stepIndicators = document.querySelectorAll('.step');
+            const stepLines = document.querySelectorAll('.step-line');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            let currentStep = 0;
+
+            // Update UI based on current step
+            function updateUI() {
+                steps.forEach((step, index) => {
+                    step.classList.remove('active');
+                    stepIndicators[index].classList.remove('active', 'completed');
+
+                    if (index < currentStep) {
+                        stepIndicators[index].classList.add('completed');
+                    } else if (index === currentStep) {
+                        step.classList.add('active');
+                        stepIndicators[index].classList.add('active');
+                    }
+                });
+
+                // Update button states
+                prevBtn.disabled = currentStep === 0;
+
+                if (currentStep === steps.length - 1) {
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'block';
+                } else {
+                    nextBtn.style.display = 'block';
+                    submitBtn.style.display = 'none';
+                }
+            }
+
+            // Next button handler
+            nextBtn.addEventListener('click', function () {
+                if (currentStep < steps.length - 1) {
+                    // Collect data for summary if moving to last step
+                    if (currentStep === 1) {
+                        document.getElementById('summaryName').textContent =
+                            document.getElementById('firstName').value + ' ' +
+                            document.getElementById('lastName').value;
+                        document.getElementById('summaryEmail').textContent =
+                            document.getElementById('email').value;
+                        document.getElementById('summaryUsername').textContent =
+                            document.getElementById('username').value;
+                    }
+
+                    currentStep++;
+                    updateUI();
+                }
+            });
+
+            // Previous button handler
+            prevBtn.addEventListener('click', function () {
+                if (currentStep > 0) {
+                    currentStep--;
+                    updateUI();
+                }
+            });
+
+            // Submit button handler
+            submitBtn.addEventListener('click', function () {
+                if (document.getElementById('termsCheck').checked) {
+                    alert('Form submitted successfully!');
+                    // Here you would typically send the data to your server
+                } else {
+                    alert('Please agree to the Terms and Conditions');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

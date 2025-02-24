@@ -22,7 +22,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
     <!-- pwa -->
 
     <link rel="manifest" href="/manifest.json">
-   
+
 
     <meta charset="utf-8" />
     <title><?php echo $sett_data['system_title']; ?> - Login</title>
@@ -237,6 +237,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                         }
 
                         .download-btn:hover {
+
                             background-color: #0D3B7E;
                         }
 
@@ -290,9 +291,15 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                             .download-btn .large-text {
                                 font-size: 12px;
                             }
-                        }
 
+                            transform: scale(1.1);
+                            /* Slight zoom-in effect */
+                            opacity: 0.8;
+                            /* Slight transparency */
+
+                        }
                     </style>
+
 
                                         
                     <div class="my-download-container">
@@ -318,6 +325,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                                     </div>
                                 </a>
                             </div>
+
                         </div>
                     </div>
 
@@ -342,10 +350,10 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 
                 function downloadiOS() {
                     // Replace with your iOS TestFlight or App Store link
-                    const iOSUrl = 'https://testflight.apple.com/join/ABC123';
-                    
+                    const iOSUrl = 'https://testflight.apple.com/join/DGBkG2zd';
+
                     // Show confirmation dialog
-                    if(confirm('iOS installation requires TestFlight. Continue to TestFlight?')) {
+                    if (confirm('iOS installation requires TestFlight. Continue to TestFlight?')) {
                         window.location.href = iOSUrl;
                     }
                 }
