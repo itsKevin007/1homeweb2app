@@ -41,6 +41,32 @@ function doLogin()
 		$errorMessage = 'You must enter the password';
 	} else {
 		// check the database and see if the username and password combo do match
+
+		$todaydate = date('Y-m-d');
+		$accdelete = $conn->prepare("
+			SELECT * FROM tbl_accdelete 
+			WHERE date_expected <= :today_date
+			AND is_confirm = '1' 
+			AND is_done = '0'
+			AND is_cancel = '0'
+		");
+		$accdelete->execute([':today_date' => $todaydate]);
+
+		if ($accdelete->rowCount() > 0) {
+			while ($accdelete_data = $accdelete->fetch()) {
+				$accdelete_id = $accdelete_data['userId'];
+				$accId = $accdelete_data['accId'];
+				
+				$update = $conn->prepare("UPDATE bs_user SET is_deleted = '1', date_deleted = '$today_date1' WHERE user_id = :accdelete_id");
+				$update->execute([':accdelete_id' => $accdelete_id]);
+				
+				$update2 = $conn->prepare("UPDATE tbl_accdelete SET is_done = '1' WHERE accId = :accId");
+				$update2->execute([':accId' => $accId]);
+				
+			}
+		} else {
+			// No matching records
+		}
 		
 		$stmt = $conn->prepare("SELECT user_id FROM bs_user WHERE username = '$userName' AND password = md5('$password') AND is_deleted != '1'");
 		$stmt->execute();
@@ -64,6 +90,9 @@ function doLogin()
 					$up->execute();
 					
 					$stat = $conn->prepare("UPDATE bs_user SET is_active = '1' WHERE user_id = '{$row['user_id']}'");
+					$stat->execute();
+
+					$stat = $conn->prepare("UPDATE tbl_accdelete SET is_cancel = '1' WHERE userId = '{$row['user_id']}'");
 					$stat->execute();
 					
 				/* End process log attempt */

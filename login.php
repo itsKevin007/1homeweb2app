@@ -12,6 +12,8 @@ if (isset($_POST['txtUserName'])) {
         $errorMessage = $result;
     }
 }
+
+$sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +75,64 @@ if (isset($_POST['txtUserName'])) {
                     }
                 });
             </script>
+
+            <!-- prompt -->
+          
+            <?php
+                if ($sweetAlert == 'exceeded') {
+			?>
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						Swal.fire({
+						title: 'Registered Failed',
+						text: 'You have exceeded your daily registration limit. Please Try again tomorrow',
+						icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+						showConfirmButton: true,
+						confirmButtonText: 'OK',
+						timer: 5000, // Auto-dismiss after 5 seconds
+						timerProgressBar: true,
+						backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+						background: '#1e1e1e', // Dark background color
+						color: '#ffffff', // White text color
+						customClass: {
+							popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+							confirmButton: 'swal2-confirm-dark' // Custom style for the button
+						}
+						});
+					});
+				</script>
+		
+				<style>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/sweet-alert-failed.css'); ?>
+					<?php include ($_SERVER["DOCUMENT_ROOT"] . '/' . $sett_data['directory'] . '/style/card-signup.css'); ?>
+				</style>
+			<?php
+				}elseif($sweetAlert == 'Failed Registration'){
+            ?>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+						Swal.fire({
+						title: 'Registered Failed',
+						text: 'Please try again and check all the details.',
+						icon: 'error', // Options: 'success', 'error', 'warning', 'info', 'question'
+						showConfirmButton: true,
+						confirmButtonText: 'OK',
+						timer: 5000, // Auto-dismiss after 5 seconds
+						timerProgressBar: true,
+						backdrop: 'rgba(0, 0, 0, 0.8)', // Dark semi-transparent backdrop
+						background: '#1e1e1e', // Dark background color
+						color: '#ffffff', // White text color
+						customClass: {
+							popup: 'swal2-dark swal2-rounded', // Rounded corners and dark style
+							confirmButton: 'swal2-confirm-dark' // Custom style for the button
+						}
+						});
+					});
+                </script>
+            <?php
+                }
+            ?>
 
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
@@ -139,28 +199,143 @@ if (isset($_POST['txtUserName'])) {
                         </div> <!-- end card-body -->
                     </div>
                     <!-- end card -->
+
                     <style>
+                        .my-download-container {
+                            text-align: center;
+                            padding: 10px;
+                            width: 100%;
+                        }
+
+                        .row {
+                            display: flex;
+                            justify-content: center;
+                            gap: 20px;
+                            flex-wrap: nowrap; /* Force items to stay in a row */
+                        }
+
+                        .col-6 {
+                            flex: 1; /* Equal width distribution */
+                            min-width: 0; /* Allow shrinking below min-content */
+                            max-width: 250px; /* Prevent buttons from getting too wide */
+                        }
+
                         .download-btn {
-                            transition: transform 0.3s ease, opacity 0.3s ease;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: #16405f;
+                            color: #fff;
+                            border: none;
+                            border-radius: 8px;
+                            padding: 8px 12px;
+                            text-decoration: none;
+                            font-family: Arial, sans-serif;
+                            cursor: pointer;
+                            width: 100%;
+                            transition: background-color 0.3s ease;
                         }
 
                         .download-btn:hover {
+
+                            background-color: #0D3B7E;
+                        }
+
+                        .download-btn img {
+                            height: 40px;
+                            width: auto;
+                            margin-right: 8px;
+                        }
+
+                        .download-btn .text-container {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            line-height: 1.2;
+                            min-width: 0; /* Allow text container to shrink */
+                        }
+
+                        .download-btn .small-text {
+                            font-size: 12px;
+                            font-weight: normal;
+                            display: block;
+                            white-space: nowrap;
+                        }
+
+                        .download-btn .large-text {
+                            font-size: 18px;
+                            font-weight: bold;
+                            display: block;
+                            white-space: nowrap;
+                            text-align: center;
+                        }
+
+                        @media (max-width: 576px) {
+                            .row {
+                                gap: 8px;
+                            }
+                            
+                            .download-btn {
+                                padding: 6px 8px;
+                            }
+                            
+                            .download-btn img {
+                                height: 24px;
+                                margin-right: 6px;
+                            }
+                            
+                            .download-btn .small-text {
+                                font-size: 8px;
+                            }
+                            
+                            .download-btn .large-text {
+                                font-size: 12px;
+                            }
+
                             transform: scale(1.1);
                             /* Slight zoom-in effect */
                             opacity: 0.8;
                             /* Slight transparency */
+
                         }
                     </style>
 
-                    <div class="row d-flex align-items-center justify-content-center">
-                        <div class="col-6 text-center d-flex justify-content-center">
-                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/googleDown.png" class="download-btn" alt="Download Android" onclick="downloadAndroid()" />
-                        </div>
-                        <div class="col-6 text-center d-flex justify-content-center">
-                            <img width="95%" src="<?php echo WEB_ROOT; ?>assets/images/icons/appleDown.png" class="download-btn" alt="Download iOS" />
+
+                                        
+                    <div class="my-download-container">
+                        <div class="row">
+                            <!-- Apple iOS button -->
+                            <div class="col-6">
+                                <a href="#" onClick="downloadiOS()" class="download-btn">
+                                    <img src="assets/images/icon/apple-grey.svg" alt="Apple Icon">
+                                    <div class="text-container">
+                                        <span class="small-text">Download this app for</span>
+                                        <span class="large-text ">Apple iOS</span>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Android button -->
+                            <div class="col-6">
+                                <a href="#" onClick="downloadAndroid()" class="download-btn">
+                                    <img src="assets/images/icon/android-grey.svg" alt="Android Icon">
+                                    <div class="text-container">
+                                        <span class="small-text">Download this app for</span>
+                                        <span class="large-text">Android</span>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 
+                    <!-- Bootstrap JS (optional, for certain components) -->
+                    <script 
+                        src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+                    </script>
+                    <script 
+                        src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js">
+                    </script>
 
                 </div> <!-- end col -->
             </div>

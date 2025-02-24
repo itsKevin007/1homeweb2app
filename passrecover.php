@@ -6,7 +6,7 @@ require_once 'include/functions.php';
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-<title><?php echo $sett_data['system_title']; ?> - Login</title>
+<title><?php echo $sett_data['system_title']; ?> - Recover Password</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="Lending System - www.tridentechnology.com" name="description" />
 <meta content="Coderthemes" name="author" />
@@ -48,7 +48,7 @@ require_once 'include/functions.php';
                     <div class="col-md-8 col-lg-6 col-xl-4">
                         <div class="text-center">
                             <a href="index.html">
-                                <img src="<?php echo WEB_ROOT;?>assets/images/human-cap-colored.png" alt="" height="22" class="mx-auto">
+                                <img src="<?php echo WEB_ROOT; ?>assets/images/human-cap-colored.png" alt="" height="22" class="mx-auto">
                             </a>
                             <a href="#">
                                 <img src="<?php echo WEB_ROOT; ?>assets/images/icons/silverlogoh.png" alt="user-img" title=""  width="200px">
