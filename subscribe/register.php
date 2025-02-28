@@ -66,7 +66,7 @@
 			<div class="price-inside">Premium</div>
 			<div class="price-header">
 				<div class="price-value">
-				<h2><span>P</span>99</h2>
+				<h2><span>P</span>10k</h2>
 				<span>Annual Package</span>
 				</div>
 				<h3 class="price-title">Premium</h3> 
