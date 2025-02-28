@@ -21,9 +21,14 @@ if ($accesslevel == 0) {
 	$transactDirect =  WEB_ROOT . 'company/transactions/';
 }
 
+include 'profile-notification.php';
 ?>
 <!-- ======= Footer ======= -->
-<link href="<?php echo WEB_ROOT; ?>style/notif-dot.css" rel="stylesheet">
+
+
+<!-- Include the Intro.js CSS with fixed styling -->
+<link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet">
+<link href="<?php echo WEB_ROOT; ?>style/nav_tutorial.css" rel="stylesheet">
 
 <!-- Profile Details Section Start -->
 <div id="bottom-navigation">
@@ -41,7 +46,7 @@ if ($accesslevel == 0) {
 										</g>
 									</svg>
 
-									<p class="navigation-name">HOME</p>
+									<p <?php echo ($PAGEDATA === 'Dashboard') ? 'style="color: #0EA5E9;"' : ''; ?> class="navigation-name">HOME</p>
 
 								</a>
 							</li>
@@ -54,7 +59,7 @@ if ($accesslevel == 0) {
 										<path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C14.761 22 17.2 20.983 19 19.600 21.1 17.6 22 15.2 22 12C22 6.477 17.523 2 12 2Z" 
 												stroke="#666666" stroke-width="2" stroke-linecap="round" />									
 									</svg>
-									<p class="navigation-name">TRANSACTIONS</p>
+									<p <?php echo ($PAGEDATA === 'Transactions') ? 'style="color: #0EA5E9;"' : ''; ?> class="navigation-name">TRANSACTIONS</p>
 								</a>							
 							</li>
 							<a href="<?php echo WEB_ROOT; ?>client/categories/index.php?view=categories" class="nav-menu-icon nav-indicator">
@@ -78,20 +83,20 @@ if ($accesslevel == 0) {
 										</g>
 									</svg>
 									<?php
-									// Add PHP logic to display the dot based on rowCount
-									$notificationsSQL = $conn->prepare("SELECT * FROM tbl_notifications WHERE user_id = :userId AND is_read = '0'");
-									$notificationsSQL->bindParam(':userId', $userId, PDO::PARAM_INT);
-									$notificationsSQL->execute();
+                    // Add PHP logic to display the dot based on rowCount
+                    $notificationsSQL = $conn->prepare("SELECT * FROM tbl_notifications WHERE user_id = :userId AND is_read = '0'");
+                    $notificationsSQL->bindParam(':userId', $userId, PDO::PARAM_INT);
+                    $notificationsSQL->execute();
 
-									$unreadCount = $notificationsSQL->rowCount();
+                    $unreadCount = $notificationsSQL->rowCount();
 
-									if ($unreadCount > 0) {
-										echo '<span class="notification-dot"></span>';
-									}
+                    if ($unreadCount > 0) {
+                      echo '<span class="notification-dot"></span>';
+                    }
 
 									?>
 
-									<p class="navigation-name">NOTIFICATION</p>
+									<p <?php echo ($PAGEDATA === 'notification') ? 'style="color: #0EA5E9;"' : ''; ?> class="navigation-name">NOTIFICATION</p>
 
 								</a>
 							</li>
@@ -111,8 +116,15 @@ if ($accesslevel == 0) {
 
 										</g>
 									</svg>
-
-									<p class="navigation-name">PROFILE</p>
+                 
+									<p 
+                  <?php  
+                        if($requirements != ''){
+                          echo $requirements;
+                        }else{
+                          echo ($PAGEDATA === 'Profile') ? 'style="color: #0EA5E9;"' : '';
+                        } 
+                  ?> class="navigation-name">PROFILE</p>
 
 								</a>
 							</li>
@@ -123,3 +135,171 @@ if ($accesslevel == 0) {
 		</div>
 	</div>
 </div>
+
+<!-- Include the Intro.js script -->
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+
+<!-- Onboarding Tutorial Script - FIXED -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Embed the tutorial status from the database
+    // (Make sure this variable is set in your PHP code above this script)
+    // 0 = not shown, 1 = already shown
+    var navTutorial = <?php echo isset($user_data['nav_tutorial']) ? $user_data['nav_tutorial'] : 0; ?>;
+    
+    // Ensure all required elements are available before proceeding
+    const homeIcon = document.querySelector('.home-icon');
+    const eventIcon = document.querySelector('.event-icon');
+    const circle = document.querySelector('.sc-nav-indicator .circle');
+    const notificationIcon = document.querySelector('.notification-icon');
+    const accountIcon = document.querySelector('.account-icon');
+    
+    if (!homeIcon || !eventIcon || !circle || !notificationIcon || !accountIcon) {
+      console.error('Some navigation elements are missing. Tutorial cannot start.');
+      return;
+    }
+    
+    // Check if the tutorial should be shown (if navTutorial is 0 or URL param is set)
+    const showTutorial = (navTutorial == 0) || new URLSearchParams(window.location.search).has('showTutorial');
+    
+    if (showTutorial) {
+      setTimeout(function() {
+        // Force reload of IntroJS CSS to ensure it takes precedence
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.href = 'https://unpkg.com/intro.js/minified/introjs.min.css';
+        document.head.appendChild(linkElement);
+        
+        // Create an instance of IntroJs
+        const intro = introJs();
+        
+        // Configure the tutorial
+        intro.setOptions({
+          steps: [
+            {
+              element: homeIcon,
+              title: 'Home',
+              intro: "Access your dashboard with an overview of your account and quick access to key features.",
+              position: 'top'
+            },
+            {
+              element: eventIcon,
+              title: 'Transactions',
+              intro: "Track all your transactions, view history, and monitor your activity in real-time.",
+              position: 'top'
+            },
+            {
+              element: circle,
+              title: 'Book Service',
+              intro: "Browse categories and book your service with just a few taps.",
+              position: 'top'
+            },
+            {
+              element: notificationIcon,
+              title: 'Notifications',
+              intro: "Stay updated with important alerts and messages. A dot appears when you have unread notifications.",
+              position: 'top'
+            },
+            {
+              element: accountIcon,
+              title: 'Profile',
+              intro: "Manage your personal details, set your address, and customize your preferences.",
+              position: 'top'
+            }
+          ],
+          showProgress: true,
+          showBullets: true,
+          exitOnOverlayClick: false,
+          disableInteraction: false,
+          tooltipClass: 'customIntroTooltip',
+          highlightClass: 'customIntroHighlight',
+          nextLabel: 'Next →',
+          prevLabel: '← Back',
+          skipLabel: 'skip',
+          doneLabel: 'Got it!',
+          scrollToElement: true
+        });
+        
+        // Add custom HTML to each tooltip
+        intro.onbeforechange(function(targetElement) {
+          try {
+            const currentStep = intro._currentStep;
+            const tooltipTitle = intro._options.steps[currentStep].title;
+            setTimeout(function() {
+              const tooltipTextElement = document.querySelector('.introjs-tooltiptext');
+              if (tooltipTextElement && tooltipTitle) {
+                const content = tooltipTextElement.innerHTML;
+                tooltipTextElement.innerHTML = `<div class="tooltip-title">${tooltipTitle}</div>${content}`;
+              }
+            }, 50);
+          } catch (e) {
+            console.error('Error in onbeforechange:', e);
+          }
+        });
+        
+        // Function to update tutorial status in the database
+        function updateTutorialStatus() {
+          fetch('<?php echo WEB_ROOT;?>include/nav_tutorial.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+              user_id: <?php echo $user_data['user_id']; ?>, 
+              nav_tutorial: 1 
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log('Tutorial status updated in database.');
+            }
+          })
+          .catch(error => console.error('Error updating tutorial status:', error));
+        }
+        
+        // Start the tutorial with error handling and update the database on completion/exit
+        try {
+        // Attach the callbacks to the intro instance first
+        intro.oncomplete(function() {
+          localStorage.setItem('onboardingTutorialSeen', 'true');
+          updateTutorialStatus();
+        });
+        intro.onexit(function() {
+          localStorage.setItem('onboardingTutorialSeen', 'true');
+          updateTutorialStatus();
+        });
+        
+        // Now start the tutorial
+        intro.start();
+      } catch (e) {
+        console.error('Error starting intro.js:', e);
+      }
+      }, 500); // Increased delay for better reliability
+    }
+    
+    // Add a restart button for the tutorial
+    const restartButton = document.createElement('button');
+    restartButton.id = 'restartTutorial';
+    restartButton.innerHTML = '?';
+    restartButton.title = 'Show Tutorial';
+    restartButton.style.cssText = 'position: fixed; bottom: 80px; right: 20px; background: #0EA5E9; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); cursor: pointer; z-index: 9999; opacity: 0.7; font-size: 18px; font-weight: bold;';
+    
+    restartButton.addEventListener('mouseover', function() {
+      this.style.opacity = '1';
+    });
+    
+    restartButton.addEventListener('mouseout', function() {
+      this.style.opacity = '0.7';
+    });
+    
+    restartButton.addEventListener('click', function() {
+      // Clear the flag to show tutorial
+      localStorage.removeItem('onboardingTutorialSeen');
+      // Reload page with tutorial parameter
+      window.location.href = window.location.pathname + '?showTutorial=true';
+    });
+    
+    document.body.appendChild(restartButton);
+  });
+</script>

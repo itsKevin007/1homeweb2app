@@ -1,0 +1,146 @@
+ /* Custom styling for Intro.js tooltips - FIXED */
+ .introjs-tooltip {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    max-width: 100% !important;
+    padding: 15px !important;
+    border: none !important;
+    z-index: 999999 !important;
+  }
+
+  .introjs-helperLayer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.6) !important;
+    z-index: 999998 !important;
+  }
+
+
+  .introjs-tooltiptext {
+    font-size: 14px !important;
+    color: #333 !important;
+    line-height: 1.5 !important;
+  }
+
+  .introjs-tooltipbuttons {
+    border-top: 1px solid #f0f0f0 !important;
+    padding-top: 10px !important;
+    text-align: center !important;
+  }
+
+  .introjs-button {
+    background-color: #0EA5E9 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    margin: 2px !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    display: inline-block !important;
+  }
+
+  .introjs-button:hover {
+    background-color: #0284c7 !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .introjs-skipbutton {
+    background-color: transparent !important;
+    color: #666 !important;
+
+  }
+
+  .introjs-skipbutton:hover {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+  }
+
+  .introjs-progress {
+    background-color: #eee !important;
+    height: 5px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .introjs-progressbar {
+    background-color: #0EA5E9 !important;
+  }
+
+  .introjs-arrow {
+    border: 10px solid white !important;
+  }
+
+  .introjs-arrow.top {
+    border-bottom-color: white !important;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+  }
+
+  .introjs-arrow.bottom {
+    border-top-color: white !important;
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+  }
+
+  .introjs-arrow.right {
+    border-left-color: white !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-right-color: transparent !important;
+  }
+
+  .introjs-arrow.left {
+    border-right-color: white !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+  }
+
+  /* Custom tooltip header */
+  .tooltip-title {
+    font-weight: bold !important;
+    margin-bottom: 8px !important;
+    color: #0EA5E9 !important;
+    font-size: 16px !important;
+  }
+
+  /* Fix for mobile devices */
+  @media (max-width: 576px) {
+    .introjs-tooltip {
+      max-width: 80% !important;
+      min-width: 250px !important;
+    }
+    
+    .introjs-tooltiptext {
+      font-size: 13px !important;
+    }
+    
+    .introjs-button {
+      padding: 6px 12px !important;
+      font-size: 12px !important;
+    }
+  }
+  
+  /* Fix for z-index issues with other elements */
+  .introjs-overlay {
+    z-index: 999997 !important;
+  }
+  
+  .introjs-showElement {
+    z-index: 999999 !important;
+  }
+  
+  /* Fix for restart tutorial button */
+  #restartTutorial {
+    font-size: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    cursor: pointer !important;
+  }

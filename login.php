@@ -211,93 +211,97 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                             display: flex;
                             justify-content: center;
                             gap: 20px;
-                            flex-wrap: nowrap; /* Force items to stay in a row */
+                            flex-wrap: wrap; /* Allow wrapping so buttons aren’t squished */
                         }
 
                         .col-6 {
-                            flex: 1; /* Equal width distribution */
-                            min-width: 0; /* Allow shrinking below min-content */
-                            max-width: 250px; /* Prevent buttons from getting too wide */
+                            /* Let the button size itself rather than capping it. 
+                            Remove max-width if you had it, or increase it. */
+                            flex: 0 0 auto;
                         }
 
                         .download-btn {
-                            display: inline-flex;
+                            /* Use flex so icon + text are side-by-side */
+                            display: flex;
                             align-items: center;
-                            justify-content: center;
+                            /* Add a bit of spacing between icon and text container */
+                            gap: 8px;
+
                             background-color: #16405f;
                             color: #fff;
                             border: none;
                             border-radius: 8px;
-                            padding: 8px 12px;
+                            /* Roomier padding */
+                            padding: 12px 16px;
                             text-decoration: none;
                             font-family: Arial, sans-serif;
                             cursor: pointer;
-                            width: 100%;
+
+                            /* Optional: remove if you want the button to stretch full-width of container */
+                            width: fit-content;
+
                             transition: background-color 0.3s ease;
                         }
 
                         .download-btn:hover {
-
                             background-color: #0D3B7E;
                         }
 
                         .download-btn img {
-                            height: 40px;
-                            width: auto;
-                            margin-right: 8px;
+                            /* Adjust icon size to your liking */
+                            width: 36px;
+                            height: auto;
                         }
 
-                        .download-btn .text-container {
+                        .text-container {
+                            /* Stack “Download this app for” and “Apple iOS” vertically */
                             display: flex;
                             flex-direction: column;
+                            justify-content: center;
+                            /* If you want them center-aligned horizontally, change to align-items: center; */
                             align-items: flex-start;
-                            line-height: 1.2;
-                            min-width: 0; /* Allow text container to shrink */
                         }
 
-                        .download-btn .small-text {
+                        .small-text {
+                            /* Slightly smaller text */
                             font-size: 12px;
                             font-weight: normal;
-                            display: block;
-                            white-space: nowrap;
+                            line-height: 1.2;
+                            margin: 0; /* Remove default spacing if you like */
                         }
 
-                        .download-btn .large-text {
-                            font-size: 18px;
+                        .large-text {
+                            font-size: 24px;
                             font-weight: bold;
-                            display: block;
-                            white-space: nowrap;
-                            text-align: center;
+                            line-height: 1.2;
+                            margin: 0;
                         }
 
+                        /* Responsive adjustments for smaller screens */
                         @media (max-width: 576px) {
                             .row {
                                 gap: 8px;
                             }
-                            
+
                             .download-btn {
-                                padding: 6px 8px;
+                                /* If you want to keep proportions the same, remove transforms or special scaling */
+                                padding: 10px 12px;
+                                gap: 6px;
                             }
-                            
+
                             .download-btn img {
-                                height: 24px;
-                                margin-right: 6px;
+                                width: 28px; /* smaller icon */
                             }
-                            
-                            .download-btn .small-text {
+
+                            .small-text {
                                 font-size: 8px;
                             }
-                            
-                            .download-btn .large-text {
-                                font-size: 12px;
+
+                            .large-text {
+                                font-size: 16px;
                             }
-
-                            transform: scale(1.1);
-                            /* Slight zoom-in effect */
-                            opacity: 0.8;
-                            /* Slight transparency */
-
                         }
+
                     </style>
 
 
@@ -316,7 +320,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                             </div>
                             
                             <!-- Android button -->
-                            <div class="col-6">
+                            <!-- <div class="col-6">
                                 <a href="#" onClick="downloadAndroid()" class="download-btn">
                                     <img src="assets/images/icon/android-grey.svg" alt="Android Icon">
                                     <div class="text-container">
@@ -324,7 +328,7 @@ $sweetAlert = isset($_GET['mail']) ? $_GET['mail'] : '';
                                         <span class="large-text">Android</span>
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>

@@ -10,7 +10,7 @@
         <li>Remove all personal data</li>
         <li>Cancel active subscriptions</li>
         <li>Delete content permanently</li>
-        <li>If you Log in, your account will be retrieved</li>
+        <li>You can retrieve your account before 15 days if you log in.</li>
     </ul>
     <div class="btn-group">
         <button class="btn btn-primary" onclick="showConfirmation()">Proceed to Delete</button>

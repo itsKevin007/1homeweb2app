@@ -40,8 +40,52 @@
 		}else{}
 	}
 
-	if($user_data['is_sub'] == 0){
-		include 'pop-up/subscription/subscribe-offcanvas.php';
-	}else{}
+	?>
+
+<div id="subscribe-popup" style="display: none;">
+    <!-- Your pop-up content here -->
+	<?php
+		if ($user_data['is_sub'] == 0) {
+			include 'pop-up/subscription/subscribe-offcanvas.php';
+		}
+	?>
+    
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fiveMinutes = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+    function showPopup() {
+        document.getElementById('subscribe-popup').style.display = 'block';
+        localStorage.setItem('lastPopupShown', Date.now());
+        scheduleNextPopup(fiveMinutes);
+    }
+
+    function scheduleNextPopup(delay) {
+        setTimeout(() => {
+            showPopup();
+        }, delay);
+    }
+
+    // Check localStorage for last shown time
+    const lastPopup = localStorage.getItem('lastPopupShown');
+    const currentTime = Date.now();
+
+    if (!lastPopup) {
+        // First time showing the pop-up
+        showPopup();
+    } else {
+        const timePassed = currentTime - lastPopup;
+        if (timePassed >= fiveMinutes) {
+            showPopup();
+        } else {
+            // Schedule next pop-up after remaining time
+            const remainingTime = fiveMinutes - timePassed;
+            scheduleNextPopup(remainingTime);
+        }
+    }
+});
+</script>
 	
 
