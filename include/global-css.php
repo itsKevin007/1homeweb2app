@@ -16,7 +16,7 @@ if (!defined('WEB_ROOT')) {
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/media-query.css">
 <link href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>assets/css/drawer.css">
-
+<link href="<?php echo WEB_ROOT; ?>style/notif-dot.css" rel="stylesheet">
 
 
 <link href="<?php echo WEB_ROOT; ?>adminpanel/assets/css/icons.css" rel="stylesheet">

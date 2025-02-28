@@ -42,7 +42,7 @@
 				break;
 
 			default :
-				$content 	= 'list.php';		
+				$content 	= 'profile.php';		
 				$pageTitle 	= $sett_data['system_title'];
 		}
 	}else{
